@@ -440,8 +440,8 @@ h3 {
 .join-session {
   border: solid var(--light) 2px;
   position: fixed;
-  bottom: 125px;
-  right: 28%;
+  bottom: 80px;
+  right: 25%;
   width: 50%;
   height: 75vh;
   z-index: 10;
@@ -611,7 +611,8 @@ th {
 .notifaction-contaner {
   position: fixed;
   width: 50%;
-  left: 20%;
+  left: 25%;
+  bottom: 80px;
   z-index: 30;
   border: solid var(--light) 2px;
   background-color: var(--secondary);
@@ -644,4 +645,12 @@ th {
 }
 .h-100{
   height: 70vh;
+}
+
+.account{
+  position: fixed;
+  right: 0px;
+  top: 10px;
+  z-index: 50;
+  width: 25%;
 }

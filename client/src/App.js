@@ -1,4 +1,5 @@
 import './App.css';
+import Auth from './auth/authenticated';
 import Members from './home/members';
 import Menu from './home/menu';
 import MyMessage from './message/myMessage';
@@ -9,7 +10,8 @@ function App() {
       <Menu/>
       <Members />
       <MyMessage />
-      <Player/>
+      <Player />
+      <Auth/>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import Notification from "./notification";
-import Search from "./search";
-function auth() {
+import Notification from "../home/notification";
+import Search from "../home/search";
+function Auth() {
     const [searchClick, setSearchClick] = useState(false);
     const [NotificationClick, setNotificationClick] = useState(false);
     let searchElemt = searchClick ? <Search /> : <></>;
     let NotificationElemt = NotificationClick ? <Notification/> : <></>;
     return (<>
-    <div className="flex-row flex-center ">
+    <div className="flex-row flex-center account">
         <div onClick={() => {
             setSearchClick(!searchClick);
             setNotificationClick(false);
@@ -31,4 +31,4 @@ function auth() {
     </>);
 }
 
-export default auth;
+export default Auth;

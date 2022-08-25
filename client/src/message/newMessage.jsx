@@ -1,9 +1,8 @@
 import { useState } from "react";
 function NewMessage(props) {
-    const [iconShow, seticonShow] = useState(false);
-    console.log(props.show, iconShow);
+   console.log(props);
     return (
-    <div className="message" style={{display: props.show?"block":iconShow?"block":"none"}}>
+    <div className="message">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <p className="pl-1">James Mensah</p>
@@ -19,7 +18,7 @@ function NewMessage(props) {
         </path>
     </svg>
 </div>
-        <div className="p-1 btn" onClick={() => seticonShow(true)}>
+        <div className="p-1 btn" onClick={props.show}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
             className="mercado-match" width="16" height="16" focusable="false">
             <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>

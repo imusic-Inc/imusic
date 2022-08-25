@@ -5,6 +5,9 @@ function MyMessage() {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     const [showNewMessage, setshowNewMessage] = useState(false);
+    function hideManasession() {
+        setshowNewMessage(false);
+    }
   return (
       <>
       <div className="messaging" style={{ height: expand }}>
@@ -168,7 +171,7 @@ function MyMessage() {
     
           </div>
           </div>
-          {showNewMessage ? <NewMessage show={showNewMessage} />:<></>}
+          {showNewMessage ? <NewMessage show={hideManasession} />:<></>}
       </>
   );
 }

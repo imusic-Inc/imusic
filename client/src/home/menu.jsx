@@ -7,7 +7,6 @@ import SignUp from "../auth/signup";
 
 
 function Menu() {
-
     const [menus, setMenu] = useState("Discover");
     const [Manasession, setManasession] = useState("");
     let showMenu = <Discover />;

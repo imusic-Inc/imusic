@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-loading-skeleton": "^3.1.0",
+    "redux": "^4.2.0"
+  }
+}

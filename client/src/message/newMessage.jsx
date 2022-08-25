@@ -1,4 +1,3 @@
-import { useState } from "react";
 function NewMessage(props) {
    console.log(props);
     return (

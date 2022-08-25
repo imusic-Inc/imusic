@@ -1,43 +1,33 @@
+import APIController from '../api/functons'
+import { useState } from "react"; 
+import Session from '../components/session';
+import store from '../redux/store';
+
 function Discover() {
+
+    const [genre, setGenre] = useState([]);
+    let token;
+    async function init() {
+    token = await APIController.getToken();
+        const genes = await APIController.getGenres(token);
+        store.dispatch({ type: "genre", payload: [...genes] });
+        setGenre(genes);
+    }
+
+    const storeState = store.getState();
+    console.log();
+    if (storeState.genre) {
+        
+    } else {
+         init();
+    }
+    
   return (
       <div class="flex-6 p-1 pt-1 left-20">
     <p class="font-s-2 fixed bg-primary title">Discover
     </p>
-    <h3 id="discover"  class="pt-3">Trending album</h3>
-    <div class="cour pt-1">
-        <img class=" b-r-1 btn" src="./images/austin-neill-hgO1wFPXl3I-unsplash.jpg" width="100%" height="300px" alt=""/>
-    </div>
-    <h3 id="trending" class="pt-2">popular session</h3>
-    <div  class="flex-row p-session">
-        <div class="flex-column p-1 btn">
-            <img class="b-r-1" src="./images/My project-1.png" alt="" width="170px" height="170px" srcset=""/>
-            <h4 class="pt-01">Kofi the Traveler</h4>
-            <h6 class="opacity-6">Black Shaif</h6>
-        </div>
-        <div class="flex-column p-1 btn">
-            <img class="b-r-1" src="./images/My project-1(1).png" alt="" width="170px" height="170px" srcset=""/>
-            <h4 class="pt-01">Kofi the Traveler</h4>
-            <h6 class="opacity-6">Black Shaif</h6>
-        </div>
 
-        <div class="flex-column p-1 btn">
-            <img class="b-r-1" src="./images/My project-1(2).png" alt="" width="170px" height="170px" srcset=""/>
-            <h4 class="pt-01">Kofi the Traveler</h4>
-            <h6 class="opacity-6">Black Shaif</h6>
-        </div>
-
-        <div class="flex-column p-1 btn">
-            <img class="b-r-1" src="./images/My project-1(2).png" alt="" width="170px" height="170px" srcset=""/>
-            <h4 class="pt-01">Kofi the Traveler</h4>
-            <h6 class="opacity-6">Black Shaif</h6>
-        </div>
-
-        <div class="flex-column p-1 btn">
-            <img class="b-r-1" src="./images/My project-1(2).png" alt="" width="170px" height="170px" srcset=""/>
-            <h4 class="pt-01">Kofi the Traveler</h4>
-            <h6 class="opacity-6">Black Shaif</h6>
-        </div>
-    </div>
+    ...
 
     <h3 class="pt-2">Session playlist</h3>
     <div class="playlist">

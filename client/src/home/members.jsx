@@ -38,7 +38,8 @@ function Members() {
             </div>
 
         </div>
-          </div>
+      </div>
+      <input type="text" className="playSearch w-100 p-1" placeholder="&#8486; Username or Email" name="name"/>
           <hr className="opacity-6 mb-1" />
           <div className="messages-list"> 
             <div className="flex-row flex-center btn card p-01">

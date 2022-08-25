@@ -1,14 +1,16 @@
 import APIController from '../api/functons'
 import { useState } from "react"; 
-import Session from '../components/session';
 import store from '../redux/store';
+import PublicSession from '../components/publicSession';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function Discover() {
 
     const [genre, setGenre] = useState([]);
-    let token;
+    
     async function init() {
-    token = await APIController.getToken();
+    let token = await APIController.getToken();
         const genes = await APIController.getGenres(token);
         store.dispatch({ type: "genre", payload: [...genes] });
         setGenre(genes);
@@ -24,8 +26,11 @@ function Discover() {
     
   return (
     <div class="flex-6 p-1 pt-1 left-20">
-          <p class="font-s-2 fixed bg-primary title">Discover</p>
-          
+          <h1 class="fixed bg-primary title">Discover Popular Public Sessions</h1>
+<br /><br />
+      {genre.map(value => {
+                  return <PublicSession name={value.name} id={value.id} key={value.id} />
+              })}
 </div>
   );
 }

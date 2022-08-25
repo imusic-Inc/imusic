@@ -1,4 +1,5 @@
-function Disable() {
+function Disable(props) {
+    console.log(props);
   return (
     <div className="join-session">
     <div className="flex-row flex-center flex-space">
@@ -7,7 +8,7 @@ function Disable() {
         </div>
 
 
-        <div className="flex-row flex-center">
+        <div className="flex-row flex-center" onClick={()=>props.onClick()}>
 
             <div className="p-1 btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"

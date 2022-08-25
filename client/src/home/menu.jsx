@@ -21,9 +21,15 @@ function Menu() {
     }
 
      if (Manasession === "Join") {
-        managSession = <Join />;
+        managSession = <Join onClick = {hideManasession} />;
     } else if (Manasession === "Disable") {
-         managSession = < Disable/>;
+         managSession = < Disable onClick = {hideManasession}/>;
+     } else {
+         managSession = <></>;
+     }
+    
+    function hideManasession() {
+        setManasession("");
     }
 
     return (

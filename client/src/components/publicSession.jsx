@@ -14,7 +14,7 @@ function PublicSession(props) {
     init();
     return (
         <>
-            <a href={"/"+props.id+"/"+props.name}><h3 id="trending" class="pt-1">{props.name}</h3></a>
+            <a href={"/session/"+props.id}><h3 id="trending" class="pt-1">{props.name}</h3></a>
           <div class="flex-row p-session">
               { playList.length <1? <SessionTrack/> :playList.map(value => {
                   return <Session name={value.name} info={value.description} image={value.images[0].url} key={value.id} />

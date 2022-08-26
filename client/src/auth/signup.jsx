@@ -1,6 +1,7 @@
+import {Link} from "react-router-dom";
 function SignUp() {
   return (
-    <div className="flex-6 left-20 p-3">
+    <div className="left-20 pt-1">
 <div className="register-container">
 <div className="register-section">
 <h2 className="pb-3">Register an Account.</h2>
@@ -31,7 +32,7 @@ Or
 <input type="password" className="playSearch w-100 p-1" placeholder="&#8649; Confirm Password" name="cpass"/>
 <button className="playSearch btn w-100 p-1" >Sign-up</button>
 </div>
-<p className="p-2">I ready have and account <span className="btn link" >sign me in</span></p>
+<p className="p-2">I ready have and account <Link to="/sign-in" className="btn link" >sign me in</Link></p>
 </div>
       </div>
       <br />

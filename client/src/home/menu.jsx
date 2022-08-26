@@ -1,23 +1,17 @@
 import Discover from "../home/discover";
 import { useState } from "react";
-import Create from "../session/create";
 import Join from "../session/join";
 import Disable from "../session/disable";
 import SignUp from "../auth/signup";
+import {BrowserRouter as Router,Routes as Switch,Route,Link} from "react-router-dom";
+import SignIn from "../auth/signin";
+import MySession from "../session/mysession";
+import Create from "../session/create";
 
 
 function Menu() {
-    const [menus, setMenu] = useState("Discover");
     const [Manasession, setManasession] = useState("");
-    let showMenu = <Discover />;
     let managSession = <></>;
-    if (menus === "Discover") {
-        showMenu = <Discover />;
-    } else if (menus === "Create") {
-         showMenu = < Create/>;
-    }else if (menus === "Register") {
-         showMenu = < SignUp/>;
-    }
 
      if (Manasession === "Join") {
         managSession = <Join onClick = {hideManasession} />;
@@ -32,7 +26,7 @@ function Menu() {
     }
 
     return (
-      <>
+      <Router>
       <div className="flex-2 bg-secondary p-1 fixed left"> 
 <img src="./images/logo.png" alt="IMusic" width="60%" height="40px" srcset=""/>
 <div className="flex-row flex-center pt-3 opacity-8">
@@ -44,8 +38,8 @@ function Menu() {
 </div>
 
 
-<a href="#discover">
-            <div onClick={() => setMenu("Discover")} className="flex-row flex-center pt-1 btn opacity-6">
+<Link to="/discover">
+            <div  className="flex-row flex-center pt-1 btn opacity-6">
 <svg style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor"
         d="M5 20V12H2L12 3L22 12H19V20H5M12 5.69L7 10.19V18H17V10.19L12 5.69M11 17V16H13V17H11M11 15C10.72 15 10.5 14.78 10.5 14.5V13.6C9.6 13.08 9 12.11 9 11C9 9.34 10.34 8 12 8C13.66 8 15 9.34 15 11C15 12.11 14.4 13.08 13.5 13.6V14.5C13.5 14.78 13.28 15 13 15H11Z" />
@@ -53,9 +47,9 @@ function Menu() {
 
     <p className="pl-01">Discover</p>
 </div>
-</a>
+</Link>
 
-    <a href="#trending" onClick={() => setMenu("Discover")}>
+    <Link to="/my-session" >
                     <div  className="flex-row flex-center pt-1 btn opacity-6" >
 <svg style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor"
@@ -64,7 +58,7 @@ function Menu() {
 
 <p className="pl-01 btn">My Session</p>
 </div>
-</a>
+</Link>
 <div className="flex-row flex-center pt-3 opacity-8 ">
     <svg style={{width:24,height:24}} viewBox="0 0 24 24">
         <path fill="currentColor"
@@ -75,14 +69,14 @@ function Menu() {
 </div>
 
 
-<div onClick={() => setMenu("Create")} className="flex-row flex-center pt-1 btn opacity-6 " >
+<Link to="/create"  className="flex-row flex-center pt-1 btn opacity-6 " >
 <svg style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor"
         d="M16,16.92C15.67,16.97 15.34,17 15,17C14.66,17 14.33,16.97 14,16.92V13.41L11.5,15.89C11,15.5 10.5,15 10.11,14.5L12.59,12H9.08C9.03,11.67 9,11.34 9,11C9,10.66 9.03,10.33 9.08,10H12.59L10.11,7.5C10.3,7.25 10.5,7 10.76,6.76V6.76C11,6.5 11.25,6.3 11.5,6.11L14,8.59V5.08C14.33,5.03 14.66,5 15,5C15.34,5 15.67,5.03 16,5.08V8.59L18.5,6.11C19,6.5 19.5,7 19.89,7.5L17.41,10H20.92C20.97,10.33 21,10.66 21,11C21,11.34 20.97,11.67 20.92,12H17.41L19.89,14.5C19.7,14.75 19.5,15 19.24,15.24V15.24C19,15.5 18.75,15.7 18.5,15.89L16,13.41V16.92H16V16.92M5,19A2,2 0 0,1 7,17A2,2 0 0,1 9,19A2,2 0 0,1 7,21A2,2 0 0,1 5,19H5Z" />
 </svg>
 
 <p className="btn pl-01">Create</p>
-</div>
+</Link>
 
 
 <div onClick={() => setManasession("Join")} className="flex-row flex-center pt-1 btn opacity-6 ">
@@ -103,8 +97,8 @@ function Menu() {
     <p className="  btn pl-01">Disable</p>
 </div>
                 
-                <a href="#register">
-                     <div onClick={() => setMenu("Register")} className="flex-row flex-center btn opacity-8 btn pt-4 ">
+                <Link to="/sign-up">
+                     <div className="flex-row flex-center btn opacity-8 btn pt-4 ">
     <svg style={{width:24,height:24}} viewBox="0 0 24 24">
         <path fill="currentColor"
             d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
@@ -112,13 +106,22 @@ function Menu() {
 
 <h3 className=" btn pl-01">Log in</h3>
 </div>
-               </a>
+               </Link>
             </div> 
+{managSession}
 
-            {showMenu} 
-            {managSession}
+    
+        <Switch>
+        <Route path="/discover" element={<Discover />}/>
+        <Route path="/my-session" element={<MySession />}/>
+        <Route path="/create" element={<Create />}/>
+        <Route path="/sign-in" element={<SignIn />}/>
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/" element={<Discover />}/>
+                
+        </Switch>
  
-      </>
+     </Router>
          
   );
 }

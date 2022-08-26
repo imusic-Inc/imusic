@@ -1,6 +1,7 @@
+import {Link} from "react-router-dom";
 function SignIn() {
     return (
-      <div className="flex-6 left-20 p-3">
+      <div className="left-20 pt-1">
         <div className="register-container">
          <div className="register-section">
             <h2 className="pb-3">Welcome back.</h2>
@@ -31,9 +32,11 @@ function SignIn() {
                 <button className="playSearch btn w-100 p-1">Sign-in</button>
 
             </div>
-            <p className="p-2">Don't have and account <span className="btn link">sign me up</span></p>
+            <p className="p-2">Don't have and account <Link to="/sign-up" className="btn link">sign me up</Link></p>
         </div>
-    </div>
+            </div>
+            <br />
+      <br />
 </div>);
 }
 

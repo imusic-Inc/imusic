@@ -2,8 +2,7 @@ import APIController from '../api/functons'
 import { useState } from "react"; 
 import store from '../redux/store';
 import PublicSession from '../components/publicSession';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import {LoadingSession} from '../components/loadingSession';
 
 function Discover() {
 
@@ -17,18 +16,18 @@ function Discover() {
     }
 
     const storeState = store.getState();
-    console.log();
+    
     if (storeState.genre) {
-        
+       console.log(storeState); 
     } else {
          init();
     }
-    
   return (
     <div class="flex-6 p-1 pt-1 left-20">
-          <h1 class="fixed bg-primary title">Discover Popular Public Sessions</h1>
-<br /><br />
-      {genre.map(value => {
+          <h1 class="fixed bg-primary title">Public Sessions</h1>
+      <br /><br />
+      
+    {genre.length < 1 ? <><LoadingSession/></>: genre.map(value => {
                   return <PublicSession name={value.name} id={value.id} key={value.id} />
               })}
 </div>

@@ -1,5 +1,14 @@
 
-function Reducer(state={},action) {
+function Reducer(state = {}, action) {
+    switch (action.type) {
+        case 'genre':
+            
+            break;
+    
+        default:
+            break;
+    }
+
     return state;
 }
 

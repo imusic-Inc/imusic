@@ -1,13 +1,16 @@
 const express = require('express');
-const { viewAllSessionRooms } = require('./../controllers/sessionController');
-
+const { viewAllSessionRooms, createSession, getSessionById } = require('./../controllers/sessionController');
+const { protect } = require('./../controllers/authentication')
 const router = express.Router();
 
 router
     .route('/')
-    .get(viewAllSessionRooms)
+    .get(protect, viewAllSessionRooms)
+    .post(createSession)
 
-
+router
+    .route('/:id')
+    .get(getSessionById)
 
 
 

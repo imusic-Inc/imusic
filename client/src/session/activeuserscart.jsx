@@ -1,5 +1,21 @@
 function Activeuserscart() {
-    return ( <div className='active-users'>
+    return (<div className='active-users'>
+        
+ <div className="flex-row flex-center flex-space">
+        <div className="flex-row flex-center">
+           
+            <p className="p-1">Live cart</p>
+        </div>
+
+
+        <div title="Send" className="pr-2 btn" >
+                <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
+    <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+</svg>
+            </div>
+      </div>
+
+        
                 <div className='active-list p-01'>
 
 

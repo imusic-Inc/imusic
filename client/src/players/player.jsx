@@ -1,29 +1,50 @@
 import store from "../redux/store";
 import { useState } from "react"; 
 import { memo } from "react";
+import MyPlayerFunctions from "./playerMethods";
 let tracks;
-console.log("this is the line of code just testing");
+const player = MyPlayerFunctions();
 function Player() {
     const [track, setTrack] = useState([]);
     const [playing, setPlaying] = useState(false);
-    
+    const [index, setIndex] = useState(0);
     store.subscribe(() => {
         tracks = store.getState();
         if (tracks.single) {
             setTrack(tracks.single);
-            console.log(tracks);
+            setIndex(0);
         }
     });
-  
+
+    function playOnload() {
+        if (tracks && playing) {
+        let at = index < tracks.length ? index : tracks.length - 1;
+        console.log(index);
+        player.clean();
+        player.setSrc(tracks.single[index].audio);
+    if (player.canPlay) {
+        player.play(setPlaying,setIndex,playOnload,index).then(() => {
+            setPlaying(true);
+        })
+    }
+       
+    } else {
+        if (tracks) {
+            player.pause();
+        }
+    }
+    }
+
+    playOnload();
     
    
   return (
     <div className="player p-1">
 <div className="flex-row flex-center">
-    <img className="b-r-01" src={ track.length > 0? track[0].image:"" } alt="" width="80" height="80" srcSet=""/>
+    <img className="b-r-01" src={ track.length > 0? track[index].image:"" } alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
-                  <h4>{ track.length > 0? track[0].name:"" }</h4>
-        <h6 className="opacity-6">{ track.length > 0 ? track[0].name:"" }</h6>
+                  <h4>{ track.length > 0? track[index].name:"" }</h4>
+        <h6 className="opacity-6">{ track.length > 0 ? track[index].name:"" }</h6>
     </div>
 </div>
 
@@ -40,14 +61,19 @@ function Player() {
         <path fill="currentColor" d="M6,18V6H8V18H6M9.5,12L18,6V18L9.5,12Z" />
     </svg>
 </div>
-{!playing?<div className="pl-1 btn" >
+                  {playing ? <div className="pl-1 btn" onClick={() => player.play(setPlaying,setIndex,playOnload,index).then(() => {
+     setPlaying(false);
+})}>
     <svg style={{width:34, height:34}} viewBox="0 0 24 24">
-        <path fill="currentColor"
-            d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-    </svg>
-</div>:<div className="pl-1 btn">
-   <svg style={{width:34, height:34}} viewBox="0 0 24 24">
+       
     <path fill="currentColor" d="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+    </svg>
+                  </div> : <div className="pl-1 btn" onClick={() => player.pause().then(() => {
+                      setPlaying(true);
+})}>
+                          <svg style={{ width: 34, height: 34 }} viewBox="0 0 24 24">
+                               <path fill="currentColor"
+            d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
 </svg>
 </div>}
 
@@ -70,12 +96,13 @@ function Player() {
     <div className="progress-contaner btn">
         <div className="progress" style={{width: "00%"}}></div>
     </div>
-    <div className="pl-1">{ track.length > 0?String(Number(track[0].length)/(1000*60)).substring(0,5):"" }</div>
+    <div className="pl-1">{ track.length > 0?String(Number(track[index].length)/(1000*60)).substring(0,5):"" }</div>
 </div>
     </div>
 </div>
 </div>
   );
 }
+
 
 export default memo(Player);

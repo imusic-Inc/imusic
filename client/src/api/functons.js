@@ -91,7 +91,7 @@ const APIController = (function() {
 
     }   
     const _getPlayList = async (token, tracksEndPoint) => {
-        const path = `https://api.spotify.com/v1/playlists/${tracksEndPoint}/tracks?offset=0&limit=100&locale=en-US,en;q=0.5`
+        const path = `https://api.spotify.com/v1/playlists/${tracksEndPoint}/tracks?offset=0&limit=30&locale=en-US,en;q=0.5`
         const result = await fetch(path, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
@@ -139,33 +139,4 @@ const APIController = (function() {
          }
     }
 })();
-export function MyPlayerFunctions() {
-    let audio = new Audio();
-    let isPlaying = false;
-    return {
-       async play() {
-            if (audio) {
-            audio.play();
-            isPlaying = true;
-            };
-        },
-        setSrc(url) {
-            if (audio) audio.src = url;
-        },
-        pause() {
-            if (audio) {
-                audio.pause();
-                isPlaying = false;
-            }
-        },
-       async listiner() {
-            if (isPlaying && audio) {
-            audio.addEventListener('ended', () => {
-            isPlaying = false;
-        })
-        }
-        }
-    }
-    
-}
 export default APIController;

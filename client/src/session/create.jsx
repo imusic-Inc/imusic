@@ -1,13 +1,17 @@
 import CreateSession from "../components/createSession";
 import TableRow from "../components/playListTableRow";
 import TrackList from "../components/trackList";
-
+import { useState } from "react"; 
 function Create() {
+    const [showCreate, setshowCreate] = useState(false);
+    function showCreatScreen() {
+        setshowCreate(false);
+    }
   return (
       <>
       <div className="flex-6 left-20 p-1">
 <div className="session-board flex-row flex-center">
-<img className="p-1" src="./images/My project-1(2).png" alt="" width="250px" height="200px" srcset=""/>
+<img className="p-1" src="./images/My project-1(2).png" alt="" width="250px" height="200px" srcSet=""/>
 
 <div className="p-1 ">
     <h4 className="p-2">Session Playlist</h4>
@@ -41,7 +45,7 @@ function Create() {
     <h4>Let's find something for your session</h4>
     <div className="flex-row flex-center flex-space" >
         <input type="text" className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
-        <div className="addPlayList btn bg-success">
+        <div onClick={()=>setshowCreate(true)} className="addPlayList btn bg-success">
             save
         </div>
     </div>
@@ -51,13 +55,15 @@ function Create() {
     <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
     <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
     <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
-</div>
+              </div>
+              
+              
           <br /><br />
           <br /><br />
       </div>
 
           
-          <CreateSession/>
+          {showCreate ? <CreateSession show={ showCreatScreen} />:<></>} 
       
       </>
       

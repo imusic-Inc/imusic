@@ -4,7 +4,7 @@ function Disable(props) {
     <div className="join-session">
     <div className="flex-row flex-center flex-space">
         <div className="flex-row flex-center">
-            <p className="pl-1">Disable session</p>
+            <p className="pl-1">Control session</p>
         </div>
 
 
@@ -24,9 +24,10 @@ function Disable(props) {
 
 
     <div className="join-list">
-        <div className="card">
+        
+<div className="card">
             <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
             </div>
             <div className="flex-6 p-1">
                 <h4>The party now</h4>
@@ -35,63 +36,16 @@ function Disable(props) {
                     targeted solutions to private and
                     government schools.</small>
             </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
-        </div>
-
-              <div className="card">
-            <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
-            </div>
-            <div className="flex-6 p-1">
-                <h4>The party now</h4>
-                <small className="opacity-6 pt-01">InfoView Data Solutions Ltd is a premier leader in information technology
-                    delivering
-                    targeted solutions to private and
-                    government schools.</small>
-            </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
+    <div className="flex-1 p-1">
+        <div className="btn bg-success button">Start</div>
+        <div className="btn bg-danger button">End</div>
+    </div>
               </div>
               
-              <div className="card">
-            <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
-            </div>
-            <div className="flex-6 p-1">
-                <h4>The party now</h4>
-                <small className="opacity-6 pt-01">InfoView Data Solutions Ltd is a premier leader in information technology
-                    delivering
-                    targeted solutions to private and
-                    government schools.</small>
-            </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
-        </div>
-
-        <div className="card">
-            <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
-            </div>
-            <div className="flex-6 p-1">
-                <h4>The party now</h4>
-                <small className="opacity-6 pt-01">InfoView Data Solutions Ltd is a premier leader in information technology
-                    delivering
-                    targeted solutions to private and
-                    government schools.</small>
-            </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
-        </div>
-
 
               <div className="card">
             <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
             </div>
             <div className="flex-6 p-1">
                 <h4>The party now</h4>
@@ -100,30 +54,16 @@ function Disable(props) {
                     targeted solutions to private and
                     government schools.</small>
             </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
+    <div className="flex-1 p-1">
+        <div className="btn bg-success button">Start</div>
+        <div className="btn bg-danger button">End</div>
+    </div>
               </div>
               
-              <div className="card">
-            <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
-            </div>
-            <div className="flex-6 p-1">
-                <h4>The party now</h4>
-                <small className="opacity-6 pt-01">InfoView Data Solutions Ltd is a premier leader in information technology
-                    delivering
-                    targeted solutions to private and
-                    government schools.</small>
-            </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
-        </div>
 
               <div className="card">
             <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
             </div>
             <div className="flex-6 p-1">
                 <h4>The party now</h4>
@@ -132,14 +72,16 @@ function Disable(props) {
                     targeted solutions to private and
                     government schools.</small>
             </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
-        </div>
+    <div className="flex-1 p-1">
+        <div className="btn bg-success button">Start</div>
+        <div className="btn bg-danger button">End</div>
+    </div>
+              </div>
+              
 
               <div className="card">
             <div className="ml-1 flex-1">
-                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+                <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
             </div>
             <div className="flex-6 p-1">
                 <h4>The party now</h4>
@@ -148,10 +90,14 @@ function Disable(props) {
                     targeted solutions to private and
                     government schools.</small>
             </div>
-            <div className="flex-1 p-1">
-                <div className="btn bg-danger button">Disable</div>
-            </div>
+    <div className="flex-1 p-1">
+        <div className="btn bg-success button">Start</div>
+        <div className="btn bg-danger button">End</div>
+    </div>
         </div>
+
+
+
     </div>
 
 </div>

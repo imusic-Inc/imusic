@@ -1,27 +1,31 @@
 import APIController from "../api/functons";
-import { useState } from "react"; 
+import { memo, useState } from "react"; 
 import Session from "./session";
 import { SessionTrack } from "./loadingSession";
-
+let a = 0;
 function PublicSession(props) {
     const [playList, setPlayList] = useState([]);
     async function init() {
         let token = await APIController.getToken();
-    const playlist = await APIController.getPlaylistByGenre(token,props.id);
+    const playlist = await APIController.getPlaylistByGenre(token,props.id,10);
         setPlayList(playlist);
     }
+    if (a < 2) {
+       init(); 
+    }
 
-    init();
+    
     return (
         <>
-            <a href={"/session/"+props.id}><h3 id="trending" class="pt-1">{props.name}</h3></a>
-          <div class="flex-row p-session">
+            <h3 id="trending" className="pt-1">{props.name}</h3>
+            
+          <div className="flex-row p-session">
               { playList.length <1? <SessionTrack/> :playList.map(value => {
-                  return <Session name={value.name} info={value.description} image={value.images[0].url} key={value.id} />
+                  return  <a href={"/session/"+value.id}><Session name={value.name} info={value.description} image={value.images[0].url} key={value.id} /></a> 
               })}
             </div>
         </>
     )
 }
 
-export default PublicSession;
+export default memo(PublicSession);

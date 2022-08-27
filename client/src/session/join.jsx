@@ -24,7 +24,7 @@ function Join(props) {
 <div className="join-list">
 <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>
@@ -40,7 +40,7 @@ function Join(props) {
               
               <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>
@@ -57,7 +57,7 @@ function Join(props) {
 
 <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>
@@ -74,7 +74,7 @@ function Join(props) {
 
               <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>
@@ -91,7 +91,7 @@ function Join(props) {
 
               <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>
@@ -108,7 +108,7 @@ function Join(props) {
 
               <div className="card">
     <div className="ml-1 flex-1">
-        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcset=""/>
+        <img className="b-r-01" src="./images/My project-1(1).png" alt="" width="80" height="80" srcSet=""/>
     </div>
     <div className="flex-6 p-1">
         <h4>The party now</h4>

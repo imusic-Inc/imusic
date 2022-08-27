@@ -46,7 +46,7 @@ a:hover{
   width: 80%;
   padding-right: 40px;
   z-index: 4;
-  height: calc(100vh - 50px);
+  height: calc(100% - 50px);
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -57,7 +57,7 @@ a:hover{
 .left {
   left: 0px;
   width: 15%;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .flex-center {
@@ -170,7 +170,7 @@ p {
 }
 
 .session-board{
-  height: 65vh;
+  height: 65%;
   background: linear-gradient(var(--secondary), var(--primary));
 }
 .pr-1 {
@@ -376,11 +376,11 @@ h3 {
 .player {
   position: fixed;
   bottom: 0px;
-  width: 52vw;
+  width: 52%;
   height: 50px;
   right: 30%;
   margin-right: 8px;
-  left: 20vw;
+  left: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -390,7 +390,7 @@ h3 {
 
 .progress-contaner {
   background-color: rgb(114, 114, 114);
-  width: 300px;
+  width: 15em;
   border-radius: 15px;
   height: 5px;
   -webkit-border-radius: 15px;
@@ -443,7 +443,7 @@ h3 {
   bottom: 130px;
   right: 26%;
   width: 25%;
-  height: 60vh;
+  height: 60%;
   z-index: 15;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -466,7 +466,7 @@ h3 {
   right: auto;
   bottom: -20.5px;
   height: 100px;
-  width: 19.9vw;
+  width: 19.9%;
 }
 .char-textarea {
   width: 97%;
@@ -482,7 +482,7 @@ h3 {
   bottom: 80px;
   right: 25%;
   width: 50%;
-  height: 75vh;
+  height: 75%;
   z-index: 10;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -502,7 +502,7 @@ scroll-behavior: smooth;
   scrollbar-color: transparent;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  height: 50vh;
+  height: 50%;
 }
 .card {
   border: solid 1px var(--secondary);
@@ -534,7 +534,7 @@ scroll-behavior: smooth;
 }
 
 .join-list {
-  height: 65vh;
+  height: 65%;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -670,7 +670,7 @@ background-color: var(--secondary);
 }
 .notification-list{
   margin-top: 4px;
-  height: 70vh;
+  height: 70%;
   width: 100%;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -695,7 +695,7 @@ background-color: var(--secondary);
   align-items: center;
 }
 .h-100{
-  height: 70vh;
+  height: 70%;
 }
 
 .account{
@@ -709,8 +709,8 @@ background-color: var(--secondary);
 .createSession{
   position: fixed;
   width: 35%;
-  height: 65vh;
-  bottom: 20vh;
+  height: 65%;
+  bottom: 20%;
   z-index: 10;
   left: 35%;
   padding: 8px;
@@ -770,21 +770,21 @@ input[type=checkbox] {
 
 .form-control{
   overflow-y: scroll;
-  height: 50vh;
+  height: 50%;
 
 }
 
 .active-users{
-  margin-top: 10vh;
-  width: 20vw;
-  height: 90vh;
+  margin-top: 10%;
+  width: 20%;
+  height: 90%;
   border-top-left-radius: 10px;
   border: solid var(--light) 2px;
   border-top-right-radius: 10px;
   background-color: var(--secondary);
 }
 .active-list{
-  height: 65vh;
+  height: 65%;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -802,21 +802,26 @@ input[type=checkbox] {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-
+.cart-room-invite,
 .cart-room-board{
-  width: 80vw;
+  width: 80%;
   position: fixed;
-  height: 90vh;
-  left: 20.5vw;
+  height: 90%;
+  left: 20.5%;
 }
+
+.cart-room-invite{
+  left: 25.5%;
+}
+
 .addToPlayList{
   background-color: var(--secondary);
-  width: 79vw;
+  width: 79%;
   position: fixed;
-  left: 21vw;
+  left: 21%;
   border: solid var(--light) 2px;
   bottom: 80px;
-  height: 60vh;
+  height: 60%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }

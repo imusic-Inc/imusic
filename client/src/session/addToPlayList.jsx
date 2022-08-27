@@ -1,16 +1,16 @@
 import TableRow from '../components/playListTableRow';
 import TrackList from '../components/trackList';
-function AddToPlayList() {
+function AddToPlayList(props) {
     return (
         <>
-            <div className='addToPlayList'>
+            <div className='addToPlayList' >
                 <div className='flex-row '>
                     <div className='flex-4'>
 <div className="p-1">
         <div className="flex-row flex-center pl-1">
-            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 16" data-supported-dps="16x16"
+            <svg xmlns="http://www.w3.org/2000/svg"  onClick={props.show} viewBox="0 0 16 16" data-supported-dps="16x16"
                     fill="currentColor" className="mercado-match btn" width="16" height="16" focusable="false">
-                   <path d="M1 5l7 4.61L15 5v2.39L8 12 1 7.39z"></path>
+                   <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
                 </svg>
             <p className="p-1">Playlist Manager</p>
                             </div>

@@ -65,7 +65,7 @@ function Activeuserscart() {
 
 <div className="chat-send-active">
 <hr/>
-<textarea className="char-textarea" name="message" id="message"  placeholder="Write a comment..." rows="4"></textarea>
+<textarea className="char-textarea  bg-secondary" name="message" id="message"  placeholder="Write a comment..." rows="4"></textarea>
 </div>
                 </div>
         </div>);

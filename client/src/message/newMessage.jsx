@@ -59,7 +59,7 @@ function NewMessage(props) {
 
 <div className="chat-send">
 <hr/>
-<textarea className="char-textarea" name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
+<textarea className="char-textarea  bg-default" name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
 </div>
 </div>
   );

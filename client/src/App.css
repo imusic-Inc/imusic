@@ -417,8 +417,9 @@ h3 {
 }
 
 .btn:hover {
-  opacity: 0.8;
-
+  opacity: 0.7;
+  filter: contrast();
+  -webkit-filter: contrast();
 }
 .messaging-members,
 .messaging {
@@ -470,12 +471,14 @@ h3 {
 }
 .char-textarea {
   width: 97%;
-  background-color: rgb(18, 31, 41);
   border: solid 0px;
   color: aliceblue;
   padding: 4px;
 }
 
+.bg-default{
+  background-color: rgb(18, 31, 41);
+}
 .join-session {
   border: solid var(--light) 2px;
   position: fixed;
@@ -494,7 +497,7 @@ h3 {
     scrollbar-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  height: 450px;
+  height: 65vh;
 }
 .income-messages-list{
 overflow-y: scroll;
@@ -502,7 +505,7 @@ scroll-behavior: smooth;
   scrollbar-color: transparent;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  height: 50%;
+  height: 50vh;
 }
 .card {
   border: solid 1px var(--secondary);
@@ -573,6 +576,10 @@ table {
 
 .text-left {
   text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }
 .text-danger{
 color: rgb(176, 23, 23);
@@ -645,6 +652,7 @@ background-color: var(--secondary);
 .bold {
   font-weight: 900;
 }
+.share-contaner,
 .search-contaner {
   position: fixed;
   width: 50%;
@@ -653,11 +661,19 @@ background-color: var(--secondary);
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  border-radius: 10px;
   z-index: 30;
   border: solid var(--light) 2px;
-  background-color: var(--secondary);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
+.share-contaner{
+  top: 10vh;
+  left: 25;
+}
 
 .notifaction-contaner {
   position: fixed;
@@ -775,8 +791,9 @@ input[type=checkbox] {
 }
 
 .active-users{
-  margin-top: 10%;
+  position: fixed;
   width: 20%;
+  margin-top: 10%;
   height: 90%;
   border-top-left-radius: 10px;
   border: solid var(--light) 2px;
@@ -784,7 +801,7 @@ input[type=checkbox] {
   background-color: var(--secondary);
 }
 .active-list{
-  height: 65%;
+  height: 55vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -802,6 +819,7 @@ input[type=checkbox] {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+.cart-room-share,
 .cart-room-invite,
 .cart-room-board{
   width: 80%;
@@ -814,8 +832,23 @@ input[type=checkbox] {
   left: 25.5%;
 }
 
+.cart-room-share {
+  left: 30.5%;
+}
+.invite{
+  position: fixed;
+  left: 25%;
+  width: 50%;
+  height: 70vh;
+  bottom: 68px;
+  border: solid var(--light) 2px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
 .addToPlayList{
-  background-color: var(--secondary);
   width: 79%;
   position: fixed;
   left: 21%;
@@ -842,4 +875,44 @@ input[type=checkbox] {
   scrollbar-color: transparent;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .nav{
+    display: none;
+    padding: 0px;
+  }
+  .left{
+    width: 60px;
+    padding: 0px;
+    padding-left: 8px;
+    padding-top: 10px;
+    margin: 0px;
+  }
+  .nav-icon{
+    width: 48px;
+    height: 48px;
+  }
+  .left-20{
+    width: 95%;
+    left: 65px;
+  }
+  .account{
+    width: 35%;
+  }
+  .title{
+    font-size: 1.3em;
+  }
+  .player{
+    width: 50%;
+  }
+  .cart-room-invite{
+    left: 28%;
+  }
+  .cart-room-share{
+    left: 35%;
+  }
+  .progress-contaner{
+    width: 10em;
+  }
 }

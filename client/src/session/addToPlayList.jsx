@@ -3,7 +3,7 @@ import TrackList from '../components/trackList';
 function AddToPlayList(props) {
     return (
         <>
-            <div className='addToPlayList' >
+            <div className='addToPlayList bg-default' >
                 <div className='flex-row '>
                     <div className='flex-4'>
 <div className="p-1">

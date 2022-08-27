@@ -1,14 +1,9 @@
 import { useState } from "react";
-import NewMessage from "./newMessage";
 
 function MyMessage() {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     
-    function showPlayList() {
-        setexpand("500px");
-        seticonShow(false);
-    }
 
   return (
       <>
@@ -50,7 +45,8 @@ function MyMessage() {
     </div>
           <hr className="bg-primary" />
           
-          <div className="messages-list"> 
+              <div className="messages-list"> 
+                  
               <div className="flex-row flex-center flex-space btn card p-01" >
         <img className="b-r-01 bg-secondary ml-1"
             src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60px"
@@ -72,7 +68,8 @@ function MyMessage() {
                       </div>
                       <div className="pl-1">
         </div>
-    </div>
+                  </div>
+                  
 
     
           </div>

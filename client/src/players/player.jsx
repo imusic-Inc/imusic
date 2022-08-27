@@ -2,6 +2,7 @@ import store from "../redux/store";
 import { useState } from "react"; 
 import { memo } from "react";
 import MyPlayerFunctions from "./playerMethods";
+// import APIController from "../api/functons";
 let tracks;
 const player = MyPlayerFunctions();
 function Player() {
@@ -17,23 +18,32 @@ function Player() {
     });
 
     function playOnload() {
-        if (tracks && playing) {
-        let at = index < tracks.length ? index : tracks.length - 1;
-        console.log(index);
+        if (tracks && tracks.single  && playing) {
+            let at = index < tracks.single.length ? index : tracks.single.length - 1;
+            console.log(at,index,tracks.single.length);
         player.clean();
-        player.setSrc(tracks.single[index].audio);
+        player.setSrc(tracks.single[at].audio);
     if (player.canPlay) {
-        player.play(setPlaying,setIndex,playOnload,index).then(() => {
+        player.play(setPlaying,setIndex,playOnload,at).then(() => {
             setPlaying(true);
         })
     }
        
     } else {
-        if (tracks) {
+        if (tracks && tracks.single) {
             player.pause();
         }
     }
     }
+
+
+//     async function init(id) {
+//     let token = await APIController.getToken();
+//      const song = await APIController.getTracks(token, id);
+//      console.log(song);
+     
+//  }
+//     init('1wCjMz6bqdzVjpJWl45p9L');
 
     playOnload();
     

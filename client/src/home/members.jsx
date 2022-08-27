@@ -1,15 +1,18 @@
 import { useState } from "react";
-
+import NewMessage from "../message/newMessage";
 function Members() {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
-    
-  return (
+    const [showNewMessage, setshowNewMessage] = useState(false);
+    function hideManasession() {
+        setshowNewMessage(false);
+    }
+  return (<>
       <div className="messaging-members " style={{ height: expand }}>
                       <div className="flex-row flex-center flex-space">
         <div className="flex-row flex-center">
            
-            <p className="p-1">Session members</p>
+            <p className="p-1">iMusic Room Members</p>
         </div>
 
 
@@ -42,7 +45,7 @@ function Members() {
       <input type="text" className="playSearch w-100 p-1" placeholder="&#8486; Username or Email" name="name"/>
           <hr className="opacity-6 mb-1" />
           <div className="messages-list"> 
-            <div className="flex-row flex-center btn card p-01">
+            <div className="flex-row flex-center btn card p-01" onClick={() => setshowNewMessage(true)}>
             <img className="cirle-2 bg-secondary ml-1"
             src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
             height="60%" alt=""/>
@@ -156,7 +159,9 @@ function Members() {
         <br /><br /><br /><br />
           </div>
     
-    </div>
+      </div>
+       {showNewMessage ? <NewMessage show={hideManasession} />:<></>}
+      </>
   );
 }
 

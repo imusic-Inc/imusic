@@ -376,11 +376,11 @@ h3 {
 .player {
   position: fixed;
   bottom: 0px;
-  width: 55.15%;
+  width: 52vw;
   height: 50px;
   right: 30%;
   margin-right: 8px;
-  left: 17%;
+  left: 20vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -449,7 +449,7 @@ h3 {
   border-top-right-radius: 10px;
   background-color: rgb(18, 31, 41);
 }
-
+.chat-send-active,
 .chat-send {
   border: solid var(--light) 2px;
   position: fixed;
@@ -458,8 +458,16 @@ h3 {
   right: 26%;
   bottom: 92px;
   height: 50px;
+  border: solid transparent 2px;
 }
 
+.chat-send-active{
+  left: 0px;
+  right: auto;
+  bottom: -20.5px;
+  height: 100px;
+  width: 19.9vw;
+}
 .char-textarea {
   width: 97%;
   background-color: rgb(18, 31, 41);
@@ -700,11 +708,12 @@ background-color: var(--secondary);
 
 .createSession{
   position: fixed;
-  width: 30%;
-  height: 50vh;
-  bottom: 25vh;
+  width: 35%;
+  height: 65vh;
+  bottom: 20vh;
   z-index: 10;
   left: 35%;
+  padding: 8px;
   background-color: var(--secondary);
   border: solid var(--light) 2px;
   border-radius: 15px;
@@ -712,4 +721,95 @@ background-color: var(--secondary);
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
+}
+input[type=checkbox] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#switched {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 28px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+
+#switched:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 18px;
+  background: var(--secondary);
+  border-radius: 90px;
+  transition: 0.3s;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  -ms-border-radius: 90px;
+  -o-border-radius: 90px;
+}
+
+#switch:checked+#switched {
+  background: var(--primary);
+}
+
+#switch:checked+#switched:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+#switched:active:after {
+  width: 120px;
+}
+
+.form-control{
+  overflow-y: scroll;
+  height: 50vh;
+
+}
+
+.active-users{
+  margin-top: 10vh;
+  width: 20vw;
+  height: 90vh;
+  border-top-left-radius: 10px;
+  border: solid var(--light) 2px;
+  border-top-right-radius: 10px;
+  background-color: var(--secondary);
+}
+.active-list{
+  height: 95vh;
+  /* background-color: red; */
+  overflow-y: scroll;
+}
+.active-list{
+  height: 75vh;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.btn-back{
+  position: fixed;
+  border: solid var(--light) 2px;
+  border-radius: 10px;
+  background-color: var(--secondary);
+  margin: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.cart-room-board{
+  width: 80vw;
+  position: fixed;
+  height: 90vh;
+  left: 20.5vw;
 }

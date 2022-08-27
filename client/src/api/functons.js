@@ -103,7 +103,7 @@ const APIController = (function() {
 
     const _getTrack = async (token, trackEndPoint) => {
 
-        const result = await fetch(`${trackEndPoint}`, {
+        const result = await fetch(`https://api.spotify.com/track/${trackEndPoint}`, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
         });

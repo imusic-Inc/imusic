@@ -1,10 +1,10 @@
 import CreateSession from "../components/createSession";
 import {useParams} from "react-router-dom";
-import TrackList from "../components/trackList";
 import { memo, useState } from "react"; 
 import APIController from '../api/functons'
 import PlayListHead from "../components/playListHead";
 import PlayList from "../components/playList";
+let count = 0;
 function MySession() {
     const [showCreate, setshowCreate] = useState(false);
     const [genre, setGenre] = useState({});
@@ -28,6 +28,8 @@ function MySession() {
      
     }
     const paths = useParams();
+if (count < 3) {
+        count++;
     if (!genre.description) {
         if (paths.id) {
             init(paths.id);
@@ -38,6 +40,8 @@ function MySession() {
     if (genre.id) {
          initPlaylist(genre.id)
     }
+}
+    
   return (
       <>
       <div className="flex-6 left-20 ">
@@ -66,28 +70,18 @@ function MySession() {
                       <th className="opacity-6 text-left">
                           X
                       </th>
-               
+                     
                   </tr>
-                  
-                  {playList.length > 1 ? playList.map((value, index) => {
+                <tbody>
+                          {playList.length > 1 ? playList.map((value, index) => {
                       return value.track ? <PlayList key={value.track.album.artists[0].id+Math.random()} id={index} values={value} /> : "";
-                  }):<></>}
+                  }):<></>} 
+               </tbody>
+                 
 
                   
               </table>
               
-<div className="pl-2 pr-2">
-    <h4>Let's find something for your session</h4>
-    <div className="flex-row flex-center flex-space" >
-        <input type="text" className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
-    </div>
-</div>
-
-<div className="trackList pl-2 pr-2">
-    <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
-    <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
-    <TrackList  track="Kwaku the traveler" by="Black Sherif" image="./images/My project-1(1).png"/>
-</div>
           <br /><br />
           <br /><br />
       </div>

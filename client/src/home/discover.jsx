@@ -15,7 +15,7 @@ function Discover() {
   
   return (
     <div className="flex-6 p-1 pt-1 left-20">
-          <h1 className="fixed bg-primary title">Public Sessions</h1>
+          <h1 className="fixed bg-primary title">Public iMusic Rooms</h1>
       <br /><br />
       
     {genre.length < 1 ? <><LoadingSession/></>: genre.map(value => {

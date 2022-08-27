@@ -1,17 +1,18 @@
 import './App.css';
-import Auth from './auth/authenticated';
-import Members from './home/members';
-import Menu from './home/menu';
-import MyMessage from './message/myMessage';
-import Player from './players/player';
+import {BrowserRouter as Router,Routes as Switch,Route} from "react-router-dom";
+import Room from './session/room';
+import Home from './home/home';
 function App() {
   return (
     <div className='flex-row bg-primary'>
-      <Menu/>
-      <Members />
-      <MyMessage />
-      <Player />
-      <Auth/>
+      <Router>
+        <Switch>
+        <Route path="/room" element={<Room />} />
+        <Route path="/room/:id" element={<Room />} />
+        <Route path="/" element={<Home/>}/>
+        <Route path="/:id" element={<Home/>}/>
+        </Switch>
+      </Router>
     </div>
   );
 }

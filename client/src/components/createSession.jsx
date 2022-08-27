@@ -1,8 +1,9 @@
-function  CreateSession(props) {
+import {Link} from "react-router-dom";
+function CreateSession(props) {
     return (<div className="createSession p-1">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
-        <p className="pl-1">Let setup your session</p>
+        <p className="pl-1">Let setup your iMusic Room</p>
     </div>
 
 
@@ -16,17 +17,32 @@ function  CreateSession(props) {
     </div>
 </div>
               <div className="form-control p-1">
-            <input type="text" className="playSearch p-1 w-100 mt-1" placeholder="Session name" name="search" />
-<select name="visibility" className="playSearch p-1 w-100 mt-1">
-  <option value="">Session visibility</option>
-  <option value="Public">Public</option>
-  <option value="Private">Private</option>
-</select>
-            <textarea  className="playSearch-textArea p-1 w-100 mt-1" rows={3} placeholder="Session description" name="search"></textarea>
+            <div className="pl-1 pr-1">
+                <label htmlFor="name">iMusic Room name</label>
+                <input type="text" className="playSearch w-100 " placeholder="iMusic Room name" name="name" />
+            </div>
+            <div className="pl-1 pr-1">
+                <label htmlFor="description">iMusic Room name</label>
+                <textarea  className="playSearch-textArea w-100" rows={3} placeholder="iMusic Room description" name="description"></textarea>
+            </div>
+            <div className="pl-1 pr-1">
+                <label htmlFor="tags">iMusic Room tags</label>
+                <input type="text" className="playSearch p-1 w-100 mt-1" placeholder="iMusic Room tags" name="tags" />
+            </div>
+
+            <div className="pr-1 pl-1 pt-1 flex-row flex-center">
+                <label htmlFor="" className="pr-1">Is your iMusic Room private?</label>
+                <div className="flex-row flex-center">
+                   <div className="pr-1" >YES</div>  <input type="checkbox" id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >NO</div>
+                </div>
+            </div>
             
-             <div className="btn flex-row bg-danger p-1 flex-center mt-1 flex-center-justify text-center">
+
+            <Link  to="room">
+            <div className="btn flex-row bg-danger p-1 flex-center mt-1 flex-center-justify text-center">
                     Create Session
                 </div>
+            </Link>
         </div>
         
           </div>)

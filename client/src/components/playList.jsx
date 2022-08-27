@@ -1,3 +1,4 @@
+import { memo } from "react";
 import APIController from "../api/functons"
 import store from "../redux/store"
 
@@ -38,4 +39,4 @@ function PlayList(props) {
     <td className="btn text-danger">X</td>
 </tr>:<></>)
 }
-export default PlayList
+export default memo(PlayList);

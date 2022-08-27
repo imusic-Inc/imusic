@@ -1,5 +1,4 @@
 function NewMessage(props) {
-   console.log(props);
     return (
     <div className="message">
 <div className="flex-row flex-center flex-space">
@@ -28,27 +27,27 @@ function NewMessage(props) {
 <hr className="bg-primary"/>
 
             <div className="income-messages-list">
-                <div className="message-card p-1">
+                <div className="message-card p-01">
 <p>John Dzikunu</p>
                     <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
                     <hr className="opacity-6" />
                 </div>
-                <div className="message-card p-1">
+                <div className="message-card p-01">
 <p>John Dzikunu</p>
                     <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
                     <hr className="opacity-6" />
                 </div>
-                <div className="message-card p-1">
+                <div className="message-card p-01">
 <p>John Dzikunu</p>
                     <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
                     <hr className="opacity-6" />
                 </div>
-                <div className="message-card p-1">
+                <div className="message-card p-01">
 <p>John Dzikunu</p>
                     <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
                     <hr className="opacity-6" />
                 </div>
-                <div className="message-card p-1">
+                <div className="message-card p-01">
 <p>John Dzikunu</p>
                     <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
                     <hr className="opacity-6" />

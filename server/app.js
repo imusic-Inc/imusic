@@ -3,8 +3,10 @@ const morgan = require("morgan");
 const app = express();
 const sessionRouter = require("./routes/roomSessionRouter");
 const userRouter = require('./routes/userRoutes');
+const messagesRouter = require('./routes/messageRoutes');
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
+const cookieParser = require('cookie-parser');
 //Development logging
 const cors = require("cors");
 
@@ -22,6 +24,7 @@ if (process.env.NODE_ENV === "development") {
 }
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 app.use((req, res, next) => {
@@ -33,7 +36,7 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);
-
+app.use('/api/v1/messages', messagesRouter);
 app.all('*', (req, res, next) => {
     // res.status(404).json({
     //     status: 'fail',

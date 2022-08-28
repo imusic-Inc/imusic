@@ -20,6 +20,9 @@ const sessionSchema = new mongoose.Schema({
         }, ],
         required: false,
     },
+    guest: {
+        type: Array,
+    },
     role: {
         type: String,
         enum: ['room-admin'],
@@ -32,15 +35,35 @@ const sessionSchema = new mongoose.Schema({
 });
 
 
-sessionSchema.pre(/^find/, function(next) {
+
+//Virtual populate(two way ref for chatMessages)
+
+sessionSchema.virtual('messages', {
+    ref: 'Message',
+    foreignField: 'session', //referencing the session ids on Message model
+    localField: '_id'
+
+
+
+});
+
+
+sessionSchema.pre(/^find/, function(next) { //populate participants field with selected credentials added members
 
     this.populate({
         path: 'participants',
-        select: 'name'
+        select: ['name', 'email'],
+
     });
 
     next()
 });
+
+
+
+
+
+
 const Session = mongoose.model('Session', sessionSchema);
 
 

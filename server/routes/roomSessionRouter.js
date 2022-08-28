@@ -1,6 +1,7 @@
 const express = require('express');
 const { viewAllSessionRooms, createSession, getSessionById, deleteSession, joinRoomSession } = require('./../controllers/sessionController');
-const { protect, restrictTo } = require('./../controllers/authentication')
+const { protect, restrictTo, isLoggedIn } = require('./../controllers/authentication');
+const { createMessage } = require('../controllers/roomMessage');
 const router = express.Router();
 
 router
@@ -13,8 +14,13 @@ router
     .get(getSessionById)
     .delete(protect, restrictTo('admin', 'room-admin', 'user'), deleteSession);
 
+
 router
     .route('/:id/session')
-    .patch(protect, joinRoomSession)
+    .patch(isLoggedIn, joinRoomSession)
+
+router
+    .route('/:sessionId/messages')
+    .post(protect, restrictTo('user'), createMessage)
 
 module.exports = router;

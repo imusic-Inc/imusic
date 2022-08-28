@@ -4,88 +4,87 @@ const socketio = require('socket.io')
 
 dotenv.config({ path: './config.env' }) // retrieving protected variables from config file
 const app = require('./app')
+const ACTIONS = require('./utils/actions');
 
 const PORT = process.env.PORT || 3000;
-const http = require('http').createServer(app);
-const sessionModel = require('./models/session');
+const server = require('http').createServer(app);
+const sessionModel = require('./models/sessionRoom');
 
-const io = socketio(http, {
+const io = socketio(server, {
     cors: {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
 
-io.on('connection', (socket) => {
-    console.log(socket.id);
-    sessionModel.find().then(result => {
-        socket.emit('output-rooms', result)
 
-    })
-
-    socket.on('create-room', (name, description, genres, private) => {
-        const sessionModel = new sessionModel({ name, description, genres, private });
-        sessionModel.save().then(result => {
-            io.emit('room-created', result)
-        })
-    })
-
-    socket.on('join', ({ name, room_id, user_id }) => {
-            const { error, user } = addUser({
-                socket_id: socket.id,
-                name,
-                room_id,
-                user_id
-            })
-            socket.join(room_id);
-            if (error) {
-                console.log('join error', error)
-            } else {
-                console.log('join user', user)
-            }
-        })
-        // socket.on('sendMessage', (message, room_id, callback) => {
-        //     const user = getUser(socket.id);
-        //     const msgToStore = {
-        //         name: user.name,
-        //         user_id: user.user_id,
-        //         room_id,
-        //         text: message
-        //     }
-        //     console.log('message', msgToStore)
-        //     const msg = new Message(msgToStore);
-        //     msg.save().then(result => {
-        //         io.to(room_id).emit('message', result);
-        //         callback()
-        //     })
-
-    // })
-    // socket.on('get-messages-history', room_id => {
-    //     Message.find({ room_id }).then(result => {
-    //         socket.emit('output-messages', result)
-    //     })
-    // })
-    socket.on('disconnect', () => {
-        //const user = removeUser(socket.id);
-    })
-});
 
 
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 mongoose.connect(DB, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true
-    }).then(() => console.log('DB connection successfully')) //.catch(err => console.log('error'))
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+}).then(() => console.log('DB connection successfully')) //.catch(err => console.log('error'))
 
 
 
+// Sockets
+const socketUserMap = {};
+
+io.on('connection', (socket) => {
+    console.log('New connection', socket.id);
+    socket.on(ACTIONS.JOIN, ({ roomId, user }) => {
+        socketUserMap[socket.id] = user;
+        const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+        clients.forEach((clientId) => {
+            io.to(clientId).emit(ACTIONS.ADD_PEER, {
+                peerId: socket.id,
+                createOffer: false,
+                user,
+            });
+            socket.emit(ACTIONS.ADD_PEER, {
+                peerId: clientId,
+                createOffer: true,
+                user: socketUserMap[clientId],
+            });
+        });
+        socket.join(roomId);
+    });
+
+  
+    const leaveRoom = () => {
+        const { rooms } = socket;
+        Array.from(rooms).forEach((roomId) => {
+            const clients = Array.from(
+                io.sockets.adapter.rooms.get(roomId) || []
+            );
+            clients.forEach((clientId) => {
+                io.to(clientId).emit(ACTIONS.REMOVE_PEER, {
+                    peerId: socket.id,
+                    userId: socketUserMap[socket.id]?.id,
+                });
+
+                // socket.emit(ACTIONS.REMOVE_PEER, {
+                //     peerId: clientId,
+                //     userId: socketUserMap[clientId]?.id,
+                // });
+            });
+            socket.leave(roomId);
+        });
+        delete socketUserMap[socket.id];
+    };
+
+    socket.on(ACTIONS.LEAVE, leaveRoom);
+
+    socket.on('disconnecting', leaveRoom);
+});
 
 
 
 
 //Start Server
-http.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server Listening on port ${PORT}`)
 });

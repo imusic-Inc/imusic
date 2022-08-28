@@ -1,29 +1,36 @@
 function MyPlayerFunctions() {
-    let audio = new Audio();
+    const audio = new Audio();
     let isPlaying = false;
-   
-   function listiner(calback,secondCallback,playOnLoadCallback,number) {
+    let loginShow = true;
+   function listiner(calback,secondCallback,playOnLoadCallback,number,total,setLogin) {
             if (audio) {
             audio.addEventListener('ended', () => {
                 isPlaying = false;
                 console.log("this is the line of code just testing");
                 calback(false);
-                secondCallback(number + 1);
+                const next = number + 1 < total ? number + 1 : number;
+                secondCallback(next);
                 playOnLoadCallback();
+                if (loginShow) {
+                    setLogin(true);
+                    loginShow = false;
+                }
+               
         })
         }
    }
    
     
     return {
-       async play(calback,secondCallback,playOnLoadCallback,number) {
-            if (audio) {
+       async play(calback,secondCallback,playOnLoadCallback,number,total,setLogin) {
+            if (audio && !isPlaying) {
             audio.play();
             isPlaying = true;
             };
-            listiner(calback,secondCallback,playOnLoadCallback,number);
+            listiner(calback,secondCallback,playOnLoadCallback,number,total,setLogin);
         },
-        setSrc(url) {
+       async setSrc(url) {
+            if (isPlaying && audio) audio.pause();
             if (audio) audio.src = url;
         },
        async pause() {
@@ -32,14 +39,6 @@ function MyPlayerFunctions() {
                 isPlaying = false;
             }
         },
-        clean() {
-            if (audio) {
-                audio.pause();
-                audio = null;
-                audio = new Audio();
-           }
-       },
-       
         canPlay() {
             if (audio && !isPlaying) {
                 return true;

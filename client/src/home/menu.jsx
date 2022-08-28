@@ -1,16 +1,16 @@
 import Discover from "../home/discover";
 import { useState } from "react";
 import Join from "../session/join";
-import SignUp from "../auth/signup";
 import {Routes as Switch,Route,Link} from "react-router-dom";
-import SignIn from "../auth/signin";
 import MySession from "../session/mysession";
 import CreateSession from "../components/createSession";
+import Auth from "../auth/auth";
 
 
 function Menu() {
     const [Manasession, setManasession] = useState("");
     const [create, setCreate] = useState(false);
+    const [signIn, setSignIn] = useState(false);
     let managSession = <></>;
 
      if (Manasession === "Join") {
@@ -19,9 +19,14 @@ function Menu() {
          managSession = <></>;
      }
     
+    
+    
     function hideCreate() {
         setCreate(false);
+        setSignIn(false);
     }
+
+
     
     function hideManasession() {
         setManasession("");
@@ -49,18 +54,8 @@ function Menu() {
 
     <p className="pl-01 nav">Discover</p>
 </div>
-</Link>
-
-    <Link to="/room" >
-                    <div  className="flex-row flex-center pt-1 btn opacity-6" >
-<svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
-    <path fill="currentColor"
-        d="M17.36,20.2V14.82H19.15V22H3V14.82H4.8V20.2H17.36M6.77,14.32L7.14,12.56L15.93,14.41L15.56,16.17L6.77,14.32M7.93,10.11L8.69,8.5L16.83,12.28L16.07,13.9L7.93,10.11M10.19,6.12L11.34,4.74L18.24,10.5L17.09,11.87L10.19,6.12M14.64,1.87L20,9.08L18.56,10.15L13.2,2.94L14.64,1.87M6.59,18.41V16.61H15.57V18.41H6.59Z" />
-</svg>
-
-<p className="pl-01 btn nav" >My Session</p>
-</div>
-</Link>
+                </Link>
+                
 <div className="flex-row flex-center pt-3 opacity-8 ">
     <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
         <path fill="currentColor"
@@ -99,28 +94,27 @@ function Menu() {
             d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
     </svg>
 
-<h3 className=" btn pl-01 nav">Log out</h3>
+<h3 className=" btn pl-01 nav">Sign out</h3>
 </div>
                 </div>
                 
-                <Link to="/sign-up">
-                     <div className="flex-row flex-center btn opacity-8 btn pt-4 ">
+                <div onClick={() => {
+                    setSignIn(true);
+                     }} className="flex-row flex-center btn opacity-8 btn pt-4 ">
    <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor" d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
 </svg>
 
-<h3 className=" btn pl-01 nav">Log in</h3>
+<h3 className=" btn pl-01 nav">Sign up</h3>
 </div>
-               </Link>
             </div> 
 {managSession}
             {create ? <CreateSession show={ hideCreate } />:<></>}
+            {signIn ? <Auth show={ hideCreate } />:<></>}
     
         <Switch>
         <Route path="/discover" element={<Discover />}/>
         <Route path="/my-session" element={<MySession />}/>
-        <Route path="/sign-in" element={<SignIn />}/>
-        <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Discover />}/>
         <Route path="/session/:id/" element={<MySession/>}/>
                 

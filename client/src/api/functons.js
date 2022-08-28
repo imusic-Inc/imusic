@@ -81,8 +81,8 @@ const APIController = (function() {
             headers: { 'Authorization' : 'Bearer ' + token}
         });
 
-        const data = await result.json();
-        return data.items;
+         const data = await result.json();
+        return data.tracks.items;
      }
     
     const _getTrack = async (token, trackEndPoint) => {

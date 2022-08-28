@@ -1,16 +1,26 @@
 
 function Reducer(state = {}, action) {
     switch (action.type) {
-        case 'genre':
-            state = {...state, genre:[...action.payload]}
-            break;
         case 'current-play':
             if (state.single) {
-                state = {...state, 'single':[...action.payload,...state.single]}
+                const set  = new Set([...action.payload,...state.single])
+                state = {...state, 'single':[...set]}
             } else {
-                state = {...state, 'single':[...action.payload]}
+                const set = new Set([...action.payload]);
+                state = {...state, 'single':[...set]}
             }
-            
+            break;
+        case 'add-to-playlist':
+            if (state.addToPlayList) {
+             const set =  new Set([...action.payload, ...state.addToPlayList]);
+                state = {...state, 'addToPlayList': [...set]}
+            } else {
+                const set =  new Set([...action.payload]);
+                state = {...state, 'addToPlayList':[...set]}
+            }
+            break;
+        case 'delete-Draft-Playlist':
+            state = {...state, 'addToPlayList': []}
             break;
         default:
             break;

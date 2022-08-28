@@ -1,8 +1,49 @@
 import TableRow from '../components/playListTableRow';
 import TrackList from '../components/trackList';
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import APIController from '../api/functons';
+import store from "../redux/store";
+let token;
+var addPlayList;
 function AddToPlayList(props) {
-    const [expand, setexpand] = useState("50px");
+    const [tracks, setTracks] = useState([]);
+    const [playlist, setPlaylist] = useState([]);
+    const [message, setMessage] = useState('');
+
+
+
+    async function getSearch() {
+        setTracks([]);
+        if (!token) {
+      APIController.getToken().then(value => {
+          token = value;
+          if (message.length > 3) {
+               APIController.getSearch(token,message).then((values) => {
+                   setTracks(values);
+          })
+          }
+        });
+        } else {
+             if (message.length > 3) {
+               APIController.getSearch(token,message).then((values) => {
+                   setTracks(values);
+          })
+          }
+        }
+        
+    }
+
+     
+useEffect(() => {
+       store.subscribe(() => {
+         addPlayList = store.getState();
+            if (addPlayList.addToPlayList) {
+                setPlaylist([...addPlayList.addToPlayList]);
+                
+            }
+       });
+     addPlayList = store.getState();
+    });
 
     return (
         <>
@@ -34,31 +75,31 @@ function AddToPlayList(props) {
                   <th className="opacity-6 text-left">
             X
     </th>
-    </tr>
-<TableRow  number="1" image = "../images/My project-1(2).png"  name="Kwaku the traveler" by="Black Sherif" album="The time is now" len="3:4" />
-<TableRow  number="2" image = "../images/My project-1(2).png"  name="Kwaku the traveler" by="Black Sherif" album="The time is now" len="3:4" />
-<TableRow  number="3" image = "../images/My project-1(2).png"  name="Kwaku the traveler" by="Black Sherif" album="The time is now" len="3:4" />
-<TableRow  number="4" image = "../images/My project-1(2).png"  name="Kwaku the traveler" by="Black Sherif" album="The time is now" len="3:4" />
+                                </tr>
+                                {playlist.length > 0 ? playlist.map((value,index) => {
+                                   return <TableRow  number={index} image = {value.image}  name={value.name} by={value.auth} album={value.album} len={value.length} />
+                               }):<></>}
 </table>
                         </div>
                         
                     </div>
                     <div className='flex-6 p-1'>
                         <div className="p-1">
+
     <h4>Let's find something for your room</h4>
     <div className="flex-row flex-center flex-space" >
-        <input type="text" className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
-        <div  className="addPlayList btn bg-danger">
+        <input type="text" onChange={event => setMessage(event.target.value)} className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
+        <div onClick={getSearch}  className="addPlayList btn bg-danger">
             Search
         </div>
     </div>
 </div>
                         <div className='playList-list-save'>
-                            <TrackList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                            <TrackList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                            <TrackList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                            
-                            <TrackList  track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png"/>
+                            {tracks.length > 0 ? tracks.map(value => {
+                                return <TrackList values={value} />
+                               
+                             }) :<></>}
+                           
 </div>
                     </div>
                 </div>

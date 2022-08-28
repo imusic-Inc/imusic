@@ -50,7 +50,7 @@ function MyMessage({value}) {
               <div className="messages-list"> 
                   
                   {value.map(values => {
-                      return values.track? <PlayList values={values}/>:<></>
+                      return values.track? <PlayList key={values.track.uri} values={values}/>:<></>
                      })}
 
     

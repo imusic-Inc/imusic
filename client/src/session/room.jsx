@@ -4,18 +4,18 @@ import MyMessage from '../message/myMessage'
 import Player from '../players/player';
 import Activeuserscart from './activeuserscart';
 import AddToPlayList from './addToPlayList';
-import { useState } from "react"; 
+import { useState, useEffect,memo } from "react"; 
 import {useParams} from "react-router-dom";
 import Invite from './invite';
 import Share from '../home/share';
 import APIController from '../api/functons';
+import store from "../redux/store";
 let token;
 
 function Room() {
 const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
     const [expandShare, setexpandShare] = useState(false);
-   
     const [playList, setplayList] = useState([]);
      const paths = useParams();
 
@@ -30,15 +30,28 @@ const [expandInvite, setExpandInvite] = useState(false);
       }
     }
 
+    useEffect(() => {
+       
     if (paths.id) {
         if (paths.id.indexOf('imusic') < 0) {
             init(paths.id);
         }
     }
+        
+    })
+
+    function deletedPlayListDraft() {
+        const payload = {
+            type: "delete-Draft-Playlist",
+            payload:'addToPlayList'
+        }
+         store.dispatch(payload);
+    }
 
 
     function showAndHide() {
-        setexpand(!expand)
+        setexpand(!expand);
+        deletedPlayListDraft();
     }
     function showAndHideInvite() {
         setExpandInvite(!expandInvite)
@@ -73,6 +86,13 @@ function showAndHideShare() {
                 </div>
             </div>
            
+            
+
+           
+
+
+
+
             {expandShare?<Share show = {showAndHideShare} />:<></>}
             {expandInvite?<Invite show = {showAndHideInvite} />:<></>}
            {expand?<AddToPlayList show = {showAndHide} />:<></>} 
@@ -86,4 +106,4 @@ function showAndHideShare() {
     )
 }
 
-export default Room;
+export default memo(Room);

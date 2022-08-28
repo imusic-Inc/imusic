@@ -384,7 +384,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 50;
+  z-index: 40;
   background-color: var(--secondary);
 }
 
@@ -879,7 +879,7 @@ input[type=checkbox] {
 
 .lyrics{
   background-color: var(--primary);
-  width: 50%;
+  width: 48%;
   height: 65vh;
   position: fixed;
   top: 15%;
@@ -907,6 +907,55 @@ input[type=checkbox] {
     font-family: 'Courier New', Courier, monospace;
     text-align: justify;
 }
+
+.logIn-alert{
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card{
+  width: 60vw;
+  height: 60vh;
+  background: linear-gradient(0deg, var(--secondary), var(--primary) 40%, rgb(18, 31, 41));;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.btn-login{
+  padding: 16px 24px;
+  border: solid var(--light) 2px;
+  border-radius: 10px;
+  background: green;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.sign-in{
+  color: var(--light);
+}
+.login-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-image{
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
 @media only screen and (max-width: 900px) {
   .nav{
     display: none;

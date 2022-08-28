@@ -3,16 +3,23 @@ import { useState, useEffect } from "react";
 import { memo } from "react";
 import MyPlayerFunctions from "./playerMethods";
 import Lyrics from "../session/lyrics";
+import Auth from "../auth/auth";
+import Progress from "./progress";
 let tracks;
 const player = MyPlayerFunctions();
 function Player() {
     const [track, setTrack] = useState([]);
     const [playing, setPlaying] = useState(false);
+    const [login, setLogin] = useState(false);
     const [index, setIndex] = useState(0);
-    const [expandlyrics, setexpandlyrics] = useState(true);
+    const [expandlyrics, setexpandlyrics] = useState(false);
     
     function showAndHideLyrics() {
         setexpandlyrics(!expandlyrics)
+    }
+
+    function showLogin() {
+        setLogin(false);
     }
 
     useEffect(() => {
@@ -21,38 +28,49 @@ function Player() {
             if (tracks.single) {
                 setTrack(tracks.single);
                 setIndex(0);
+                playOnload();
             }
         });
-    }, [tracks]);
+    });
 
 
     useEffect(() => {
         tracks = store.getState();
-    }, [tracks]);
+        if (tracks && tracks.single) {
+             playOnload();
+        }
+    });
     
 
-    function playOnload() {
-        if (tracks && tracks.single  && playing) {
-            let at = index < tracks.single.length ? index : 0;
-            console.log(at, index, tracks.single.length);
-        player.clean();
-        player.setSrc(tracks.single[index].pre_view);
+    function setUrl() {
+        player.setSrc(tracks.single[index].pre_view).then(() => {
+        document.title = tracks.single[index].name +" "+ tracks.single[index].album;
     if (player.canPlay) {
-        player.play(setPlaying,setIndex,playOnload,index).then(() => {
+        player.play(setPlaying,setIndex,playOnload,index,tracks.length,setLogin).then(() => {
             setPlaying(true);
+            setexpandlyrics(true);
         })
-    }
-    } else {
+            };
+        });
+    };
+
+    function playOnload() {
         if (tracks && tracks.single) {
-            player.pause();
-        }
-    }
+            if (playing) {
+                setUrl();
+            } else {
+                player.pause();
+                setUrl();
+            };
+            
+        };
     }
 
     function dec() {
         if (tracks) {
-            if (index > 1 && index < tracks.length) {
-                setIndex(index-1)
+            console.log(index > 1 && index < tracks.single.length);
+            if (index > 1 && index < tracks.single.length) {
+                setIndex(index - 1);
             }
         }
        
@@ -60,21 +78,14 @@ function Player() {
 
     function inc() {
         if (tracks) {
-            console.log(index >= 0 && index < tracks.length-1,index,tracks.length);
-        console.log((tracks));
-            if (index >= 0 && index < tracks.length-1) {
+            if (index >= 0 && index < tracks.single.length-1) {
                 setIndex(index+1)
             }
         }
         
     }
 
-    useEffect(() => {
-         playOnload();
-    },[])
-   
-    
-   
+
   return (<>
     <div className="player p-1">
 <div className="flex-row flex-center">
@@ -100,19 +111,19 @@ function Player() {
         <path fill="currentColor" d="M6,18V6H8V18H6M9.5,12L18,6V18L9.5,12Z" />
     </svg>
 </div>
-                  {playing ? <div className="pl-1 btn" onClick={() => player.play(setPlaying,setIndex,playOnload,index).then(() => {
+                  {playing ? <div className="pl-1 btn" onClick={() => player.play(setPlaying,setIndex,playOnload,index,tracks.length,setLogin).then(() => {
      setPlaying(false);
 })}>
     <svg style={{width:34, height:34}} viewBox="0 0 24 24">
-       
-    <path fill="currentColor" d="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                               <path fill="currentColor"
+            d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
     </svg>
                   </div> : <div className="pl-1 btn" onClick={() => player.pause().then(() => {
                       setPlaying(true);
+                      setexpandlyrics(true);
 })}>
                           <svg style={{ width: 34, height: 34 }} viewBox="0 0 24 24">
-                               <path fill="currentColor"
-            d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                              <path fill="currentColor" d="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
 </svg>
 </div>}
 
@@ -129,17 +140,16 @@ function Player() {
 </div>
     </div>
     <div>
-<div className="flex-row flex-center ">
-    <div className="pr-1">0:0</div>
-    <div className="progress-contaner btn">
-        <div className="progress" style={{width: "20%"}}></div>
-    </div>
-    <div className="pl-1">{ track.length > 0?String(Number(track[index].length)/(1000*60)).substring(0,5):"" }</div>
-</div>
+
+                  <Progress index={index}  track={track} />
+                  
+
+
     </div>
 </div>
       </div>
-   {expandlyrics?<Lyrics show = {showAndHideLyrics} />:<></>}
+   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} album={track.length > 0 ? track[index].album:""} show = {showAndHideLyrics} />:<></>}
+   {login?<Auth show = {showLogin} />:<></>}
   </>
   );
 }

@@ -1,15 +1,21 @@
 import APIController from '../api/functons'
 import { useState } from "react"; 
 import PublicSession from '../components/publicSession';
-import {LoadingSession} from '../components/loadingSession';
+import { LoadingSession } from '../components/loadingSession';
+let token;
 function Discover() {
 
     const [genre, setGenre] = useState([]);
     
-    async function init() {
-    let token = await APIController.getToken();
-        const genes = await APIController.getGenres(token);
-        setGenre(genes);
+  async function init() {
+    if (!token) {
+      APIController.getToken().then(value => {
+        token = value;
+        APIController.getGenres(token).then((values) => {
+            setGenre(values);
+          })
+        });
+      }
     }
   init();
   

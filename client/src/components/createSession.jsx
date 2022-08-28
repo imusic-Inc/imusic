@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 function CreateSession(props) {
-    return (<div className="createSession p-1">
+    return (<div className="createSession bg-default p-1">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <p className="pl-1">Let setup your iMusic Room</p>

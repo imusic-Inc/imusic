@@ -1,6 +1,8 @@
 import { useState } from "react";
+import PlayList from "../components/playList";
 
-function MyMessage() {
+function MyMessage({value}) {
+   
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     
@@ -47,29 +49,9 @@ function MyMessage() {
           
               <div className="messages-list"> 
                   
-              <div className="flex-row flex-center flex-space btn card p-01" >
-        <img className="b-r-01 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60px"
-            height="50px" alt=""/>
-        <div className="pl-1">
-            <h5>John Dzikunu Dzikunu Dzikunu</h5>
-            <h6 className="opacity-6">dzikunujohn36@gmail.com</h6>
-        </div>
-              </div>
-              
-               <div className="flex-row flex-center btn card p-01">
-        <img className="b-r-01  ml-1" style={{ backgroundImage: `url('../images/My project-1(2).png'`,backgroundPosition: 'center',
-  backgroundSize: 'cover'}}
-            src="https://i.imgur.com/nYxJ5cV.gif" width="50px"
-            height="40px" alt=""/>
-        <div className="pl-1">
-            <h5>John Dzikunu Dzikunu Dzikunu Dzikunu</h5>
-            <h6 className="opacity-6">dzikunujohn36@gmail.com</h6>
-                      </div>
-                      <div className="pl-1">
-        </div>
-                  </div>
-                  
+                  {value.map(values => {
+                      return values.track? <PlayList values={values}/>:<></>
+                     })}
 
     
           </div>

@@ -5,12 +5,38 @@ import Player from '../players/player';
 import Activeuserscart from './activeuserscart';
 import AddToPlayList from './addToPlayList';
 import { useState } from "react"; 
+import {useParams} from "react-router-dom";
 import Invite from './invite';
 import Share from '../home/share';
+import APIController from '../api/functons';
+let token;
+
 function Room() {
 const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
-const [expandShare, setexpandShare] = useState(false);
+    const [expandShare, setexpandShare] = useState(false);
+   
+    const [playList, setplayList] = useState([]);
+     const paths = useParams();
+
+    async function init(id) {
+        if (!token) {
+      APIController.getToken().then(value => {
+          token = value;
+        APIController.getPlayList(token,id).then((values) => {
+            setplayList(values);
+          })
+        });
+      }
+    }
+
+    if (paths.id) {
+        if (paths.id.indexOf('imusic') < 0) {
+            init(paths.id);
+        }
+    }
+
+
     function showAndHide() {
         setexpand(!expand)
     }
@@ -46,13 +72,14 @@ function showAndHideShare() {
 </svg>
                 </div>
             </div>
+           
             {expandShare?<Share show = {showAndHideShare} />:<></>}
             {expandInvite?<Invite show = {showAndHideInvite} />:<></>}
            {expand?<AddToPlayList show = {showAndHide} />:<></>} 
         <LeaveCart/>
        <Activeuserscart/>
             <Members/>
-            <MyMessage />
+            <MyMessage value={ playList } />
             <Player/>
             
         </>

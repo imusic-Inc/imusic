@@ -62,34 +62,7 @@ const APIController = (function() {
         const data = await result.json();
         return data;
     }
-       const _timeSince = (date) => {
-
-    var seconds = Math.abs(Math.floor((new Date() - date) / 1000));
-    
-    var interval = seconds / 31536000;
-    
-    if (interval > 1) {
-      return Math.floor(interval) + " year(s) ago";
-    }
-    interval = seconds / 2592000;
-    if (interval > 1) {
-      return Math.floor(interval) + " month(s) ago";
-    }
-    interval = seconds / 86400;
-    if (interval > 1) {
-      return Math.floor(interval) + " day(s) ago";
-    }
-    interval = seconds / 3600;
-    if (interval > 1) {
-      return Math.floor(interval) + " hour(s) ago";
-    }
-    interval = seconds / 60;
-    if (interval > 1) {
-      return Math.floor(interval) + " minute(s) ago";
-    }
-    return Math.floor(seconds) + " second(s) ago";
-
-    }   
+          
     const _getPlayList = async (token, tracksEndPoint) => {
         const path = `https://api.spotify.com/v1/playlists/${tracksEndPoint}/tracks?offset=0&limit=30&locale=en-US,en;q=0.5`
         const result = await fetch(path, {
@@ -101,13 +74,26 @@ const APIController = (function() {
         return data.items;
     }
 
-    const _getTrack = async (token, trackEndPoint) => {
-
-        const result = await fetch(`https://api.spotify.com/track/${trackEndPoint}`, {
+     const _getSearch = async (token, tracksEndPoint) => {
+        const path = `https://api.spotify.com/v1/search?q=${tracksEndPoint}&type=track&limit=30&offset=0`
+        const result = await fetch(path, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
         });
 
+        const data = await result.json();
+        return data.items;
+     }
+    
+    const _getTrack = async (token, trackEndPoint) => {
+
+        const result = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        });
+
+        console.log(`https://api.spotify.com/track/${trackEndPoint}`);
+        
         const data = await result.json();
         return data;
     }
@@ -134,8 +120,8 @@ const APIController = (function() {
         getTrack(token, trackEndPoint) {
             return _getTrack(token, trackEndPoint);
         },
-        timeSince(time) {
-             return  _timeSince(time);
+        getSearch(token, trackEndPoint) {
+             return  _getSearch(token, trackEndPoint);
          }
     }
 })();

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MemberList from "../message/memberList";
 import NewMessage from "../message/newMessage";
 function Members() {
     const [expand, setexpand] = useState("50px");
@@ -6,6 +7,9 @@ function Members() {
     const [showNewMessage, setshowNewMessage] = useState(false);
     function hideManasession() {
         setshowNewMessage(false);
+    }
+    function showManasession() {
+        setshowNewMessage(true);
     }
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
@@ -45,118 +49,13 @@ function Members() {
       <input type="text" className="playSearch w-100 p-1" placeholder="&#8486; Username or Email" name="name"/>
           <hr className="opacity-6 mb-1" />
           <div className="messages-list"> 
-            <div className="flex-row flex-center btn card p-01" onClick={() => setshowNewMessage(true)}>
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
-             <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
-             <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
-             <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-        </div>
-         <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
-             <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
-             <div className="flex-row flex-center btn card p-01">
-            <img className="cirle-2 bg-secondary ml-1"
-            src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="60%"
-            height="60%" alt=""/>
-            <div className="pl-1">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
-            </div>
-            </div>
+              
+              <MemberList showMessage={ showManasession} />
+         
 
         
 
-        <br /><br /><br /><br />
+        
           </div>
     
       </div>

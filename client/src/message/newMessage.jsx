@@ -1,3 +1,5 @@
+import Message from "./message";
+
 function NewMessage(props) {
     return (
     <div className="message">
@@ -27,31 +29,8 @@ function NewMessage(props) {
 <hr className="bg-primary"/>
 
             <div className="income-messages-list">
-                <div className="message-card p-01">
-<p>John Dzikunu</p>
-                    <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
-                    <hr className="opacity-6" />
-                </div>
-                <div className="message-card p-01">
-<p>John Dzikunu</p>
-                    <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
-                    <hr className="opacity-6" />
-                </div>
-                <div className="message-card p-01">
-<p>John Dzikunu</p>
-                    <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
-                    <hr className="opacity-6" />
-                </div>
-                <div className="message-card p-01">
-<p>John Dzikunu</p>
-                    <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
-                    <hr className="opacity-6" />
-                </div>
-                <div className="message-card p-01">
-<p>John Dzikunu</p>
-                    <small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti blanditiis laudantium eum ipsam cupiditate ratione voluptas aliquam libero quia magni!</small>
-                    <hr className="opacity-6" />
-                </div>
+
+                <Message><hr className="opacity-6" /></Message>
                 
                 
             </div>

@@ -390,7 +390,7 @@ h3 {
 
 .progress-contaner {
   background-color: rgb(114, 114, 114);
-  width: 15em;
+  width: 10em;
   border-radius: 15px;
   height: 5px;
   -webkit-border-radius: 15px;
@@ -497,7 +497,7 @@ h3 {
     scrollbar-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  height: 65vh;
+  height: 75vh;
 }
 .income-messages-list{
 overflow-y: scroll;
@@ -537,7 +537,7 @@ scroll-behavior: smooth;
 }
 
 .join-list {
-  height: 65%;
+  height: 65vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -730,7 +730,6 @@ background-color: var(--secondary);
   z-index: 10;
   left: 35%;
   padding: 8px;
-  background-color: var(--secondary);
   border: solid var(--light) 2px;
   border-radius: 15px;
   -webkit-border-radius: 15px;
@@ -786,7 +785,7 @@ input[type=checkbox] {
 
 .form-control{
   overflow-y: scroll;
-  height: 50%;
+  height: 50vh;
 
 }
 
@@ -877,6 +876,37 @@ input[type=checkbox] {
   scrollbar-width: none;
 }
 
+
+.lyrics{
+  background-color: var(--primary);
+  width: 50%;
+  height: 65vh;
+  position: fixed;
+  top: 15%;
+  left: 24%;
+  border: solid var(--light) 2px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.lyrics-text{
+  height: 60vh;
+  width: 100%;
+  overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    text-shadow: #30363b;
+    line-height: 30px;
+    font-size: 1.5em;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+}
 @media only screen and (max-width: 900px) {
   .nav{
     display: none;
@@ -913,6 +943,6 @@ input[type=checkbox] {
     left: 35%;
   }
   .progress-contaner{
-    width: 10em;
+    width: 8em;
   }
 }

@@ -34,7 +34,12 @@ const userSchema = new mongoose.Schema({
         }
     },
 
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    role: {
+        type: String,
+        enum: ['user', 'admin', 'room-admin'],
+        default: 'user'
+    }
 
 });
 

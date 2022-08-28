@@ -112,3 +112,18 @@ exports.protect = hookAsync(async(req, res, next) => {
 
     next()
 })
+
+
+
+
+
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+        //roles is an array ['admin','room-admin']. role is now user
+        if (!roles.includes(req.user.role)) {
+            return next(new AppError('You do not have permission to perform this action', 403)) //403 MEANS forbidden
+        }
+        next();
+
+    }
+}

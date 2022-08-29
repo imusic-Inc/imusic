@@ -5,12 +5,8 @@ const router = express.Router();
 
 router
     .get('/', login)
-
-
 router
-    .get('logged', logged)
-
-
+    .get('/logged', logged)
 router
     .get('/getUser/:token', getUser)
 

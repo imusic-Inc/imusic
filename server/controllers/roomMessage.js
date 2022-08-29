@@ -36,7 +36,7 @@ exports.createMessage = hookAsync(async(req, res, next) => {
 
         //only joined user as a member of room can create messages on this route
         if (session.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user.id)).length === 0) {
-            return next(new AppError('You do not have permission to perform this action, join music room as a registered user', 403));
+            return next(new AppError('You do not have permission to perform this action, join music room before taking this action', 403));
         }
 
     }

@@ -1,8 +1,8 @@
 const encodeFormData = require('../utils/encodeFormdata');
 const querystring = require('querystring');
 const fetch = require('node-fetch')
-
-
+const got = require('got')
+    //oauth through spotify api
 exports.login = async(req, res) => {
     const scope =
         `user-modify-playback-state
@@ -25,7 +25,10 @@ exports.login = async(req, res) => {
 }
 
 
+//gets log user credentials
 exports.logged = async(req, res) => {
+    let isloggedDone = false;
+    let query;
     const body = {
         grant_type: 'authorization_code',
         code: req.query.code,
@@ -44,9 +47,30 @@ exports.logged = async(req, res) => {
         })
         .then(response => response.json())
         .then(data => {
-            const query = querystring.stringify(data);
+            query = querystring.stringify(data);
             res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
-        });
+
+        }).then(() => {
+            isloggedDone = true
+        })
+
+    if (isloggedDone) { //check if logged was successful
+        //get token from spotify
+        let userQuery = query.split('&')[0];
+        try {
+
+            //get user credentials from endpoint
+            let { body } = await got(`https://api.spotify.com/v1/me/?${userQuery}`, { json: true })
+
+
+            console.log(body);
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+
 };
 
 exports.getUser = async(req, res) => {

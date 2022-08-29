@@ -34,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/api/v1/login", spotifyAuth)
+app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messagesRouter);

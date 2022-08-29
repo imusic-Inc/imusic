@@ -8,7 +8,7 @@ const ACTIONS = require('./utils/encodeFormdata');
 
 const PORT = process.env.PORT || 3000;
 const server = require('http').createServer(app);
-const sessionModel = require('./models/sessionRoom');
+//const sessionModel = require('./models/sessionRoom');
 
 const io = socketio(server, {
     cors: {

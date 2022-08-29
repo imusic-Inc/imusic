@@ -33,6 +33,23 @@ function AddToPlayList(props) {
         
     }
 
+    function addToPlayList() {
+         if (playlist.length > 0) {
+            const payload = {
+        type: "toPlayList",
+        payload: [...playlist]
+            }
+             store.dispatch(payload);
+             props.show();
+         }
+    }
+
+    function removePlayList(index) {
+        const newPlayList = playlist.filter((value, indexed) => {
+            return indexed !== index;
+        });
+        setPlaylist(newPlayList);
+    }
      
 useEffect(() => {
        store.subscribe(() => {
@@ -42,8 +59,17 @@ useEffect(() => {
                 
             }
        });
-     addPlayList = store.getState();
     });
+
+
+    useEffect(() => {
+        const state = store.getState()
+        if (state && state.addToPlayList) {
+            addPlayList = state.addToPlayList;
+            setPlaylist([...addPlayList]);
+       }
+    },[setPlaylist]);
+
 
     return (
         <>
@@ -61,7 +87,7 @@ useEffect(() => {
 
      <div className="flex-row flex-center flex-space">
                                 <p className="p-1">Playlist Manager</p>
-                                <div className='btn btn-default p-01 bg-success'>
+                                <div onClick={addToPlayList} className='btn btn-default p-01 bg-success'>
                                 Save
                                 </div>
         </div>
@@ -69,16 +95,22 @@ useEffect(() => {
                         
                         <div className='playList-list-save'>
                            <table className="p-1">
-    <tr>
+                                <thead>
+ <tr>
         <th className="opacity-6 text-left">Title</th>
         <th className="opacity-6 text-left">album</th>
                   <th className="opacity-6 text-left">
             X
-    </th>
+                                    </th>
+                                    
                                 </tr>
-                                {playlist.length > 0 ? playlist.map((value,index) => {
-                                   return <TableRow  number={index} image = {value.image}  name={value.name} by={value.auth} album={value.album} len={value.length} />
+                                </thead>
+                                <tbody>
+ {playlist.length > 0 ? playlist.map((value,index) => {
+                                   return <TableRow  number={index} image = {value.image} key={value.image+value.name}  name={value.name} by={value.auth} album={value.album} remove={removePlayList}  />
                                }):<></>}
+                                </tbody>
+                               
 </table>
                         </div>
                         
@@ -96,7 +128,7 @@ useEffect(() => {
 </div>
                         <div className='playList-list-save'>
                             {tracks.length > 0 ? tracks.map(value => {
-                                return <TrackList values={value} />
+                                return <TrackList key={value.id} values={value} />
                                
                              }) :<></>}
                            

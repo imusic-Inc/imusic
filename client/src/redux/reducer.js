@@ -13,14 +13,25 @@ function Reducer(state = {}, action) {
         case 'add-to-playlist':
             if (state.addToPlayList) {
              const set =  new Set([...action.payload, ...state.addToPlayList]);
-                state = {...state, 'addToPlayList': [...set]}
+                state = { ...state, 'addToPlayList': [...set] }
             } else {
                 const set =  new Set([...action.payload]);
                 state = {...state, 'addToPlayList':[...set]}
             }
             break;
+        case 'toPlayList':
+            const set =  new Set([...action.payload]);
+            state = {...state, 'playList':[...set]}
+            break;
         case 'delete-Draft-Playlist':
             state = {...state, 'addToPlayList': []}
+            break;
+        case 'exit':
+            if (state.auth) {
+                state = {...state.auth}
+            } else {
+                state = {}
+            }
             break;
         default:
             break;

@@ -413,20 +413,6 @@ h3 {
   align-items: center;
 }
 
-.progress-contaner:hover>.progress {
-  background-color: rgb(7, 75, 7);
-}
-
-.progress {
-  background-color: #037AFF;
-  border-radius: 15px;
-  height: 3px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-}
-
 .btn:hover {
   opacity: 0.7;
   filter: contrast();
@@ -966,6 +952,14 @@ left: 21%;
   -o-border-radius: 10px;
 }
 
+.play{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+  border:  solid var(--light) 2px;
+}
+
 @media only screen and (max-width: 900px) {
   .nav{
     display: none;
@@ -988,8 +982,5 @@ left: 21%;
   }
   .player{
     width: 50%;
-  }
-  .progress-contaner{
-    width: 8em;
   }
 }

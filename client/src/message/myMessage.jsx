@@ -5,28 +5,17 @@ function MyMessage({value}) {
    
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
+   
     
    async function addAll() {
         if (value.length > 0) {
-            const getPlayList = await value.map((value => {
-                return {
-                    "image": value.track.album.images[0].url,
-                    "name": value.track.name,
-                    "len": value.track.duration_ms,
-                    "auth": value.track.album.artists[0].name,
-                    "audio": value.track.uri,
-                    "album": value.track.album.name,
-                    "pre_view": value.track.preview_url
-                };
-            }));
             const payload = {
         type: "current-play",
-        payload: [...getPlayList]
+        payload: [...value]
             }
         store.dispatch(payload);
         }
     }
-
   return (
       <>
       <div className="messaging" style={{ height: expand }}>
@@ -75,7 +64,7 @@ function MyMessage({value}) {
 
 
                   {value.map(values => {
-                      return values.track? <PlayList key={values.track.uri} values={values}/>:<></>
+                      return <PlayList key={values.audio+values.len} values={values}/>
                      })}
 
     

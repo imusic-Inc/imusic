@@ -1,13 +1,12 @@
 import { memo } from "react";
 import store from "../redux/store";
 function TrackList(props) {
-    console.log(props);
     const payload = {
         type: "add-to-playlist",
         payload: [{
                 "image": props.values.album.images[0].url,
                 "name": props.values.name,
-                "length": props.values.duration_ms,
+                "len": props.values.duration_ms,
                 "auth": props.values.album.artists[0].name,
                 "audio": props.values.uri,
                 "album": props.values.album.name,

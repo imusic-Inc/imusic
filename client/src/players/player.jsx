@@ -10,9 +10,10 @@ function Player() {
     const [track, setTrack] = useState([]);
     const [playing, setPlaying] = useState(false);
     const [login, setLogin] = useState(false);
+    const [notPaused, setNotPaused] = useState(true);
     const [index, setIndex] = useState(0);
     const ref = useRef(null);
-    const [expandlyrics, setexpandlyrics] = useState(true);
+    const [expandlyrics, setexpandlyrics] = useState(false);
     
    
 
@@ -44,24 +45,40 @@ function Player() {
                     setLogin(true);
                     loginShow = false;
                 }
-               
-            })
+            });
+
+            audio.onplay = function () {
+                setPlaying(true);
+                setexpandlyrics(true);
+                setNotPaused(true);
+            }; 
+
+             audio.onpause = function () {
+                setPlaying(false);
+                 setexpandlyrics(true);
+                 setNotPaused(false);
+            }; 
+        
         }
         playOnload();
     });
 
     function int() {
-        if (track.length>0) {
-         audio.src = track[index].pre_view
-        audio.load();
-        audio.play(); 
-        document.title = track[index].name +" "+ track[index].album;
+        if (track.length > 0) {
+            audio.src = track[index].pre_view
+            audio.load();
+            if (notPaused) {
+                audio.play();
+            }
+            
+           
+            document.title = track[index].name + " " + track[index].album;
         }
-        }
+    }
 
 
     function playOnload() {
-       if (playing) {
+        if (playing) {
             audio.pause();
             int();
         } else {
@@ -82,7 +99,7 @@ function Player() {
 
     function inc() {
         if (tracks) {
-            if (index >= 0 && index < tracks.single.length-1) {
+            if (index >= 0 && index < tracks.single.length - 1) {
                 setIndex(index + 1)
                 playOnload();
             }
@@ -90,11 +107,11 @@ function Player() {
         
     }
 
-
+const background = track.length > 0 ? `url(${track[index].image })` : "url(https://picsum.photos/200)";
   return (<>
     <div className="player p-1">
 <div className="flex-row flex-center">
-    <img className="b-r-01" src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
+    <img className="b-r-01 play" src={track.length  > 0  & playing ? 'https://i.imgur.com/nYxJ5cV.gif': ""} style={{backgroundImage: background }} alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
                   <h4>{ track.length > 0? track[index].name:"" }</h4>
         <h6 className="opacity-6">{ track.length > 0 ? track[index].auth:"" }</h6>

@@ -10,7 +10,7 @@ function TableRow(props) {
         </div>
     </td>
         <td>{ props.album}</td>
-    <td className="btn text-danger">X</td>
+        <td onClick={() => { props.remove(props.number) }} className="btn text-danger">X</td>
 </tr>)
 }
 export default TableRow;

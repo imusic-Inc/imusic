@@ -13,19 +13,15 @@ function Members() {
     }
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
-                      <div className="flex-row flex-center flex-space">
-        <div className="flex-row flex-center">
-           
-            <p className="p-1">iMusic Room Members</p>
+        <div className="flex-row flex-center flex-space  pt-01">
+        <div className="flex-5 p-01">
+            iMusic Room Members
         </div>
 
 
-        <div className="flex-row flex-center ">
-
-
-
+        <div className="flex-1 text-right">
                   <div onClick={() => {
-                      setexpand("500px");
+                      setexpand("75vh");
                       seticonShow(!iconShow);
                   }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
@@ -47,7 +43,7 @@ function Members() {
         </div>
       </div>
       <input type="text" className="playSearch w-100 p-1" placeholder="&#8486; Username or Email" name="name"/>
-          <hr className="opacity-6 mb-1" />
+          <hr className="opacity-6" />
           <div className="messages-list"> 
               
               <MemberList showMessage={ showManasession} />

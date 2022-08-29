@@ -57,7 +57,11 @@ a:hover{
 .left {
   left: 0px;
   width: 15%;
-  min-height: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .flex-center {
@@ -168,7 +172,14 @@ p {
   font-family: 'Courier New', Courier, monospace;
   font-weight: 600;
 }
-
+.overflow-x{
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: hidden;
+}
 .session-board{
   height: 65%;
   background: linear-gradient(var(--secondary), var(--primary));
@@ -497,7 +508,7 @@ h3 {
     scrollbar-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  height: 75vh;
+  height: 60vh;
 }
 .income-messages-list{
 overflow-y: scroll;
@@ -584,6 +595,7 @@ table {
 .text-danger{
 color: rgb(176, 23, 23);
 }
+
 .playSearch-textArea,
 .playSearch {
   width: 70%;
@@ -771,7 +783,7 @@ input[type=checkbox] {
 }
 
 #switch:checked+#switched {
-  background: var(--primary);
+  background: rgb(37, 91, 149);
 }
 
 #switch:checked+#switched:after {
@@ -785,6 +797,10 @@ input[type=checkbox] {
 
 .form-control{
   overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   height: 50vh;
 
 }
@@ -808,7 +824,6 @@ input[type=checkbox] {
     scrollbar-width: none;
 }
 .btn-back{
-  position: fixed;
   border: solid var(--light) 2px;
   border-radius: 10px;
   background-color: var(--secondary);
@@ -818,8 +833,6 @@ input[type=checkbox] {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.cart-room-share,
-.cart-room-invite,
 .cart-room-board{
   width: 80%;
   position: fixed;
@@ -827,13 +840,6 @@ input[type=checkbox] {
   left: 20.5%;
 }
 
-.cart-room-invite{
-  left: 25.5%;
-}
-
-.cart-room-share {
-  left: 30.5%;
-}
 .invite{
   position: fixed;
   left: 25%;
@@ -907,13 +913,17 @@ input[type=checkbox] {
     font-family: 'Courier New', Courier, monospace;
     text-align: justify;
 }
-
+.controls{
+position: absolute;
+left: 21%;
+}
 .logIn-alert{
   width: 100vw;
   height: 100vh;
   background-color: black;
   z-index: 50;
   display: flex;
+  position: fixed;
   justify-content: center;
   align-items: center;
 }
@@ -961,13 +971,7 @@ input[type=checkbox] {
     display: none;
     padding: 0px;
   }
-  .left{
-    width: 60px;
-    padding: 0px;
-    padding-left: 8px;
-    padding-top: 10px;
-    margin: 0px;
-  }
+  
   .nav-icon{
     width: 48px;
     height: 48px;
@@ -984,12 +988,6 @@ input[type=checkbox] {
   }
   .player{
     width: 50%;
-  }
-  .cart-room-invite{
-    left: 28%;
-  }
-  .cart-room-share{
-    left: 35%;
   }
   .progress-contaner{
     width: 8em;

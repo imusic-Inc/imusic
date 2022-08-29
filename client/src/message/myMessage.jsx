@@ -1,21 +1,41 @@
 import { useState } from "react";
 import PlayList from "../components/playList";
-
+import store from "../redux/store"
 function MyMessage({value}) {
    
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     
+   async function addAll() {
+        if (value.length > 0) {
+            const getPlayList = await value.map((value => {
+                return {
+                    "image": value.track.album.images[0].url,
+                    "name": value.track.name,
+                    "len": value.track.duration_ms,
+                    "auth": value.track.album.artists[0].name,
+                    "audio": value.track.uri,
+                    "album": value.track.album.name,
+                    "pre_view": value.track.preview_url
+                };
+            }));
+            const payload = {
+        type: "current-play",
+        payload: [...getPlayList]
+            }
+        store.dispatch(payload);
+        }
+    }
 
   return (
       <>
       <div className="messaging" style={{ height: expand }}>
     <div className="flex-row flex-center flex-space">
-        <div className="flex-row flex-center">
+        <div className="flex-row flex-center pb-1 pt-01">
             <img className="b-r-01 bg-secondary ml-1"
-                src="https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg" width="40px"
+                src="https://ui-avatars.com/api/?background=random" width="40px"
                 height="40px" alt=""/>
-            <p className="p-1">Room playlist</p>
+            <p className="p-01">Room playlist</p>
         </div>
 
 
@@ -24,7 +44,7 @@ function MyMessage({value}) {
 
 
                   <div onClick={() => {
-                      setexpand("500px");
+                      setexpand("70vh");
                       seticonShow(!iconShow);
                   }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
@@ -49,6 +69,11 @@ function MyMessage({value}) {
           
               <div className="messages-list"> 
                   
+                  <div onClick={addAll} className="bg-danger p-1 text-center btn">
+                      Add All To Query
+                  </div>
+
+
                   {value.map(values => {
                       return values.track? <PlayList key={values.track.uri} values={values}/>:<></>
                      })}

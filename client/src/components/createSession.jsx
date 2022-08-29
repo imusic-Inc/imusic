@@ -1,5 +1,12 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import generateRandomString from "../api/keygen";
+import { useState } from "react";
 function CreateSession(props) {
+    const [name, setName] = useState('');
+    const [dis, setDis] = useState('');
+    const [tags, setTags] = useState('');
+    const [visibility, setVisibility] = useState(true);
+
     return (<div className="createSession bg-default p-1">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
@@ -17,32 +24,32 @@ function CreateSession(props) {
     </div>
 </div>
               <div className="form-control p-1">
-            <div className="pl-1 pr-1">
-                <label htmlFor="name">iMusic Room name</label>
-                <input type="text" className="playSearch w-100 " placeholder="iMusic Room name" name="name" />
+            <div className="pl-1 p-1">
+                <label htmlFor="name" className="opacity-6">iMusic Room name</label>
+                <input type="text" onChange={event => setName(event.target.value)}  className="playSearch w-100 " placeholder="iMusic Room name" name="name" />
             </div>
-            <div className="pl-1 pr-1">
-                <label htmlFor="description">iMusic Room name</label>
-                <textarea  className="playSearch-textArea w-100" rows={3} placeholder="iMusic Room description" name="description"></textarea>
+            <div className="pl-1 p-1">
+                <label htmlFor="description" className="opacity-6">iMusic Room description</label>
+                <textarea  className="playSearch-textArea w-100" onChange={event => setDis(event.target.value)} rows={3} placeholder="iMusic Room description" name="description"></textarea>
             </div>
-            <div className="pl-1 pr-1">
-                <label htmlFor="tags">iMusic Room tags</label>
-                <input type="text" className="playSearch p-1 w-100 mt-1" placeholder="iMusic Room tags" name="tags" />
+            <div className="pl-1 p-1">
+                <label htmlFor="tags" className="opacity-6">iMusic Room tags</label>
+                <input type="text" className="playSearch p-1 w-100 mt-1" onChange={event => setTags(event.target.value)} placeholder="iMusic Room tags" name="tags" />
             </div>
 
             <div className="pr-1 pl-1 pt-1 flex-row flex-center">
-                <label htmlFor="" className="pr-1">Is your iMusic Room private?</label>
+                <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >YES</div>  <input type="checkbox" id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >NO</div>
+                   <div className="pr-1" >YES</div>  <input type="checkbox" onChange={event => setVisibility(event.target.value)} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >NO</div>
                 </div>
             </div>
             
 
-            <Link  to="room">
-            <div className="btn flex-row bg-danger p-1 flex-center mt-1 flex-center-justify text-center">
+            <NavLink  to={'../room/'+generateRandomString(50)+'imusicroom?name='+name}>
+            <div className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center">
                     Create Session
                 </div>
-            </Link>
+            </NavLink>
         </div>
         
           </div>)

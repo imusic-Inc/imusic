@@ -64,7 +64,7 @@ const APIController = (function() {
     }
           
     const _getPlayList = async (token, tracksEndPoint) => {
-        const path = `https://api.spotify.com/v1/playlists/${tracksEndPoint}/tracks?offset=0&limit=30&locale=en-US,en;q=0.5`
+        const path = `https://api.spotify.com/v1/playlists/${tracksEndPoint}/tracks?offset=0&limit=50&locale=en-US,en;q=0.5`
         const result = await fetch(path, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}

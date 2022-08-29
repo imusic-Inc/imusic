@@ -9,7 +9,7 @@ function PlayList(props) {
         payload: [{
                 "image": props.values.track.album.images[0].url,
                 "name": props.values.track.name,
-                "length": props.values.track.duration_ms,
+                "len": props.values.track.duration_ms,
                 "auth": props.values.track.album.artists[0].name,
                 "audio": props.values.track.uri,
                 "album": props.values.track.album.name,

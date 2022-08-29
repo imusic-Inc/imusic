@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema({
     session: {
         type: mongoose.Schema.ObjectId,
         ref: 'Session',
-        required: [true, 'message must belong to a a room sessioni']
+        required: [true, 'message must belong to a a room session']
     },
     user: {
         type: mongoose.Schema.ObjectId,

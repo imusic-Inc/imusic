@@ -102,6 +102,7 @@ exports.deleteSession = hookAsync(async(req, res, next) => {
 
 exports.joinRoomSession = hookAsync(async(req, res, next) => {
 
+    console.log(req.cookies);
     let session = await sessionModel.findOne({ _id: req.params.id });
 
 

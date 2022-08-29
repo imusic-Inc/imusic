@@ -4,6 +4,7 @@ const app = express();
 const sessionRouter = require("./routes/roomSessionRouter");
 const userRouter = require('./routes/userRoutes');
 const messagesRouter = require('./routes/messageRoutes');
+const spotifyAuth = require('./routes/spotifyAuthRoute');
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
+app.use("/api/v1/login", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messagesRouter);

@@ -55,3 +55,30 @@ export function SessionTrack() {
         </div>)
     
 }
+
+export function SearchLoading() {
+    return (
+        <div className='z-index-5'>
+    <div className='p-2'></div>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+             <SkeletonTheme baseColor = "#201D1D" highlightColor = "#444" >
+                <div><Skeleton count={1}  height={70} /></div>
+            </SkeletonTheme>
+            
+        </div>)
+    
+}

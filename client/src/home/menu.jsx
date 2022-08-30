@@ -37,12 +37,9 @@ function Menu() {
 
                 <div className="logo">
                     <img className="pb-3" src="./images/logo.png" alt="IMusic" width="60%"  srcSet=""/>
-                </div>
-
-                
-
-                <div className="man">
-                     <div className="flex-row flex-center pt-3 opacity-8">
+               
+               <div className="man ">
+                     <div className="flex-row flex-center opacity-8">
     <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
         <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
     </svg>
@@ -73,6 +70,11 @@ function Menu() {
     <p className=" btn pl-01 nav">Join Room</p>
 </div>
                 </div>
+                </div>
+
+                
+
+                
 
 
                 
@@ -90,14 +92,12 @@ function Menu() {
 </div>
                 </div>
                 
-                <div  onClick={() => {
-                    setSignIn(true);
-                     }} className="flex-row flex-center btn opacity-8 btn pt-4 ">
+                <div   className="flex-row flex-center btn opacity-8 btn pt-4 ">
    <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor" d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
 </svg>
 
-<h3 className=" btn pl-01 nav">Sign up</h3>
+<h3 onClick={() => {setSignIn(true)}} className=" btn pl-01 nav">Sign up</h3>
 </div>
                 </div>
             </div> 

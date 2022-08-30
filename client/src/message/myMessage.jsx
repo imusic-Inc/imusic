@@ -19,19 +19,16 @@ function MyMessage({value}) {
   return (
       <>
       <div className="messaging" style={{ height: expand }}>
-    <div className="flex-row flex-center flex-space">
+    <div className="flex-row flex-center flex-space ">
         <div className="flex-row flex-center pb-1 pt-01">
-            <img className="b-r-01 bg-secondary ml-1"
+            <img className="b-r-01 bg-secondary ml-01"
                 src="https://ui-avatars.com/api/?background=random" width="40px"
                 height="40px" alt=""/>
-            <p className="p-01">Room playlist</p>
+            <h5 className="p-01">Room playlist</h5>
         </div>
 
 
         <div className="flex-row flex-center">
-
-
-
                   <div onClick={() => {
                       setexpand("70vh");
                       seticonShow(!iconShow);

@@ -6,7 +6,7 @@ function Activeuserscart() {
  <div className="flex-row flex-center flex-space">
         <div className="flex-row flex-center">
            
-            <p className="p-1">Live cart</p>
+            <h4 className="p-1">Live cart</h4>
         </div>
 
 

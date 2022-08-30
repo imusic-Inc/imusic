@@ -14,9 +14,9 @@ function Members() {
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
         <div className="flex-row flex-center flex-space  pt-01">
-        <div className="flex-5 p-01">
+        <h5 className="flex-5 p-01">
             iMusic Room Members
-        </div>
+        </h5>
 
 
         <div className="flex-1 text-right">

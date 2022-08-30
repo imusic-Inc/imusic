@@ -3,16 +3,19 @@ import TrackList from '../components/trackList';
 import { useState,useEffect } from "react";
 import APIController from '../api/functons';
 import store from "../redux/store";
+import { SearchLoading } from '../components/loadingSession';
 let token;
 var addPlayList;
 function AddToPlayList(props) {
     const [tracks, setTracks] = useState([]);
+    const [searched, setSearched] = useState(false);
     const [playlist, setPlaylist] = useState([]);
     const [message, setMessage] = useState('');
 
 
 
     async function getSearch() {
+        setSearched(true);
         setTracks([]);
         if (!token) {
       APIController.getToken().then(value => {
@@ -20,6 +23,7 @@ function AddToPlayList(props) {
           if (message.length > 3) {
                APIController.getSearch(token,message).then((values) => {
                    setTracks(values);
+                    setSearched(false);
           })
           }
         });
@@ -27,6 +31,7 @@ function AddToPlayList(props) {
              if (message.length > 3) {
                APIController.getSearch(token,message).then((values) => {
                    setTracks(values);
+                   setSearched(false);
           })
           }
         }
@@ -73,20 +78,20 @@ useEffect(() => {
 
     return (
         <>
-            <div className='addToPlayList bg-default' >
+            <div className='addToPlayList  bg-default' >
                 <div className='flex-row '>
                     <div className='flex-4'>
 <div className="p-1">
         <div className="flex-row flex-center pl-1">
             <svg xmlns="http://www.w3.org/2000/svg"  onClick={props.show} viewBox="0 0 16 16" data-supported-dps="16x16"
-                    fill="currentColor" className="mercado-match btn" width="16" height="16" focusable="false">
+                    fill="currentColor" className="mercado-match btn close" width="16" height="16" focusable="false">
                    <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
                 </svg>
-            <p className="p-1">Playlist Manager</p>
+            <h4 className="p-1">Playlist Manager</h4>
                             </div>
 
      <div className="flex-row flex-center flex-space">
-                                <p className="p-1">Playlist Manager</p>
+                                <h5 className="p-1">Playlist Manager</h5>
                                 <div onClick={addToPlayList} className='btn btn-default p-01 bg-success'>
                                 Save
                                 </div>
@@ -119,9 +124,9 @@ useEffect(() => {
                         <div className="p-1">
 
     <h4>Let's find something for your room</h4>
-    <div className="flex-row flex-center flex-space" >
+    <div className="flex-row flex-center" >
         <input type="text" onChange={event => setMessage(event.target.value)} className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
-        <div onClick={getSearch}  className="addPlayList btn bg-danger">
+        <div onClick={getSearch}  className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 mt-01">
             Search
         </div>
     </div>
@@ -130,7 +135,7 @@ useEffect(() => {
                             {tracks.length > 0 ? tracks.map(value => {
                                 return <TrackList key={value.id} values={value} />
                                
-                             }) :<></>}
+                             }) :searched?<SearchLoading/>:<></>}
                            
 </div>
                     </div>

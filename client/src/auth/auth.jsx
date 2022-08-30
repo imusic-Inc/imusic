@@ -18,7 +18,7 @@ function Auth(props) {
                                 SIGN UP FREE
                             </span>
                         </div>
-                        <h5 className='p-1 pt-4'>Already have and account? <span className='sign-in pl-1 btn'>Sign me in</span></h5>
+                        <h5 className='p-1 pt-2'>Already have and account? <span className='sign-in pl-1 btn'>Sign me in</span></h5>
                     </div>
                 </div>
                 </div>

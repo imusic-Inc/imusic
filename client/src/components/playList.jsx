@@ -14,8 +14,8 @@ function PlayList(props) {
             height="50px" alt=""/>
        </div>
         <div className="pl-1 flex-5">
-            <h5>{props.values.name.substring(0,100).trim()}</h5>
-            <h6 className="opacity-6">{ props.values.name}</h6>
+            <h5 className="opacity-8">{props.values.name.substring(0,60).trim()}</h5>
+            <small className="opacity-6 font-size-08">{ props.values.auth}</small>
         </div>
         </div>)
 }

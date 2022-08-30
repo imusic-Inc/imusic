@@ -109,17 +109,17 @@ function Player() {
 
 const background = track.length > 0 ? `url(${track[index].image })` : "url(https://picsum.photos/200)";
   return (<>
-    <div className="player p-1">
+    <div className="player pt-1 pb-1">
 <div className="flex-row flex-center">
     <img className="b-r-01 play" src={track.length  > 0  & playing ? 'https://i.imgur.com/nYxJ5cV.gif': ""} style={{backgroundImage: background }} alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
-                  <h4>{ track.length > 0? track[index].name:"" }</h4>
-        <h6 className="opacity-6">{ track.length > 0 ? track[index].auth:"" }</h6>
+                  <h5>{ track.length > 0? track[index].name.substring(0,100):"" }</h5>
+        <small className="opacity-6 font-size-08">{ track.length > 0 ? track[index].auth:"" }</small>
     </div>
 </div>
 
 <div className="flex-column flex-center">
-    <div className="flex-row flex-center">
+    <div className="flex-row flex-center pt-1">
                   <div className="opacity-6 btn" >
             <svg style={{width:24, height:24}} viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -155,8 +155,10 @@ const background = track.length > 0 ? `url(${track[index].image })` : "url(https
     </div>
     <div>
 
-                  <audio ref={ref} controls={true} src="" />
+                  <audio ref={ref} controls={true} />
                   
+                  {/* {track.length > 0 ? <PlayerConrols  trackUri={ track[index].name } />:<audio ref={ref} controls={true} />} */}
+
 
 
     </div>

@@ -7,8 +7,8 @@ function MemberList(props) {
             height="60%" alt=""/>
             </div>
             <div className="pl-1 flex-5 text-left">
-            <h4>John Dzikunu</h4>
-            <h6>dzikunujohn36@gmail.com</h6>
+            <h5>John Dzikunu</h5>
+            <small>dzikunujohn36@gmail.com</small>
             </div>
         </div>
     </>)

@@ -22,12 +22,14 @@ function TrackList(props) {
         <div className="flex-row flex-center">
         <img className="b-r-01" src={props.values.album.images[0].url} alt={props.values.name} width="50" height="50" srcSet=""/>
         <div className="pl-1">
-            <h4>{props.values.name}</h4>
-            <h6 className="opacity-6">{props.values.album.artists[0].name}</h6>
+            <h5 className="opacity-8">{props.values.name.substring(0,70)}</h5>
+            <small className="opacity-6 font-size-08">{props.values.album.artists[0].name}</small>
         </div>
     </div>
-        <div onClick={clicked} className="addPlayList btn ">
-    Add
+        <div onClick={clicked} className="cirlce flex-row flex-center btn  bg-blue">
+     <svg style={{ width: '16px', height: '16px' }} viewBox="0 0 24 24">
+    <path fill="currentColor" d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
+</svg>
         </div>
     </div>)
 }

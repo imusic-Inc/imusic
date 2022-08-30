@@ -21,6 +21,7 @@ const SendToken = (user, res) => {
     res.cookie('jwt', token, cookieOptions);
 
     user.password = undefined //remove password from response output
+
 }
 
 
@@ -94,14 +95,16 @@ exports.getUser = hookAsync(async(req, res) => {
             passwordConfirm: body.id
         });
 
-        createSendToken(newUser, 201, res)
+        SendToken(newUser, res)
     } else {
         const user = await User.findOne({ email: body.email }).select('+password');
 
         if (!user || !(await user.correctPassword(body.id, user.password))) {
             return next(new AppError('Incorrect email or password', 401))
         }
-        console.log("mdmdm");
-        createSendToken(user, 200, res)
+
+        SendToken(user, res)
+        res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+
     }
 })

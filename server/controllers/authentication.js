@@ -4,14 +4,14 @@ const User = require("./../models/userModel");
 const hookAsync = require("../utils/hookAsync");
 const AppError = require('../utils/appError');
 
-const signToken = id => {
+exports.signToken = id => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN
     });
 }
 
 exports.createSendToken = (user, statusCode, res) => {
-    const token = signToken(user._id);
+    const token = this.signToken(user._id);
     const cookieOptions = {
 
         expires: new Date(

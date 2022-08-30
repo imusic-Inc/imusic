@@ -3,11 +3,8 @@ import Message from "../message/message";
 function Activeuserscart() {
     return (<div className='active-users'>
         
- <div className="flex-row flex-center flex-space">
-        <div className="flex-row flex-center">
-           
-            <h4 className="p-1">Live cart</h4>
-        </div>
+ <div className="flex-row flex-center flex-space pt-01">
+         <h3 className="pl-1">Live cart</h3>
 
 
         <div title="Send" className="pr-2 btn" >

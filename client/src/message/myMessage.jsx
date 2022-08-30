@@ -24,13 +24,13 @@ function MyMessage({value}) {
             <img className="b-r-01 bg-secondary ml-01"
                 src="https://ui-avatars.com/api/?background=random" width="40px"
                 height="40px" alt=""/>
-            <h5 className="p-01">Room playlist</h5>
+            <h4 className="p-01">Room playlist</h4>
         </div>
 
 
         <div className="flex-row flex-center">
                   <div onClick={() => {
-                      setexpand("70vh");
+                      setexpand("80vh");
                       seticonShow(!iconShow);
                   }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"

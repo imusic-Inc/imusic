@@ -5,7 +5,7 @@ function NewMessage(props) {
     <div className="message">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
-        <h5 className="pl-1">James Mensah</h5>
+        <h4 className="pl-1">James Mensah</h4>
     </div>
 
 
@@ -30,6 +30,14 @@ function NewMessage(props) {
 
             <div className="income-messages-list">
 
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
+                <Message><hr className="opacity-6" /></Message>
                 <Message><hr className="opacity-6" /></Message>
                 
                 

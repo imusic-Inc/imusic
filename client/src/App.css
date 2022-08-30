@@ -431,7 +431,7 @@ h3 {
   position: fixed;
   bottom: 0px;
   right: 0px;
-  width: 25%;
+  width: 27%;
   height: 50px;
   z-index: 15;
   border-top-left-radius: 10px;
@@ -444,8 +444,8 @@ h3 {
 
 .message {
   position: fixed;
-  bottom: 160px;
-  right: 26%;
+  bottom: 170px;
+  right: 30%;
   width: 25%;
   height: 60%;
   z-index: 15;
@@ -458,8 +458,8 @@ h3 {
   position: fixed;
   z-index: 20;
   width: 25%;
-  right: 26%;
-  bottom: 90px;
+  right: 30%;
+  bottom: 100px;
   height: 70px;
 }
 
@@ -506,7 +506,7 @@ h3 {
     scrollbar-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  height: 60vh;
+  height: 70vh;
 }
 .income-messages-list{
 overflow-y: scroll;
@@ -807,13 +807,13 @@ input[type=checkbox] {
   position: fixed;
   width: 20%;
   margin-top: 10%;
-  height: 90%;
+  height: 80vh;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: var(--secondary);
 }
 .active-list{
-  height: 55vh;
+  height: 60vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;

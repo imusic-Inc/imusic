@@ -14,14 +14,14 @@ function Members() {
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
         <div className="flex-row flex-center flex-space  pt-01">
-        <h5 className="flex-5 p-01">
+        <h4 className="flex-5 p-01">
             iMusic Room Members
-        </h5>
+        </h4>
 
 
         <div className="flex-1 text-right">
                   <div onClick={() => {
-                      setexpand("75vh");
+                      setexpand("80vh");
                       seticonShow(!iconShow);
                   }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"

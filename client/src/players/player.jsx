@@ -15,8 +15,6 @@ function Player() {
     const ref = useRef(null);
     const [expandlyrics, setexpandlyrics] = useState(false);
     
-   
-
     function showLogin() {
         setLogin(false);
     }
@@ -34,19 +32,32 @@ function Player() {
 
         audio = ref.current;
 
-        if (audio && track.length > 0) {
-            audio.addEventListener('ended', () => {
-                setPlaying(false);
-                setexpandlyrics(false);
+            // audio.addEventListener('ended', () => {
+            //     setPlaying(false);
+            //     setexpandlyrics(false);
+               
+            //     const next = index + 1 < track.length ? index + 1 : 0;
+            //      console.log(next);
+            //     setIndex(next);
+            //     playOnload();
+            //     if (loginShow) {
+            //         setLogin(true);
+            //         loginShow = false;
+            //     }
+            // });
+console.log(audio);
+            audio.onended = function() {
+            alert("The audio has ended");
+            }; 
+
+            audio.onerror = function () {
+                if (track.length > 0) {
                 const next = index + 1 < track.length ? index + 1 : 0;
                 setIndex(next);
                 playOnload();
-                if (loginShow) {
-                    setLogin(true);
-                    loginShow = false;
                 }
-            });
-
+               
+            };
             audio.onplay = function () {
                 setPlaying(true);
                 setexpandlyrics(true);
@@ -57,19 +68,23 @@ function Player() {
                 setPlaying(false);
                  setexpandlyrics(true);
                  setNotPaused(false);
-            }; 
+        }; 
         
-        }
         playOnload();
     });
 
     function int() {
         if (track.length > 0) {
-            audio.src = track[index].pre_view
+           try {
+             audio.src = track[index].pre_view
             audio.load();
             if (notPaused) {
                 audio.play();
             }
+           } catch (error) {
+            console.error(error);
+           }
+            
             
            
             document.title = track[index].name + " " + track[index].album;

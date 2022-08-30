@@ -10,7 +10,7 @@ const signToken = id => {
     });
 }
 
-const createSendToken = (user, statusCode, res) => {
+exports.createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id);
     const cookieOptions = {
 
@@ -44,7 +44,7 @@ exports.signup = hookAsync(async(req, res, next) => {
         passwordConfirm: req.body.passwordConfirm
     });
 
-    createSendToken(newUser, 201, res)
+    this.createSendToken(newUser, 201, res)
 
 });
 
@@ -76,7 +76,7 @@ exports.login = hookAsync(async(req, res, next) => {
 
 
     //3) If everything is okay, send token to client
-    createSendToken(user, 200, res);
+    this.createSendToken(user, 200, res);
 
 });
 

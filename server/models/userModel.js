@@ -17,13 +17,13 @@ const userSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: [true, 'Please provide a password'],
+        //  required: [true, 'Please provide a password'],
         minlength: 8,
         select: false
     },
     passwordConfirm: {
         type: String,
-        required: [true, 'please confirm password'],
+        //     required: [true, 'please confirm password'],
         validate: {
             //This only works on Create and Save!!!
             validator: function(el) {

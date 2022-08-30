@@ -1,11 +1,33 @@
-const encodeFormData = require('../utils/encodeFormdata');
+const encodeFormData = require('../utils/actions');
 const querystring = require('querystring');
 const fetch = require('node-fetch')
-const got = require('got')
-    //oauth through spotify api
+const got = require('got');
+const User = require('../models/userModel');
+const { signToken, createSendToken } = require('./authentication');
+const hookAsync = require('../utils/hookAsync');
+//oauth through spotify api
+
+const SendToken = (user, res) => {
+    const token = signToken(user._id);
+    const cookieOptions = {
+
+        expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+
+        httpOnly: true
+
+    }
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    res.cookie('jwt', token, cookieOptions);
+
+    user.password = undefined //remove password from response output
+}
+
+
 exports.login = async(req, res) => {
     const scope =
-        `user-modify-playback-state
+        `user-read-email
+        user-modify-playback-state
     user-read-playback-state
     user-read-currently-playing
     user-library-modify
@@ -24,11 +46,11 @@ exports.login = async(req, res) => {
     );
 }
 
-
+let isloggedDone = false;
+let query;
 //gets log user credentials
-exports.logged = async(req, res) => {
-    let isloggedDone = false;
-    let query;
+exports.logged = async(req, res, next) => {
+
     const body = {
         grant_type: 'authorization_code',
         code: req.query.code,
@@ -48,39 +70,38 @@ exports.logged = async(req, res) => {
         .then(response => response.json())
         .then(data => {
             query = querystring.stringify(data);
-            res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+            //  console.log('hello', query);
 
-        }).then(() => {
-            isloggedDone = true
+
         })
-
-    if (isloggedDone) { //check if logged was successful
-        //get token from spotify
-        let userQuery = query.split('&')[0];
-        try {
-
-            //get user credentials from endpoint
-            let { body } = await got(`https://api.spotify.com/v1/me/?${userQuery}`, { json: true })
-
-
-            console.log(body);
-        } catch (err) {
-            console.log(err)
-        }
-
-    }
-
+    next()
 
 };
 
-exports.getUser = async(req, res) => {
-    await fetch('https://api.spotify.com/v1/me', {
-            headers: {
-                'Authorization': `Bearer ${req.params.token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            res.json(data);
+exports.getUser = hookAsync(async(req, res) => {
+    let userQuery = query.split('&')[0];
+    let { body } = await got(`https://api.spotify.com/v1/me?${userQuery}`, { json: true });
+
+    //extract name,email,photo
+    const findUser = await User.find({ email: body.email })
+
+    if (findUser.length === 0) {
+        //we store spotify user data in our database
+        const newUser = await User.create({
+            name: body.display_name,
+            email: body.email,
+            password: body.id,
+            passwordConfirm: body.id
         });
-}
+
+        createSendToken(newUser, 201, res)
+    } else {
+        const user = await User.findOne({ email: body.email }).select('+password');
+
+        if (!user || !(await user.correctPassword(body.id, user.password))) {
+            return next(new AppError('Incorrect email or password', 401))
+        }
+        console.log("mdmdm");
+        createSendToken(user, 200, res)
+    }
+})

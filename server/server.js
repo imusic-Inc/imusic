@@ -4,7 +4,6 @@ const socketio = require('socket.io')
 
 dotenv.config({ path: './config.env' }) // retrieving protected variables from config file
 const app = require('./app')
-const ACTIONS = require('./utils/encodeFormdata');
 
 const PORT = process.env.PORT || 3000;
 const server = require('http').createServer(app);

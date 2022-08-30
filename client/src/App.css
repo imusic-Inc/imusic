@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
-
 :root {
   --primary: #1A2B39;
   --secondary: #201D1D;
@@ -14,11 +13,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
-small {
+small{
   font-weight: 100;
 }
-
-.z-index-5 {
+.z-index-5{
   z-index: 1;
 }
 
@@ -26,11 +24,9 @@ small {
   mask-type: luminance;
   cursor: pointer;
 }
-
-h5 {
+h5{
   max-lines: 2;
 }
-
 .fixed {
   position: fixed;
 }
@@ -39,95 +35,19 @@ hr {
   background-color: var(--light) !important;
 }
 
-/* Similar items will be grouped together to prevent 
-repetition since we want to do as much as we can 
-to avoid code repetition, which is a terrible coding practice. */
-
-/* grouping */
-
-/* border-radius of 15px */
-.b-r-1,
-.b-r-01,
-.play-board,
-.player,
-.card,
-.card-column,
-.button,
-.addPlayList,
-.btn-card,
-.share-contaner,
-.search-contaner,
-.search,
-.createSession,
-.btn-back,
-.invite,
-.b-r-2,
-.btn-default,
-.lyrics,
-.login-card,
-.btn-login .login-image,
-.border-radius {
+.b-r-2 {
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
 }
-
-
-/* overflow-y: scroll; */
-.messages-list,
-.income-messages-list,
-.join-list,
-.notification-list,
-.form-control,
-.active-list,
-.playList-list-save,
-.lyrics-text,
-.left-20,
-.overflow-x,
-.p-session,
-.overflow-y-scroll {
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scrollbar-color: transparent;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-
-/* display: flex; */
-.login-btn,
-.logIn-alert,
-.left,
-.nav-link,
-.cirle-2,
-.cirle-1,
-.cirle-4,
-.cirle-3,
-.flex-row,
-.flex-column,
-.player,
-.card,
-.button,
-.register-container,
-.btn-card,
-.share-contaner,
-.search-contaner,
-.search-btn,
-.display-flex {
-  display: flex;
-  align-items: center;
-}
-
-a {
+a{
   text-decoration: none;
 }
-
-a:hover {
+a:hover{
   text-decoration: none;
 }
-
 .left-20 {
   left: 15.5%;
   position: absolute;
@@ -135,12 +55,18 @@ a:hover {
   padding-right: 40px;
   z-index: 4;
   height: calc(100% - 50px);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .left {
   left: 0px;
   width: 15%;
   height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
@@ -154,15 +80,12 @@ a:hover {
 .flex-space {
   justify-content: space-between;
 }
-
-.flex-center-justify {
+.flex-center-justify{
   justify-content: center;
 }
-
-.text-center {
+.text-center{
   text-align: center;
 }
-
 .title {
   padding: 0px;
   padding-top: 8px;
@@ -174,13 +97,17 @@ a:hover {
 }
 
 .nav-link {
+  display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
-.overflow-x,
 .p-session {
   overflow-x: scroll;
-  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-color: transparent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .cirle-2 {
@@ -191,7 +118,9 @@ a:hover {
   -moz-border-radius: 1.2em;
   -ms-border-radius: 1.2em;
   -o-border-radius: 1.2em;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .cirle-1 {
@@ -202,7 +131,9 @@ a:hover {
   -moz-border-radius: 0.7em;
   -ms-border-radius: 0.7em;
   -o-border-radius: 0.7em;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .cirle-4 {
@@ -213,7 +144,9 @@ a:hover {
   -moz-border-radius: 2em;
   -ms-border-radius: 2em;
   -o-border-radius: 2em;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .cirle-3 {
@@ -224,24 +157,42 @@ a:hover {
   -moz-border-radius: 1.5em;
   -ms-border-radius: 1.5em;
   -o-border-radius: 1.5em;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+.b-r-1 {
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
 
+.b-r-01 {
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
 
 p {
   font-weight: 100;
 }
-
-.overflow-x {
-  overflow-y: hidden;
+.overflow-x{
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: hidden;
 }
-
-.session-board {
+.session-board{
   height: 65%;
   background: linear-gradient(var(--secondary), var(--primary));
 }
-
 .pr-1 {
   padding-right: 1rem;
 }
@@ -282,10 +233,12 @@ h3 {
 }
 
 .flex-row {
+  display: flex;
   flex-direction: row;
 }
 
 .flex-column {
+  display: flex;
   flex-direction: column;
 }
 
@@ -317,18 +270,16 @@ h3 {
   flex: 6;
 }
 
-.m-1 {
+.m-1{
   margin: 1rem;
 }
 
 .p-1 {
   padding: 1rem;
 }
-
 .p-01 {
   padding: 0.5rem;
 }
-
 .p-2 {
   padding: 2rem;
 }
@@ -368,8 +319,7 @@ h3 {
 .pb-1 {
   padding-bottom: 1rem;
 }
-
-.mb-1 {
+.mb-1{
   margin-bottom: 1rem;
 }
 
@@ -392,27 +342,21 @@ h3 {
 .pl-1 {
   padding-left: 1rem;
 }
-
-.pl-4 {
+.pl-4{
   padding-left: 4rem;
 }
-
 .pl-3 {
   padding-left: 3rem;
 }
-
 .pl-01 {
   padding-left: 0.5rem;
 }
-
 .pr-01 {
   padding-right: 0.5rem;
 }
-
 .pr-03 {
   padding-right: 0.3rem;
 }
-
 .ml-1 {
   margin-left: 1rem;
 }
@@ -428,15 +372,12 @@ h3 {
 .mt-1 {
   margin-top: 1rem;
 }
-
 .mt-01 {
   margin-top: 0.5rem;
 }
-
-.bg-blue {
+.bg-blue{
   background-color: rgb(50, 101, 177);
 }
-
 .opacity-6 {
   opacity: 0.6;
 }
@@ -451,6 +392,11 @@ h3 {
   position: absolute;
   bottom: 50px;
   right: 5px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -461,11 +407,18 @@ h3 {
   width: 52%;
   height: 58px;
   right: 30%;
+  border-radius: 15px;
   margin-right: 8px;
   left: 20.2%;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
   z-index: 40;
   background-color: var(--secondary);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 .btn:hover {
@@ -473,7 +426,6 @@ h3 {
   filter: contrast();
   -webkit-filter: contrast();
 }
-
 .messaging-members,
 .messaging {
   position: fixed;
@@ -486,7 +438,6 @@ h3 {
   border-top-right-radius: 10px;
   background-color: rgb(18, 31, 41);
 }
-
 .messaging-members {
   bottom: 40px;
 }
@@ -502,7 +453,6 @@ h3 {
   border-top-right-radius: 10px;
   background-color: rgb(18, 31, 41);
 }
-
 .chat-send-active,
 .chat-send {
   position: fixed;
@@ -513,26 +463,22 @@ h3 {
   height: 70px;
 }
 
-.cirlce {
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
-  justify-content: center;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
-  -ms-border-radius: 100%;
-  -o-border-radius: 100%;
+.cirlce{
+  border-radius: 100;
+  -webkit-border-radius: 100;
+  -moz-border-radius: 100;
+  -ms-border-radius: 100;
+  -o-border-radius: 100;
 }
 
 
-.chat-send-active {
+.chat-send-active{
   left: 0px;
   right: auto;
   bottom: -20.5px;
   height: 100px;
   width: 19.9%;
 }
-
 .char-textarea {
   width: 97%;
   border: solid 0px;
@@ -540,10 +486,9 @@ h3 {
   padding: 4px;
 }
 
-.bg-default {
+.bg-default{
   background-color: rgb(18, 31, 41);
 }
-
 .join-session {
   position: fixed;
   bottom: 80px;
@@ -555,32 +500,56 @@ h3 {
   border-top-right-radius: 10px;
   background-color: rgb(18, 31, 41);
 }
-
-.messages-list {
+.messages-list{
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   height: 60vh;
 }
-
-.income-messages-list {
+.income-messages-list{
+overflow-y: scroll;
+scroll-behavior: smooth;
+  scrollbar-color: transparent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   height: 50vh;
 }
-
 .card {
   background-color: var(--primary);
   width: auto;
   margin: 8px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  display: flex;
   justify-content: space-between;
   flex-direction: row;
+  align-items: center;
 }
 
 .card-column {
   background-color: var(--primary);
   width: auto;
   margin: 8px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
   align-items: flex-start;
 }
 
 .join-list {
   height: 65vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   overflow-x: hidden;
 }
 
@@ -588,8 +557,15 @@ h3 {
   padding: 4px;
   width: 80px;
   height: 30px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
   margin: 4px;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .bg-success {
@@ -611,9 +587,8 @@ table {
 .text-right {
   text-align: right;
 }
-
-.text-danger {
-  color: rgb(176, 23, 23);
+.text-danger{
+color: rgb(176, 23, 23);
 }
 
 .playSearch-textArea,
@@ -630,20 +605,23 @@ table {
   height: 60px;
 }
 
-.bg-white {
+.bg-white{
   background-color: white;
 }
-
-.text-primary {
+.text-primary{
   color: var(--primary);
 }
-
 .addPlayList {
-  padding: 6px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  padding:  6px;
   height: 25px;
 }
 
-.close {
+.close{
   fill: red;
 }
 
@@ -652,7 +630,9 @@ table {
 }
 
 .register-container {
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .register-section {
@@ -660,11 +640,18 @@ table {
 }
 
 .btn-card {
+  display: flex;
   flex-direction: row;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
   width: 350px;
   padding: 16px;
   margin: 4px;
   justify-content: center;
+  align-items: center;
   font-size: 20px;
 }
 
@@ -672,25 +659,30 @@ table {
   width: 100%;
 }
 
-.text-md {
-  font-weight: 400;
+.text-md{
+font-weight: 400;
 }
-
 .bold {
   font-weight: 900;
 }
-
 .share-contaner,
 .search-contaner {
   position: fixed;
   width: 50%;
   left: 20%;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 70px;
+  border-radius: 15px;
   z-index: 30;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
-.share-contaner {
+.share-contaner{
   top: 10vh;
   left: 25;
 }
@@ -703,29 +695,37 @@ table {
   z-index: 30;
   background-color: var(--secondary);
 }
-
-.notification-list {
+.notification-list{
   margin-top: 4px;
   height: 65vh;
   width: 100%;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
 }
-
 .search {
   width: 100%;
   height: 50px;
   padding: 8px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
-
-.search-btn {
+.search-btn{
+  display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
-
-.h-100 {
+.h-100{
   height: 70%;
 }
 
-.account {
+.account{
   position: fixed;
   right: 0px;
   top: 10px;
@@ -733,7 +733,7 @@ table {
   width: 25%;
 }
 
-.createSession {
+.createSession{
   position: fixed;
   width: 35%;
   height: 65%;
@@ -741,8 +741,12 @@ table {
   z-index: 10;
   left: 35%;
   padding: 8px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
-
 input[type=checkbox] {
   height: 0;
   width: 0;
@@ -789,158 +793,207 @@ input[type=checkbox] {
   width: 120px;
 }
 
-.form-control {
+.form-control{
+  overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   height: 50vh;
+
 }
 
-.active-users {
+.active-users{
   position: fixed;
   width: 20%;
   margin-top: 10%;
   height: 90%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: var(--secondary);
 }
-
-.active-list {
+.active-list{
   height: 55vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-
-.btn-back {
+.btn-back{
+  border-radius: 15px;
   background-color: var(--secondary);
   margin: 10px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
-
-.cart-room-board {
+.cart-room-board{
   width: 80%;
   position: fixed;
   height: 90%;
   left: 20.5%;
 }
 
-.invite {
+.invite{
   position: fixed;
   left: 25%;
   width: 50%;
   height: 70vh;
   bottom: 68px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
-
-.addToPlayList {
+.addToPlayList{
   width: 75%;
   position: fixed;
   left: 21%;
   padding-bottom: 80px;
   bottom: 0px;
   height: 70%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.playList-list-save {
+.btn-default{
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.playList-list-save{
   width: 100%;
-  height: 300px;
+  height: 250px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-color: transparent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.font-size-08 {
+.font-size-08{
   font-size: 0.8em;
 }
-
-.lyrics {
+.lyrics{
   background-color: #213749;
   width: 48%;
   height: 65vh;
   position: fixed;
   top: 15%;
   left: 24%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
-.lyrics-text {
+.lyrics-text{
   height: 60vh;
   width: 100%;
-  text-shadow: #30363b;
-  line-height: 30px;
-  font-size: 1.5em;
-  color: whitesmoke;
-  text-align: justify;
+  overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    text-shadow: #30363b;
+    line-height: 30px;
+    font-size: 1.5em;
+    color: whitesmoke;
+    text-align: justify;
 }
-
-.controls {
-  padding: 8px;
-  position: absolute;
-  width: 95%;
+.controls{
+padding: 8px;
+position: absolute;
+width: 95%;
 }
-
-.logIn-alert {
+.logIn-alert{
   width: 100vw;
   height: 100vh;
   background-color: black;
   z-index: 50;
+  display: flex;
   position: fixed;
   justify-content: center;
+  align-items: center;
 }
 
-.login-card {
+.login-card{
   width: 60vw;
   height: 60vh;
-  background: linear-gradient(0deg, var(--secondary), var(--primary) 40%, rgb(18, 31, 41));
-  ;
+  background: linear-gradient(0deg, var(--secondary), var(--primary) 40%, rgb(18, 31, 41));;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
-.btn-login {
+.btn-login{
   padding: 16px 24px;
+  border-radius: 10px;
   background: green;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
-
-.sign-in {
+.sign-in{
   color: var(--light);
 }
-
-.login-btn {
+.login-btn{
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.play {
+.login-image{
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.play{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-clip: border-box;
-  border: solid var(--light) 2px;
+  border:  solid var(--light) 2px;
 }
-
 .playListcard {
   width: 200px;
   height: 300px;
   overflow: hidden;
   background-color: #162632;
 }
-
 @media only screen and (max-width: 900px) {
-  .nav {
+  .nav{
     display: none;
     padding: 0px;
   }
-
-  .nav-icon {
+  
+  .nav-icon{
     width: 48px;
     height: 48px;
   }
-
-  .left-20 {
+  .left-20{
     width: 95%;
     left: 65px;
   }
-
-  .account {
+  .account{
     width: 35%;
   }
-
-  .title {
+  .title{
     font-size: 1.3em;
   }
-
-  .player {
+  .player{
     width: 50%;
   }
 }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { viewAllSessionRooms, createSession, getSessionById, deleteSession, joinRoomSession } = require('./../controllers/sessionController');
+const { viewAllSessionRooms, createSession, getSessionById, deleteSession, joinRoomSession, leaveRoomSession } = require('./../controllers/sessionController');
 const { protect, restrictTo, isLoggedIn } = require('./../controllers/authentication');
 const { createMessage } = require('../controllers/roomMessage');
 const router = express.Router();
@@ -18,6 +18,12 @@ router
 router
     .route('/:id/session')
     .patch(isLoggedIn, joinRoomSession)
+
+router
+    .route('/:id/leave')
+    .patch(isLoggedIn, leaveRoomSession)
+
+
 
 router
     .route('/:sessionId/messages')

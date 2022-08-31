@@ -4,10 +4,15 @@ const app = express();
 const sessionRouter = require("./routes/roomSessionRouter");
 const userRouter = require('./routes/userRoutes');
 const messagesRouter = require('./routes/messageRoutes');
+const conversationRouter = require('./routes/conversations');
+const privateMessageRouter = require('./routes/private-messages');
+
 const spotifyAuth = require('./routes/spotifyAuthRoute');
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
+
+
 //Development logging
 const cors = require("cors");
 
@@ -39,6 +44,10 @@ app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messagesRouter);
+app.use("/api/v1/conversations", conversationRouter);
+app.use("/api/v1/privateMessage", privateMessageRouter);
+
+
 app.all('*', (req, res, next) => {
     // res.status(404).json({
     //     status: 'fail',

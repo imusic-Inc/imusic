@@ -35,7 +35,9 @@ exports.login = async(req, res) => {
     user-library-read
     user-top-read
     playlist-read-private
-    playlist-modify-public`;
+    playlist-modify-public
+    streaming
+    `;
 
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
@@ -104,7 +106,7 @@ exports.getUser = hookAsync(async(req, res) => {
         }
 
         SendToken(user, res)
-        res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+
 
     }
 })

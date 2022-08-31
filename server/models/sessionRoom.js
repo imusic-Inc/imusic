@@ -12,7 +12,7 @@ const sessionSchema = new mongoose.Schema({
         default: 'public',
     },
     ownerId: { type: Schema.Types.ObjectId, ref: 'User' },
-
+    photo: String,
     participants: {
         type: [{
             type: Schema.Types.ObjectId,

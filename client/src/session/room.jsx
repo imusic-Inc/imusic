@@ -10,14 +10,17 @@ import Invite from './invite';
 import Share from '../home/share';
 import APIController from '../api/functons';
 import store from "../redux/store";
-let token;
+import PlayerConrols from '../players/playerControls';
 
+let token;
 function Room() {
 const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
     const [expandShare, setexpandShare] = useState(false);
+    const [auth, setAuth] = useState(true);
     const [playList, setplayList] = useState([]);
-     const paths = useParams();
+    const paths = useParams();
+    
 
     async function init(id) {
         if (!token) {
@@ -152,8 +155,7 @@ function showAndHideShare() {
        <Activeuserscart/>
             <Members/>
             <MyMessage value={ playList } />
-            <Player/>
-            
+           { auth? <PlayerConrols auth={setAuth} />: <Player/>}
         </>
     )
 }

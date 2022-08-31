@@ -91,9 +91,15 @@ const APIController = (function() {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
         });
+        const data = await result.json();
+        return data;
+    }
 
-        console.log(`https://api.spotify.com/track/${trackEndPoint}`);
-        
+    const _getUser = async (token) => {
+        const result = await fetch(`https://api.spotify.com/v1/me`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer '+token+''}
+        });
         const data = await result.json();
         return data;
     }
@@ -122,6 +128,9 @@ const APIController = (function() {
         },
         getSearch(token, trackEndPoint) {
              return  _getSearch(token, trackEndPoint);
+        },
+        getUser(token) {
+             return  _getUser(token);
          }
     }
 })();

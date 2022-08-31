@@ -10,11 +10,12 @@ function Player() {
     const [track, setTrack] = useState([]);
     const [playing, setPlaying] = useState(false);
     const [login, setLogin] = useState(false);
-    const [notPaused, setNotPaused] = useState(true);
     const [index, setIndex] = useState(0);
     const ref = useRef(null);
-    const [expandlyrics, setexpandlyrics] = useState(false);
+    const [expandlyrics, setexpandlyrics] = useState(true);
     
+    const token = "";
+
     function showLogin() {
         setLogin(false);
     }
@@ -31,69 +32,47 @@ function Player() {
         
 
         audio = ref.current;
+        
 
-            // audio.addEventListener('ended', () => {
-            //     setPlaying(false);
-            //     setexpandlyrics(false);
-               
-            //     const next = index + 1 < track.length ? index + 1 : 0;
-            //      console.log(next);
-            //     setIndex(next);
-            //     playOnload();
-            //     if (loginShow) {
-            //         setLogin(true);
-            //         loginShow = false;
-            //     }
-            // });
-console.log(audio);
-            audio.onended = function() {
-            alert("The audio has ended");
-            }; 
-
-            audio.onerror = function () {
-                if (track.length > 0) {
+        if (audio && track.length > 0) {
+            audio.addEventListener('ended', () => {
+                setPlaying(false);
+                setexpandlyrics(false);
                 const next = index + 1 < track.length ? index + 1 : 0;
                 setIndex(next);
                 playOnload();
+                if (loginShow) {
+                    setLogin(true);
+                    loginShow = false;
                 }
                
-            };
-            audio.onplay = function () {
-                setPlaying(true);
-                setexpandlyrics(true);
-                setNotPaused(true);
-            }; 
+            });
 
-             audio.onpause = function () {
+             audio.addEventListener('error', () => {
                 setPlaying(false);
-                 setexpandlyrics(true);
-                 setNotPaused(false);
-        }; 
-        
+                setexpandlyrics(false);
+                const next = index + 1 < track.length ? index + 1 : 0;
+                setIndex(next);
+                playOnload();
+               
+            });
+        }
         playOnload();
-    });
+    },[playOnload]);
 
     function int() {
-        if (track.length > 0) {
-           try {
-             audio.src = track[index].pre_view
+        if (track.length>0) {
+         audio.src = track[index].pre_view
             audio.load();
-            if (notPaused) {
-                audio.play();
-            }
-           } catch (error) {
-            console.error(error);
-           }
-            
-            
-           
-            document.title = track[index].name + " " + track[index].album;
+            setexpandlyrics(true);
+        audio.play(); 
+        document.title = track[index].name +" "+ track[index].album;
         }
-    }
+        }
 
 
     function playOnload() {
-        if (playing) {
+       if (playing) {
             audio.pause();
             int();
         } else {
@@ -114,7 +93,7 @@ console.log(audio);
 
     function inc() {
         if (tracks) {
-            if (index >= 0 && index < tracks.single.length - 1) {
+            if (index >= 0 && index < tracks.single.length-1) {
                 setIndex(index + 1)
                 playOnload();
             }
@@ -122,19 +101,19 @@ console.log(audio);
         
     }
 
-const background = track.length > 0 ? `url(${track[index].image })` : "url(https://picsum.photos/200)";
+
   return (<>
-    <div className="player pt-1 pb-1">
+      <div className="player p-1">
 <div className="flex-row flex-center">
-    <img className="b-r-01 play" src={track.length  > 0  & playing ? 'https://i.imgur.com/nYxJ5cV.gif': ""} style={{backgroundImage: background }} alt="" width="80" height="80" srcSet=""/>
+    <img className="b-r-01" src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
-                  <h5>{ track.length > 0? track[index].name.substring(0,100):"" }</h5>
-        <small className="opacity-6 font-size-08">{ track.length > 0 ? track[index].auth:"" }</small>
+                  <h4>{ track.length > 0? track[index].name:"" }</h4>
+        <h6 className="opacity-6">{ track.length > 0 ? track[index].auth:"" }</h6>
     </div>
 </div>
 
 <div className="flex-column flex-center">
-    <div className="flex-row flex-center pt-1">
+    <div className="flex-row flex-center">
                   <div className="opacity-6 btn" >
             <svg style={{width:24, height:24}} viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -169,13 +148,7 @@ const background = track.length > 0 ? `url(${track[index].image })` : "url(https
 </div>
     </div>
     <div>
-
-                  <audio ref={ref} controls={true} />
-                  
-                  {/* {track.length > 0 ? <PlayerConrols  trackUri={ track[index].name } />:<audio ref={ref} controls={true} />} */}
-
-
-
+                  <audio ref={ref} controls={true} src="" />
     </div>
 </div>
       </div>

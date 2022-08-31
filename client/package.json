@@ -13,6 +13,7 @@
     "react-scripts": "5.0.1",
     "react-spotify-web-playback": "^0.10.0",
     "redux": "^4.2.0",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

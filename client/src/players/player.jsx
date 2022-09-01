@@ -58,7 +58,7 @@ function Player() {
             });
         }
         playOnload();
-    },[playOnload]);
+    });
 
     function int() {
         if (track.length>0) {

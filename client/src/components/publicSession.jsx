@@ -1,6 +1,7 @@
 import APIController from "../api/functons";
 import { memo, useState } from "react"; 
 import Session from "./session";
+import {NavLink} from "react-router-dom";
 import { SessionTrack } from "./loadingSession";
 let a = 0;
 function PublicSession(props) {
@@ -21,7 +22,7 @@ function PublicSession(props) {
             
           <div className="flex-row p-session">
               { playList.length <1? <SessionTrack/> :playList.map(value => {
-                  return  <a href={"/room/"+value.id}><Session name={value.name} info={value.description} image={value.images[0].url} key={value.id} /></a> 
+                  return  <NavLink to={"/room/"+value.id+'?type=public&name='+props.name}><Session name={value.name} info={value.description} image={value.images[0].url} key={value.id} /></NavLink> 
               })}
             </div>
         </>

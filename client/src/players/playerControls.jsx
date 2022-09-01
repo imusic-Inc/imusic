@@ -2,11 +2,23 @@ import { useState, useEffect,useRef } from "react"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { useSearchParams } from 'react-router-dom';
 import store from "../redux/store";
-const token = "BQCcDLXjVIcT6r6gDPq6eXTlwP1TT_4BQ1oVTdYjWj1ThCeBZHbUhkvFliQeWPlgyEXXJk8qWTH2k0Ke7OJOq0eJNN-FaxmWF1YmMndYufZoYa6KFuA0_FYPqLZjPmn3H7qekOZNXWr4j-71Tej3uPflwNT27ywgZrVaX2UAlQqQJ_MCmv4L1ADjWJtDOmkD-8jkBpsHWBODd0zHcz-RautjQEc";
+import Cookies from 'universal-cookie';
 export default function PlayerConrols(props) {
   const [track, setTrack] = useState([]);
   const [index, setIndex] = useState(0);
- const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const cookies = new Cookies();
+    const token = cookies.get('access_token');
+    if (token && token.length > 10) {
+      setToken(token)
+    } else {
+      setToken('error')
+    }
+  }, []);
+
   const ref = useRef(null);
    useEffect(() => {
         store.subscribe(() => {
@@ -16,20 +28,20 @@ export default function PlayerConrols(props) {
               setIndex(0);
               
             }
-        },[track]);
+        });
 
-   });
+   }, [track, index]);
   
-  console.log(ref);
+  console.log(token);
   
-  if (!token) return null
+  // if (!token) return props.auth(false);
   return (
     <div className="player p-1">
 
-      <SpotifyPlayer
+      {token? token==="error"?props.auth(false):<SpotifyPlayer
         ref={ref}
         autoPlay={true}
-        token="BQD3b4Y1alXjWkJPV1EO_Qb-ltK829t6XemnRTwp85MjLulCgVm9m3_ktR6jCK6BeJ21w_hKb4S6AG3m4tz9jHnO3qzOOya4MvDt3QTYgLPfAU469ZFmcYCFTqlGi79vvTrrqzJRlV4tR81ReaAyXIxZRjbxsJ6HUYE7gx6tECxHKZaIBknTFIPLmI4i7qhVQiBWKWZvQDSJgf8iM5DrbRLV-HLcDeJPNlwvIwC0RlRI9N0W6D07Bw"
+        token={token}
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
        callback={state => {
@@ -48,7 +60,7 @@ export default function PlayerConrols(props) {
     trackArtistColor: '#ccc',
     trackNameColor: '#fff',
   }}
-      />
+      />:<>Loading...</>}
       
     </div>
     

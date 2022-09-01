@@ -2,7 +2,7 @@ import { memo } from "react";
 import store from "../redux/store"
 function PlayList(props) {
     const payload = {
-        type: "current-play",
+        type: "current-play-single",
         payload: [{ ...props.values }]}
     function clicked() {
         store.dispatch(payload);

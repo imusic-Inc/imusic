@@ -16,7 +16,7 @@ function Menu() {
 
      useEffect(() => {
          const token = cookies.get('access_token');
-        if (token.length > 10) {
+        if (token && token.length > 10) {
             setSignOut(true)
         }
      })
@@ -25,6 +25,7 @@ function logOut() {
      cookies.set("name",null);
     cookies.set("access_token",null);
     cookies.set("email", null);
+    cookies.set("setDate", null);
     window.location.reload(); 
 }
 

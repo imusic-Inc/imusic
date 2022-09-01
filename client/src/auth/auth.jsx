@@ -2,42 +2,51 @@ import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
 import APIController from "../api/functons";
 function Auth(props) {
-    const [path, setPath] = useState("");
+    const [pathed, setPath] = useState("");
     const [userName, setUserName] = useState("");
+    const cookies = new Cookies();
 
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
-        const cookies = new Cookies();
         const token = paths.get("access_token");
         if (token && token.length > 10) {
-            const expires = paths.get('expires_in');
-            cookies.set('access_token', path, { maxAge:expires })
-            setPath(token);
-            APIController.getUser(path).then(value => {
-            cookies.set('name', value.display_name, { maxAge:expires });
-                cookies.set('email', value.email, { maxAge:expires });
-                setUserName(value.display_name);
-        })
+            authenticate(token);
         } else {
-            const tokens = cookies.get('access_token');
-            setUserName(cookies.get('name'));
-            if (tokens && tokens.length > 10) {
-               setPath(tokens); 
+            const cookies_tokens = cookies.get('access_token');
+            if (cookies_tokens && cookies_tokens.length > 10) {
+                authenticate(cookies_tokens);
             }
         }
-    if (path && userName &&  userName.length>3) {
+
+    if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
         if (window.location.href.includes('login')) {
            window.history.back();
         } else {
-            // props.show();
-        }
-       
-        
+            props.show();
+        } 
     }
-    });
+    },[setPath,setUserName,authenticate]);
 
-   
-    
+    function authenticate(tokens) {
+        APIController.getUser(tokens).then(value => {
+            const expires = 1000 * 60 * 60;
+            if (value.error) {
+                setPath('');
+                cookies.set("name",null);
+                cookies.set("access_token",null);
+                cookies.set("email", null);
+                cookies.set("setDate", null);
+            } else {
+                 cookies.set('access_token', tokens)
+                cookies.set('name', value.display_name);
+                cookies.set('email', value.email);
+                cookies.set('setDate', Date.now());
+                cookies.set('product', value.product);
+                setUserName(value.display_name);
+                setPath(tokens);
+            }
+            });
+    }
 
     return( <div className='logIn-alert'>
                 <div className='login-card p-2'>
@@ -57,7 +66,7 @@ function Auth(props) {
                         <div className='login-btn btn p-1'>
                         <a href={'http://localhost:3001/api/v1/auth'}>
                             <span className='btn-login'>
-                               {path && path.length>10? "LOADING...":"SIGN UP FREE"}
+                               {pathed && pathed.length>10? "LOADING...":"SIGN UP FREE"}
                         </span>
                         </a>   
                         

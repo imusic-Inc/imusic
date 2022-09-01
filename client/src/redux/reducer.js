@@ -10,6 +10,15 @@ function Reducer(state = {}, action) {
                 state = {...state, 'single':[...set]}
             }
             break;
+        case 'current-play-single':
+            if (state.single) {
+                const set  = new Set([...action.payload])
+                state = {...state, 'single':[...set]}
+            } else {
+                const set = new Set([...action.payload]);
+                state = {...state, 'single':[...set]}
+            }
+            break;
         case 'add-to-playlist':
             if (state.addToPlayList) {
              const set =  new Set([...action.payload, ...state.addToPlayList]);

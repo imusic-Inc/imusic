@@ -72,7 +72,7 @@ exports.logged = async(req, res, next) => {
             query = querystring.stringify(data);
             //  console.log('hello', query);
 
-        })
+        }).catch(err => res.redirect(`${process.env.CLIENT_REDIRECTURI}`))
     next()
 
 };
@@ -82,6 +82,9 @@ exports.getUser = hookAsync(async(req, res) => {
     let { body } = await got(`https://api.spotify.com/v1/me?${userQuery}`, { json: true });
     //console.log(body);
     //extract name,email,photo
+    if (!body) {
+        res.redirect(`${process.env.CLIENT_REDIRECTURI}`)
+    }
     const findUser = await User.find({ email: body.email })
 
     if (findUser.length === 0) {

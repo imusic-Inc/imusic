@@ -27,16 +27,13 @@ const SendToken = (user, res) => {
 
 exports.login = async(req, res) => {
     const scope =
-        `user-read-email
-        user-modify-playback-state
-    user-read-playback-state
-    user-read-currently-playing
-    user-library-modify
-    user-library-read
-    user-top-read
-    playlist-read-private
-    playlist-modify-public
-    streaming
+        `streaming 
+user-read-email 
+user-read-private 
+user-library-read 
+user-library-modify 
+user-read-playback-state 
+user-modify-playback-state
     `;
 
     res.redirect('https://accounts.spotify.com/authorize?' +
@@ -75,7 +72,6 @@ exports.logged = async(req, res, next) => {
             query = querystring.stringify(data);
             //  console.log('hello', query);
 
-
         })
     next()
 
@@ -84,7 +80,7 @@ exports.logged = async(req, res, next) => {
 exports.getUser = hookAsync(async(req, res) => {
     let userQuery = query.split('&')[0];
     let { body } = await got(`https://api.spotify.com/v1/me?${userQuery}`, { json: true });
-
+    //console.log(body);
     //extract name,email,photo
     const findUser = await User.find({ email: body.email })
 
@@ -94,10 +90,13 @@ exports.getUser = hookAsync(async(req, res) => {
             name: body.display_name,
             email: body.email,
             password: body.id,
-            passwordConfirm: body.id
+            passwordConfirm: body.id,
+            photo: body.images[0].url
         });
 
         SendToken(newUser, res)
+        res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+
     } else {
         const user = await User.findOne({ email: body.email }).select('+password');
 
@@ -106,6 +105,8 @@ exports.getUser = hookAsync(async(req, res) => {
         }
 
         SendToken(user, res)
+        res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+
 
 
     }

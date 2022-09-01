@@ -52,7 +52,7 @@ sessionSchema.pre(/^find/, function(next) { //populate participants field with s
 
     this.populate({
         path: 'participants',
-        select: ['name', 'email'],
+        select: ['name', 'email', 'photo'],
 
     });
 

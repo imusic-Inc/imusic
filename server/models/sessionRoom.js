@@ -64,6 +64,7 @@ sessionSchema.pre(/^find/, function(next) { //populate participants field with s
 
 
 
+
 const Session = mongoose.model('Session', sessionSchema);
 
 

@@ -95,6 +95,35 @@ exports.deleteSession = hookAsync(async(req, res, next) => {
 
 });
 
+exports.updateSession = hookAsync(async(req, res, next) => {
+
+    const getRole = await sessionModel.findOne({ _id: req.params.id });
+    //console.log(getRole);
+    //const doc = await Model.findByIdAndDelete(req.params.id);
+    if (!getRole) {
+        return next(new AppError('No room found with that ID', 404));
+    }
+    if (getRole && (getRole.role === 'room-admin') && (JSON.stringify(getRole.ownerId) === JSON.stringify(req.user._id))) { //only room admin can update room session
+        const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        }); //only update group with group-admin function
+        if (!doc) {
+            return next(new AppError('No document found with that ID', 404));
+        }
+    } else {
+        return next(new AppError('You do not have permission to perform this action', 403));
+    }
+
+
+    res.status(204).json({
+        status: 'success',
+        data: null
+    });
+
+});
+
+
 
 
 
@@ -138,6 +167,7 @@ exports.joinRoomSession = hookAsync(async(req, res, next) => {
                 status: `you've joined the ${session.name} room as the group admin`
             });
         } else if (session.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user._id)).length === 0) { //check if user is already a member 
+
 
             session.participants.push(req.user._id)
             session.save();

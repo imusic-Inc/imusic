@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs')
 
 //schema model
 const sessionSchema = new mongoose.Schema({
@@ -28,11 +29,19 @@ const sessionSchema = new mongoose.Schema({
         enum: ['room-admin'],
         default: 'room-admin'
     },
+    lock: {
+
+        type: String,
+        minlength: 4,
+        select: false
+
+    }
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
+
 
 
 
@@ -62,6 +71,27 @@ sessionSchema.pre(/^find/, function(next) { //populate participants field with s
 
 
 
+sessionSchema.pre('save', async function(next) {
+    if (this.roomType === 'public') {
+        this.lock = undefined
+        return next()
+    } else if (this.roomType === 'private') {
+
+        if (!this.isModified('lock')) return next()
+
+        this.lock = await bcrypt.hash(this.lock, 10);
+        next()
+
+    }
+
+
+
+})
+
+
+sessionSchema.methods.correctlock = async function(candidatelock, roomLock) {
+    return await bcrypt.compare(candidatelock, roomLock);
+}
 
 
 

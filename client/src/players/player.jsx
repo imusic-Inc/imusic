@@ -105,7 +105,7 @@ function Player() {
   return (<>
       <div className="player p-1">
 <div className="flex-row flex-center">
-    <img className="b-r-01" src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
+    <img className="b-r-01 player-image"  src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
                   <h4>{ track.length > 0? track[index].name:"" }</h4>
         <h6 className="opacity-6">{ track.length > 0 ? track[index].auth:"" }</h6>
@@ -148,7 +148,7 @@ function Player() {
 </div>
     </div>
     <div>
-                  <audio ref={ref} controls={true} src="" />
+                  <audio className="audioPlayer" ref={ref} controls={true} src="" />
     </div>
 </div>
       </div>

@@ -7,6 +7,9 @@ function CreateSession(props) {
     const [tags, setTags] = useState('');
     const [visibility, setVisibility] = useState(true);
 
+
+    const type = visibility ? 'private' : 'public';
+
     return (<div className="createSession bg-default p-1">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
@@ -40,12 +43,12 @@ function CreateSession(props) {
             <div className="pr-1 pl-1 pt-01 flex-row flex-center">
                 <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >YES</div>  <input type="checkbox" onChange={event => setVisibility(event.target.value)} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >NO</div>
+                   <div className="pr-1" >NO</div>  <input type="checkbox" onChange={event => setVisibility(event.target.value)} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
                 </div>
             </div>
             
 
-            <NavLink  to={'../room/'+generateRandomString(50)+'imusicroom?name='+name}>
+            <NavLink  to={'../room/'+generateRandomString(50)+'imusicroom?name='+name+'&admin=true&type='+type}>
             <div className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center">
                     Create Session
                 </div>

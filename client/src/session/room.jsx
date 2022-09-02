@@ -18,6 +18,8 @@ const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
     const [expandShare, setexpandShare] = useState(false);
     const [auth, setAuth] = useState(true);
+    const [actions, setActions] = useState(true);
+    const [mobile, setMobile] = useState(false);
     const [type, setType] = useState('public');
     const [playList, setplayList] = useState([]);
     const paths = useParams();
@@ -110,9 +112,13 @@ function showAndHideShare() {
     return (
         <>
             <div className='controls flex-row flex-space' >
-                <LeaveCart exit={exit} />
-                <div className='flex-row flex-center'>
-                     <div className='btn btn-back flex-row flex-center p-01' onClick={ type==='private'?null:showAndHide}>
+                <div style={{display:mobile?actions?'flex':'none':'auto'}}>
+<LeaveCart  exit={exit} />
+                </div>
+                
+
+                <div className='flex-row flex-center actions' style={{display:mobile?actions?'none':'flex':null}}>
+                     <div className='btn btn-back flex-row flex-center p-01' onClick={ type==='public'?null:showAndHide}>
                     <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
 </svg>
@@ -135,12 +141,22 @@ function showAndHideShare() {
 </div>
                </div>
                 
-                 <div className='flex-row flex-center'>
+                 <div className='flex-row flex-center actions toggle' style={{display:mobile?actions?'none':'flex':null}}>
                     <h4 className='p-01 text-center'>Allow Invite:</h4>
                     <div className="flex-row flex-center">
                    <small className="pr-03" >YES</small>  <input type="checkbox"  disabled={ type === 'public'} id="switch" /><label id="switched" htmlFor="switch">Toggle</label> <small className="pl-01" >NO</small>
                 </div>
                  </div>
+
+                
+                <div className='btn flex-row flex-center mobile-menu'>
+                    <i onClick={() => {
+                        setActions(!actions)
+                        setMobile(true);
+                    }}>
+                        menu
+                        </i>
+                </div>
 
             </div>
             

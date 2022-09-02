@@ -3,7 +3,7 @@ import Message from "../message/message";
 function Activeuserscart() {
     return (<div className='active-users'>
         
- <div className="flex-row flex-center flex-space pt-01">
+ <div className="flex-row flex-center flex-space pt-01 live-chat">
          <h3 className="pl-1">Live cart</h3>
 
 

@@ -13,7 +13,7 @@ router
     .route('/:id')
     .get(getSessionById)
     .delete(protect, restrictTo('admin', 'room-admin', 'user'), deleteSession)
-    .patch(protect, restrictTo('admin', 'room-admin', 'user'), updateSession)
+    .patch(protect, isLoggedIn, restrictTo('admin', 'room-admin', 'user'), updateSession)
 
 
 router

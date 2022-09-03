@@ -13,13 +13,12 @@ function Menu() {
     const [signIn, setSignIn] = useState(false);
     const [signout, setSignOut] = useState(false);
     const cookies = new Cookies();
-
-     useEffect(() => {
-         const token = cookies.get('access_token');
+const token = cookies.get('access_token');
+    useEffect(() => {
         if (token && token.length > 10) {
             setSignOut(true)
         }
-     })
+    },[signout,token]);
     
 function logOut() {
      cookies.set("name",null);

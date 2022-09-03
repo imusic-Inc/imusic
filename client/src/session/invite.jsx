@@ -22,14 +22,14 @@ function Invite(props) {
                 setSource(value);
             })
         }
-    }, []);
+    }, [uid,users,source]);
     
     useEffect(() => {
         if (search.length > 3) {
             const newSource = source.filter(value => value.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 || value.email.toLowerCase().indexOf(search.toLowerCase()) >= 0);
             setUser(newSource);
        }
-    },[search]);
+    },[search,source]);
 
 
     return (<div className='invite bg-default p-1'>

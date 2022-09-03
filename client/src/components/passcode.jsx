@@ -1,21 +1,32 @@
 import React, {memo,useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import generateRandomString from '../api/keygen';
+import getData from '../api/backendcalls';
 function PassCode(props) {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
     
     const handleOnClick = () => {
-        if (props.pass === password || props.pass === undefined) {
-            if (props.hide) {
-                props.show(props.pass,password);
-            } else {
-                 navigate(props.link[0]+'&v='+generateRandomString(5), { replace: true });
-            }
+        if (password && password.length > 4) {
+            
+            getData.joinPrivateSession(`session/${props.pass}/session`, { lock: password }).then(value => {
+                console.log(value.error); 
+                if (value.error) {
+                    setMessage(value.message);
+                } else {
+                    navigate(props.link[0]+'&v='+generateRandomString(5), { replace: false });
+                }
+            });
+
+
+            // if (props.hide) {
+            //     props.show(props.pass,password);
+            // } else {
+            //      navigate(props.link[0]+'&v='+generateRandomString(5), { replace: true });
+            // }
             
         } else {
-            
             setMessage('Wrong pass code');
         }
     
@@ -34,10 +45,10 @@ function PassCode(props) {
         </div>
 
         <div className="flex-column flex-center password-conent">
-           <div className="pr-1 pl-1 pt-01">
+           <div className="pr-1 pl-1 ">
                 <label htmlFor="password" className="opacity-6">iMusic Room Password Code</label><br />
                 <span className="opacity-6 text-danger">{message }</span>
-                <input type="text" maxLength={5} className="playSearch p-1 w-100 mt-1" value={password} onChange={event => {
+                <input type="text" minLength={7} className="playSearch p-1 w-100 mt-1" value={password} onChange={event => {
                     setPassword(event.target.value);
                     console.log(password)
                 }} placeholder="Room pass code" name="password" />

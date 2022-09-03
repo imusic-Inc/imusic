@@ -7,7 +7,7 @@ function Members(props) {
     const [iconShow, seticonShow] = useState(true);
     const [showNewMessage, setshowNewMessage] = useState(false);
     const [NewMessageId, setNewMessageId] = useState('');
-    const [searced, SetSearced] = useState([...props.value]);
+    const [searced, SetSearced] = useState([]);
     const [search, SetSearch] = useState('');
     const [NewMessageReciever, setNewMessageReciever] = useState('');
     function hideManasession() {
@@ -18,7 +18,12 @@ function Members(props) {
         setshowNewMessage(true);
          setNewMessageId(messageId);
         setNewMessageReciever(name);
-    }
+    };
+
+
+    useEffect(() => {
+        SetSearced(props.value);
+    }, [searced]);
 
     useEffect(() => {
         if (search.length > 3) {

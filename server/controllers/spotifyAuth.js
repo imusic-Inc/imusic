@@ -5,6 +5,7 @@ const got = require('got');
 const User = require('../models/userModel');
 const { signToken, createSendToken } = require('./authentication');
 const hookAsync = require('../utils/hookAsync');
+
 //oauth through spotify api
 
 const SendToken = (user, res) => {

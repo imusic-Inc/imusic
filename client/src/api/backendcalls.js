@@ -43,9 +43,42 @@ const getData = (function() {
         const data = await result.json();
         return data.data.users;
      }
+
+    const __joinPublicSession = async (path) => {
+        const result = await fetch(link + path, {
+            method: 'PATCH',
+            mode: 'cors',
+            // credentials: 'same-origin',
+        });
+        const data = await result.json();
+        return data;
+     }
+    
+    const __joinPrivateSession = async (path,values={}) => {
+        const result = await fetch(link + path, {
+            method: 'PATCH',
+            mode: 'cors',
+            // credentials: 'same-origin',
+            body: JSON.stringify(values),
+        });
+        const data = await result.json();
+        return data;
+    }
+    const __leaveSession = async (path) => {
+        const result = await fetch(link + path, {
+            method: 'PATCH',
+            mode: 'cors',
+            // credentials: 'same-origin',
+        });
+        const data = await result.json();
+        return data;
+    }
+
     const __CreateSession = async (path,values={}) => {
         const result = await fetch(link + path, {
             method: 'post',
+            mode: 'cors',
+            // credentials: 'same-origin',
             body: JSON.stringify(values),
         });
         const data = await result.json();
@@ -54,11 +87,13 @@ const getData = (function() {
     const __UpdateSession = async (path,id,values={}) => {
         const result = await fetch(link + path, {
             method: 'put',
+            mode: 'cors',
             body: JSON.stringify(values),
         });
         const data = await result.json();
         return data.data.users;
     }
+    
 
     
     return {
@@ -76,6 +111,15 @@ const getData = (function() {
         },
           getUser(path) {
             return __getUser(path);
+          },
+          joinPublicSession(path) {
+            return __joinPublicSession(path);
+        },
+          joinPrivateSession(path,password) {
+            return __joinPrivateSession(path,password);
+        },
+        leaveSession(path) {
+            return __leaveSession(path);
         }
           
     }

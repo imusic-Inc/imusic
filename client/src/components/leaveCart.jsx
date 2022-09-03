@@ -1,12 +1,17 @@
-import React, {useCallback} from 'react';
-import { useNavigate } from "react-router-dom";
-function LeaveCart(props) {
-
+import React, {useCallback,memo} from 'react';
+import { useNavigate,useParams } from "react-router-dom";
+import getData from '../api/backendcalls';
+function LeaveCart({exit}) {
+    const paths = useParams();
     const navigate = useNavigate();
     const handleOnClick = useCallback(() => {
-        props.exit();
-        navigate('../home', { replace: true });
-     }, [navigate]);
+        exit();
+        getData.leaveSession(`session/${paths.id + 3209}/leave`).then(value => {
+            if (value.status !== 'error') {
+                navigate('../home', { replace: true });
+            }
+        })
+     }, [exit,navigate,paths.id]);
 
 
     return (<div onClick={handleOnClick}  className='btn btn-back flex-row flex-center p-01'>
@@ -18,4 +23,4 @@ function LeaveCart(props) {
         </div>
     </div>);
 }
-export default LeaveCart;
+export default memo(LeaveCart);

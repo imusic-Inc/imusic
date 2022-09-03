@@ -77,13 +77,13 @@ function CreateSession(props) {
             <div className="pr-1 pl-1 pt-01 flex-row flex-center">
                 <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >NO</div>  <input type="checkbox" required={true} value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
+                   <div className="pr-1" >NO</div>  <input type="checkbox" value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
                 </div>
             </div>
 
             {visibility?<div className="pr-1 pl-1 pt-01">
                 <label htmlFor="password" className="opacity-6">iMusic Room Password Code</label>
-                <input type="text"  minLength={4} maxLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
+                <input type="text" required={visibility}  minLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
             </div>:null}
             
 

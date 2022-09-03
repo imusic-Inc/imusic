@@ -30,15 +30,7 @@ function NewMessage(props) {
 
             <div className="income-messages-list">
 
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
-                <Message><hr className="opacity-6" /></Message>
+                <Message value={{name:"john", message:"hello world"}}><hr className="opacity-6" /></Message>
                 
                 
             </div>

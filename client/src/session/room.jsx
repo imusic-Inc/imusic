@@ -71,12 +71,12 @@ const [expandInvite, setExpandInvite] = useState(false);
                 setOwerId(uid);
             } else {
             const email = cookies.get('email');
-            setParticipant(value.participants);
+                setParticipant(value.participants);
             setMessages(value.messages);
             setplayList(value.playlist?value.playlist:[]);
             setGuest(value.guest);
             setOwerId(value.ownerId);
-                setGuest(value.guest);
+            setGuest(value.guest);
                 const allow = value.allowInvite ? value.allowInvite ? value.allowInvite : false : true;
                 setAllowInvite(allow)
             if (value.roomType === 'private' &&  !search.get('v') && !allowInvite) {
@@ -100,8 +100,9 @@ const [expandInvite, setExpandInvite] = useState(false);
     useEffect(() => {
         setUid(cookies.get('uid'));
         if (paths.id) {
-            if (paths.id.indexOf('imusic') < 0) {
-                init(paths.id);
+            if (paths.id.indexOf('@spotify') >= 0) {
+                const inde = paths.id.indexOf('@spotify');
+                init(paths.id.substring(0,inde));
                 setType('public');
             } else {
                 getSession(paths.id);
@@ -121,6 +122,8 @@ const [expandInvite, setExpandInvite] = useState(false);
         });
     }, [playList]);
 
+
+
 function editPlaylist() {
      setexpand(!expand);
     if (playList.length > 0) {
@@ -133,6 +136,7 @@ function editPlaylist() {
     }
    
 }
+    
     
     function deletedPlayListDraft() {
         const payload = {
@@ -154,9 +158,13 @@ function exit() {
         setexpand(!expand);
         deletedPlayListDraft();
     }
+
+
+
     function showAndHideInvite() {
         setExpandInvite(!expandInvite)
     }
+
 function showAndHideShare() {
         setexpandShare(!expandShare)
 }

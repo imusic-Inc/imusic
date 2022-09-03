@@ -18,7 +18,7 @@ const cors = require("cors");
 
 const corsOptions = {
     origin: 'http://localhost:3000', // frontend server address
-    credentials: true,
+    // credentials: true, 
     optionsSuccessStatus: 200
 }
 

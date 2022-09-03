@@ -7,7 +7,6 @@ function Auth(props) {
     const [pathed, setPath] = useState("");
     const [userName, setUserName] = useState("");
     const cookies = new Cookies();
-    const navigate = useNavigate();
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
         const token = paths.get("access_token");
@@ -22,8 +21,8 @@ function Auth(props) {
 
     if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
         if (window.location.href.includes('login')) {
-            navigate('../home', { replace: true });
-            // window.history.back();
+           
+            window.history.back();
             
         } else {
             props.show();

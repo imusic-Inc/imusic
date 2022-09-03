@@ -11,6 +11,7 @@ function PublicSession(props) {
     const playlist = await APIController.getPlaylistByGenre(token,props.id,10);
         setPlayList(playlist);
     }
+    
     if (a < 2) {
        init(); 
     }

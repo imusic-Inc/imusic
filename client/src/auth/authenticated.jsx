@@ -14,7 +14,7 @@ function Auth() {
          const emil = cookies.get("email");
          setEmail(emil);
          setName(name);
-     });
+     },[name,email]);
     
     return (<>
     <div className="flex-row flex-center account">

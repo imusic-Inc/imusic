@@ -1,6 +1,6 @@
 import Message from "../message/message";
 
-function Activeuserscart() {
+function Activeuserscart(props) {
     return (<div className='active-users'>
         
  <div className="flex-row flex-center flex-space pt-01 live-chat">
@@ -18,7 +18,7 @@ function Activeuserscart() {
                 <div className='active-list p-01'>
 
         <div className="list">
-          <Message/>
+                            {props.value?props.value.map(value=><Message value={value} />):null}
 </div>
                     
                 

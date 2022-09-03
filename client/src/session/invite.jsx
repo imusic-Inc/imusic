@@ -1,6 +1,18 @@
 import InviteList from "../components/inviteList";
-
+import getData from "../api/backendcalls";
+import {useState} from 'react'
+import { SearchLoading } from "../components/loadingSession";
 function Invite(props) {
+
+    const [users,setUser] = useState([])
+
+
+    getData.getUser('users').then(value => {
+        setUser(value);
+    })
+
+
+
     return (<div className='invite bg-default p-1'>
         <h1 className='text-right pr-1 pt-01 btn' >
             <svg  onClick={props.show} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
@@ -19,13 +31,7 @@ function Invite(props) {
                 </div>
             </div>
             <div className='playList-list-save'>
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
-                            
-                <InviteList track="Kwaku the traveler" by="Black Sherif" image="../images/My project-1(1).png" />
+                {users.length>0?users.map(value=><InviteList key={ value._id} track={value.name} by={value.email} image={value.photo} />):<SearchLoading/>}
             </div>
         </div>
     </div>);

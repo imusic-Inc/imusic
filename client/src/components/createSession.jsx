@@ -1,16 +1,45 @@
-import {NavLink} from "react-router-dom";
 import generateRandomString from "../api/keygen";
+import store from "../redux/store"
 import { useState } from "react";
+import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
 function CreateSession(props) {
     const [name, setName] = useState('');
     const [dis, setDis] = useState('');
     const [tags, setTags] = useState('');
-    const [visibility, setVisibility] = useState(true);
+    const [visibility, setVisibility] = useState(false);
+    const [password, setPassword] = useState(true);
+ const type = visibility ? 'private' : 'public';
+    const cookies = new Cookies();
+    const id = generateRandomString(50);
+    const navigate = useNavigate();
+
+    const handler = () => {
+        const payload_action = {
+            id:id,
+            uid:cookies.get("uid"),
+            email:cookies.get("email"),
+            ownerName:cookies.get("name"),
+            name,
+            discription: dis,
+            tags,
+            type,
+            passcode:password
+        }
+
+        const payload = {
+            payload:payload_action,
+            type:'create-session'
+        }
+        if (store.dispatch(payload)) {
+          navigate('../room/'+id+'imusicroom?name='+name+'&admin=true&type='+type, { replace: true });   
+        }
+
+    }
 
 
-    const type = visibility ? 'private' : 'public';
-
-    return (<div className="createSession bg-default p-1">
+   
+    return (<div className="createSession bg-default p-01 box-shadow">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Let setup your iMusic Room</h4>
@@ -43,16 +72,21 @@ function CreateSession(props) {
             <div className="pr-1 pl-1 pt-01 flex-row flex-center">
                 <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >NO</div>  <input type="checkbox" onChange={event => setVisibility(event.target.value)} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
+                   <div className="pr-1" >NO</div>  <input type="checkbox" value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
                 </div>
             </div>
+
+            {visibility?<div className="pr-1 pl-1 pt-01">
+                <label htmlFor="password" className="opacity-6">iMusic Room Password Code</label>
+                <input type="text" maxLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
+            </div>:null}
             
 
-            <NavLink  to={'../room/'+generateRandomString(50)+'imusicroom?name='+name+'&admin=true&type='+type}>
+            <div onClick={handler}>
             <div className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center">
                     Create Session
                 </div>
-            </NavLink>
+            </div>
         </div>
         
           </div>)

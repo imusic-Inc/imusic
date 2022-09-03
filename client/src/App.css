@@ -631,6 +631,31 @@ color: rgb(176, 23, 23);
   height: 25px;
 }
 
+.password{
+  z-index: 20;
+  position: fixed;
+  padding: 10px;
+  width: 30%;
+  left: 35%;
+  border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+  height: 50vh;
+  top: 25vh;
+}
+
+.box-shadow{
+  box-shadow: 5px 5px 8px 5px #1a1a1a7f;
+}
+
+.password-conent{
+justify-content: space-between;
+  flex-direction: column;
+  height: 40vh;
+}
+
 .close{
   fill: red;
 }
@@ -745,7 +770,7 @@ font-weight: 400;
 
 .createSession{
   position: fixed;
-  width: 35%;
+  width: 40%;
   height: 65%;
   bottom: 20%;
   z-index: 10;
@@ -878,7 +903,7 @@ input[type=checkbox] {
 }
 .playList-list-save{
   width: 100%;
-  height: 250px;
+  height: 50vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-color: transparent;

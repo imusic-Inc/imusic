@@ -5,7 +5,7 @@ function NewMessage(props) {
     <div className="message">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
-        <h4 className="pl-1">James Mensah</h4>
+        <h4 className="pl-1">{props.name}</h4>
     </div>
 
 

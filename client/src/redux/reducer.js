@@ -28,6 +28,9 @@ function Reducer(state = {}, action) {
                 state = {...state, 'addToPlayList':[...set]}
             }
             break;
+        case 'create-session':
+            state = {...state, 'session':{...action.payload}}
+            break;
         case 'toPlayList':
             const set =  new Set([...action.payload]);
             state = {...state, 'playList':[...set]}

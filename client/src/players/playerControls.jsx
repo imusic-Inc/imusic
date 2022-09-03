@@ -1,23 +1,32 @@
 import { useState, useEffect,useRef } from "react"
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import store from "../redux/store";
 import Cookies from 'universal-cookie';
 export default function PlayerConrols(props) {
   const [track, setTrack] = useState([]);
   const [index, setIndex] = useState(0);
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
   const [token, setToken] = useState("");
-
+  const cookies = new Cookies();
+  const tokened = cookies.get('access_token');
   useEffect(() => {
-    const cookies = new Cookies();
-    const token = cookies.get('access_token');
-    if (token && token.length > 10) {
-      setToken(token)
+    if (tokened && tokened.length > 10) {
+      setToken(tokened)
     } else {
       setToken('error')
     }
-  }, []);
+  },[setToken,tokened]);
+
+
+  function clearLogins() {
+    cookies.set("name",null);
+                cookies.set("access_token",null);
+                cookies.set("email", null);
+                cookies.set("setDate", null);
+                cookies.set("uid", null);
+                cookies.set("photo", null);
+  }
 
   const ref = useRef(null);
    useEffect(() => {
@@ -32,7 +41,6 @@ export default function PlayerConrols(props) {
 
    }, [track, index]);
   
-  console.log(token);
   
   // if (!token) return props.auth(false);
   return (
@@ -44,9 +52,11 @@ export default function PlayerConrols(props) {
         token={token}
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
-       callback={state => {
+        callback={state => {
+         console.log(state);
         // if (!state.isPlaying) setPlay(false);
         if (state.error) {
+          clearLogins();
           props.auth(false);
         }
       }}

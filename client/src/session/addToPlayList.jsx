@@ -39,6 +39,7 @@ function AddToPlayList(props) {
     }
 
     function addToPlayList() {
+        
          if (playlist.length > 0) {
             const payload = {
         type: "toPlayList",

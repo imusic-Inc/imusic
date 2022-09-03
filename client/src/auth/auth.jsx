@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
+import getData from "../api/backendcalls";
 import APIController from "../api/functons";
 function Auth(props) {
     const [pathed, setPath] = useState("");
@@ -25,25 +26,32 @@ function Auth(props) {
             props.show();
         } 
     }
-    },[setPath,setUserName,authenticate]);
+    });
 
     function authenticate(tokens) {
         APIController.getUser(tokens).then(value => {
-            const expires = 1000 * 60 * 60;
+            // const expires = 1000 * 60 * 60;
             if (value.error) {
                 setPath('');
                 cookies.set("name",null);
                 cookies.set("access_token",null);
                 cookies.set("email", null);
                 cookies.set("setDate", null);
+                cookies.set("uid", null);
+                cookies.set("photo", null);
             } else {
-                 cookies.set('access_token', tokens)
-                cookies.set('name', value.display_name);
+                getData.getUserByEmail('users', value.email)
+                    .then(value => {
+                cookies.set('access_token', tokens)
+                cookies.set('name', value.name);
                 cookies.set('email', value.email);
+                cookies.set('uid', value._id);
+                cookies.set('photo', value.email);
                 cookies.set('setDate', Date.now());
                 cookies.set('product', value.product);
-                setUserName(value.display_name);
-                setPath(tokens);
+                setUserName(value.name);
+                setPath(tokens); 
+                });
             }
             });
     }

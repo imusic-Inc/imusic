@@ -1,15 +1,22 @@
 import { useState } from "react";
 import MemberList from "../message/memberList";
 import NewMessage from "../message/newMessage";
-function Members() {
+function Members(props) {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     const [showNewMessage, setshowNewMessage] = useState(false);
+    const [NewMessageId, setNewMessageId] = useState('');
+    const [NewMessageReciever, setNewMessageReciever] = useState('');
     function hideManasession() {
         setshowNewMessage(false);
+       
     }
-    function showManasession() {
+    
+    function showManasession(messageId,name) {
         setshowNewMessage(true);
+         setNewMessageId(messageId);
+        setNewMessageReciever(name)
+       
     }
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
@@ -46,7 +53,7 @@ function Members() {
           <hr className="opacity-6" />
           <div className="messages-list"> 
               
-              <MemberList showMessage={ showManasession} />
+              {props.value ? props.value.map(value => <MemberList value={ value } showMessage={showManasession} />):null}
          
 
         
@@ -55,7 +62,7 @@ function Members() {
           </div>
     
       </div>
-       {showNewMessage ? <NewMessage show={hideManasession} />:<></>}
+      {showNewMessage ? <NewMessage show={hideManasession} id={NewMessageId} name={NewMessageReciever} />:<></>}
       </>
   );
 }

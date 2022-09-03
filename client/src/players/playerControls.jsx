@@ -3,9 +3,13 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 // import { useSearchParams } from 'react-router-dom';
 import store from "../redux/store";
 import Cookies from 'universal-cookie';
+import Lyrics from "../session/lyrics";
 export default function PlayerConrols(props) {
+  
   const [track, setTrack] = useState([]);
   const [index, setIndex] = useState(0);
+  const [lyris, setLyris] = useState([]);
+  const [isplaying, setIsPlaying] = useState(false);
   // const [searchParams] = useSearchParams();
   const [token, setToken] = useState("");
   const cookies = new Cookies();
@@ -18,6 +22,9 @@ export default function PlayerConrols(props) {
     }
   },[setToken,tokened]);
 
+  function show() {
+    setIsPlaying(false)
+  }
 
   function clearLogins() {
     cookies.set("name",null);
@@ -39,9 +46,20 @@ export default function PlayerConrols(props) {
             }
         });
 
-   }, [track, index]);
+   }, [track, track]);
+  
+  function startLyris(url) {
+    const newTrack = track.filter(value => {
+      console.log(value.audio,url);
+      return value.audio === url;
+    });
+    setLyris(newTrack);
+   
+  }
   
   
+  
+   
   // if (!token) return props.auth(false);
   return (
     <div className="player p-1">
@@ -53,8 +71,13 @@ export default function PlayerConrols(props) {
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
         callback={state => {
-         console.log(state);
-        // if (!state.isPlaying) setPlay(false);
+          if (state.isPlaying) {
+            startLyris(state.track.uri);
+            setIsPlaying(true);
+          };
+          if (!state.isPlaying) {
+            setIsPlaying(false);
+          }
         if (state.error) {
           clearLogins();
           props.auth(false);
@@ -72,6 +95,7 @@ export default function PlayerConrols(props) {
   }}
       />:<>Loading...</>}
       
+      {isplaying?<Lyrics  name={lyris.length > 0 ? lyris[0].name:""} auth={lyris.length > 0 ? lyris[0].auth:""} show = {show} />:<></>}
     </div>
     
   )

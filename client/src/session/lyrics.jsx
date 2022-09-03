@@ -1,8 +1,16 @@
-// import lyricsSearcher from "lyrics-searcher";
 import { useEffect, useState} from "react";
+import APIController from "../api/functons";
 
 function Lyrics(props) {
     const [lyrics, setLyrics] = useState('');
+    useEffect(() => {
+        APIController.getLyrics(props.auth, props.name).then(value => {
+            if (value.error) {
+                setLyrics(value.error)
+            }
+            console.log(value);
+        }, [lyrics]);
+    });
     return (<div className='lyrics p-01'>
         <div className="text-p-01 p-1 text-right btn" onClick={() => { props.show(false) }}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
@@ -11,7 +19,7 @@ function Lyrics(props) {
         </svg>
           </div>
                 <div className='lyrics-tex p-1t text-center'>
-<h2 className="text-md">{props.name + " " + props.album}</h2>
+<h2 className="text-md">{lyrics}</h2>
                 </div>
 
             </div>)

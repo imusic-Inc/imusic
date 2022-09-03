@@ -2,7 +2,7 @@ import JoinList from "./joinList";
 
 function Join(props) {
   return (
-    <div className="join-session">
+    <div className="join-session box-shadow">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Join session</h4>

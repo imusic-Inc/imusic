@@ -14,7 +14,11 @@ function CreateSession(props) {
     const id = generateRandomString(50);
     const navigate = useNavigate();
 
-    const handler = () => {
+    const handler = (event) => {
+        event.preventDefault();
+        if (type === 'private' && password.length < 4) {
+            return null;
+        }
         const payload_action = {
             id:id,
             uid:cookies.get("uid"),
@@ -26,6 +30,7 @@ function CreateSession(props) {
             type,
             passcode:password
         }
+
 
         const payload = {
             payload:payload_action,
@@ -55,39 +60,37 @@ function CreateSession(props) {
         </div>
     </div>
 </div>
-              <div className="form-control p-1">
+              <form className="form-control p-1" onSubmit={handler}>
             <div className="pr-1 pl-1 ">
                 <label htmlFor="name" className="opacity-6">iMusic Room name</label>
-                <input type="text" onChange={event => setName(event.target.value)}  className="playSearch w-100 " placeholder="Room name" name="name" />
+                <input type="text" minLength={5} required={true} onChange={event => setName(event.target.value)}  className="playSearch w-100 " placeholder="Room name" name="name" />
             </div>
             <div className="pr-1 pl-1 pt-01">
                 <label htmlFor="description" className="opacity-6">iMusic Room description</label>
-                <textarea  className="playSearch-textArea w-100" onChange={event => setDis(event.target.value)} rows={3} placeholder="Room description" name="description"></textarea>
+                <textarea required={true} minLength={5}  className="playSearch-textArea w-100" onChange={event => setDis(event.target.value)} rows={3} placeholder="Room description" name="description"></textarea>
             </div>
             <div className="pr-1 pl-1 pt-01">
                 <label htmlFor="tags" className="opacity-6">iMusic Room tags</label>
-                <input type="text" className="playSearch p-1 w-100 mt-1" onChange={event => setTags(event.target.value)} placeholder="Room tags" name="tags" />
+                <input type="text" minLength={4} required={true} className="playSearch p-1 w-100 mt-1" onChange={event => setTags(event.target.value)} placeholder="Room tags" name="tags" />
             </div>
 
             <div className="pr-1 pl-1 pt-01 flex-row flex-center">
                 <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >NO</div>  <input type="checkbox" value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
+                   <div className="pr-1" >NO</div>  <input type="checkbox" required={true} value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
                 </div>
             </div>
 
             {visibility?<div className="pr-1 pl-1 pt-01">
                 <label htmlFor="password" className="opacity-6">iMusic Room Password Code</label>
-                <input type="text" maxLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
+                <input type="text"  minLength={4} maxLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
             </div>:null}
             
 
-            <div onClick={handler}>
-            <div className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center">
-                    Create Session
-                </div>
+            <div >
+            <input type={'submit'} className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center w-100" value={'Create Session'}/>
             </div>
-        </div>
+        </form>
         
           </div>)
 }

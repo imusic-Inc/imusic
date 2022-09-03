@@ -1,6 +1,4 @@
 function InviteList(props) {
-
-console.log("https://ui-avatars.com/api/?name="+props.by);
     return (<div className="flex-row flex-center flex-space p-01 pl-01 pr-01">
         <div className="flex-row flex-center">
         <img className="b-r-01" src={props.image?props.image:"https://ui-avatars.com/api/?name="+props.track} alt="" width="50" height="50" srcSet=""/>

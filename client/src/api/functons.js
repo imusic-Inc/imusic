@@ -104,6 +104,14 @@ const APIController = (function() {
         return data;
     }
 
+    const _getLyrics = async (artist,song) => {
+        const result = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`, {
+            method: 'GET',
+        });
+        const data = await result.json();
+        return data;
+    }
+
     return {
         getToken() {
             return _getToken();
@@ -131,6 +139,9 @@ const APIController = (function() {
         },
         getUser(token) {
              return  _getUser(token);
+        },
+         getLyrics(artist,song) {
+             return  _getLyrics(artist,song);
          }
     }
 })();

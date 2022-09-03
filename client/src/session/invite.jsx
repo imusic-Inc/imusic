@@ -1,16 +1,35 @@
 import InviteList from "../components/inviteList";
 import getData from "../api/backendcalls";
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { SearchLoading } from "../components/loadingSession";
+import Cookies from 'universal-cookie';
 function Invite(props) {
-
+    const cookies = new Cookies();
+   const uid =  cookies.get('uid');
     const [users,setUser] = useState([])
+    const [source,setSource] = useState([])
+    const [search,setSearch] = useState('')
 
+    function reset() {
+        setUser(source);
+        setSearch('');
+    }
 
-    getData.getUser('users').then(value => {
-        setUser(value);
-    })
-
+    useEffect(() => {
+        if (uid && uid.length > 10) {
+            getData.getUser('users').then(value => {
+                setUser(value);
+                setSource(value);
+            })
+        }
+    }, []);
+    
+    useEffect(() => {
+        if (search.length > 3) {
+            const newSource = source.filter(value => value.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 || value.email.toLowerCase().indexOf(search.toLowerCase()) >= 0);
+            setUser(newSource);
+       }
+    },[search]);
 
 
     return (<div className='invite bg-default p-1'>
@@ -20,13 +39,13 @@ function Invite(props) {
                 <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
             </svg>
         </h1>
-        <div className='flex-6'>
-            <div className="p-1">
+        <div className='flex-6 pl-1 pr-1'>
+            <div className="">
                 <h4>Invite friend to join this music room</h4>
                 <div className="flex-row flex-center" >
-                    <input type="text" className="playSearch" placeholder="&#9835; Search by username or email" name="search" id="playSearch" />
-                    <div className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 mt-01">
-                        Search
+                    <input type="text" className="playSearch" value={search} onChange={(event)=>setSearch(event.currentTarget.value)} placeholder="&#9835; Search by username or email" name="search" id="playSearch" />
+                    <div onClick={reset} className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 mt-01">
+                        Reset
                     </div>
                 </div>
             </div>

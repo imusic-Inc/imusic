@@ -42,6 +42,22 @@ const getData = (function() {
         });
         const data = await result.json();
         return data.data.users;
+     }
+    const __CreateSession = async (path,values={}) => {
+        const result = await fetch(link + path, {
+            method: 'post',
+            body: JSON.stringify(values),
+        });
+        const data = await result.json();
+        return data.data.users;
+    }
+    const __UpdateSession = async (path,id,values={}) => {
+        const result = await fetch(link + path, {
+            method: 'put',
+            body: JSON.stringify(values),
+        });
+        const data = await result.json();
+        return data.data.users;
     }
 
     

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
 import getData from "../api/backendcalls";
+import { useNavigate } from "react-router-dom";
 import APIController from "../api/functons";
 function Auth(props) {
     const [pathed, setPath] = useState("");
     const [userName, setUserName] = useState("");
     const cookies = new Cookies();
-
+    const navigate = useNavigate();
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
         const token = paths.get("access_token");
@@ -21,7 +22,9 @@ function Auth(props) {
 
     if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
         if (window.location.href.includes('login')) {
-           window.history.back();
+            navigate('../home', { replace: true });
+            // window.history.back();
+            
         } else {
             props.show();
         } 

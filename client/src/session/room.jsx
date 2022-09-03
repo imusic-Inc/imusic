@@ -233,7 +233,7 @@ function showAndHideShare() {
             <Members value={participant} />
             <MyMessage value={ playList } />
             {auth ? <PlayerConrols auth={setAuth} /> : <Player />}
-            {notPart?<Passcode pass={'1234'} show = {show} hide={true} />:null}
+            {notPart?<Passcode pass={passcode?passcode:'1234'} show = {show} hide={true} />:null}
         </>
     )
 }

@@ -421,6 +421,7 @@ h3 {
   margin-right: 8px;
   left: 20.2%;
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
   align-items: center;
   z-index: 40;
@@ -727,7 +728,12 @@ font-weight: 400;
   width: 50%;
   left: 25%;
   bottom: 80px;
-  z-index: 30;
+  border-radius: 15px;
+    z-index: 30;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
   background-color: var(--secondary);
 }
 .notification-list{

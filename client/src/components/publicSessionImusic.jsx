@@ -30,7 +30,7 @@ function IMusicSessions(props) {
             <div className="flex-row p-session">
                 {sessions.map(value => {
                     return props.type === 'private' ? <div onClick={() => { 
-                        show('1234');
+                        show(props.pass?props.pass:'1234');
                     }}> <Session name={value.name} info={value.description} image={value.photo} key={value.id} /></div>: <NavLink to={"/room/"+value.id+'?type='+props.type+'&name='+value.name}><Session name={value.name} info={value.description} image={value.photo} key={value.id} /></NavLink> 
               })}
             </div>

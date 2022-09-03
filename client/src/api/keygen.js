@@ -53,6 +53,9 @@ export function timeSince (date) {
     }
     return Math.floor(seconds) + " second(s) ago";
 
-    }
+}
+    
+ 
+
 
 export default generateRandomString;

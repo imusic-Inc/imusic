@@ -152,7 +152,7 @@ function Player() {
     </div>
 </div>
       </div>
-   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} album={track.length > 0 ? track[index].album:""} show = {setexpandlyrics} />:<></>}
+   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {setexpandlyrics} />:<></>}
    {login?<Auth show = {showLogin} />:<></>}
   </>
   );

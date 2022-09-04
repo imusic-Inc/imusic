@@ -6,15 +6,14 @@ function Auth() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     let NotificationElemt = NotificationClick ? <Notification/> : <></>;
-
+    const cookies = new Cookies();
 
      useEffect(() => {
-        const cookies = new Cookies();
         const name = cookies.get("name");
          const emil = cookies.get("email");
          setEmail(emil);
          setName(name);
-     },[name,email]);
+     },[]);
     
     return (<>
     <div className="flex-row flex-center account">

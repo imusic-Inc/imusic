@@ -74,6 +74,17 @@ const getData = (function() {
         return data;
     }
 
+    const __postMessage = async (path,values={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            // credentials: 'same-origin',
+            body: JSON.stringify(values),
+        });
+        const data = await result.json();
+        return data;
+    }
+
     const __CreateSession = async (path,values={}) => {
         const result = await fetch(link + path, {
             method: 'post',
@@ -120,6 +131,12 @@ const getData = (function() {
         },
         leaveSession(path) {
             return __leaveSession(path);
+        },
+        postMessage(path,message) {
+            return __postMessage(path,message);
+        },
+        createSession(path,data) {
+            return __CreateSession(path,data);
         }
           
     }

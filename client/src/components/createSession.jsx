@@ -3,6 +3,9 @@ import store from "../redux/store"
 import { useState } from "react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
+import getData from "../api/backendcalls";
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function CreateSession(props) {
     const [name, setName] = useState('');
     const [dis, setDis] = useState('');
@@ -13,6 +16,14 @@ function CreateSession(props) {
     const cookies = new Cookies();
     const id = generateRandomString(50);
     const navigate = useNavigate();
+
+    const notify = (message) => {
+        toast.info(message, {
+            autoClose: 600,
+        });
+    };
+
+
 
     const handler = (event) => {
         event.preventDefault();
@@ -25,10 +36,10 @@ function CreateSession(props) {
             email:cookies.get("email"),
             ownerName:cookies.get("name"),
             name,
-            discription: dis,
+            description: dis,
             tags,
-            type,
-            passcode:password
+            roomType:type,
+            lock:password
         }
 
 
@@ -36,6 +47,11 @@ function CreateSession(props) {
             payload:payload_action,
             type:'create-session'
         }
+
+        getData.createSession('http://localhost:3000/api/v1/session', payload_action).then(value => {
+            
+        })
+
         if (store.dispatch(payload)) {
           navigate('../room/'+id+'imusicroom?name='+name+'&admin=true&type='+type, { replace: true });   
         }
@@ -44,7 +60,10 @@ function CreateSession(props) {
 
 
    
-    return (<div className="createSession bg-default p-01 box-shadow">
+    return (<>
+    
+        
+        <div className="createSession bg-default p-01 box-shadow">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Let setup your iMusic Room</h4>
@@ -92,7 +111,8 @@ function CreateSession(props) {
             </div>
         </form>
         
-          </div>)
+          </div>
+    </>)
 }
 
 export default CreateSession;

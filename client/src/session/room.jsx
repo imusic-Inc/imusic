@@ -232,7 +232,7 @@ function showAndHideShare() {
             {expandShare?<Share show = {showAndHideShare} />:<></>}
             {expandInvite?<Invite show = {showAndHideInvite} />:<></>}
            {expand?<AddToPlayList show = {showAndHide} />:<></>} 
-            <Activeuserscart value={messages } />
+            <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} />
             <MyMessage value={ playList } />
             {auth ? <PlayerConrols auth={setAuth} /> : <Player />}

@@ -20,7 +20,7 @@ autoClose: 500,
 
     useEffect(() => {
         int();
-    },[sessions]);
+    },[props]);
 
     function show(id) {     
         setShowpass(!showpass);

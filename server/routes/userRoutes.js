@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, login } = require('./../controllers/authentication');
+const { signup, login, protect, restrictTo, isLoggedIn } = require('./../controllers/authentication');
 const {
     getAllUsers,
     createUser,
@@ -7,6 +7,7 @@ const {
     updateUser,
     deleteUser
 } = require('../controllers/userController');
+const { createMessage } = require('../controllers/peerTopeer');
 const router = express.Router();
 
 
@@ -23,8 +24,6 @@ router.route('/:id')
     .get(getUser)
     .patch(updateUser)
     .delete(deleteUser);
-
-
 
 
 

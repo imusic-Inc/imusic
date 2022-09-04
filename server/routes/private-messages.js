@@ -1,16 +1,15 @@
 const express = require('express');
-const { createMessage, getMessages } = require('../controllers/peerTopeer');
+const { protect, restrictTo } = require('../controllers/authentication');
+const { createMessage, getAllPrivateMessages } = require('../controllers/peerTopeer');
 
 const router = express.Router();
 
 
-router
-    .route('/:conversationId')
-    .get(getMessages)
 
 router
     .route('/')
-    .post(createMessage)
+    .get(getAllPrivateMessages)
+    .post(protect, restrictTo('user'), createMessage)
 
 
 

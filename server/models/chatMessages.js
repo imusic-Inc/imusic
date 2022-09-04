@@ -5,7 +5,7 @@ const Session = require('./sessionRoom')
 const messageSchema = new mongoose.Schema({
     message: {
         type: String,
-        required: [true, 'review can not be empty!']
+        required: [true, 'message can not be empty!']
     },
     createdAt: {
         type: Date,

@@ -12,6 +12,9 @@
   margin: 0px;
   font-family: 'Poppins', sans-serif;
 }
+.Toastify__toast-body div{
+color: var(--primary);
+}
 
 small{
   font-weight: 100;

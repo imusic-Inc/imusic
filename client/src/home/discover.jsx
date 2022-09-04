@@ -3,27 +3,25 @@ import { useState, useEffect } from "react";
 import PublicSession from '../components/publicSession';
 import { LoadingSession } from '../components/loadingSession';
 import PublicSessionImusic from '../components/publicSessionImusic';
-let token;
 function Discover() {
 
     const [genre, setGenre] = useState([]);
   
   async function init() {
-    if (!token) {
-      APIController.getToken().then(value => {
-        token = value;
-        APIController.getGenres(token).then((values) => {
-            setGenre(values);
-          })
-        });
-    }
-  }
+     APIController.getToken().then(value => {
+        let token = value;
+       APIController.getGenres(token).then((values) => {
+         setGenre(values);
+       });
+      });
+  };
+  
   
   useEffect(() => {
-  init();
-  },[])
+    init();
+  },[]);
 
-  
+  console.log(genre);
   return (
     <div className="flex-6 p-1 pt-1 left-20">
           <h1 className="fixed bg-primary title">iMusic Rooms</h1>

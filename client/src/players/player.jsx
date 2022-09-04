@@ -48,14 +48,11 @@ function Player() {
                
             });
 
-             audio.addEventListener('error', () => {
-                setPlaying(false);
-                setexpandlyrics(false);
-                const next = index + 1 < track.length ? index + 1 : 0;
-                setIndex(next);
-                playOnload();
-               
-            });
+            //  audio.addEventListener('error', () => {
+            //     setPlaying(false);
+            //     //  setexpandlyrics(false);
+            //      audio.load();
+            // });
         }
         playOnload();
     });

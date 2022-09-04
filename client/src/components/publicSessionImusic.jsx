@@ -4,11 +4,20 @@ import {NavLink} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import getData from '../api/backendcalls';
 import PassCode from "./passcode";
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function IMusicSessions(props) {
     const [sessions, setSessions] = useState([]);
     const [showpass, setShowpass] = useState(false);
     const [passCode, setPassCode] = useState('');
-     const navigate = useNavigate();
+    const navigate = useNavigate();
+
+const notify = (message) => {
+toast.info(message, {
+autoClose: 500,
+});
+    }
+
     useEffect(() => {
         int();
     },[sessions]);
@@ -18,10 +27,17 @@ function IMusicSessions(props) {
         setPassCode(id);
     }
 
-    function joinsession(link,id) {
+    function joinsession(link, id) {
+        notify("please wait joing...");
         getData.joinPublicSession(`session/${id}/session`).then(value => {
             if (value.status) {
-                navigate(link, { replace: false });
+                notify(value.status);
+                setTimeout(() => {
+                    navigate(link, { replace: false });
+                },500)
+                
+            } else {
+                notify(value.error);
             }
         })
       
@@ -35,13 +51,24 @@ function IMusicSessions(props) {
 
     return (
         <>
+<ToastContainer
+position="top-left"
+autoClose={500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
             {sessions.length < 1 ? null :<div>
             <h3 className="pt-1">{props.name}</h3>
             <div className="flex-row p-session">
                 {sessions.map(value => {
                     return props.type === 'private' ? <div onClick={() => { 
                         show(value.id);
-                    }}> <Session name={value.name} info={value.description} image={value.photo} key={value.id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.photo} key={value.id} /></div> 
+                    }}> <Session name={value.name}  info={value.description} image={value.photo} key={value.id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.photo} key={value.id} /></div> 
               })}
             </div>
             </div>}

@@ -1,26 +1,49 @@
 import React, {useCallback,memo} from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import getData from '../api/backendcalls';
-function LeaveCart({exit}) {
-    const paths = useParams();
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+function LeaveCart({exit,id}) {
     const navigate = useNavigate();
+    const notify = (message) => {
+        toast.info(message, {
+            autoClose: 600,
+        });
+    };
+    
     const handleOnClick = useCallback(() => {
         exit();
-        getData.leaveSession(`session/${paths.id + 3209}/leave`).then(value => {
-            if (value.status !== 'error') {
-                navigate('../home', { replace: true });
-            }
+        getData.leaveSession(`session/${id}/leave`).then(value => {
+            setTimeout(() => {
+               navigate('../home', { replace: true });
+            }, 500);
+            notify(value.status);
         })
-     }, [exit,navigate,paths.id]);
+     }, [exit,id]);
 
 
-    return (<div onClick={handleOnClick}  className='btn btn-back flex-row flex-center p-01'>
+    return (
+        <>
+<ToastContainer
+position="top-left"
+autoClose={500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+            <div onClick={handleOnClick} className='btn btn-back flex-row flex-center p-01'>
          <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M21,11H6.83L10.41,7.41L9,6L3,12L9,18L10.41,16.58L6.83,13H21V11Z" />
 </svg>
         <div className='pl-01 leave-chat'>
             Leave room
         </div>
-    </div>);
+    </div>
+        </>
+        );
 }
 export default memo(LeaveCart);

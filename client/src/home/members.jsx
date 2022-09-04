@@ -23,17 +23,17 @@ function Members(props) {
 
     useEffect(() => {
         SetSearced(props.value);
-    }, [searced]);
-
+    },[props.value]);
+    
     useEffect(() => {
         if (search.length > 3) {
             const se = props.value.filter(value => value.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 || value.email.toLowerCase().indexOf(search.toLowerCase()) >= 0);
             SetSearced(se);
+            
         } else {
-            SetSearced([...props.value]);
+            SetSearced(props.value);
         }
-    }, [search]);
-
+    }, [search,props.value]);
   return (<>
       <div className="messaging-members " style={{ height: expand }}>
         <div className="flex-row flex-center flex-space  pt-01">

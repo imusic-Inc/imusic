@@ -14,7 +14,6 @@ import PlayerConrols from '../players/playerControls';
 import getData from '../api/backendcalls';
 import Cookies from 'universal-cookie';
 import Passcode from '../components/passcode';
-let token;
 function Room() {
 const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
@@ -33,14 +32,12 @@ const [expandInvite, setExpandInvite] = useState(false);
     const [owerId, setOwerId] = useState("");
     const paths = useParams();
     const [uid, setUid] = useState("");
-
     const cookies = new Cookies();
-     const search = new URLSearchParams(window.location.search);
+    const search = new URLSearchParams(window.location.search);
+    
     async function init(id) {
-        if (!token) {
-      APIController.getToken().then(value => {
-          token = value;
-          APIController.getPlayList(token, id).then((value1) => {
+        APIController.getToken().then(value => {
+          APIController.getPlayList(value, id).then((value1) => {
             const getModifiedPlayList =  value1.filter((value)=>value.track).map((values => {
                 return {
                     "image": values.track.album.images[0].url,
@@ -55,7 +52,6 @@ const [expandInvite, setExpandInvite] = useState(false);
             setplayList(getModifiedPlayList);
           })
         });
-      }
     }
 
     function show(pass, code) {
@@ -109,7 +105,7 @@ const [expandInvite, setExpandInvite] = useState(false);
                 setType(search.get("type"));
             }
         }
-    }, []);
+    },[paths.id]);
 
 
     useEffect(() => {
@@ -168,12 +164,11 @@ function exit() {
 function showAndHideShare() {
         setexpandShare(!expandShare)
 }
-    
     return (
         <>
             <div className='controls flex-row flex-space' >
                 <div style={{display:mobile?actions?'flex':'none':'auto'}}>
-<LeaveCart  exit={exit}  udi={uid} owerId={owerId} type={type}  />
+<LeaveCart  exit={exit} id={paths.id} udi={uid} owerId={owerId} type={type}  />
                 </div>
                 
 

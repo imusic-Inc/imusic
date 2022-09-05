@@ -67,12 +67,12 @@ function Auth(props) {
                 </div>
                     <div className=' flex-row flex-center'>
                     
-                    <div className='flex-1 p-2'>
+                    <div className='flex-1 p-2 auth-image'>
                         <img className='login-image' src="https://images.unsplash.com/photo-1661664492724-dd5cec84afa8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt=""  width='100%'/>
                 </div>
                 
                      <div className='flex-1 '>
-                        <h1 className='p-1'>With a free account, you can listen to full songs.</h1>
+                        <h1 className='p-1 auth-h1'>With a free account, you can listen to full songs.</h1>
                         <div className='login-btn btn p-1'>
                         <a href={'http://localhost:3001/api/v1/auth'}>
                             <span className='btn-login'>

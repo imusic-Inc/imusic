@@ -93,7 +93,7 @@ const getData = (function() {
             body: JSON.stringify(values),
         });
         const data = await result.json();
-        return data.data.users;
+        return data;
     }
     const __UpdateSession = async (path,id,values={}) => {
         const result = await fetch(link + path, {

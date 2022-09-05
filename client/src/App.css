@@ -54,9 +54,9 @@ a:hover{
   text-decoration: none;
 }
 .left-20 {
-  left: 15.5%;
+  left: 220px;
   position: absolute;
-  width: 83%;
+  width: calc(100% - 200px);
   padding-right: 40px;
   z-index: 4;
   height: calc(100% - 50px);
@@ -72,11 +72,13 @@ a:hover{
 
 .left {
   left: 0px;
-  width: 15%;
+  width: 200px;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-top: 1em;
+  padding-bottom: 2em;
   align-items: flex-start;
   padding-left: 16px;
 }
@@ -512,9 +514,9 @@ h3 {
   background-color: rgb(18, 31, 41);
 }
 .join-session {
-  position: fixed;
-  bottom: 80px;
-  right: 25%;
+  position: relative;
+  top: 50px;
+  left: 25%;
   width: 50%;
   height: 75%;
   z-index: 10;
@@ -576,7 +578,7 @@ scroll-behavior: smooth;
 }
 
 .join-list {
-  height: 65vh;
+  height: 70vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
     scrollbar-color: transparent;
@@ -660,15 +662,15 @@ color: rgb(176, 23, 23);
   z-index: 20;
   position: fixed;
   padding: 10px;
-  width: 30%;
+  width: 25%;
   left: 35%;
   border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
-  height: 50vh;
-  top: 25vh;
+  height: auto;
+  top: 33vh;
 }
 
 .box-shadow{
@@ -678,7 +680,7 @@ color: rgb(176, 23, 23);
 .password-conent{
 justify-content: space-between;
   flex-direction: column;
-  height: 40vh;
+  height: 25vh;
 }
 
 .close{
@@ -796,19 +798,19 @@ font-weight: 400;
 
 .account{
   position: fixed;
-  right: 0px;
+  right: 1em;
   top: 10px;
   z-index: 10;
-  width: 25%;
 }
 
 .createSession{
-  position: fixed;
+  position: relative;
   width: 40%;
-  height: 65vh;
+  max-height: auto;
   bottom: 20%;
   z-index: 10;
   left: 35%;
+  top: 50px;
   flex-direction: column;
   justify-content: space-between;
   padding: 8px;
@@ -870,7 +872,8 @@ input[type=checkbox] {
     scrollbar-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  height: 50vh;
+  max-height: 60vh;
+  padding-bottom: 16px;
   flex-direction: column;
   justify-content: space-between;
 
@@ -918,11 +921,11 @@ input[type=checkbox] {
 }
 
 .invite{
-  position: fixed;
+  position: relative;
   left: 25%;
   width: 50%;
   height: 70vh;
-  bottom: 68px;
+  top: 50px;
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -998,7 +1001,7 @@ input[type=checkbox] {
 .controls{
 padding: 8px;
 position: absolute;
-width: 95%;
+width: 98%;
 }
 .logIn-alert{
   width: 100vw;
@@ -1072,8 +1075,11 @@ width: 95%;
     height: 48px;
   }
   .left-20{
-    width: 95%;
     left: 65px;
+    width: calc(100% - 65px);
+  }
+  .left{
+    width: 65px;
   }
   .account{
     width: 35%;
@@ -1096,6 +1102,16 @@ width: 95%;
 
 @media only screen and (max-width: 750px) {
  
+
+  .auth-h1{
+    font-size: 25px;
+  }
+  .auth-image{
+    display: none;
+  }
+  .login-card{
+    height: 40vh;
+  }
   .player {
     width: 45%;
   }
@@ -1206,7 +1222,7 @@ width: 95%;
 
   .lyrics {
     width: 80%;
-    z-index: 20;
+    z-index: 10;
     left: 10%;
   }
 
@@ -1221,7 +1237,12 @@ width: 95%;
     bottom: 80px;
   }
 
-
+.auth-h1{
+  font-size: 15px;
+}
+.login-card {
+  height: 30vh;
+}
   .p-01{
     padding: 0.3rem;
   }

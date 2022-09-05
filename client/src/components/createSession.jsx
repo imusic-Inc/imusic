@@ -18,8 +18,8 @@ function CreateSession(props) {
     const navigate = useNavigate();
 
     const notify = (message) => {
-        toast.info(message, {
-            autoClose: 600,
+        toast.error(message, {
+            autoClose: 1000,
         });
     };
 
@@ -28,8 +28,10 @@ function CreateSession(props) {
     const handler = (event) => {
         event.preventDefault();
         if (type === 'private' && password.length < 4) {
+            notify('You have not provided pass code for you private room');
             return null;
         }
+
         const payload_action = {
             id:id,
             uid:cookies.get("uid"),
@@ -42,27 +44,58 @@ function CreateSession(props) {
             lock:password
         }
 
+        if (name.length < 5 || dis.length < 5 || type.length < 2) {
+            notify('All fields are required');
+            return null;
+        }
 
         const payload = {
             payload:payload_action,
             type:'create-session'
         }
 
-        getData.createSession('http://localhost:3000/api/v1/session', payload_action).then(value => {
-            
+        getData.createSession('session', payload_action).then(value => {
+            if (value.error) {
+                notify(value.message);
+                return;
+            } else {
+                const link = '../room/' + value.id + 'imusicroom?name=' + value.name + '&admin=true&type=' + value.roomType;
+                joinsession(link, value.id);
+            }
         })
 
-        if (store.dispatch(payload)) {
-          navigate('../room/'+id+'imusicroom?name='+name+'&admin=true&type='+type, { replace: true });   
-        }
-
+    }
+     function joinsession(link, id) {
+        notify("please wait joing...");
+        getData.joinPublicSession(`session/${id}/session`).then(value => {
+            if (value.status) {
+                notify(value.status);
+                setTimeout(() => {
+                    navigate(link, { replace: false });
+                },500)
+                
+            } else {
+                notify(value.error);
+            }
+        })
+      
     }
 
 
    
     return (<>
     
-        
+        <ToastContainer
+position="top-left"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
         <div className="createSession bg-default p-01 box-shadow">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
@@ -101,7 +134,7 @@ function CreateSession(props) {
             </div>
 
             {visibility?<div className="pr-1 pl-1 pt-01">
-                <label htmlFor="password" className="opacity-6">iMusic Room Password Code</label>
+                <label htmlFor="password" className="opacity-6">iMusic Room Pass Code</label>
                 <input type="text" required={visibility}  minLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
             </div>:null}
             

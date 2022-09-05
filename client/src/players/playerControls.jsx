@@ -6,7 +6,13 @@ import Cookies from 'universal-cookie';
 import Lyrics from "../session/lyrics";
 export default function PlayerConrols(props) {
   
-  const [track, setTrack] = useState([]);
+  const [track, setTrack] = useState([{
+  "image": "https://i.scdn.co/image/ab67616d000048516b93b86e8411c1eae6686497",
+  "name": "Introduction",
+  "auth": "Samargl",
+  "audio": "spotify:track:4WUKvuiIgKtTiuhpnAw01W",
+  "album": "Away Message",
+}]);
   const [index, setIndex] = useState(0);
   const [lyris, setLyris] = useState([]);
   const [isplaying, setIsPlaying] = useState(false);
@@ -58,7 +64,7 @@ export default function PlayerConrols(props) {
   }
   
   
-  
+  console.log(track);
    
   // if (!token) return props.auth(false);
   return (
@@ -71,6 +77,7 @@ export default function PlayerConrols(props) {
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
         callback={state => {
+          console.log(state);
           if (state.isPlaying) {
             startLyris(state.track.uri);
             setIsPlaying(true);

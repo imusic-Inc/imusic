@@ -6,7 +6,7 @@ const userRouter = require('./routes/userRoutes');
 const messagesRouter = require('./routes/messageRoutes');
 const conversationRouter = require('./routes/conversations');
 const privateMessageRouter = require('./routes/private-messages');
-
+const bodyParser = require('body-parser');
 const spotifyAuth = require('./routes/spotifyAuthRoute');
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
@@ -18,7 +18,7 @@ const cors = require("cors");
 
 const corsOptions = {
     origin: 'http://localhost:3000', // frontend server address
-    // credentials: true, 
+    credentials: true,
     optionsSuccessStatus: 200
 }
 
@@ -28,12 +28,11 @@ app.use(cors(corsOptions));
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
-app.use(cors());
-app.use(cookieParser());
+
 app.use(express.json({ limit: '10kb' }));
-
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-
+app.use(cookieParser());
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
     //console.log(req.headers);

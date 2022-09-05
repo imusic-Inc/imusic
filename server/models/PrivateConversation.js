@@ -16,7 +16,7 @@ const ConversationSchema = new mongoose.Schema({
 //Virtual populate(two way ref for privateMessages)
 ConversationSchema.virtual('messages', {
     ref: 'PrivateMessage',
-    foreignField: 'conversation', //referencing the session ids on Message model
+    foreignField: 'conversation',
     localField: '_id'
 
 

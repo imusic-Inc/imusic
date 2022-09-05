@@ -3,12 +3,17 @@ const querystring = require('querystring');
 const fetch = require('node-fetch')
 const got = require('got');
 const User = require('../models/userModel');
-const { signToken, createSendToken } = require('./authentication');
 const hookAsync = require('../utils/hookAsync');
-
+const jwt = require('jsonwebtoken');
 //oauth through spotify api
 
-const SendToken = (user, res) => {
+const signToken = id => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN
+    });
+}
+
+const createSendToken = (user, res) => {
     const token = signToken(user._id);
     const cookieOptions = {
 
@@ -20,6 +25,7 @@ const SendToken = (user, res) => {
     }
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
+    console.log('hello', token);
 
     user.password = undefined //remove password from response output
 
@@ -98,7 +104,7 @@ exports.getUser = hookAsync(async(req, res) => {
             photo: body.images[0].url
         });
 
-        SendToken(newUser, res)
+        createSendToken(newUser, res)
         res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
 
     } else {
@@ -108,7 +114,7 @@ exports.getUser = hookAsync(async(req, res) => {
             return next(new AppError('Incorrect email or password', 401))
         }
 
-        SendToken(user, res)
+        createSendToken(user, res)
         res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
 
 

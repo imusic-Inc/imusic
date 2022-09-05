@@ -1,5 +1,5 @@
 const express = require('express');
-const { login, logged, getUser } = require('../controllers/spotifyAuth')
+const { login, logged, getUser, refreshToken } = require('../controllers/spotifyAuth')
 const router = express.Router();
 
 
@@ -8,7 +8,7 @@ router
 router
     .get('/logged', logged, getUser)
 router
-    .get('/getUser/:token', getUser)
+    .get('/refreshToken', refreshToken)
 
 
 

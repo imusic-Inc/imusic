@@ -93,7 +93,7 @@ function logOut() {
                 
                 
 
-                <div className="auth">
+                <div className="auth pb-4">
                     {signout ? <div onClick={() => {
                         logOut();
                     }
@@ -107,12 +107,12 @@ function logOut() {
 
 <h3 className=" btn pl-01 nav">Sign out</h3>
 </div>
-                </div>:<div   className="flex-row flex-center btn opacity-8 btn pt-4 ">
+                </div>:<div onClick={() => {setSignIn(true)}}   className="flex-row flex-center btn opacity-8 btn pt-4 ">
    <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor" d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
 </svg>
 
-<h3 onClick={() => {setSignIn(true)}} className=" btn pl-01 nav">Sign up</h3>
+<h3 className=" btn pl-01 nav">Sign up</h3>
                     </div>}
                 </div>
             </div> 

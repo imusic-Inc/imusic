@@ -24,7 +24,10 @@ function Discover() {
   console.log(genre);
   return (
     <div className="flex-6 p-1 pt-1 left-20">
-          <h1 className="fixed bg-primary title">iMusic Rooms</h1>
+      <div className=''>
+<h1 className="fixed bg-primary title">iMusic Rooms</h1>
+      </div>
+          
       <br /><br />
       
 

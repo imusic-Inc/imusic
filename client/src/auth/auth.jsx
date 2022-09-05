@@ -7,23 +7,24 @@ function Auth(props) {
     const [pathed, setPath] = useState("");
     const [userName, setUserName] = useState("");
     const cookies = new Cookies();
+
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
         const token = paths.get("access_token");
-        const refresh_token = paths.get("refresh_token");
+        const refresh = paths.get("refresh_token");
         if (token && token.length > 10) {
-            authenticate(token);
+            authenticate(token,refresh);
         } else {
             const cookies_tokens = cookies.get('access_token');
-            if (cookies_tokens && cookies_tokens.length > 10) {
-                authenticate(cookies_tokens);
+            const refresh_token = cookies.get('access_token');
+            if (cookies_tokens && cookies_tokens.length > 10 && refresh_token && refresh_token.length>10) {
+                authenticate(cookies_tokens,refresh_token);
             }
         }
 
     if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
         if (window.location.href.includes('login')) {
-           
-            // window.history.back();
+            window.history.back();
             
         } else {
             props.show();
@@ -31,7 +32,7 @@ function Auth(props) {
     }
     });
 
-    function authenticate(tokens) {
+    function authenticate(tokens,refresh) {
         APIController.getUser(tokens).then(value => {
             // const expires = 1000 * 60 * 60;
             if (value.error) {
@@ -48,7 +49,7 @@ function Auth(props) {
                 getData.getUserByEmail('users', value.email)
                     .then(value => {
                 cookies.set('access_token', tokens)
-                cookies.set("refresh_token",refresh_token);
+                cookies.set("refresh_token",refresh);
                 cookies.set('name', value.name);
                 cookies.set('email', value.email);
                 cookies.set('uid', value._id);

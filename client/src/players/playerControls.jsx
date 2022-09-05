@@ -33,12 +33,15 @@ export default function PlayerConrols(props) {
   }
 
   function clearLogins() {
-    cookies.set("name",null);
-                cookies.set("access_token",null);
+     cookies.set("name",null);
+     cookies.set("access_token", null);
+                cookies.set("refresh_token",null);
                 cookies.set("email", null);
                 cookies.set("setDate", null);
                 cookies.set("uid", null);
                 cookies.set("photo", null);
+                cookies.set("product", null);
+    
   }
 
   const ref = useRef(null);

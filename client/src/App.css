@@ -1069,7 +1069,12 @@ width: 98%;
     display: none;
     padding: 0px;
   }
-  
+    .auth-image {
+      display: none;
+    }
+        .login-card {
+          height: 45vh;
+        }
   .nav-icon{
     width: 48px;
     height: 48px;

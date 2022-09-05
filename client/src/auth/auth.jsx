@@ -10,6 +10,7 @@ function Auth(props) {
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
         const token = paths.get("access_token");
+        const refresh_token = paths.get("refresh_token");
         if (token && token.length > 10) {
             authenticate(token);
         } else {
@@ -22,7 +23,7 @@ function Auth(props) {
     if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
         if (window.location.href.includes('login')) {
            
-            window.history.back();
+            // window.history.back();
             
         } else {
             props.show();
@@ -37,18 +38,21 @@ function Auth(props) {
                 setPath('');
                 cookies.set("name",null);
                 cookies.set("access_token",null);
+                cookies.set("refresh_token",null);
                 cookies.set("email", null);
                 cookies.set("setDate", null);
                 cookies.set("uid", null);
                 cookies.set("photo", null);
+                cookies.set("product", null);
             } else {
                 getData.getUserByEmail('users', value.email)
                     .then(value => {
                 cookies.set('access_token', tokens)
+                cookies.set("refresh_token",refresh_token);
                 cookies.set('name', value.name);
                 cookies.set('email', value.email);
                 cookies.set('uid', value._id);
-                cookies.set('photo', value.email);
+                cookies.set('photo', value.photo);
                 cookies.set('setDate', Date.now());
                 cookies.set('product', value.product);
                 setUserName(value.name);

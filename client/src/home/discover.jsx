@@ -19,9 +19,8 @@ function Discover() {
   
   useEffect(() => {
     init();
-  },[]);
-
-  console.log(genre);
+  }, []);
+  
   return (
     <div className="flex-6 p-1 pt-1 left-20">
       <div className=''>

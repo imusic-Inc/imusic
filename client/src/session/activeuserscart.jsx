@@ -12,7 +12,7 @@ function Activeuserscart(props) {
         const name = cookies.get("name");
 const notify = (message) => {
         toast.error(message, {
-            autoClose: 600,
+            autoClose: 1000,
         });
     };
 
@@ -26,7 +26,7 @@ useEffect(() => {
                 if (props.id.indexOf('@spotify') < 0) {
                      getData.getSessionById('session', props.id).then((value) => {
                         if (messages.length < value.messages.length) {
-                                setMessages(value.messages);
+                                setMessages(value.messages); 
                         }
                 });    
                 };
@@ -42,7 +42,8 @@ useEffect(() => {
                         if (value.error) {
                                 notify(value.message);
                         } else {
-                            setMessages([...messages,{message,user:{name:name}}])    
+                                setMessages([...messages, { message, user: { name: name } }])    
+                                setmessage("");
                    }     
                 });     
                 }
@@ -52,7 +53,7 @@ useEffect(() => {
         return (<>
         <ToastContainer
 position="top-left"
-autoClose={500}
+autoClose={1000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

@@ -145,6 +145,22 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
+
+     const __LogOut = async (path) => {
+        const result = await fetch(link + path, {
+            method: 'get',
+            mode: 'cors',
+            // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
     const __UpdateSession = async (path,id,values={}) => {
         const result = await fetch(link + path, {
             method: 'put',
@@ -192,6 +208,9 @@ const getData = (function() {
         },
         createSession(path,data) {
             return __CreateSession(path,data);
+        },
+         logOut(path) {
+            return __LogOut(path);
         }
           
     }

@@ -7,6 +7,11 @@ const getData = (function() {
 
         const result = await fetch(link + path, {
             method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.session;
@@ -16,6 +21,11 @@ const getData = (function() {
 
         const result = await fetch(link + path+'?roomType='+type, {
             method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.session;
@@ -23,6 +33,11 @@ const getData = (function() {
      const __getUserByEmail = async (path,email) => {
         const result = await fetch(link + path, {
             method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.users.find(value=>value.email === email);
@@ -31,6 +46,11 @@ const getData = (function() {
      const __getSessionById = async (path,id) => {
         const result = await fetch(link + path+'/'+id, {
             method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.session;
@@ -39,6 +59,11 @@ const getData = (function() {
      const __getUser = async (path) => {
         const result = await fetch(link + path, {
             method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.users;
@@ -49,6 +74,11 @@ const getData = (function() {
             method: 'PATCH',
             mode: 'cors',
             // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data;
@@ -59,6 +89,11 @@ const getData = (function() {
             method: 'PATCH',
             mode: 'cors',
             // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(values),
         });
         const data = await result.json();
@@ -69,6 +104,11 @@ const getData = (function() {
             method: 'PATCH',
             mode: 'cors',
             // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data;
@@ -79,6 +119,11 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(values),
         });
         const data = await result.json();
@@ -90,6 +135,11 @@ const getData = (function() {
             method: 'post',
             mode: 'cors',
             // credentials: 'same-origin',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(values),
         });
         const data = await result.json();
@@ -100,6 +150,11 @@ const getData = (function() {
             method: 'put',
             mode: 'cors',
             body: JSON.stringify(values),
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
         const data = await result.json();
         return data.data.users;

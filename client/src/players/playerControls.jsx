@@ -56,15 +56,11 @@ export default function PlayerConrols(props) {
   
   function startLyris(url) {
     const newTrack = track.filter(value => {
-      console.log(value.audio,url);
       return value.audio === url;
     });
     setLyris(newTrack);
    
   }
-  
-  
-  console.log(track);
    
   // if (!token) return props.auth(false);
   return (
@@ -77,7 +73,6 @@ export default function PlayerConrols(props) {
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
         callback={state => {
-          console.log(state);
           if (state.isPlaying) {
             startLyris(state.track.uri);
             setIsPlaying(true);

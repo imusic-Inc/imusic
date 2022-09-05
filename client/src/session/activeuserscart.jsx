@@ -23,11 +23,14 @@ const notify = (message) => {
 
 useEffect(() => {
         const interval = setInterval(() => {
-                getData.getSessionById('session', props.id).then((value) => {
+                if (props.id.indexOf('@spotify') < 0) {
+                     getData.getSessionById('session', props.id).then((value) => {
                         if (messages.length < value.messages.length) {
                                 setMessages(value.messages);
                         }
-                });
+                });    
+                };
+               
   }, 5000);
   return () => clearInterval(interval);
 }, []);

@@ -76,11 +76,12 @@ exports.logged = async(req, res, next) => {
             body: encodeFormData(body)
         })
         .then(response => response.json())
-        .then(data => {
-            query = querystring.stringify(data);
-            //  console.log('hello', query);
 
-        }).catch(err => res.redirect(`${process.env.CLIENT_REDIRECTURI}`))
+    .then(data => {
+        query = querystring.stringify(data);
+        //  console.log('hello', query);
+
+    }).catch(err => res.redirect(`${process.env.CLIENT_REDIRECTURI}`))
     next()
 
 };

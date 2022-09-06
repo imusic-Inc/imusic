@@ -19,6 +19,7 @@ function PassCode(props) {
             getData.joinPrivateSession(`session/${props.pass}/session`, { lock: password }).then(value => {
                 if (!value.error) {
                     navigate(props.link + '&v=' + generateRandomString(5), { replace: false });
+                    props.show();
                 }
                 notify(value.message);
             });

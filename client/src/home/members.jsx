@@ -24,7 +24,6 @@ function Members(props) {
     useEffect(() => {
         const set = new Set([...props.value]);
         SetSearced(set);
-        console.log(set);
     },[props.value]);
     
     useEffect(() => {

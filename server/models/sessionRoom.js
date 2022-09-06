@@ -38,7 +38,16 @@ const sessionSchema = new mongoose.Schema({
         minlength: 4,
         select: false
 
-    }
+    },
+    now_playing: {
+        image: { type: String, default: null },
+        name: { type: String, default: null },
+        at: { type: Number, default: null },
+        auth: { type: String, default: null },
+        audio: { type: String, default: null },
+        album: { type: String, default: null },
+        pre_view: { type: String, default: null },
+    },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

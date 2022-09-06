@@ -119,18 +119,20 @@ exports.updateSession = hookAsync(async(req, res, next) => {
     }
     if (getRole && (getRole.role === 'room-admin') && (JSON.stringify(getRole.ownerId) === JSON.stringify(req.user._id))) { //only room admin can update room session
 
-        if (req.body.playlist) {
-            getRole.playlist.push(req.body.playlist)
 
+        const doc = await sessionModel.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        }); //only update group with group-admin function
+        if (!doc) {
+            return next(new AppError('No document found with that ID', 404));
         }
-        getRole.save();
-
         res.status(200).json({
 
 
             status: 'success',
             data: {
-                data: getRole
+                data: doc
             }
 
         });
@@ -144,6 +146,31 @@ exports.updateSession = hookAsync(async(req, res, next) => {
 
 });
 
+exports.updatePlaylist = hookAsync(async(req, res, next) => {
+
+    const session = await sessionModel.findOne({ _id: req.params.id });
+    if ((session.role === 'room-admin') && (JSON.stringify(session.ownerId) === JSON.stringify(req.user._id))) { //only room admin can update playlist
+
+        if (req.body.playlist) {
+            session.playlist.push(req.body.playlist)
+
+        }
+        session.save();
+
+        res.status(200).json({
+
+
+            status: 'success',
+            data: {
+                data: session
+            }
+
+        });
+
+    } else {
+        return next(new AppError('You do not have permission to perform this action', 403));
+    }
+});
 
 
 

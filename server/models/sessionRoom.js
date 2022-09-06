@@ -24,6 +24,9 @@ const sessionSchema = new mongoose.Schema({
     guest: {
         type: Array,
     },
+    playlist: {
+        type: Array,
+    },
     role: {
         type: String,
         enum: ['room-admin'],

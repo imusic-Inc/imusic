@@ -118,19 +118,19 @@ exports.updateSession = hookAsync(async(req, res, next) => {
         return next(new AppError('No room found with that ID', 404));
     }
     if (getRole && (getRole.role === 'room-admin') && (JSON.stringify(getRole.ownerId) === JSON.stringify(req.user._id))) { //only room admin can update room session
-        const doc = await sessionModel.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        }); //only update group with group-admin function
-        if (!doc) {
-            return next(new AppError('No document found with that ID', 404));
+
+        if (req.body.playlist) {
+            getRole.playlist.push(req.body.playlist)
+
         }
+        getRole.save();
+
         res.status(200).json({
 
 
             status: 'success',
             data: {
-                data: doc
+                data: getRole
             }
 
         });

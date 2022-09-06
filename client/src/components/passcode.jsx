@@ -7,22 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 function PassCode(props) {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
     const notify = (message) => {
-        toast.error(message, {
+        toast.info(message, {
             autoClose: 600,
         });
     };
 
     const handleOnClick = () => {
         if (password && password.length > 4) {
-            
+             notify("Joining room, Please wait...");
             getData.joinPrivateSession(`session/${props.pass}/session`, { lock: password }).then(value => {
-                if (value.error) {
-                    notify(value.message);
-                } else {
-                    navigate(props.link[0]+'&v='+generateRandomString(5), { replace: false });
+                if (!value.error) {
+                    navigate(props.link + '&v=' + generateRandomString(5), { replace: false });
                 }
+                notify(value.message);
             });
         } else {
              notify('Wrong pass code');

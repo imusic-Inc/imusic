@@ -176,6 +176,30 @@ const getData = (function() {
         return data.data.users;
     }
     
+     const __DeleteSession = async (path) => {
+        const result = await fetch(link + path, {
+            method: 'DELETE',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        return result;
+     }
+    const __RefreshToken = async (path) => {
+        const result = await fetch(link + path, {
+            method: 'DELETE',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        return result;
+    }
 
     
     return {
@@ -211,6 +235,9 @@ const getData = (function() {
         },
          logOut(path) {
             return __LogOut(path);
+        },
+         deleteSession(path) {
+            return __DeleteSession(path);
         }
           
     }

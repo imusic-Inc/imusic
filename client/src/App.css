@@ -513,9 +513,10 @@ h3 {
 .bg-default{
   background-color: rgb(18, 31, 41);
 }
+
 .join-session {
   position: relative;
-  top: 50px;
+  top: 70px;
   left: 25%;
   width: 50%;
   height: 75%;
@@ -810,7 +811,7 @@ font-weight: 400;
   bottom: 20%;
   z-index: 10;
   left: 35%;
-  top: 50px;
+  top: 70px;
   flex-direction: column;
   justify-content: space-between;
   padding: 8px;
@@ -886,7 +887,8 @@ input[type=checkbox] {
   position: fixed;
   width: 20%;
   margin-top: 10%;
-  height: 80vh;
+  max-height: 85vh;
+  min-height: 80vh;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: var(--secondary);
@@ -1090,7 +1092,7 @@ width: 98%;
     width: 35%;
   }
   .title{
-    font-size: 1.3em;
+    font-size: 2em;
   }
   .player{
     width: 50%;
@@ -1107,7 +1109,6 @@ width: 98%;
 
 @media only screen and (max-width: 750px) {
  
-
   .auth-h1{
     font-size: 25px;
   }
@@ -1132,7 +1133,9 @@ width: 98%;
   .messaging-members{
     width: 30%;
   }
-
+  .title{
+    font-size: 1.5em;
+  }
   .message{
     right: 35%;
       width: 30%;

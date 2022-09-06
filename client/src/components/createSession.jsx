@@ -1,5 +1,4 @@
 import generateRandomString from "../api/keygen";
-import store from "../redux/store"
 import { useState } from "react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ function CreateSession(props) {
     const navigate = useNavigate();
 
     const notify = (message) => {
-        toast.error(message, {
+        toast.info(message, {
             autoClose: 1000,
         });
     };
@@ -59,15 +58,16 @@ function CreateSession(props) {
                 notify(value.message);
                 return;
             } else {
-                const link = '../room/' + value.id + 'imusicroom?name=' + value.name + '&admin=true&type=' + value.roomType;
-                joinsession(link, value.id);
+                const link = '../room/' + value.data.session.id + '?name=' + value.data.session.name + '&admin=true&type=' + value.data.session.roomType;
+                console.log(link);
+                joinsession(link, value.data.session.id);
             }
         })
 
     }
      function joinsession(link, id) {
         notify("please wait joing...");
-        getData.joinPublicSession(`session/${id}/session`).then(value => {
+        getData.joinPrivateSession(`session/${id}/session`,{lock:password}).then(value => {
             if (value.status) {
                 notify(value.status);
                 setTimeout(() => {

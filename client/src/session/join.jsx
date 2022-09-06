@@ -1,8 +1,79 @@
+import { useState,useEffect } from "react";
+import getData from "../api/backendcalls";
 import JoinList from "./joinList";
-
+import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
+import {SearchLoading} from '../components/loadingSession'
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Passcode from "../components/passcode";
+let linked = '';
+let seletedId = '';
 function Join(props) {
+    const [getSession, setSession] = useState([]);
+    const [showpass, setShowpass] = useState(false);
+    const cookies = new Cookies();
+     const navigate = useNavigate();
+ const notify = (message) => {
+        toast.info(message, {
+            autoClose: 1000,
+        });
+    };
+    useEffect(() => {
+        const uid = cookies.get('uid');
+        getData.getSession('session').then(value => {
+            const getMySession = value.filter(value => value.ownerId == uid);
+            setSession(getMySession);
+    });
+
+    },[]);
+
+    function deleteFun(id) {
+        getData.deleteSession('session/' + id).then(value => {
+            const getMySession = getSession.filter(value => value.id != id);
+            setSession(getMySession);
+            notify("Session deleted successfully");
+        })
+       
+    }
+
+    function joinsession(name,roomType, id) {
+        notify("please wait joing...");
+        getData.joinPublicSession(`session/${id}/session`).then(value => {
+             const link = '../room/' + id + '?name=' + name + '&admin=true&type=' + roomType;
+            if (value.status === 'fail') {
+                notify(value.message);
+                if (value.message === 'Please provide a lock code!') {
+                    linked = link
+                    seletedId = id;
+                    setShowpass(true);
+                }
+            } else {
+                notify(value.status);
+                setTimeout(() => {
+                    navigate(link, { replace: false });
+                },500)
+            }
+        })
+      
+    }
+
+
   return (
-    <div className="join-session box-shadow">
+      <>
+      <ToastContainer
+position="top-left"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+      
+       <div className="join-session box-shadow">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Join session</h4>
@@ -24,24 +95,13 @@ function Join(props) {
 
 
 <div className="join-list">
-
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-     <JoinList/>  
-
+                  {getSession.length > 0 ? getSession.map(value => <JoinList key={value.id} name={value.name} description={value.description} id={value.id} photo={value.photo}  roomType={value.roomType} deleteFun={deleteFun} joinsession={ joinsession } /> ) :SearchLoading} 
 </div>
 
-</div>
+          </div>
+          
+           {showpass?<Passcode pass={seletedId} link={linked} />:null}
+      </>
 
   );
 }

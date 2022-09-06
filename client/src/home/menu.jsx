@@ -23,7 +23,7 @@ const token = cookies.get('access_token');
     
     function logOut() {
         getData.logOut('users/logout').then(value => {
-            if (value.status === 'success') {
+            if (value.status === 'success' || value.status === 'logged out') {
                 cookies.set("name",null);
                 cookies.set("access_token", null);
                 cookies.set("refresh_token",null);

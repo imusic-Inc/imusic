@@ -68,7 +68,7 @@ pauseOnHover
                 {sessions.map(value => {
                     return props.type === 'private' ? <div onClick={() => { 
                         show(value.id);
-                    }}> <Session name={value.name}  info={value.description} image={value.photo} key={value.id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.photo} key={value.id} /></div> 
+                    }}> <Session name={value.name}  info={value.description} image={value.now_playing.image} key={value.id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.now_playing.image} key={value.id} /></div> 
               })}
             </div>
             </div>}

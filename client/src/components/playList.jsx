@@ -1,22 +1,56 @@
 import { memo } from "react";
 import store from "../redux/store"
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import getData from "../api/backendcalls";
 function PlayList(props) {
+    const notify = (message) => {
+        toast.info(message, {
+            autoClose: 1000,
+        });
+    };
     const payload = {
         type: "current-play-single",
-        payload: [{ ...props.values }]}
+        payload: [{ ...props.values }]
+    }
+    
     function clicked() {
-        store.dispatch(payload);
+        if (props.type==='private'?props.isAdmin?true:false:true) {
+            store.dispatch(payload);
+             if (props.id.indexOf('@spotify') < 0 && props.values) {
+                    getData.PlayList_nowPlaying(props.id, { now_playing: {...props.values,at:0}});
+                }
+        } else {
+            notify("You don't have permission to control the playlist");
+        }
 }
-    return (<div onClick={clicked} className="flex-row flex-center  btn card p-01" >
+    return (
+        <>
+        <ToastContainer
+position="top-left"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+        
+            <div onClick={clicked} className="flex-row flex-center  btn card p-01" >
         <div className="flex-1">
              <img className="b-r-01 bg-secondary ml-1"
             src={props.values.image} width="60px"
             height="50px" alt=""/>
        </div>
         <div className="pl-1 flex-5">
-            <h5 className="opacity-8">{props.values.name.substring(0,60).trim()}</h5>
+            <h5 className="opacity-8">{props.values.name}</h5>
             <small className="opacity-6 font-size-08">{ props.values.auth}</small>
         </div>
-        </div>)
+        </div>
+        </>
+        
+        )
 }
 export default memo(PlayList);

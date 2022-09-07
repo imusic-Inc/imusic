@@ -161,9 +161,9 @@ const getData = (function() {
         return data;
     }
 
-    const __UpdateSession = async (path,id,values={}) => {
+    const __UpdateSession = async (path,values={}) => {
         const result = await fetch(link + path, {
-            method: 'put',
+            method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
             credentials: "include",
@@ -175,6 +175,51 @@ const getData = (function() {
         const data = await result.json();
         return data.data.users;
     }
+    
+    const __UpdateSessionPlayList = async (path,values={}) => {
+        const result = await fetch(link + 'session/'+path, {
+            method: 'PATCH',
+            mode: 'cors',
+            body: JSON.stringify(values),
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+     const __addSessionPlayList = async (path,values={}) => {
+        const result = await fetch(link + 'session/'+path+'/addToQueue', {
+            method: 'PATCH',
+            mode: 'cors',
+            body: JSON.stringify(values),
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+    
+     const __PlayList_nowPlaying = async (path,values={}) => {
+        const result = await fetch(link + 'session/'+path, {
+            method: 'PATCH',
+            mode: 'cors',
+            body: JSON.stringify(values),
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+     }
     
      const __DeleteSession = async (path) => {
         const result = await fetch(link + path, {
@@ -238,6 +283,15 @@ const getData = (function() {
         },
          deleteSession(path) {
             return __DeleteSession(path);
+        },
+        updateSessionPlayList(path,data) {
+            return __UpdateSessionPlayList(path,data);
+        },
+         addSessionPlayList(path,data) {
+            return __addSessionPlayList(path,data);
+        },
+         PlayList_nowPlaying(path,data) {
+            return __PlayList_nowPlaying(path,data);
         }
           
     }

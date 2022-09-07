@@ -6,7 +6,7 @@ import Auth from "../auth/auth";
 let tracks;
 let audio = null;
 let loginShow = true;
-function Player() {
+function Player(props) {
     const [track, setTrack] = useState([]);
     const [playing, setPlaying] = useState(false);
     const [login, setLogin] = useState(false);
@@ -20,6 +20,11 @@ function Player() {
         setLogin(false);
     }
 
+
+     useEffect(() => {
+    setTrack(props.current)
+  }, [props]);
+
     useEffect(() => {
         store.subscribe(() => {
             tracks = store.getState();
@@ -28,16 +33,12 @@ function Player() {
                 setIndex(0);
             }
         });
-
-        
-
         audio = ref.current;
         
 
         if (audio && track.length > 0) {
             audio.addEventListener('ended', () => {
                 setPlaying(false);
-                setexpandlyrics(false);
                 const next = index + 1 < track.length ? index + 1 : 0;
                 setIndex(next);
                 playOnload();
@@ -57,11 +58,15 @@ function Player() {
         playOnload();
     });
 
+
+    function Showsetexpandlyrics() {
+        setexpandlyrics(false);
+    }
+
     function int() {
         if (track.length>0) {
          audio.src = track[index].pre_view
             audio.load();
-            setexpandlyrics(true);
         audio.play(); 
         document.title = track[index].name +" "+ track[index].album;
         }
@@ -145,11 +150,11 @@ function Player() {
 </div>
     </div>
     <div>
-                  <audio className="audioPlayer" ref={ref} controls={true} src="" />
+                  <audio className="audioPlayer" autoPlay={true} ref={ref} controls={true} src="" />
     </div>
 </div>
       </div>
-   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {setexpandlyrics} />:<></>}
+   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {Showsetexpandlyrics} />:<></>}
    {login?<Auth show = {showLogin} />:<></>}
   </>
   );

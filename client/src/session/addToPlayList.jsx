@@ -4,6 +4,9 @@ import { useState,useEffect } from "react";
 import APIController from '../api/functons';
 import store from "../redux/store";
 import { SearchLoading } from '../components/loadingSession';
+import getData from '../api/backendcalls';
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 let token;
 var addPlayList;
 function AddToPlayList(props) {
@@ -11,9 +14,11 @@ function AddToPlayList(props) {
     const [searched, setSearched] = useState(false);
     const [playlist, setPlaylist] = useState([]);
     const [message, setMessage] = useState('');
-
-
-
+const notify = (message) => {
+        toast.info(message, {
+            autoClose: 1000,
+        });
+    };
     async function getSearch() {
         setSearched(true);
         setTracks([]);
@@ -39,16 +44,21 @@ function AddToPlayList(props) {
     }
 
     function addToPlayList() {
-        
-         if (playlist.length > 0) {
-            const payload = {
-        type: "toPlayList",
-        payload: [...playlist]
+        notify("Please wait!...");
+        if (playlist.length > 0) {
+              getData.updateSessionPlayList(props.id, { playlist: [...playlist] }).then(value => {
+                  if (value.status === 'success') {
+                    props.show();
+                     const payload = {
+                 type: "toPlayList",
+                payload: [...value.data.data.playlist]
             }
-             store.dispatch(payload);
-             props.show();
-         }
+                store.dispatch(payload);
+                    notify("Saved successfully");
+            }; 
+        });
     }
+}
 
     function removePlayList(index) {
         const newPlayList = playlist.filter((value, indexed) => {
@@ -62,10 +72,9 @@ useEffect(() => {
          addPlayList = store.getState();
             if (addPlayList.addToPlayList) {
                 setPlaylist([...addPlayList.addToPlayList]);
-                
             }
        });
-    });
+    },[]);
 
 
     useEffect(() => {
@@ -79,6 +88,18 @@ useEffect(() => {
 
     return (
         <>
+            <ToastContainer
+position="top-left"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+
             <div className='addToPlayList  bg-default' >
                 <div className='flex-row '>
                     <div className='flex-4'>

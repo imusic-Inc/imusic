@@ -1,8 +1,7 @@
 import { useState } from "react";
 import PlayList from "../components/playList";
 import store from "../redux/store"
-function MyMessage({value}) {
-   
+function MyMessage({ value,isAdmin,type,id }) {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
    
@@ -15,7 +14,8 @@ function MyMessage({value}) {
             }
         store.dispatch(payload);
         }
-    }
+   }
+    
   return (
       <>
       <div className="messaging" style={{ height: expand }}>
@@ -55,13 +55,13 @@ function MyMessage({value}) {
           
               <div className="messages-list"> 
                   
-                  <div onClick={addAll} className="bg-danger p-1 text-center btn">
+                  <div onClick={addAll} style={{display:type==='private'?isAdmin?'block':'none':'block'}} className="bg-danger p-1 text-center btn">
                       Add All To Query
                   </div>
 
 
                   {value.map(values => {
-                      return <PlayList key={values.audio+values.len} values={values}/>
+                      return <PlayList key={values.audio+values.len} isAdmin={isAdmin} type={type} id={id}  values={values}/>
                      })}
 
     

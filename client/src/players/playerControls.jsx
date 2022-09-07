@@ -12,7 +12,7 @@ export default function PlayerConrols(props) {
   "auth": "Samargl",
   "audio": "spotify:track:4WUKvuiIgKtTiuhpnAw01W",
   "album": "Away Message",
-}]);
+  }]);
   const [index, setIndex] = useState(0);
   const [lyris, setLyris] = useState([]);
   const [isplaying, setIsPlaying] = useState(false);
@@ -20,6 +20,7 @@ export default function PlayerConrols(props) {
   const [token, setToken] = useState("");
   const cookies = new Cookies();
   const tokened = cookies.get('access_token');
+
   useEffect(() => {
     if (tokened && tokened.length > 10) {
       setToken(tokened)
@@ -27,6 +28,12 @@ export default function PlayerConrols(props) {
       setToken('error')
     }
   },[setToken,tokened]);
+
+
+
+  useEffect(() => {
+    setTrack(props.current)
+  }, [props]);
 
   function show() {
     setIsPlaying(false)

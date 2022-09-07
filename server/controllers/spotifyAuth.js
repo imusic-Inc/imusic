@@ -5,8 +5,8 @@ const got = require('got');
 const User = require('../models/userModel');
 const hookAsync = require('../utils/hookAsync');
 const jwt = require('jsonwebtoken');
-const request = require('request')
-    //oauth through spotify api
+const axios = require('axios').default;
+//oauth through spotify api
 
 const signToken = id => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -127,28 +127,30 @@ exports.getUser = hookAsync(async(req, res) => {
 
 exports.refreshToken = async(req, res) => {
 
-    // requesting access token from refresh token
-    var refresh_token = req.cookies.refresh_token;
+        // requesting access token from refresh token
 
-    var authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        headers: { Authorization: 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64') },
-        form: {
-            grant_type: 'refresh_token',
-            refresh_token: refresh_token
+        let refresh_token = req.cookies.refresh_token;
+        axios({
+                    method: "post",
+                    url: "https://accounts.spotify.com/api/token",
+                    data: querystring.stringify({
+                        grant_type: "refresh_token",
+                        refresh_token: refresh_token,
+                    }),
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        Authorization: `Basic ${new Buffer.from(
+                `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
+            ).toString("base64")}`,
         },
-        json: true
-    };
+    })
+        .then((response) => {
 
-    request.post(authOptions, function(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            var access_token = body.access_token;
-            res.send({
-                'access_token': access_token
-            });
-        }
+            res.cookie('access_token', response.data.access_token);
 
-        res.cookie('access_token', access_token)
-    });
+        })
+        .catch((error) => {
+            res.redirect(`${process.env.CLIENT_REDIRECTURI}`);
+        });
 
 };

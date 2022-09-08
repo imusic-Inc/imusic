@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, login, protect, restrictTo, isLoggedIn, logout } = require('./../controllers/authentication');
+const { signup, login, logout } = require('./../controllers/authentication');
 const {
     getAllUsers,
     createUser,
@@ -7,7 +7,7 @@ const {
     updateUser,
     deleteUser
 } = require('../controllers/userController');
-const { createMessage } = require('../controllers/peerTopeer');
+
 const router = express.Router();
 
 

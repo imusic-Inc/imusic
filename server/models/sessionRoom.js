@@ -42,7 +42,7 @@ const sessionSchema = new mongoose.Schema({
     now_playing: {
         image: { type: String, default: null },
         name: { type: String, default: null },
-        at: { type: Number, default: null },
+        at: { type: String, default: null },
         auth: { type: String, default: null },
         audio: { type: String, default: null },
         album: { type: String, default: null },

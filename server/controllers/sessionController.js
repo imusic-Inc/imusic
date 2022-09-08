@@ -264,9 +264,16 @@ exports.joinRoomSession = hookAsync(async(req, res, next) => {
         //repetition --refactored later to follow DRY principle
 
         if (JSON.stringify(session.ownerId) === JSON.stringify(req.user._id)) { //user is creator of music room
+
+            session.participants.push(req.user._id)
+            session.save();
+
             res.status(200).json({
                 status: `you've joined the ${session.name} room as the group admin`
             });
+
+
+
         } else if (session.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user._id)).length === 0) { //check if user is already a member 
 
 

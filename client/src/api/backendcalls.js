@@ -233,9 +233,9 @@ const getData = (function() {
         });
         return result;
      }
-    const __RefreshToken = async (path) => {
-        const result = await fetch(link + path, {
-            method: 'DELETE',
+    const __RefreshToken = async () => {
+        const result = await fetch(link + 'refreshToken', {
+            method: 'get',
             mode: 'cors',
             credentials: "include",
             headers: {
@@ -292,6 +292,9 @@ const getData = (function() {
         },
          PlayList_nowPlaying(path,data) {
             return __PlayList_nowPlaying(path,data);
+         },
+         refreshToken() {
+            return __RefreshToken();
         }
           
     }

@@ -43,6 +43,7 @@ function Auth(props) {
                 cookies.set("email", null);
                 cookies.set("setDate", null);
                 cookies.set("uid", null);
+                cookies.set("jwt", null);
                 cookies.set("photo", null);
                 cookies.set("product", null);
             } else {
@@ -78,7 +79,7 @@ function Auth(props) {
                 
                      <div className='flex-1 '>
                         <h1 className='p-1 auth-h1'>With a free account, you can listen to full songs.</h1>
-                        <div className='login-btn btn p-1'>
+                        <div className='login-btn btn p-1 mb-1'>
                         <a href={'http://localhost:3001/api/v1/auth'}>
                             <span className='btn-login'>
                                {pathed && pathed.length>10? "LOADING...":"SIGN UP FREE"}
@@ -87,7 +88,7 @@ function Auth(props) {
                         
                         
                         </div>
-                        <h5 className='p-1 pt-2'>Already have and account? <span className='sign-in pl-1 btn'>Sign me in</span></h5>
+                        <h6 className='p-01 pt-3'>Already have and account? <a href={'http://localhost:3001/api/v1/auth'} className='sign-in pl-1 btn'>Sign me in</a></h6>
                     </div>
                 </div>
                 </div>

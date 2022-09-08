@@ -30,7 +30,7 @@ function MyMessage({ value,isAdmin,type,id }) {
 
         <div className="flex-row flex-center">
                   <div onClick={() => {
-                      setexpand("80vh");
+                      setexpand("75%");
                       seticonShow(!iconShow);
                   }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"

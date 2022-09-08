@@ -21,8 +21,10 @@ function Player(props) {
     }
 
 
-     useEffect(() => {
+    useEffect(() => {
+        if (props.current.length>0) {
     setTrack(props.current)
+         }
   }, [props]);
 
     useEffect(() => {
@@ -105,7 +107,7 @@ function Player(props) {
 
 
   return (<>
-      <div className="player p-1">
+      <div className="player pt-1 pb-1 pl-01">
 <div className="flex-row flex-center">
     <img className="b-r-01 player-image"  src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
@@ -149,7 +151,7 @@ function Player(props) {
     <svg role="img" height="20" width="20" viewBox="0 0 16 16" ><path fill="white" d="M0 4.75A3.75 3.75 0 013.75 1h8.5A3.75 3.75 0 0116 4.75v5a3.75 3.75 0 01-3.75 3.75H9.81l1.018 1.018a.75.75 0 11-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 111.06 1.06L9.811 12h2.439a2.25 2.25 0 002.25-2.25v-5a2.25 2.25 0 00-2.25-2.25h-8.5A2.25 2.25 0 001.5 4.75v5A2.25 2.25 0 003.75 12H5v1.5H3.75A3.75 3.75 0 010 9.75v-5z"></path></svg>
 </div>
     </div>
-    <div>
+              <div className="audio">
                   <audio className="audioPlayer" autoPlay={true} ref={ref} controls={true} src="" />
     </div>
 </div>

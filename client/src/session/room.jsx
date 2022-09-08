@@ -18,6 +18,7 @@ import { useNavigate} from "react-router-dom";
 import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let link;
+let uid;
 function Room() {
 const [expand, setexpand] = useState(false);
 const [expandInvite, setExpandInvite] = useState(false);
@@ -35,7 +36,7 @@ const [expandInvite, setExpandInvite] = useState(false);
     const [guest, setGuest] = useState([]);
     const [owerId, setOwerId] = useState("");
     const paths = useParams();
-    const [uid, setUid] = useState("");
+    
     const cookies = new Cookies();
     const navigate = useNavigate();
     const search = new URLSearchParams(window.location.search);
@@ -84,10 +85,11 @@ const [expandInvite, setExpandInvite] = useState(false);
     function setValues(value) {
         setParticipant(value.participants);
         setMessages(value.messages);
-        setplayList(value.playlist?value.playlist:[]);
+        // checking to remove duplicate members from the list
+        const set  = new Set(value.playlist?value.playlist:[]);
+        setplayList([...set]);
         setGuest(value.guest);
         setOwerId(value.ownerId);
-        setGuest(value.guest);
         setCurrent([value.now_playing]);
         const allow = new Boolean(value.allowInvite);
         setAllowInvite(allow);
@@ -111,12 +113,13 @@ const [expandInvite, setExpandInvite] = useState(false);
                 if (find.length < 1) {
                 setNotPart(true);
                     };
-                };
+            };
+            
                 };
     }
 
     useEffect(() => {
-        setUid(cookies.get('uid'));
+        uid = cookies.get('uid');
         if (paths.id) {
             if (paths.id.indexOf('@spotify') >= 0) {
                 const inde = paths.id.indexOf('@spotify');
@@ -179,6 +182,7 @@ function exit() {
     function showAndHide() {
         setexpand(!expand);
         deletedPlayListDraft();
+        
     }
 
 
@@ -190,6 +194,7 @@ function exit() {
 function showAndHideShare() {
         setexpandShare(!expandShare)
 }
+    
     return (
         <>
             
@@ -217,7 +222,7 @@ pauseOnHover
     <path fill="currentColor" d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
 </svg>
                 </div>
- <div className='btn btn-back flex-row flex-center p-01' onClick={allowInvite?showAndHideInvite:notify}>
+ <div className='btn btn-back flex-row flex-center p-01' onClick={allowInvite && uid && uid.length > 10 ?showAndHideInvite:notify}>
                     <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M19 17V19H7V17S7 13 13 13 19 17 19 17M16 8A3 3 0 1 0 13 11A3 3 0 0 0 16 8M19.2 13.06A5.6 5.6 0 0 1 21 17V19H24V17S24 13.55 19.2 13.06M18 5A2.91 2.91 0 0 0 17.11 5.14A5 5 0 0 1 17.11 10.86A2.91 2.91 0 0 0 18 11A3 3 0 0 0 18 5M8 10H5V7H3V10H0V12H3V15H5V12H8Z" />
 </svg>
@@ -235,7 +240,7 @@ pauseOnHover
 </div>
                </div>
                 
-                 <div onClick={ uid !==owerId?notify:null} className='flex-row flex-center actions toggle' style={{display:mobile && actions?'none':'flex'}}>
+                 <div onClick={ uid !==owerId?notify:null} className='flex-row  flex-center actions toggle' style={{display:mobile?actions?'none':'flex':null}}>
                     <h4 className='p-01 text-center'>Allow Invite:</h4>
                     <div className="flex-row flex-center">
                    <small className="pr-03" >YES</small>  <input type="checkbox"   disabled={ uid !== owerId} id="switch" /><label id="switched" htmlFor="switch">Toggle</label> <small className="pl-01" >NO</small>
@@ -248,9 +253,9 @@ pauseOnHover
                         setActions(!actions)
                         setMobile(true);
                     }}>
-                        {actions ? <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
+                        {actions ? <svg style={{ width: '34px', height: '34px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-</svg>:<svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
+</svg>:<svg style={{ width: '34px', height: '34px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M21,15.61L19.59,17L14.58,12L19.59,7L21,8.39L17.44,12L21,15.61M3,6H16V8H3V6M3,13V11H13V13H3M3,18V16H16V18H3Z" />
 </svg>}
                         </i>
@@ -274,7 +279,7 @@ pauseOnHover
             <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} />
             <MyMessage value={ playList } isAdmin={uid ===owerId} id={paths.id} type={type} />
-            {auth ? <PlayerConrols auth={setAuth} current={current} /> : <Player current={current} />}
+            {auth ? <PlayerConrols auth={setAuth} current={current} isAdmin={uid ===owerId} id={paths.id} type={type} /> : <Player current={current} />}
             {notPart?<Passcode pass={paths.id} show = {show} link={link} />:null}
         </>
     )

@@ -104,6 +104,36 @@ const APIController = (function() {
         return data;
     }
 
+    const _getPause = async (token) => {
+        const result = await fetch(`https://api.spotify.com/v1/me/player/pause`, {
+            method: 'put',
+            headers: { 'Authorization' : 'Bearer '+token+''}
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const _getSeek = async (token, position) => {
+        // console.log(token);
+        const result = await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${position}`, {
+            method: 'put',
+            headers: { 'Authorization' : 'Bearer '+token+''}
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const _getPlay = async (token) => {
+        const result = await fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: 'put',
+            headers: { 'Authorization' : 'Bearer '+token+''}
+        });
+        const data = await result.json();
+        return data;
+    }
+
+
+
     const _getLyrics = async (artist,song) => {
         const result = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`, {
             method: 'GET',
@@ -111,6 +141,8 @@ const APIController = (function() {
         const data = await result.json();
         return data;
     }
+
+    
 
     return {
         getToken() {
@@ -139,6 +171,15 @@ const APIController = (function() {
         },
         getUser(token) {
              return  _getUser(token);
+        },
+         getPlay(token) {
+             return  _getPlay(token);
+        },
+          getSeek(token,position) {
+             return  _getSeek(token,position);
+        },
+        getPause(token) {
+             return  _getPause(token);
         },
          getLyrics(artist,song) {
              return  _getLyrics(artist,song);

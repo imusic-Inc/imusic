@@ -31,6 +31,6 @@ router
 
 router
     .route('/:sessionId/messages')
-    .post(protect, restrictTo('user'), createMessage)
+    .post(protect, isLoggedIn, restrictTo('user'), createMessage)
 
 module.exports = router;

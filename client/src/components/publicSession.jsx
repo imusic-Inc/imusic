@@ -1,4 +1,4 @@
-import APIController from "../api/functons";
+import APIController from "../api/spotifyApi";
 import { memo, useState,useEffect } from "react"; 
 import Session from "./session";
 import {NavLink} from "react-router-dom";

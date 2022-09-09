@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
 import getData from "../api/backendcalls";
 import { useNavigate } from "react-router-dom";
-import APIController from "../api/functons";
+import APIController from "../api/spotifyApi";
 function Auth(props) {
     const [pathed, setPath] = useState("");
     const [userName, setUserName] = useState("");

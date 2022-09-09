@@ -1,4 +1,4 @@
-import APIController from '../api/functons'
+import APIController from '../api/spotifyApi'
 import { useState, useEffect } from "react"; 
 import PublicSession from '../components/publicSession';
 import { LoadingSession } from '../components/loadingSession';

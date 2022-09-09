@@ -5,7 +5,7 @@ import store from "../redux/store";
 import Cookies from 'universal-cookie';
 import Lyrics from "../session/lyrics";
 import getData from "../api/backendcalls";
-import APIController from "../api/functons";
+import APIController from "../api/spotifyApi";
 import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let nowPlaying = 'spotify:track:4WUKvuiIgKtTiuhpnAw01W';

@@ -1,7 +1,7 @@
 import TableRow from '../components/playListTableRow';
 import TrackList from '../components/trackList';
 import { useState,useEffect } from "react";
-import APIController from '../api/functons';
+import APIController from '../api/spotifyApi';
 import store from "../redux/store";
 import { SearchLoading } from '../components/loadingSession';
 import getData from '../api/backendcalls';

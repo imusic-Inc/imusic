@@ -73,7 +73,7 @@ pauseOnHover
             </div>
             </div>}
             
-            {showpass?<PassCode pass={passCode} show = {show} link={sessions.map(value => {
+            {showpass?<PassCode pass={passCode} show = {show} link={sessions.filter(value=>value.id===passCode).map(value => {
                   return "/room/"+value.id+'?type='+props.type+'&name='+value.name
               })} />:null}
         </>

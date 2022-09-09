@@ -123,9 +123,18 @@ const APIController = (function() {
         return data;
     }
 
-    const _getPlay = async (token) => {
+    const _getPlay = async (token,values) => {
         const result = await fetch(`https://api.spotify.com/v1/me/player/play`, {
             method: 'put',
+            body: JSON.stringify(values),
+            headers: { 'Authorization' : 'Bearer '+token+''}
+        });
+        const data = await result.json();
+        return data;
+    }
+    const _getPlayState = async (token) => {
+        const result = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+            method: 'GET',
             headers: { 'Authorization' : 'Bearer '+token+''}
         });
         const data = await result.json();
@@ -172,8 +181,11 @@ const APIController = (function() {
         getUser(token) {
              return  _getUser(token);
         },
-         getPlay(token) {
-             return  _getPlay(token);
+         getPlay(token,data) {
+             return  _getPlay(token,data);
+        },
+         getPlayState(token) {
+             return  _getPlayState(token);
         },
           getSeek(token,position) {
              return  _getSeek(token,position);

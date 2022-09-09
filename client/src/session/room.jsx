@@ -194,6 +194,7 @@ function exit() {
 function showAndHideShare() {
         setexpandShare(!expandShare)
 }
+
     
     return (
         <>
@@ -279,7 +280,7 @@ pauseOnHover
             <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} />
             <MyMessage value={ playList } isAdmin={uid ===owerId} id={paths.id} type={type} />
-            {auth ? <PlayerConrols auth={setAuth} current={current} isAdmin={uid ===owerId} id={paths.id} type={type} /> : <Player current={current} />}
+            {auth ? <PlayerConrols auth={setAuth} current={current}  isAdmin={owerId} uid={uid} id={paths.id} type={type} /> : <Player current={current} />}
             {notPart?<Passcode pass={paths.id} show = {show} link={link} />:null}
         </>
     )

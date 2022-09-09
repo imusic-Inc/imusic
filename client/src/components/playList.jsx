@@ -3,7 +3,13 @@ import store from "../redux/store"
 import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import getData from "../api/backendcalls";
+import Cookies from 'universal-cookie';
 function PlayList(props) {
+
+
+const cookies = new Cookies();
+  const tokened = cookies.get('access_token');
+
     const notify = (message) => {
         toast.info(message, {
             autoClose: 1000,
@@ -18,7 +24,7 @@ function PlayList(props) {
         if (props.type==='private'?props.isAdmin?true:false:true) {
             store.dispatch(payload);
              if (props.id.indexOf('@spotify') < 0 && props.values) {
-                    getData.PlayList_nowPlaying(props.id, { now_playing: {...props.values,at:0}});
+                    getData.PlayList_nowPlaying(props.id, { now_playing: {...props.values,pre_view:tokened}});
                 }
         } else {
             notify("You don't have permission to control the playlist");

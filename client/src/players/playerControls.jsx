@@ -5,8 +5,10 @@ import store from "../redux/store";
 import Cookies from 'universal-cookie';
 import Lyrics from "../session/lyrics";
 import getData from "../api/backendcalls";
-let at = 'paused';
-let nowPlaying = '';
+import APIController from "../api/functons";
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+let nowPlaying = 'spotify:track:4WUKvuiIgKtTiuhpnAw01W';
 export default function PlayerConrols(props) {
   const [track, setTrack] = useState([{
   "image": "https://i.scdn.co/image/ab67616d000048516b93b86e8411c1eae6686497",
@@ -15,23 +17,25 @@ export default function PlayerConrols(props) {
   "audio": "spotify:track:4WUKvuiIgKtTiuhpnAw01W",
   "album": "Away Message",
   }]);
-  const [lyris, setLyris] = useState([]);
+  const notify = (message) => {
+        toast.info(message, {
+            autoClose: 2000,
+        });
+    };
+  const [lyris, setLyris] = useState("");
   const [isplaying, setIsPlaying] = useState(false);
   const [token, setToken] = useState("");
   const cookies = new Cookies();
   const tokened = cookies.get('access_token');
   const ref = useRef(null);
-  let chcek = true;
   useEffect(() => {
     if (tokened && tokened.length > 10) {
       setToken(tokened)
     } else {
       setToken('error')
     }
-  },[setToken,tokened]);
-
-
-
+  }, [setToken, tokened]);
+  
   useEffect(() => {
     if (props.current.length > 0 && props.current[0].image && props.current[0].image.length>10) {
       setTrack(props.current)
@@ -43,42 +47,58 @@ export default function PlayerConrols(props) {
   }
 
 // streaming the music
-  useEffect(() => {
-    console.log(props.type==='private'?props.isAdmin?true:false:false,props);
-   if (props.type==='private'?props.isAdmin?true:false:false) {
-    const interval = setInterval(() => {
-    if (at === 'paused' && chcek) {
-      chcek = false;
-      const NowPlaying = track.find(value => value.audio === nowPlaying && value.audio !== 'spotify:track:4WUKvuiIgKtTiuhpnAw01W');
-      console.log(NowPlaying,at);
-      if (NowPlaying) {
-          getData.PlayList_nowPlaying(props.id, {'now_playing':{...NowPlaying,at:-1} }).then(value => {
-           console.log(value);
-        })
+  function changState(state) {
+    if (props.isAdmin) {
+    if (props.type === 'private' ? props.isAdmin===props.uid ? true : false : false) {
+       const NowPlaying = track.find(value => value.audio === nowPlaying && value.audio !== 'spotify:track:4WUKvuiIgKtTiuhpnAw01W');
+    if (NowPlaying) {
+      const playingNow = { ...NowPlaying, pre_view: tokened, name: state ? "play" : "paused" };
+      getData.PlayList_nowPlaying(props.id, {now_playing: playingNow });
       }
-      
-    } else {
-      if (typeof (at) === 'number') {
-        at += 47832;
-        const NowPlaying = track.find(value => {
-          console.log(nowPlaying);
-         return value.audio === nowPlaying && value.audio !== 'spotify:track:4WUKvuiIgKtTiuhpnAw01W'
-
-        });
-        console.log(NowPlaying,at);
-        if (NowPlaying) {
-         getData.PlayList_nowPlaying(props.id, {'now_playing':{...NowPlaying,at} }).then(value => {
-           console.log(value);
-        })
-        }
-         chcek = true;
+    } else if (props.type === 'private' ? props.isAdmin===props.uid ? false : true : false) {
+         getData.getSessionById('session', props.id).then(value => {
+        const Admintoken = value.now_playing.pre_view;
+        const state = value.now_playing.at;
+           const setPlayList = value.playlist;
+           setTrack({ ...value.now_playing });
+           if (state === 'pause') {
+             APIController.getPause(token);
+           } else {
+             getAdminState(Admintoken,setPlayList);
+           }
+      });
       }
-     
-    } 
-  }, 5000);
-  return () => clearInterval(interval);
+    }
   }
-  }, [props]);
+   
+
+
+  function getAdminState(Admintoken,setPlayList) {
+     APIController.getPlayState(Admintoken).then(value => {
+               const time_ms = value.progress_ms;
+               if (setPlayList.filter(value1 => value1.audio === value.item.uri).length<1) {
+                 const track = {
+                "image": value.item.image,
+                "name": value.item.name,
+                "auth": value.item.auth,
+                "audio": value.item.uri,
+                "album": value.item.album,
+               }
+               APIController.getPlay(token, {
+                 "uris": [track.audio],
+                 "position_ms": time_ms
+               });
+               } else {
+                 notify('looks like the admin is not playing any song right now');
+               }
+               
+             }).catch(error => {
+               console.error(error);
+               notify('looks like the admin is not playing any song right now');
+             });
+  }
+
+
 
   function clearLogins() {
     getData.refreshToken().then((value) => {
@@ -114,33 +134,44 @@ export default function PlayerConrols(props) {
     setLyris(newTrack);
    
   }
-  
-  console.log(track);
 
   // if (!token) return props.auth(false);
   return (
+
+
+<>
+ <ToastContainer
+position="top-left"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+    
     <div className="player pt-1 pb-1">
 
       {token? token==="error"?props.auth(false):<SpotifyPlayer
         ref={ref}
         autoPlay={true}
-        token={token}
+          token={token}
         uris={track.length > 0 ? [...track.map(value => value.audio)] : []}
         showSaveIcon
         callback={state => {
+          changState(state.isPlaying);
           if (state.isPlaying) {
             document.title = state.track.name;
             nowPlaying = state.track.uri;
-            at = state.progressMs;
             startLyris(state.track.uri);
             setIsPlaying(true);
           }else{
-            at = 'paused';
             setIsPlaying(false);
           }
         if (state.error) {
           clearLogins();
-          at = 'paused';
           props.auth(false);
         }
       }}
@@ -158,6 +189,8 @@ export default function PlayerConrols(props) {
       
       {isplaying?<Lyrics  name={lyris.length > 0 ? lyris[0].name:""} auth={lyris.length > 0 ? lyris[0].auth:""} show = {show} />:<></>}
     </div>
+</>
+   
     
   )
 }

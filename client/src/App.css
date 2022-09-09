@@ -288,6 +288,9 @@ h3 {
   flex: 6;
 }
 
+.m-01 {
+  margin: 0.5rem;
+}
 .m-1{
   margin: 1rem;
 }
@@ -731,15 +734,11 @@ font-weight: 400;
 .bold {
   font-weight: 900;
 }
-.share-contaner,
-.search-contaner {
+.share-contaner {
   position: fixed;
   width: 50%;
   left: 20%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
+  height: 40vh;
   border-radius: 15px;
   z-index: 30;
   -webkit-border-radius: 15px;
@@ -1070,6 +1069,11 @@ width: 95%;
   height: 300px;
   overflow: hidden;
   background-color: #162632;
+}
+.share-icons{
+  height: 200px;
+  display: flex;
+  align-items: center;
 }
 @media only screen and (max-width: 900px) {
   .nav{

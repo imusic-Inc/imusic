@@ -1,6 +1,6 @@
 import LeaveCart from '../components/leaveCart';
 import Members from '../home/members'
-import MyMessage from '../message/myMessage'
+import MyMessage from './playlist'
 import Player from '../players/player';
 import Activeuserscart from './activeuserscart';
 import AddToPlayList from './addToPlayList';
@@ -8,7 +8,7 @@ import { useState, useEffect,memo } from "react";
 import {useParams} from "react-router-dom";
 import Invite from './invite';
 import Share from '../home/share';
-import APIController from '../api/functons';
+import APIController from '../api/spotifyApi';
 import store from "../redux/store";
 import PlayerConrols from '../players/playerControls';
 import getData from '../api/backendcalls';

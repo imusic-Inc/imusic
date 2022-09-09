@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import APIController from "../api/functons";
+import APIController from "../api/spotifyApi";
 
 function Lyrics(props) {
     const [lyrics, setLyrics] = useState('');

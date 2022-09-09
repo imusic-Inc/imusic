@@ -13,6 +13,9 @@ const PrivateMessageSchema = mongoose.Schema({
     text: {
         type: String
     },
+    seen: {
+        type: Boolean
+    }
 }, {
     timestamps: true,
 });

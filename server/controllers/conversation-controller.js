@@ -5,6 +5,7 @@ exports.newConversation = hookAsync(async(req, res, next) => {
     let senderId = req.body.senderId;
     let receiverId = req.body.receiverId;
 
+
     const exist = await Conversation.findOne({ members: { $all: [receiverId, senderId] } })
 
     if (exist) {

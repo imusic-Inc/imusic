@@ -26,7 +26,7 @@ const createSendToken = (user, res) => {
     }
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
-    console.log('hello', token);
+
 
     user.password = undefined //remove password from response output
 
@@ -79,7 +79,7 @@ exports.logged = async(req, res, next) => {
 
     .then(data => {
         query = querystring.stringify(data);
-        //  console.log('hello', query);
+        console.log('hello', query);
 
     }).catch(err => res.redirect(`${process.env.CLIENT_REDIRECTURI}`))
     next()

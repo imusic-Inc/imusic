@@ -228,7 +228,7 @@ exports.joinRoomSession = hookAsync(async(req, res, next) => {
                 session.save();
 
                 res.status(200).json({
-                    status: `you've joined thse ${session.name} room as ${req.user.name}`
+                    status: `you've joined the ${session.name} room as ${req.user.name}`
                 });
             } else {
                 res.status(200).json({

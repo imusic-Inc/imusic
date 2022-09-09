@@ -6,6 +6,8 @@ const userRouter = require('./routes/userRoutes');
 const messagesRouter = require('./routes/messageRoutes');
 const bodyParser = require('body-parser');
 const spotifyAuth = require('./routes/spotifyAuthRoute');
+const conversationRouter = require('./routes/conversationRoute')
+const privateMessageRouter = require('./routes/privateMessageRoute')
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
@@ -41,6 +43,8 @@ app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messagesRouter);
+app.use('/api/v1/conversation', conversationRouter);
+app.use('/api/v1/privateMessage', privateMessageRouter);
 
 
 app.all('*', (req, res, next) => {

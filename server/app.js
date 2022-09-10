@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const spotifyAuth = require('./routes/spotifyAuthRoute');
 const conversationRouter = require('./routes/conversationRoute')
 const privateMessageRouter = require('./routes/privateMessageRoute')
+const inviteRouter = require('./routes/invitationRoute')
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
@@ -45,7 +46,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messagesRouter);
 app.use('/api/v1/conversation', conversationRouter);
 app.use('/api/v1/privateMessage', privateMessageRouter);
-
+app.use('/api/v1/invite', inviteRouter);
 
 app.all('*', (req, res, next) => {
     // res.status(404).json({

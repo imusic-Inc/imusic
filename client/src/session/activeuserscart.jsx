@@ -12,7 +12,7 @@ function Activeuserscart(props) {
         const name = cookies.get("name");
 const notify = (message) => {
         toast.error(message, {
-            autoClose: 1000,
+            autoClose: 2000,
         });
     };
 
@@ -53,7 +53,7 @@ useEffect(() => {
         return (<>
         <ToastContainer
 position="top-left"
-autoClose={1000}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

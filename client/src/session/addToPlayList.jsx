@@ -16,7 +16,7 @@ function AddToPlayList(props) {
     const [message, setMessage] = useState('');
 const notify = (message) => {
         toast.info(message, {
-            autoClose: 1000,
+            autoClose: 2000,
         });
     };
     async function getSearch() {
@@ -90,7 +90,7 @@ useEffect(() => {
         <>
             <ToastContainer
 position="top-left"
-autoClose={1000}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

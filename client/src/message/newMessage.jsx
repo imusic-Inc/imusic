@@ -1,8 +1,96 @@
 import Message from "./message";
-
+import Cookies from 'universal-cookie';
+import { useEffect,useState } from "react";
+import getData from "../api/backendcalls";
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function NewMessage(props) {
+     const notify = (message) => {
+        toast.info(message, {
+            autoClose: 2000,
+        });
+     };
+    const sent = true;
+    const cookies = new Cookies();
+    const uid = cookies.get('uid');
+    const userName = cookies.get('name');
+    const [message_id,setMessage_id] = useState()
+    const [message,setMessage] = useState()
+    const [messages,setMessages] = useState([])
+
+    useEffect(() => {
+        getData.startMessage('conversation/add', {
+            "senderId": uid,
+            "receiverId": props.id
+        }).then(value => {
+
+            notify(value);
+
+            getData.getMessage_id('conversation', {
+                "senderId": uid,
+                "receiverId": props.id
+            }).then(value => {
+                setMessage_id(value._id)
+                getMessage(value._id);
+            });
+        });
+    },[props.id]);
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            getMessage(message_id);
+  }, 1000);
+  return () => clearInterval(interval);
+}, []);
+
+
+    function getMessage(id) {
+        getData.getMessage(id).then(value => {
+            const mes = value.map(value => {
+                let name;
+                if (value.senderId === props.id) {
+                    name = props.name;
+                } else {
+                    name = userName;
+                }
+                return { name: name, message: value.text };
+            });
+            
+            if (mes.length !== messages.length) {
+                setMessages(mes);
+            };
+                    
+        });
+    };
+
+    function sendMessage() {
+        getData.addMessage('privateMessage', {
+            "conversationId": message_id,
+            "senderId": uid,
+            "receiverId": props.id,
+            "text": message
+        }).then(() => {
+            getMessage(message_id);
+            setMessage('');
+        });
+    }
+
     return (
-    <div className="message" style={{bottom: props.home?'80px':null,}}>
+        <>
+        <ToastContainer
+position="top-left"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+        
+        <div className="message" style={{bottom: props.home?'80px':null,}}>
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">{props.name}</h4>
@@ -11,12 +99,9 @@ function NewMessage(props) {
 
     <div className="flex-row flex-center">
 <div className="p-1 btn">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
-        className="mercado-match" width="16" height="16" focusable="false">
-        <path
-            d="M15 2.53a1.51 1.51 0 01-.44 1L9.15 9 6 10l1-3.12 5.44-5.44A1.5 1.5 0 0115 2.53zM12 11a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1h3V2H5a3 3 0 00-3 3v6a3 3 0 003 3h6a3 3 0 003-3V8h-2z">
-        </path>
-    </svg>
+   <svg style={{ width: '24px', height: '24px' }} onClick={sendMessage} viewBox="0 0 24 24">
+    <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+</svg>
 </div>
         <div className="p-1 btn" onClick={props.show}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
@@ -30,7 +115,9 @@ function NewMessage(props) {
 
             <div className="income-messages-list">
 
-                <Message value={{name:"john", message:"hello world"}}><hr className="opacity-6" /></Message>
+                    {messages.map(value => {
+                      return  <Message value={{user:{ name: value.name },message: value.message}}><hr className="opacity-6" /></Message>
+                    })}
                 
                 
             </div>
@@ -38,9 +125,10 @@ function NewMessage(props) {
 
 <div className="chat-send" style={{bottom: props.home?'10px':null,}} >
 <hr/>
-<textarea  className="char-textarea  bg-default" name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
+<textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
 </div>
 </div>
+        </>
   );
 }
 

@@ -14,7 +14,7 @@ function IMusicSessions(props) {
 
 const notify = (message) => {
 toast.info(message, {
-autoClose: 500,
+autoClose: 2000,
 });
     }
 
@@ -53,7 +53,7 @@ autoClose: 500,
         <>
 <ToastContainer
 position="top-left"
-autoClose={500}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

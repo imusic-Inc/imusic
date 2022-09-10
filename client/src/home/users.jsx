@@ -16,6 +16,7 @@ function Users() {
     useEffect(() => {
         getData.getUser('users').then(value => {
             SetSource(value);
+            SetSearced(value);
         });
     },[]);
 

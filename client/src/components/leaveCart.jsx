@@ -7,7 +7,7 @@ function LeaveCart({exit,id}) {
     const navigate = useNavigate();
     const notify = (message) => {
         toast.info(message, {
-            autoClose: 1000,
+            autoClose: 2000,
         });
     };
     
@@ -26,7 +26,7 @@ function LeaveCart({exit,id}) {
         <>
 <ToastContainer
 position="top-left"
-autoClose={1000}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

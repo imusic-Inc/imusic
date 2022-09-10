@@ -229,8 +229,72 @@ const getData = (function() {
                 'Content-Type': 'application/json',
             },
         });
-        return result;
+        const data = await result.json();
+        return data;
     }
+
+
+     const __startMessage = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+
+    const __getMessage_id = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const __getMessage = async(id) => {
+        const result = await fetch(link + 'privateMessage/get/'+id, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+     const __addMessage = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+
     const __RefreshToken = async() => {
         const result = await fetch(link + 'refreshToken', {
             method: 'get',
@@ -241,7 +305,8 @@ const getData = (function() {
                 'Content-Type': 'application/json',
             },
         });
-        return result;
+        const data = await result.json();
+        return data;
     }
 
 
@@ -293,6 +358,18 @@ const getData = (function() {
         },
         refreshToken() {
             return __RefreshToken();
+        },
+        startMessage(path,data) {
+            return __startMessage(path,data);
+        },
+        getMessage_id(path,data) {
+            return __getMessage_id(path,data);
+        },
+        getMessage(id) {
+            return __getMessage(id);
+        },
+         addMessage(path,data) {
+            return __addMessage(path,data);
         }
 
     }

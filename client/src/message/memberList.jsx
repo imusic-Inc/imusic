@@ -1,7 +1,34 @@
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'universal-cookie';
 function MemberList(props) {
+ const notify = (message) => {
+        toast.info(message, {
+            autoClose: 2000,
+        });
+ };
+const cookies = new Cookies();
+const uid = cookies.get('uid');
+    
     return (<>
+        <ToastContainer
+position="top-left"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
         <div className="flex-row flex-center btn card p-01 member-list" onClick={() => {
-            props.showMessage(props.value._id, props.value.name)
+            if (props.value._id === uid) {
+                notify("We understand you want to chat with yourself, but that system is currently unavailable.")
+            } else {
+                props.showMessage(props.value._id, props.value.name)
+            }
+            
         }}>
             <div className="flex-1">
  <img className="cirle-2 bg-secondary"

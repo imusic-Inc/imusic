@@ -12,7 +12,7 @@ const cookies = new Cookies();
 
     const notify = (message) => {
         toast.info(message, {
-            autoClose: 1000,
+            autoClose: 2000,
         });
     };
     const payload = {
@@ -34,7 +34,7 @@ const cookies = new Cookies();
         <>
         <ToastContainer
 position="top-left"
-autoClose={1000}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

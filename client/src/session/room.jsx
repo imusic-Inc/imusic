@@ -42,7 +42,7 @@ const [expandInvite, setExpandInvite] = useState(false);
     const search = new URLSearchParams(window.location.search);
     const notify = () => {
         toast.info("Only room admin can perform this action", {
-            autoClose: 1000,
+            autoClose: 2000,
         });
     };
     async function init(id) {
@@ -200,7 +200,7 @@ function showAndHideShare() {
             
             <ToastContainer
 position="top-left"
-autoClose={1000}
+autoClose={2000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

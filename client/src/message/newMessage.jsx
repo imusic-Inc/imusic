@@ -2,7 +2,7 @@ import Message from "./message";
 
 function NewMessage(props) {
     return (
-    <div className="message">
+    <div className="message" style={{bottom: props.home?'80px':null,}}>
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">{props.name}</h4>
@@ -36,9 +36,9 @@ function NewMessage(props) {
             </div>
 
 
-<div className="chat-send">
+<div className="chat-send" style={{bottom: props.home?'10px':null,}} >
 <hr/>
-<textarea className="char-textarea  bg-default" name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
+<textarea  className="char-textarea  bg-default" name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
 </div>
 </div>
   );

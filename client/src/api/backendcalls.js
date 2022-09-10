@@ -233,6 +233,19 @@ const getData = (function() {
         });
         return result;
      }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     const __RefreshToken = async () => {
         const result = await fetch(link + 'refreshToken', {
             method: 'get',

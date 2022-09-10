@@ -6,26 +6,44 @@ const AppError = require('../utils/appError');
 const LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
 const uuid4 = require('uuid4')
-exports.viewAllSessionRooms = hookAsync(async(req, res, next) => {
+const factory = require('./handlerFactory');
 
-    const features = new APIFeatures(sessionModel.find(), req.query)
-        .filter()
-        .sort()
-        .limitFields()
-        .paginate();
-    const session = await features.query;
-
-    res.status(200).json({
-        status: 'success',
-        results: session.length,
-        data: {
-            session
-        }
-
-    });
+exports.viewAllSessionRooms = factory.getAll(sessionModel)
 
 
-})
+
+const joinRoomLogic = (Model, statusCode, req, res) => {
+
+    if (JSON.stringify(Model.ownerId) === JSON.stringify(req.user._id)) { //user is creator of music room
+
+        Model.participants.push(req.user._id)
+        Model.save();
+
+        res.status(200).json({
+            status: `you've joined the ${Model.name} room as the group admin`
+        });
+
+
+
+    } else if (Model.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user._id)).length === 0) { //check if user is already a member 
+
+
+        Model.participants.push(req.user._id)
+        Model.save();
+
+        res.status(statusCode).json({
+            status: `you've joined thse ${Model.name} room as ${req.user.name}`
+        });
+    } else {
+        res.status(statusCode).json({
+            status: `you've joined the ${Model.name} room as ${req.user.name}` //will be refactored later to follow dry pricinciple
+        });
+    }
+
+
+
+
+}
 
 
 exports.createSession = hookAsync(async(req, res, next) => {
@@ -57,27 +75,7 @@ exports.createSession = hookAsync(async(req, res, next) => {
 
 })
 
-exports.getSessionById = hookAsync(async(req, res, next) => {
-
-    let query = Session.findById(req.params.id)
-
-
-    const session = await query.populate('messages')
-
-
-    if (!session) {
-        return next(new AppError('No music room found with that ID', 404));
-    }
-
-    res.status(200).json({
-        status: 'success',
-        data: {
-            session
-        }
-
-    });
-
-});
+exports.getSessionById = factory.getOne(Session, { path: 'messages' })
 
 
 
@@ -210,31 +208,7 @@ exports.joinRoomSession = hookAsync(async(req, res, next) => {
 
         } else { // join a room with an account
 
-
-            if (JSON.stringify(session.ownerId) === JSON.stringify(req.user._id)) { //user is creator of music room
-
-                session.participants.push(req.user._id)
-                session.save();
-
-                res.status(200).json({
-                    status: `you've joined the ${session.name} room as the group admin`
-                });
-
-
-            } else if (session.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user._id)).length === 0) { //check if user is already a member 
-
-
-                session.participants.push(req.user._id)
-                session.save();
-
-                res.status(200).json({
-                    status: `you've joined the ${session.name} room as ${req.user.name}`
-                });
-            } else {
-                res.status(200).json({
-                    status: `you've joined the ${session.name} room as ${req.user.name}` //will be refactored later to follow dry pricinciple
-                });
-            }
+            joinRoomLogic(session, 200, req, res)
 
         }
     } else {
@@ -262,36 +236,7 @@ exports.joinRoomSession = hookAsync(async(req, res, next) => {
 
 
         //repetition --refactored later to follow DRY principle
-
-        if (JSON.stringify(session.ownerId) === JSON.stringify(req.user._id)) { //user is creator of music room
-
-            session.participants.push(req.user._id)
-            session.save();
-
-            res.status(200).json({
-                status: `you've joined the ${session.name} room as the group admin`
-            });
-
-
-
-        } else if (session.participants.filter((user) => JSON.stringify(user._id) === JSON.stringify(req.user._id)).length === 0) { //check if user is already a member 
-
-
-            session.participants.push(req.user._id)
-            session.save();
-
-            res.status(200).json({
-                status: `you've joined thse ${session.name} room as ${req.user.name}`
-            });
-        } else {
-            res.status(200).json({
-                status: `you've joined the ${session.name} room as ${req.user.name}` //will be refactored later to follow dry pricinciple
-            });
-        }
-
-
-
-
+        joinRoomLogic(session, 200, req, res)
     }
 
 

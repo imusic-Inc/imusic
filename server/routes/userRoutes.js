@@ -2,10 +2,7 @@ const express = require('express');
 const { signup, login, logout } = require('./../controllers/authentication');
 const {
     getAllUsers,
-    createUser,
-    getUser,
-    updateUser,
-    deleteUser
+    getUser
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -17,14 +14,11 @@ router.get('/logout', logout);
 
 router.route('/')
     .get(getAllUsers)
-    .post(createUser);
 
 
 
 router.route('/:id')
     .get(getUser)
-    .patch(updateUser)
-    .delete(deleteUser);
 
 
 

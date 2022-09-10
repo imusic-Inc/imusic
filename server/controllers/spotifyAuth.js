@@ -79,7 +79,7 @@ exports.logged = async(req, res, next) => {
 
     .then(data => {
         query = querystring.stringify(data);
-        console.log('hello', query);
+
 
     }).catch(err => res.redirect(`${process.env.CLIENT_REDIRECTURI}`))
     next()
@@ -128,13 +128,24 @@ exports.getUser = hookAsync(async(req, res) => {
 exports.refreshToken = async(req, res) => {
 
         // requesting access token from refresh token
+        const scope =
+            `streaming 
+user-read-email 
+user-read-private 
+user-library-read 
+user-library-modify 
+user-read-playback-state 
+user-modify-playback-state
+    `;
+        let refresh_token = 'AQDkyEOVZ4QUy_9nCdJu23eJ84-usOM5dkOlYZ9Cdm6eDnBF65nTrxahu_HVT6C7XwzJ38Bp9XkkgWbLddp-012hDLd-8S8Ap-PUSDi9vNnyOo3ALfWY3GswWFjNjVm2tWE'
+            // req.cookies.refresh_token;
 
-        let refresh_token = req.cookies.refresh_token;
         axios({
                     method: "post",
                     url: "https://accounts.spotify.com/api/token",
                     data: querystring.stringify({
                         grant_type: "refresh_token",
+                        scope: scope,
                         refresh_token: refresh_token,
                     }),
                     headers: {
@@ -147,7 +158,7 @@ exports.refreshToken = async(req, res) => {
         .then((response) => {
 
             res.cookie('access_token', response.data.access_token);
-
+            res.redirect(`${process.env.CLIENT_REDIRECTURI}?access_token=${response.data.access_token}`);
         })
         .catch((error) => {
             res.redirect(`${process.env.CLIENT_REDIRECTURI}`);

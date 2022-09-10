@@ -1,9 +1,7 @@
-
-
 const getData = (function() {
     const link = "http://localhost:3001/api/v1/"
-    
-    const __getSession = async (path) => {
+
+    const __getSession = async(path) => {
 
         const result = await fetch(link + path, {
             method: 'get',
@@ -17,9 +15,9 @@ const getData = (function() {
         return data.data.session;
     }
 
-     const __getSessionByType = async (path,type) => {
+    const __getSessionByType = async(path, type) => {
 
-        const result = await fetch(link + path+'?roomType='+type, {
+        const result = await fetch(link + path + '?roomType=' + type, {
             method: 'get',
             credentials: "include",
             headers: {
@@ -28,9 +26,9 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.session;
-     }
-     const __getUserByEmail = async (path,email) => {
+        return data.data.doc;
+    }
+    const __getUserByEmail = async(path, email) => {
         const result = await fetch(link + path, {
             method: 'get',
             credentials: "include",
@@ -40,11 +38,11 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.users.find(value=>value.email === email);
+        return data.data.doc.find(value => value.email === email);
     }
 
-     const __getSessionById = async (path,id) => {
-        const result = await fetch(link + path+'/'+id, {
+    const __getSessionById = async(path, id) => {
+        const result = await fetch(link + path + '/' + id, {
             method: 'get',
             credentials: "include",
             headers: {
@@ -53,10 +51,10 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.session;
-     }
+        return data.data.doc;
+    }
 
-     const __getUser = async (path) => {
+    const __getUser = async(path) => {
         const result = await fetch(link + path, {
             method: 'get',
             credentials: "include",
@@ -66,10 +64,10 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.users;
-     }
+        return data.data.doc;
+    }
 
-    const __joinPublicSession = async (path) => {
+    const __joinPublicSession = async(path) => {
         const result = await fetch(link + path, {
             method: 'PATCH',
             mode: 'cors',
@@ -82,9 +80,9 @@ const getData = (function() {
         });
         const data = await result.json();
         return data;
-     }
-    
-    const __joinPrivateSession = async (path,values={}) => {
+    }
+
+    const __joinPrivateSession = async(path, values = {}) => {
         const result = await fetch(link + path, {
             method: 'PATCH',
             mode: 'cors',
@@ -99,7 +97,7 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
-    const __leaveSession = async (path) => {
+    const __leaveSession = async(path) => {
         const result = await fetch(link + path, {
             method: 'PATCH',
             mode: 'cors',
@@ -114,7 +112,7 @@ const getData = (function() {
         return data;
     }
 
-    const __postMessage = async (path,values={}) => {
+    const __postMessage = async(path, values = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -130,7 +128,7 @@ const getData = (function() {
         return data;
     }
 
-    const __CreateSession = async (path,values={}) => {
+    const __CreateSession = async(path, values = {}) => {
         const result = await fetch(link + path, {
             method: 'post',
             mode: 'cors',
@@ -146,7 +144,7 @@ const getData = (function() {
         return data;
     }
 
-     const __LogOut = async (path) => {
+    const __LogOut = async(path) => {
         const result = await fetch(link + path, {
             method: 'get',
             mode: 'cors',
@@ -161,7 +159,7 @@ const getData = (function() {
         return data;
     }
 
-    const __UpdateSession = async (path,values={}) => {
+    const __UpdateSession = async(path, values = {}) => {
         const result = await fetch(link + path, {
             method: 'PATCH',
             mode: 'cors',
@@ -175,9 +173,9 @@ const getData = (function() {
         const data = await result.json();
         return data.data.users;
     }
-    
-    const __UpdateSessionPlayList = async (path,values={}) => {
-        const result = await fetch(link + 'session/'+path, {
+
+    const __UpdateSessionPlayList = async(path, values = {}) => {
+        const result = await fetch(link + 'session/' + path, {
             method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
@@ -191,8 +189,8 @@ const getData = (function() {
         return data;
     }
 
-     const __addSessionPlayList = async (path,values={}) => {
-        const result = await fetch(link + 'session/'+path+'/addToQueue', {
+    const __addSessionPlayList = async(path, values = {}) => {
+        const result = await fetch(link + 'session/' + path + '/addToQueue', {
             method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
@@ -205,9 +203,9 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
-    
-     const __PlayList_nowPlaying = async (path,values={}) => {
-        const result = await fetch(link + 'session/'+path, {
+
+    const __PlayList_nowPlaying = async(path, values = {}) => {
+        const result = await fetch(link + 'session/' + path, {
             method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
@@ -219,9 +217,9 @@ const getData = (function() {
         });
         const data = await result.json();
         return data;
-     }
-    
-     const __DeleteSession = async (path) => {
+    }
+
+    const __DeleteSession = async(path) => {
         const result = await fetch(link + path, {
             method: 'DELETE',
             mode: 'cors',
@@ -232,21 +230,8 @@ const getData = (function() {
             },
         });
         return result;
-     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    const __RefreshToken = async () => {
+    }
+    const __RefreshToken = async() => {
         const result = await fetch(link + 'refreshToken', {
             method: 'get',
             mode: 'cors',
@@ -259,57 +244,57 @@ const getData = (function() {
         return result;
     }
 
-    
+
     return {
         getSession(path) {
             return __getSession(path);
         },
-         getSessionByType(path,type) {
-            return __getSessionByType(path,type);
-         },
-          getSessionById(path,id) {
-            return __getSessionById(path,id);
+        getSessionByType(path, type) {
+            return __getSessionByType(path, type);
         },
-          getUserByEmail(path,email) {
-            return __getUserByEmail(path,email);
+        getSessionById(path, id) {
+            return __getSessionById(path, id);
         },
-          getUser(path) {
+        getUserByEmail(path, email) {
+            return __getUserByEmail(path, email);
+        },
+        getUser(path) {
             return __getUser(path);
-          },
-          joinPublicSession(path) {
+        },
+        joinPublicSession(path) {
             return __joinPublicSession(path);
         },
-          joinPrivateSession(path,password) {
-            return __joinPrivateSession(path,password);
+        joinPrivateSession(path, password) {
+            return __joinPrivateSession(path, password);
         },
         leaveSession(path) {
             return __leaveSession(path);
         },
-        postMessage(path,message) {
-            return __postMessage(path,message);
+        postMessage(path, message) {
+            return __postMessage(path, message);
         },
-        createSession(path,data) {
-            return __CreateSession(path,data);
+        createSession(path, data) {
+            return __CreateSession(path, data);
         },
-         logOut(path) {
+        logOut(path) {
             return __LogOut(path);
         },
-         deleteSession(path) {
+        deleteSession(path) {
             return __DeleteSession(path);
         },
-        updateSessionPlayList(path,data) {
-            return __UpdateSessionPlayList(path,data);
+        updateSessionPlayList(path, data) {
+            return __UpdateSessionPlayList(path, data);
         },
-         addSessionPlayList(path,data) {
-            return __addSessionPlayList(path,data);
+        addSessionPlayList(path, data) {
+            return __addSessionPlayList(path, data);
         },
-         PlayList_nowPlaying(path,data) {
-            return __PlayList_nowPlaying(path,data);
-         },
-         refreshToken() {
+        PlayList_nowPlaying(path, data) {
+            return __PlayList_nowPlaying(path, data);
+        },
+        refreshToken() {
             return __RefreshToken();
         }
-          
+
     }
 })();
 

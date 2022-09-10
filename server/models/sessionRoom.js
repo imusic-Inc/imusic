@@ -81,8 +81,6 @@ sessionSchema.pre(/^find/, function(next) { //populate participants field with s
 });
 
 
-
-
 sessionSchema.pre('save', async function(next) {
     if (this.roomType === 'public') {
         this.lock = undefined
@@ -100,6 +98,44 @@ sessionSchema.pre('save', async function(next) {
 
 })
 
+sessionSchema.pre('save', async function(next) { //removes duplicate objects in participants array
+    const uniqueIds = new Set();
+
+    this.participants = this.participants.filter(element => {
+        const isDuplicate = uniqueIds.has(element.id);
+
+        uniqueIds.add(element.id);
+
+        if (!isDuplicate) {
+            return true;
+        }
+
+        return false;
+    });
+
+    next()
+
+})
+
+sessionSchema.pre('save', async function(next) { //removes duplicate objects in guest array
+    const uniqueIds = new Set();
+
+    this.guest = this.guest.filter(element => {
+        const isDuplicate = uniqueIds.has(element.id);
+
+        uniqueIds.add(element.id);
+
+        if (!isDuplicate) {
+            return true;
+        }
+
+        return false;
+    });
+
+
+    next()
+
+})
 
 sessionSchema.methods.correctlock = async function(candidatelock, roomLock) {
     return await bcrypt.compare(candidatelock, roomLock);

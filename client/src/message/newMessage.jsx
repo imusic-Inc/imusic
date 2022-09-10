@@ -24,7 +24,7 @@ function NewMessage(props) {
             "receiverId": props.id
         }).then(value => {
 
-            notify(value);
+            // notify(value);
 
             getData.getMessage_id('conversation', {
                 "senderId": uid,

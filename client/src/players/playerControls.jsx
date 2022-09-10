@@ -52,7 +52,7 @@ export default function PlayerConrols(props) {
     if (props.type === 'private' ? props.isAdmin===props.uid ? true : false : false) {
        const NowPlaying = track.find(value => value.audio === nowPlaying && value.audio !== 'spotify:track:4WUKvuiIgKtTiuhpnAw01W');
     if (NowPlaying) {
-      const playingNow = { ...NowPlaying, pre_view: tokened, name: state ? "play" : "paused" };
+      const playingNow = { ...NowPlaying, pre_view: tokened, at: state ? "play" : "paused" };
       getData.PlayList_nowPlaying(props.id, {now_playing: playingNow });
       }
     } else if (props.type === 'private' ? props.isAdmin===props.uid ? false : true : false) {

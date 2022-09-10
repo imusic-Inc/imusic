@@ -471,7 +471,10 @@ h3 {
 .messaging-members {
   bottom: 40px;
 }
-
+input{
+  padding-left: 8px;
+  padding-right: 8px;
+}
 .message {
   position: fixed;
   bottom: 170px;

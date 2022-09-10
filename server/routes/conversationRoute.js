@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(protect, isLoggedIn, restrictTo('user'), getConversation)
+    .post(protect, isLoggedIn, restrictTo('user'), getConversation)
 
 router
     .route('/add')

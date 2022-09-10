@@ -1,5 +1,6 @@
 const UserInvitation = require("../models/userInvitation")
-const User = require('../models/userModel')
+const User = require('../models/userModel');
+const AppError = require("../utils/appError");
 const hookAsync = require("../utils/hookAsync");
 
 exports.inviteUser = hookAsync(async(req, res, next) => {
@@ -55,4 +56,66 @@ exports.inviteUser = hookAsync(async(req, res, next) => {
 
 
     return res.status(201).send("Invitation has been sent successfully");
+})
+
+
+
+exports.getUserInvitation = hookAsync(async(req, res, next) => {
+
+
+    const invitations = await UserInvitation.find({ receiverId: req.user._id })
+
+    res.status(200).json(invitations);
+})
+
+exports.acceptInvitation = hookAsync(async(req, res, next) => {
+
+    const { invitationId, sessionId } = req.body;
+
+    if (!invitationId || !sessionId) {
+        return next(new AppError('Please provide session or invitation!', 401)); //401 which means unauthoried
+    }
+
+    console.log(req.params.id);
+
+    // check if invitation exists
+    const invitation = await UserInvitation.exists({ _id: invitationId });
+    if (!invitation) {
+        return res
+            .status(404)
+            .send(
+                "Sorry, the invitation you are trying to accept doesn't exist"
+            );
+    }
+
+
+
+
+    next()
+
+
+
+})
+
+
+exports.rejectInvitation = hookAsync(async(req, res, next) => {
+    const { invitationId } = req.body;
+
+    // check if invitation exists
+    const invitation = await UserInvitation.exists({ _id: invitationId });
+
+    if (!invitation) {
+        return res
+            .status(404)
+            .send(
+                "Sorry, the invitation you are trying to reject doesn't exist"
+            );
+    }
+
+    // reject the invitation
+    await UserInvitation.findByIdAndDelete(invitationId);
+
+
+    return res.status(200).send("Invitation rejected successfully!");
+
 })

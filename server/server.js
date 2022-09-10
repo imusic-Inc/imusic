@@ -6,6 +6,7 @@ dotenv.config({ path: './config.env' }) // retrieving protected variables from c
 
 process.on('uncaughtException', err => {
     console.log(err.name, err.message);
+    console.log(err);
     console.log('UNHANDLED EXCEPTION 💥 Shutting down...');
     process.exit(1);
 })

@@ -2,24 +2,9 @@ const hookAsync = require("../utils/hookAsync");
 const Message = require('../models/chatMessages');
 const sessionModel = require("../models/sessionRoom");
 const AppError = require("../utils/appError");
+const factory = require('../controllers/handlerFactory')
 
-
-exports.getAllMessages = hookAsync(async(req, res, next) => {
-    const messages = await Message.find()
-
-
-    res.status(200).json({
-        status: 'success',
-        results: messages.length,
-        data: {
-            messages
-        }
-
-    });
-
-
-
-});
+exports.getAllMessages = factory.getAll(Message)
 
 
 

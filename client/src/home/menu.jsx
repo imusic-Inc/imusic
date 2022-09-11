@@ -1,6 +1,6 @@
 import Discover from "../home/discover";
 import { useState,useEffect } from "react";
-import Join from "../session/join";
+import Join from "../components/join";
 import {Routes as Switch,Route} from "react-router-dom";
 import CreateSession from "../components/createSession";
 import Auth from "../auth/auth";

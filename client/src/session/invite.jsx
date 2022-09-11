@@ -22,7 +22,7 @@ function Invite(props) {
                 setSource(value);
             })
         }
-    }, [uid,users,source]);
+    }, []);
     
     useEffect(() => {
         if (search.length > 3) {
@@ -50,7 +50,7 @@ function Invite(props) {
                 </div>
             </div>
             <div className='playList-list-save'>
-                {users.length>0?users.map(value=><InviteList key={ value._id} track={value.name} by={value.email} image={value.photo} />):<SearchLoading/>}
+                {users.length>0?users.map(value=><InviteList key={ value._id} track={value.name} by={value.email} image={value.photo} id={props.id} />):<SearchLoading/>}
             </div>
         </div>
     </div>);

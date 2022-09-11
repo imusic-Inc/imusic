@@ -55,9 +55,9 @@ export default function PlayerConrols(props) {
       const playingNow = { ...NowPlaying, pre_view: tokened, at: state ? "play" : "paused" };
       getData.PlayList_nowPlaying(props.id, {now_playing: playingNow });
       }
-    } else if (props.type === 'private' ? props.isAdmin===props.uid ? false : true : false) {
+    } else if (props.type === 'private' ? props.isAdmin === props.uid ? false : true : false) {
          getData.getSessionById('session', props.id).then(value => {
-        const Admintoken = value.now_playing.pre_view;
+           const Admintoken = value.now_playing.pre_view;
         const state = value.now_playing.at;
            const setPlayList = value.playlist;
            setTrack({ ...value.now_playing });
@@ -71,30 +71,48 @@ export default function PlayerConrols(props) {
     }
   }
    
+  useEffect(() => {
+if (props.type === 'private' ? props.isAdmin === props.uid ? false : true : false) {
+      const interval = setInterval(() => {
+        changState(isplaying);
+  }, 1000*60*4);
+    return () => clearInterval(interval);
+    }
 
+     //chceck if is streaming
+    if (props.type === 'private' ? props.isAdmin === props.uid ? false : true : false) {
+  setTimeout(() => {
+      changState(isplaying); 
+  }, 5000);
+    };
+}, []);
+
+ 
 
   function getAdminState(Admintoken,setPlayList) {
-     APIController.getPlayState(Admintoken).then(value => {
-               const time_ms = value.progress_ms;
-               if (setPlayList.filter(value1 => value1.audio === value.item.uri).length<1) {
-                 const track = {
-                "image": value.item.image,
-                "name": value.item.name,
-                "auth": value.item.auth,
-                "audio": value.item.uri,
-                "album": value.item.album,
-               }
-               APIController.getPlay(token, {
+    APIController.getPlayState('BQBX2wMYnTny-n_3CUL7Gp8nXF6nNvYu8o_xJc1AwLPC5XujvyKgXf3tZRWktckutHTZvP6BhN1uuHl7TIkImgXOImS8z8M08PLj_KE2bEZPhXYKC2N2Gk-O-3Y3s_Jf_1BzaAlnNl4F5IVu_eNWV9BI9x1aLCFjE2J6axwvF_2Se_-fEPuWI300ixK5-dd8dWxpq2d7nf_rmfK_P8l5J1Pgvs13OvHgNQMAS8XmYWk3_5j8zA').then(value => {
+      const time_ms = value.progress_ms;
+      const newList = setPlayList.filter(value1 => value1.audio === value.item.uri)
+      if (newList.length > 0) {
+        const track = {
+          "image": value.item.image,
+          "name": value.item.name,
+          "auth": value.item.auth,
+          "audio": value.item.uri,
+          "album": value.item.album.name,
+        };
+const payload  =  {
                  "uris": [track.audio],
                  "position_ms": time_ms
-               });
+               }
+               APIController.getPlay(token,payload);
                } else {
-                 notify('looks like the admin is not playing any song right now');
+                 notify('looks like the admin is not playing any song right now1');
                }
                
              }).catch(error => {
                console.error(error);
-               notify('looks like the admin is not playing any song right now');
+               notify('looks like the admin is not playing any song right now2');
              });
   }
 

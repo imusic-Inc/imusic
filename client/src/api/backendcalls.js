@@ -12,7 +12,7 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.session;
+        return data.data.doc;
     }
 
     const __getSessionByType = async(path, type) => {
@@ -56,6 +56,19 @@ const getData = (function() {
 
     const __getUser = async(path) => {
         const result = await fetch(link + path, {
+            method: 'get',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data.data.doc;
+    }
+
+    const __getUserById = async(path,id) => {
+        const result = await fetch(link + path+'/' + id, {
             method: 'get',
             credentials: "include",
             headers: {
@@ -294,6 +307,63 @@ const getData = (function() {
         return data;
     }
 
+    const __inviteUser = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const __acceptInvite = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'PATCH',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const __rejectInvite = async(path,value={}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+     const __getInvite = async(path) => {
+        const result = await fetch(link + path, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
 
     const __RefreshToken = async() => {
         const result = await fetch(link + 'refreshToken', {
@@ -325,6 +395,8 @@ const getData = (function() {
         },
         getUser(path) {
             return __getUser(path);
+        },getUserById(path,id) {
+            return __getUserById(path,id);
         },
         joinPublicSession(path) {
             return __joinPublicSession(path);
@@ -370,8 +442,16 @@ const getData = (function() {
         },
          addMessage(path,data) {
             return __addMessage(path,data);
+        },
+         getInvite(path) {
+            return __getInvite(path);
+        },
+        rejectInvite(path,data) {
+             return __rejectInvite(path,data)
+        },
+        inviteUser(path,data) {
+            return __inviteUser(path,data)
         }
-
     }
 })();
 

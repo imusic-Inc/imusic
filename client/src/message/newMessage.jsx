@@ -119,13 +119,13 @@ pauseOnHover
                       return  <Message value={{user:{ name: value.name },message: value.message}}><hr className="opacity-6" /></Message>
                     })}
                 
-                
+                <br /><br /><br />
             </div>
 
 
-<div className="chat-send" style={{bottom: props.home?'10px':null,}} >
+<div className="chat-send" style={{bottom: props.home?'5px':null,}} >
 <hr/>
-<textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="3"></textarea>
+<textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="4"></textarea>
 </div>
 </div>
         </>

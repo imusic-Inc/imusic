@@ -20,6 +20,7 @@ const cookies = new Cookies();
   
   
   useEffect(() => {
+    document.title = "IMusic Room";
     init();
   }, []);
   

@@ -7,7 +7,7 @@ import AddToPlayList from './addToPlayList';
 import { useState, useEffect,memo } from "react"; 
 import {useParams} from "react-router-dom";
 import Invite from './invite';
-import Share from '../home/share';
+import Share from './share';
 import APIController from '../api/spotifyApi';
 import store from "../redux/store";
 import PlayerConrols from '../players/playerControls';
@@ -274,7 +274,7 @@ pauseOnHover
 
 
             {expandShare?<Share show = {showAndHideShare} />:<></>}
-            {expandInvite?<Invite show = {showAndHideInvite} />:<></>}
+            {expandInvite?<Invite show = {showAndHideInvite}  id={paths.id}  />:<></>}
            {expand?<AddToPlayList show = {showAndHide} id={paths.id}  />:<></>} 
             <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} />

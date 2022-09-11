@@ -9,7 +9,7 @@ function JoinList({ name, description, id, photo, roomType, deleteFun,declineFun
         </div>
         {invite?<div className="flex-1 p-1">
             <div onClick={() => {
-                joinsession(name, roomType, id);
+                joinsession(name, roomType, id,inviteId);
             }} className="btn bg-success button">Accept</div>
             <div onClick={()=>declineFun(inviteId)} className="btn bg-danger button">Decline</div>
         </div>:<div className="flex-1 p-1">

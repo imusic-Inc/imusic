@@ -63,7 +63,7 @@ function MyMessage({ value,isAdmin,type,id }) {
                   {value.map(values => {
                       return <PlayList key={values.audio+values.len} isAdmin={isAdmin} type={type} id={id}  values={values}/>
                      })}
-
+<br />
     
           </div>
           </div>

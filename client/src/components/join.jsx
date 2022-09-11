@@ -77,10 +77,10 @@ function Join(props) {
        
     }
 
-    function joinsession(name,roomType, id) {
+    function joinsession(name,roomType, id,invite) {
         notify("please wait joing...");
         getData.joinPublicSession(`session/${id}/session`).then(value => {
-             const link = '../room/' + id + '?name=' + name + '&admin=true&type=' + roomType;
+            const link = '../room/' + id + '?name=' + name + '&admin=true&type=' + roomType;
             if (value.status === 'fail') {
                 notify(value.message);
                 if (value.message === 'Please provide a lock code!') {
@@ -92,9 +92,13 @@ function Join(props) {
                 notify(value.status);
                 setTimeout(() => {
                     navigate(link, { replace: false });
-                },500)
+                }, 500)
             }
-        })
+        });
+        if (invite) {
+            declineFun(invite);
+        }
+        
       
     }
 

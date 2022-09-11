@@ -90,7 +90,7 @@ if (props.type === 'private' ? props.isAdmin === props.uid ? false : true : fals
  
 
   function getAdminState(Admintoken,setPlayList) {
-    APIController.getPlayState('BQBX2wMYnTny-n_3CUL7Gp8nXF6nNvYu8o_xJc1AwLPC5XujvyKgXf3tZRWktckutHTZvP6BhN1uuHl7TIkImgXOImS8z8M08PLj_KE2bEZPhXYKC2N2Gk-O-3Y3s_Jf_1BzaAlnNl4F5IVu_eNWV9BI9x1aLCFjE2J6axwvF_2Se_-fEPuWI300ixK5-dd8dWxpq2d7nf_rmfK_P8l5J1Pgvs13OvHgNQMAS8XmYWk3_5j8zA').then(value => {
+    APIController.getPlayState(Admintoken).then(value => {
       const time_ms = value.progress_ms;
       const newList = setPlayList.filter(value1 => value1.audio === value.item.uri)
       if (newList.length > 0) {
@@ -107,12 +107,12 @@ const payload  =  {
                }
                APIController.getPlay(token,payload);
                } else {
-                 notify('looks like the admin is not playing any song right now1');
+                 notify('looks like the admin is not playing any song right now');
                }
                
              }).catch(error => {
                console.error(error);
-               notify('looks like the admin is not playing any song right now2');
+               notify('looks like the admin is not playing any song right now');
              });
   }
 
@@ -152,7 +152,6 @@ const payload  =  {
     setLyris(newTrack);
    
   }
-
   // if (!token) return props.auth(false);
   return (
 

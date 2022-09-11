@@ -85,7 +85,7 @@ sessionSchema.pre(/^find/, function(next) { //populate participants field with s
 });
 
 
-sessionSchema.pre('save', async function(next) {
+sessionSchema.pre('save', async function(next) { //encrypts lock provided by user
     if (this.roomType === 'public') {
         this.lock = undefined
         return next()
@@ -141,7 +141,7 @@ sessionSchema.pre('save', async function(next) { //removes duplicate objects in 
 
 })
 
-sessionSchema.methods.correctlock = async function(candidatelock, roomLock) {
+sessionSchema.methods.correctlock = async function(candidatelock, roomLock) { //compares users provided lock to encrypted version on the document session
     return await bcrypt.compare(candidatelock, roomLock);
 }
 

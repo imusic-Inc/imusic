@@ -3,9 +3,17 @@ const Message = require('../models/chatMessages');
 const sessionModel = require("../models/sessionRoom");
 const AppError = require("../utils/appError");
 const factory = require('../controllers/handlerFactory')
-
+const Notification = require('../models/notification')
 exports.getAllMessages = factory.getAll(Message)
 
+async function insertNotifications(chat, message) {
+    chat.participants.forEach(async userId => {
+
+        if (userId == message.sender._id.toString()) return;
+        let noti = await Notification.insertNotification(userId, message.sender._id, "newMessage", message.chat._id)
+
+    })
+}
 
 
 exports.createMessage = hookAsync(async(req, res, next) => {
@@ -29,7 +37,7 @@ exports.createMessage = hookAsync(async(req, res, next) => {
 
     const newMessage = await Message.create(req.body)
 
-
+    //insertNotifications(session,)
     res.status(201).json({
         status: 'success',
         // results: newMessage.length,

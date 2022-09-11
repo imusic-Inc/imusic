@@ -39,6 +39,10 @@ const sessionSchema = new mongoose.Schema({
         select: false
 
     },
+    can_invite: {
+        type: Boolean,
+        default: true
+    },
     now_playing: {
         image: { type: String, default: null },
         name: { type: String, default: null },

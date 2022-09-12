@@ -1,22 +1,32 @@
 const express = require("express");
-const morgan = require("morgan");
 const app = express();
+
 const sessionRouter = require("./routes/roomSessionRouter");
 const userRouter = require('./routes/userRoutes');
 const messagesRouter = require('./routes/messageRoutes');
-const bodyParser = require('body-parser');
 const spotifyAuth = require('./routes/spotifyAuthRoute');
 const conversationRouter = require('./routes/conversationRoute')
 const privateMessageRouter = require('./routes/privateMessageRoute')
 const inviteRouter = require('./routes/invitationRoute');
 const notificationRouter = require('./routes/notificationRoutes')
+
+
 const AppError = require('./utils/appError');
 const globalErrorhandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
-
-
-//Development logging
+const monogoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const bodyParser = require('body-parser');
+const morgan = require("morgan");
+const helmet = require('helmet');
 const cors = require("cors");
+const compression = require("compression")
+
+
+// Set security HTTP headers
+app.use(helmet());
+
 
 const corsOptions = {
     origin: 'http://localhost:3000', // frontend server address
@@ -26,21 +36,52 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
+//Development logging
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
 app.use(express.json({ limit: '10kb' }));
+
+//Body Parser, reading data from body into req.body
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+
 app.use(cookieParser());
+
+//Data sanitization against nosql query injection
+app.use(monogoSanitize());
+
+//Data sanitization against xss
+app.use(xss());
+
+
+app.use(compression())
+
+// Prevent parameter pollution
+app.use(
+    hpp({
+        whitelist: [
+            'roomType',
+            'role',
+            'name',
+            'description',
+            'opened',
+            'can_invite'
+        ]
+    })
+);
+
+// Test middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
-    //console.log(req.headers);
+
     next();
 });
 
+
+// 3) ROUTES
 app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
 app.use('/api/v1/users', userRouter);

@@ -114,33 +114,33 @@ pauseOnHover
 </div>
               <form className="form-control p-1" onSubmit={handler}>
             <div className="pr-1 pl-1 ">
-                <label htmlFor="name" className="opacity-6">iMusic Room name</label>
+                <label htmlFor="name" data-testid="name" className="opacity-6">iMusic Room name</label>
                 <input type="text" minLength={5} required={true} onChange={event => setName(event.target.value)}  className="playSearch w-100 " placeholder="Room name" name="name" />
             </div>
             <div className="pr-1 pl-1 pt-01">
                 <label htmlFor="description" className="opacity-6">iMusic Room description</label>
-                <textarea required={true} minLength={5}  className="playSearch-textArea w-100" onChange={event => setDis(event.target.value)} rows={3} placeholder="Room description" name="description"></textarea>
+                <textarea required={true} minLength={5} data-testid="discription"  className="playSearch-textArea w-100" onChange={event => setDis(event.target.value)} rows={3} placeholder="Room description" name="description"></textarea>
             </div>
             <div className="pr-1 pl-1 pt-01">
                 <label htmlFor="tags" className="opacity-6">iMusic Room tags</label>
-                <input type="text" minLength={4} required={true} className="playSearch p-1 w-100 mt-1" onChange={event => setTags(event.target.value)} placeholder="Room tags" name="tags" />
+                <input type="text" minLength={4}  required={true} className="playSearch p-1 w-100 mt-1" onChange={event => setTags(event.target.value)} placeholder="Room tags" name="tags" />
             </div>
 
             <div className="pr-1 pl-1 pt-01 flex-row flex-center">
-                <label htmlFor="" className="pr-1 opacity-6"  >Is your iMusic Room private?</label>
+                <label htmlFor="" className="pr-1 opacity-6"   >Is your iMusic Room private?</label>
                 <div className="flex-row flex-center">
-                   <div className="pr-1" >NO</div>  <input type="checkbox" value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" for="switch">Toggle</label> <div className="pl-1" >YES</div>
+                   <div className="pr-1" >NO</div>  <input data-testid="roomtype" type="checkbox" value={visibility} onChange={event => {setVisibility(event.target.checked)}} id="switch" /><label id="switched" htmlFor="switch">Toggle</label> <div className="pl-1" >YES</div>
                 </div>
             </div>
 
             {visibility?<div className="pr-1 pl-1 pt-01">
                 <label htmlFor="password" className="opacity-6">iMusic Room Pass Code</label>
-                <input type="text" required={visibility}  minLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
+                <input type="text" data-testid="passcode"  required={visibility}  minLength={5} className="playSearch p-1 w-100 mt-1"  onChange={event => setPassword(event.target.value)} placeholder="Room pass code" name="password" />
             </div>:null}
             
 
             <div >
-            <input type={'submit'} className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center w-100" value={'Create Session'}/>
+            <input type={'submit'} data-testid="create" className="btn flex-row bg-danger pl-2 p-1 flex-center mt-1 flex-center-justify text-center w-100" value={'Create Session'}/>
             </div>
         </form>
         

@@ -4,7 +4,7 @@ function Share(props) {
     
     useEffect(() => {
         setClip(window.location.href);
-    },[clip])
+    }, [props]);
 
     function addToClib() {
         navigator.clipboard.writeText(clip);

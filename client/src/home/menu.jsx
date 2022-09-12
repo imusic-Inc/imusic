@@ -70,11 +70,6 @@ const token = cookies.get('access_token');
 
     <h5 className=" pl-1 nav"> MENU</h5>
 </div>
-
-
- 
-
-
 <div onClick={() => signout ? setCreate(!create) : setSignIn(true)} title={'Create Room'} className="flex-row flex-center pt-1 btn opacity-6 ">
 <svg className="nav-icon" style={{width:24,height:24}} viewBox="0 0 24 24">
     <path fill="currentColor"
@@ -94,15 +89,6 @@ const token = cookies.get('access_token');
 </div>
                 </div>
                 </div>
-
-                
-
-                
-
-
-                
-                
-
                 <div className="auth pb-4">
                     {signout ? <div onClick={() => {
                         logOut();

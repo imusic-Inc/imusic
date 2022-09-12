@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import Notification from "../home/notification";
+import Notification from "../components/notification";
 import Cookies from 'universal-cookie';
 function Auth() {
     const [NotificationClick, setNotificationClick] = useState(false);

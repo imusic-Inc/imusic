@@ -1,3 +1,4 @@
+import { memo } from "react";
 function Session(props) {
     return (
         <div className="flex-column p-1 btn playListcard card-column">
@@ -10,4 +11,4 @@ function Session(props) {
     )
 }
 
-export default Session;
+export default memo(Session);

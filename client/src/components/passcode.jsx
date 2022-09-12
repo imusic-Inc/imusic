@@ -20,6 +20,9 @@ function PassCode(props) {
                 if (!value.error) {
                     navigate(props.link + '&v=' + generateRandomString(5), { replace: false });
                     props.show();
+                    if (props.invite) {
+                        props.declineFun(props.invite);
+                    };
                 }
                 notify(value.message);
             });

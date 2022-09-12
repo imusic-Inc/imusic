@@ -8,6 +8,7 @@ import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Passcode from "./passcode";
 let linked = '';
+let inviteId = '';
 let seletedId = '';
 const invites = new Set();
 function Join(props) {
@@ -86,18 +87,25 @@ function Join(props) {
                 if (value.message === 'Please provide a lock code!') {
                     linked = link
                     seletedId = id;
+                    if (invite) {
+                        inviteId = invite;
+                    }
+                    
                     setShowpass(true);
                 }
             } else {
                 notify(value.status);
                 setTimeout(() => {
                     navigate(link, { replace: false });
+                    if (invite) {
+                        declineFun(invite);
+                    };
                 }, 500)
             }
+
+
         });
-        if (invite) {
-            declineFun(invite);
-        }
+        
         
       
     }
@@ -161,7 +169,7 @@ pauseOnHover
 
           </div>
           
-           {showpass?<Passcode pass={seletedId} show={show} link={linked} />:null}
+           {showpass?<Passcode pass={seletedId} show={show} invite={inviteId} declineFun={declineFun} link={linked} />:null}
       </>
 
   );

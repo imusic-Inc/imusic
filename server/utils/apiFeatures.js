@@ -19,7 +19,7 @@ class APIFeatures {
 
         this.query = this.query.find(JSON.parse(queryStr));
 
-        //        const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals('easy');
+
         // Execute query
         return this;
     }
@@ -35,7 +35,7 @@ class APIFeatures {
     limitFields() {
         //3) Field Limiting
         if (this.queryString.fields) {
-            //http://127.0.0.1:3000/api/v1/tours?fields=name,duration,difficulty,price
+
             const fields = this.queryString.fields.split(',').join(' ');
             this.query = this.query.select(fields);
         } else {

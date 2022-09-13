@@ -6,6 +6,24 @@
   --light: rgb(117, 113, 113);
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px var(--secondary);
+  -webkit-box-shadow: inset 0 0 6px var(--secondary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px var(--secondary);
+  -webkit-box-shadow: inset 0 0 6px var(--secondary);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: var(--primary);
+}
 * {
   color: var(--white);
   padding: 0px;
@@ -19,6 +37,7 @@ color: var(--primary);
 small{
   font-weight: 100;
 }
+
 .z-index-5{
   z-index: 1;
 }
@@ -837,15 +856,15 @@ input[type=checkbox] {
   text-align: center;
   overflow-y: scroll;
   white-space: pre-wrap;
-  height: 70vh;
+  height: 65vh;
 }
 .lyrics-container{
   background-color: #213749;
     width: 50%;
     position: fixed;
-    top: 30px;
+    top: 10vh;
     left: 21%;
-    height: 75vh;
+    height: 70vh;
   z-index: 10;
   border-radius: 10px;
   -webkit-border-radius: 10px;

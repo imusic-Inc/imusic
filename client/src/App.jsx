@@ -8,11 +8,13 @@ function App() {
     <div className='flex-row bg-primary'>
       <Router>
         <Switch>
-        <Route path="/login" element={<Auth/>} />
+        
         <Route path="/room" element={<Room />} />
-        <Route path="/room/:id" element={<Room />} />
+          <Route path="/room/:id" element={<Room />} />
+          <Route path="/login" element={<h1>Hello</h1>} />
         <Route path="/" element={<Home/>}/>
-        <Route path="/:id" element={<Home/>}/>
+          <Route path="/:id" element={<Home />} />
+          
         </Switch>
       </Router>
     </div>

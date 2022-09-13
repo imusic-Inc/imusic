@@ -10,11 +10,10 @@ function App() {
         <Switch>
         
         <Route path="/room" element={<Room />} />
-        <Route path="/room/:id" element={<Room />} />
-        <Route path="/login" element={<h1>Hello</h1>} />
-        <Route path="/" element={<Home/>}/>
+          <Route path="/room/:id" element={<Room />} />
+          <Route path="/login" element={<Auth/>} />
           <Route path="/:id" element={<Home />} />
-          
+          <Route  path="*" element={<Home/>}/>
         </Switch>
       </Router>
     </div>

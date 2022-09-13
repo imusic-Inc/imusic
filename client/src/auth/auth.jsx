@@ -8,10 +8,12 @@ function Auth(props) {
     const [userName, setUserName] = useState("");
     const cookies = new Cookies();
     const navigate = useNavigate();
+
     useEffect(() => {
         const paths = new URLSearchParams(window.location.search);
         const token = paths.get("access_token");
         const refresh = paths.get("refresh_token");
+
         if (token && token.length > 10) {
             authenticate(token,refresh);
         } else {
@@ -22,7 +24,9 @@ function Auth(props) {
             }
         }
 
-    if (pathed && pathed.length>10 &&  userName &&  userName.length>3) {
+
+        if (pathed && pathed.length > 10 && userName && userName.length > 3) {
+        console.log('here');
         if (window.location.href.includes('login')) {
             navigate('../home', { replace: true });
         } else {
@@ -30,6 +34,7 @@ function Auth(props) {
         } 
     }
     });
+
 
     function authenticate(tokens,refresh) {
         APIController.getUser(tokens).then(value => {
@@ -64,7 +69,7 @@ function Auth(props) {
     }
 
     return( <div className='logIn-alert'>
-                <div className='login-card p-2'>
+                <div className='login-card p-2 pb-3'>
                     <div >
                         <svg  className='btn' onClick={props.show} style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path fill="currentColor" d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z" />

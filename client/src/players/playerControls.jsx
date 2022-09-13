@@ -169,7 +169,7 @@ draggable
 pauseOnHover
 />
     
-    <div className="player pt-1 pb-1">
+    <div className="player b-r-1 pt-1 pb-1">
 
       {token? token==="error"?props.auth(false):<SpotifyPlayer
         ref={ref}

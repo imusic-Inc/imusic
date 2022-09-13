@@ -173,7 +173,7 @@ const getData = (function() {
     }
 
     const __UpdateSession = async(path, values = {}) => {
-        const result = await fetch(link + path, {
+        const result = await fetch(link + 'session/' +  path, {
             method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
@@ -365,6 +365,20 @@ const getData = (function() {
         return data;
     }
 
+     const __getNotification = async(path) => {
+        const result = await fetch(link + path, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data.data.notifications;
+     }
+    
     const __RefreshToken = async() => {
         const result = await fetch(link + 'refreshToken', {
             method: 'get',
@@ -451,6 +465,12 @@ const getData = (function() {
         },
         inviteUser(path,data) {
             return __inviteUser(path,data)
+        },
+        update(path,data) {
+            return __UpdateSession(path,data)
+        },
+        getNotification(path) {
+            return __getNotification(path)
         }
     }
 })();

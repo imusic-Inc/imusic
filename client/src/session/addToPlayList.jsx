@@ -148,7 +148,7 @@ pauseOnHover
     <h4>Let's find something for your room</h4>
     <div className="flex-row flex-center" >
         <input type="text" onChange={event => setMessage(event.target.value)} className="playSearch" placeholder="&#9835; Search..." name="search" id="playSearch"/>
-        <div onClick={getSearch}  className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 mt-01">
+        <div onClick={getSearch}  className="addPlayList bg-white text-primary btn-default  btn pt-01 pl-1 ml-1 mt-01">
             Search
         </div>
     </div>

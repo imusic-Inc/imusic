@@ -21,7 +21,7 @@ function PublicSession(props) {
         <>
             <h3 id="trending" className="pt-1">{props.name}</h3>
             
-          <div className="flex-row p-session">
+          <div className="flex-row p-session hide-scrollbar">
                 {playList.length < 1 ? <SessionTrack key={ Math.random()} /> :playList.map(value => {
                   return  <NavLink key={value.id} to={"/room/"+value.id+'@spotify?type=public&name='+props.name}><Session name={value.name} info={value.description} image={value.images[0].url}  /></NavLink> 
               })}

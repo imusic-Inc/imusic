@@ -16,6 +16,7 @@ function CreateSession(props) {
     const id = generateRandomString(50);
     const navigate = useNavigate();
 
+
     const notify = (message) => {
         toast.info(message, {
             autoClose: 2000,
@@ -48,10 +49,6 @@ function CreateSession(props) {
             return null;
         }
 
-        const payload = {
-            payload:payload_action,
-            type:'create-session'
-        }
 
         getData.createSession('session', payload_action).then(value => {
             if (value.error) {
@@ -96,7 +93,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 />
-        <div className="createSession bg-default p-01 box-shadow">
+        <div className="createSession b-r-1 bg-default p-01 box-shadow">
         <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Let setup your iMusic Room</h4>

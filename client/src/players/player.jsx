@@ -107,7 +107,7 @@ function Player(props) {
 
 
   return (<>
-      <div className="player pt-1 pb-1 pl-01">
+      <div className="player b-r-1 pt-1 pb-1 pl-01">
 <div className="flex-row flex-center">
     <img className="b-r-01 player-image"  src={ track.length > 0? track[index].image:"https://picsum.photos/200" } alt="" width="80" height="80" srcSet=""/>
     <div className="pl-1">
@@ -156,7 +156,7 @@ function Player(props) {
     </div>
 </div>
       </div>
-   {expandlyrics?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {Showsetexpandlyrics} />:<></>}
+   {expandlyrics && track && track.length>0?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {Showsetexpandlyrics} />:<></>}
    {login?<Auth show = {showLogin} />:<></>}
   </>
   );

@@ -18,7 +18,7 @@ function TrackList(props) {
         store.dispatch(payload);
 }
 
-    return (<div className="flex-row flex-center flex-space p-01">
+    return (<div className="flex-row flex-center b-r-1 flex-space p-01">
         <div className="flex-row flex-center">
         <img className="b-r-01" src={props.values.album.images[0].url} alt={props.values.name} width="50" height="50" srcSet=""/>
         <div className="pl-1">

@@ -1,21 +1,38 @@
-export function askNotificationPermission() {
-  // function to actually ask the permissions
-  function handlePermission(permission) {
-    // set the button to shown or hidden, depending on what the user answers
-    notificationBtn.style.display =
-      Notification.permission === 'granted' ? 'none' : 'block';
-  }
+export function notificationShow(message, title) {
+  
+  if (!("Notification" in window)) {
 
-  // Let's check if the browser supports notifications
-  if (!('Notification' in window)) {
-    console.log("This browser does not support notifications.");
-  } else if (checkNotificationPromise()) {
+    alert("This browser does not support desktop notification");
+
+  } else if (Notification.permission === "granted") {
+
+  const notification =  new Notification(title,{
+  body: message,
+  icon: 'client/public/images/favicon.png'
+  });
+    
+  notification.onclick = (event) => {
+    event.preventDefault();
+    window.open('http://localhost:3000/home?n=vs-1dts', '_self');
+  };
+
+  } else if (Notification.permission !== "denied") {
+
     Notification.requestPermission().then((permission) => {
-      handlePermission(permission);
+      if (permission === "granted") {
+
+        const notification = new Notification(title, {
+          body: message,
+          icon: 'client/public/images/favicon.png'
+        });
+
+        notification.onclick = (event) => {
+          event.preventDefault();
+          window.open('http://localhost:3000/home?n=vs-1dts', '_self');
+        };
+        
+      }
     });
-  } else {
-    Notification.requestPermission((permission) => {
-      handlePermission(permission);
-    });
+
   }
 }

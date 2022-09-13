@@ -48,7 +48,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 />
-        <div className="password bg-default box-shadow">
+        <div className="password b-r-1 bg-default box-shadow">
      <div className="p-1 text-rigth" >
             <svg onClick={props.show} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
                 className="mercado-match close btn" width="16" height="16" focusable="false">

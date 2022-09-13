@@ -31,7 +31,7 @@ useEffect(() => {
                 });    
                 };
                
-  }, 1000);
+  }, 3000);
   return () => clearInterval(interval);
 }, []);
 
@@ -75,7 +75,8 @@ pauseOnHover
                 <div className='active-list p-01'>
 
         <div className="list">
-                            {messages.map(value=><Message value={value} />)}
+                                        {messages.map(value => <Message value={value} />)}
+                                        <br />
 </div>
 <div className="chat-send-active">
 <hr/>

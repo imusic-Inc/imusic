@@ -23,7 +23,7 @@ const APIController = (function() {
     
     const _getGenres = async (token) => {
 
-        const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_US`, {
+        const result = await fetch(`https://api.spotify.com/v1/browse/categories`, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
         });
@@ -31,6 +31,7 @@ const APIController = (function() {
         const data = await result.json();
         return data.categories.items;
     }
+    
     const _getGenre = async (token, genreId) => {
         const result = await fetch(`https://api.spotify.com/v1/browse/categories/${genreId}`, {
             method: 'GET',
@@ -142,8 +143,9 @@ const APIController = (function() {
 
 
 
-    const _getLyrics = async (artist,song) => {
-        const result = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`, {
+    const _getLyrics = async (artist, song) => {
+        console.log(artist,song);
+        const result = await fetch(`https://github-auth-node.herokuapp.com/lyrics?artist=${artist}&title=${song}}`, {
             method: 'GET',
         });
         const data = await result.json();

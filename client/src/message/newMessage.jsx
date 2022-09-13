@@ -2,14 +2,7 @@ import Message from "./message";
 import Cookies from 'universal-cookie';
 import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
-import {toast,ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 function NewMessage(props) {
-     const notify = (message) => {
-        toast.info(message, {
-            autoClose: 2000,
-        });
-     };
     const sent = true;
     const cookies = new Cookies();
     const uid = cookies.get('uid');
@@ -18,14 +11,13 @@ function NewMessage(props) {
     const [message,setMessage] = useState()
     const [messages,setMessages] = useState([])
 
+    console.log(props);
+
     useEffect(() => {
         getData.startMessage('conversation/add', {
             "senderId": uid,
             "receiverId": props.id
         }).then(value => {
-
-            // notify(value);
-
             getData.getMessage_id('conversation', {
                 "senderId": uid,
                 "receiverId": props.id
@@ -76,20 +68,7 @@ function NewMessage(props) {
         });
     }
 
-    return (
-        <>
-        <ToastContainer
-position="top-left"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-/>
-        
+    return (  
         <div className="message" style={{bottom: props.home?'80px':null,}}>
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
@@ -103,8 +82,8 @@ pauseOnHover
     <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
 </svg>
 </div>
-        <div className="p-1 btn" onClick={props.show}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
+        <div className="p-1 btn" >
+        <svg onClick={props.show} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
             className="mercado-match  close" width="16" height="16" focusable="false">
             <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
         </svg>
@@ -128,7 +107,6 @@ pauseOnHover
 <textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="4"></textarea>
 </div>
 </div>
-        </>
   );
 }
 

@@ -22,7 +22,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 />
-        <div className="flex-row flex-center btn card p-01 member-list" onClick={() => {
+        <div className="flex-row flex-center b-r-1 btn card p-01 member-list" onClick={() => {
             if (props.value._id === uid) {
                 notify("We understand you want to chat with yourself, but that system is currently unavailable.")
             } else {

@@ -1,5 +1,5 @@
 const getData = (function() {
-    const link = "http://localhost:3001/api/v1/"
+    const link = "https://amalitech-imusic.herokuapp.com/api/v1/"
 
     const __getSession = async(path) => {
 

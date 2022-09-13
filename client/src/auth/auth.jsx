@@ -84,7 +84,7 @@ function Auth(props) {
                      <div className='flex-1 '>
                         <h1 className='p-1 auth-h1'>With a free account, you can listen to full songs.</h1>
                         <div className='login-btn btn p-1 mb-1'>
-                        <a data-testid="signin" href={'http://localhost:3001/api/v1/auth'}>
+                        <a data-testid="signin" href={'https://amalitech-imusic.herokuapp.com/api/v1/auth'}>
                             <span className='btn-login'>
                                {pathed && pathed.length>10? "LOADING...":"SIGN UP FREE"}
                         </span>
@@ -92,7 +92,7 @@ function Auth(props) {
                         
                         
                         </div>
-                        <h6 className='p-01 pt-3'>Already have and account? <a href={'http://localhost:3001/api/v1/auth'} className='sign-in pl-1 btn'>Sign me in</a></h6>
+                        <h6 className='p-01 pt-3'>Already have and account? <a href={'https://amalitech-imusic.herokuapp.com/api/v1/auth'} className='sign-in pl-1 btn'>Sign me in</a></h6>
                     </div>
                 </div>
                 </div>

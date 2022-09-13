@@ -12,7 +12,7 @@ exports.newMessage = hookAsync(async(req, res, next) => {
     await Conversation.findByIdAndUpdate(req.body.conversationId, { message: req.body.text });
 
 
-    await Notification.insertNotification(receiverId, senderId, `new message`, text, Message._id)
+    // await Notification.insertNotification(receiverId, senderId, `new message`, text)
 
     res.status(200).json("Message has been sent successfully");
 

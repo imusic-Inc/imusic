@@ -7,7 +7,7 @@ const router = express.Router();
 router
     .route('/')
     .get( /*protect*/ viewAllSessionRooms)
-    .post(protect, createSession)
+    .post(protect, isLoggedIn, createSession)
 
 router
     .route('/:id')

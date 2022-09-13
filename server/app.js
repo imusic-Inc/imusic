@@ -34,7 +34,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Development logging
 if (process.env.NODE_ENV === "development") {

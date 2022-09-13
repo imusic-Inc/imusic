@@ -9,22 +9,21 @@ const NotificationSchema = new Schema({
     notificationType: String,
     content: String,
     opened: { type: Boolean, default: false },
-    entityId: Schema.Types.ObjectId
 }, { timestamps: true })
 
 
-NotificationSchema.statics.insertNotification = async(userTo, userFrom, notificationType, content, entityId) => {
+NotificationSchema.statics.insertNotification = async(userTo, userFrom, notificationType, content) => {
     const data = {
         userTo,
         userFrom,
         notificationType,
-        content,
-        entityId
+        content
     };
 
     await Notification.deleteOne(data).catch(error => console.log(error));
     return Notification.create(data).catch(error => console.log(error));;
 }
+
 
 
 const Notification = mongoose.model('Notification', NotificationSchema)

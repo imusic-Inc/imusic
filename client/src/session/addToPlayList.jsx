@@ -120,7 +120,7 @@ pauseOnHover
         </div>
                         </div>
                         
-                        <div className='playList-list-save'>
+                        <div className='playList-list-save pl-1'>
                            <table className="p-1">
                                 <thead>
  <tr>

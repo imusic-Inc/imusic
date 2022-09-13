@@ -2,6 +2,10 @@ import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 function MemberList(props) {
+
+    console.log(props);
+
+
  const notify = (message) => {
         toast.info(message, {
             autoClose: 2000,
@@ -36,8 +40,8 @@ pauseOnHover
             height="60%" alt=""/>
             </div>
             <div className="pl-1 text-left flex-6">
-                <h5>{ props.value.name}</h5>
-            <small>{ props.value.email}</small>
+            <h5 className='pb-01'>{props.value.name} { props.owerId === props.value._id?<span className='admin'>Admin</span>:null}</h5>
+            <small >{ props.value.email}</small>
             </div>
         </div>
     </>)

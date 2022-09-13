@@ -2,16 +2,14 @@ import Message from "./message";
 import Cookies from 'universal-cookie';
 import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
+const sent = true;
 function NewMessage(props) {
-    const sent = true;
     const cookies = new Cookies();
     const uid = cookies.get('uid');
     const userName = cookies.get('name');
     const [message_id,setMessage_id] = useState()
     const [message,setMessage] = useState()
     const [messages,setMessages] = useState([])
-
-    console.log(props);
 
     useEffect(() => {
         getData.startMessage('conversation/add', {
@@ -65,6 +63,10 @@ function NewMessage(props) {
         }).then(() => {
             getMessage(message_id);
             setMessage('');
+            if (sent) {
+                sent = false;
+                getData.createNotification('notification/new', { receiverId: props.id, alertMessage: 'new message', content: `Hello there, ${userName} sent you a message` });
+            }
         });
     }
 

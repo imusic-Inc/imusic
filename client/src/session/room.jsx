@@ -29,7 +29,7 @@ const [expandInvite, setExpandInvite] = useState(false);
     const [actions, setActions] = useState(true);
     const [mobile, setMobile] = useState(false);
     const [notPart, setNotPart] = useState(false);
-    const [notifcation, setNotifcation] = useState('public');
+    const [notifcation, setNotifcation] = useState([]);
     const [type, setType] = useState('public');
     const [playList, setplayList] = useState([]);
     const [messages, setMessages] = useState([]);
@@ -79,13 +79,22 @@ const [expandInvite, setExpandInvite] = useState(false);
     useEffect(() => {
         if (uid) {
              const interval = setInterval(() => {
-               getData.getNotification('notification').then(value => {
-            if (value.length !== notifcation) {
-                setNotifcation(value);
-                notificationShow('hello there you have about '+value.length+' new notifications','New Message');
+                 getData.getNotification('notification').then(value => {
+                     
+                     
+            if (value.status === 'success') {
+          if (value.data.notifications.length > 0 && notifcation.length !== value.data.notifications) {
+            setNotifcation(value.data.notifications);
+          if (!search.get('n')) {
+            notificationShow('hello there you have about '+value.data.notifications.length+' new notifications','New Message');
+          } else {
+            notificationShow(true);
+          }
+          }
             }
+            
     });     
-  }, 1000*60*3);
+  }, 1000);
   return () => clearInterval(interval);
         };
     }, []);
@@ -310,7 +319,7 @@ pauseOnHover
             {expandInvite?<Invite show = {showAndHideInvite}  id={paths.id}  />:<></>}
            {expand?<AddToPlayList show = {showAndHide} id={paths.id}  />:<></>} 
             <Activeuserscart value={messages } id={paths.id} />
-            <Members value={participant} />
+            <Members value={participant} ownerId = {owerId} />
             <MyMessage value={ playList } isAdmin={uid ===owerId} id={paths.id} type={type} />
             {auth ? <PlayerConrols auth={setAuth} current={current}  isAdmin={owerId} uid={uid} id={paths.id} type={type} /> : <Player current={current} />}
             {notPart?<Passcode pass={paths.id} show = {show} link={link} />:null}

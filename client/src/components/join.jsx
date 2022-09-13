@@ -125,7 +125,6 @@ function Join(props) {
     function show() {
         setShowpass(false);
     }
-console.log(getInvite);
   return (
       <>
       <ToastContainer

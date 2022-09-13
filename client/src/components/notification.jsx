@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import getData from "../api/backendcalls";
 import NewMessage from "../message/newMessage";
+import Join from "./join";
 
 function Notification(props) {
     const [type, setType] = useState('');
@@ -17,9 +19,10 @@ function Notification(props) {
         setType('');
     }
 
-    function remove(indexed) {
+    function remove(indexed,id) {
         const newNoti = notifications.filter((value, index) => index !== indexed);
         setNotifications(newNoti);
+        getData.deleteNotification(id);
     }
 
     return (
@@ -39,8 +42,10 @@ function Notification(props) {
                             setNewMessageId(value.userFrom._id);
                             setType('message');
                             setName(value.userFrom.name);
-                            remove(index);
+                        } else {
+                            
                         }
+                        remove(index,value._id);
                         // props.hideNot();
                 }} className="pl-1 card-column b-r-1 p-1 btn">
                     <h4>{value.notificationType}</h4>
@@ -50,7 +55,7 @@ function Notification(props) {
                 
             </div>
         </div>
-        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:null}
+        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:<Join/>}
         </>);
 }
 

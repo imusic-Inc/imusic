@@ -51,11 +51,7 @@ function Player(props) {
                
             });
 
-            //  audio.addEventListener('error', () => {
-            //     setPlaying(false);
-            //     //  setexpandlyrics(false);
-            //      audio.load();
-            // });
+            
         }
         playOnload();
     });
@@ -156,7 +152,7 @@ function Player(props) {
     </div>
 </div>
       </div>
-   {expandlyrics && track && track.length>0?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} show = {Showsetexpandlyrics} />:<></>}
+   {expandlyrics && track && track.length>0?<Lyrics  name={track.length > 0 ? track[index].name:""} auth={track.length > 0 ? track[index].auth:""} playing={playing} show = {Showsetexpandlyrics} />:<></>}
    {login?<Auth show = {showLogin} />:<></>}
   </>
   );

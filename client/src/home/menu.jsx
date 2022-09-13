@@ -1,7 +1,7 @@
 import Discover from "../home/discover";
 import { useState,useEffect } from "react";
 import Join from "../components/join";
-import {Routes as Switch,Route} from "react-router-dom";
+import {Routes as Switch,Route,NavLink} from "react-router-dom";
 import CreateSession from "../components/createSession";
 import Auth from "../auth/auth";
 import Cookies from 'universal-cookie';
@@ -108,7 +108,7 @@ const token = cookies.get('access_token');
     <path fill="currentColor" d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
 </svg>
 
-<h3 className=" btn pl-01 nav">Sign up</h3>
+<NavLink to={'/login'} className=" btn pl-01 nav">Sign up</NavLink>
                     </div>}
                 </div>
             </div> 

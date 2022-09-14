@@ -2,6 +2,8 @@ import Message from "./message";
 import Cookies from 'universal-cookie';
 import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
+import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const sent = true;
 function NewMessage(props) {
     const cookies = new Cookies();
@@ -10,7 +12,11 @@ function NewMessage(props) {
     const [message_id,setMessage_id] = useState()
     const [message,setMessage] = useState()
     const [messages,setMessages] = useState([])
-
+ const notify = (message) => {
+        toast.info(message, {
+            autoClose: 2000,
+        });
+    };
     useEffect(() => {
         getData.startMessage('conversation/add', {
             "senderId": uid,
@@ -60,18 +66,36 @@ function NewMessage(props) {
             "senderId": uid,
             "receiverId": props.id,
             "text": message
-        }).then(() => {
+        }).then((value) => {
+            if (value.status === 'fail') {
+                notify(value.status);
+            } else {
             getMessage(message_id);
             setMessage('');
             if (sent) {
                 sent = false;
                 getData.createNotification('notification/new', { receiverId: props.id, alertMessage: 'new message', content: `Hello there, ${userName} sent you a message` });
             }
+            }
+            
         });
     }
 
     return (  
-        <div className="message" style={{bottom: props.home?'80px':null,}}>
+
+        <>
+        <ToastContainer
+position="top-left"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+         <div className="message" style={{bottom: props.home?'80px':null,}}>
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">{props.name}</h4>
@@ -109,6 +133,7 @@ function NewMessage(props) {
 <textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="4"></textarea>
 </div>
 </div>
+        </>
   );
 }
 

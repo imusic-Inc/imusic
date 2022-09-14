@@ -8,6 +8,7 @@ const getData = (function() {
         const result = await fetch(link + path, {
             method: 'get',
             credentials: "include",
+            withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -22,6 +23,7 @@ const getData = (function() {
         const result = await fetch(link + path + '?roomType=' + type, {
             method: 'get',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -34,6 +36,7 @@ const getData = (function() {
         const result = await fetch(link + path, {
             method: 'get',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -47,6 +50,7 @@ const getData = (function() {
         const result = await fetch(link + path + '/' + id, {
             method: 'get',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -60,6 +64,7 @@ const getData = (function() {
         const result = await fetch(link + path, {
             method: 'get',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -73,6 +78,7 @@ const getData = (function() {
         const result = await fetch(link + path + '/' + id, {
             method: 'get',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -88,6 +94,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -103,6 +110,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -118,6 +126,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -133,6 +142,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -149,6 +159,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -165,6 +176,7 @@ const getData = (function() {
             mode: 'cors',
             // credentials: 'same-origin',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -180,6 +192,7 @@ const getData = (function() {
             mode: 'cors',
             body: JSON.stringify(values),
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -195,6 +208,7 @@ const getData = (function() {
             mode: 'cors',
             body: JSON.stringify(values),
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -210,6 +224,7 @@ const getData = (function() {
             mode: 'cors',
             body: JSON.stringify(values),
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -225,6 +240,7 @@ const getData = (function() {
             mode: 'cors',
             body: JSON.stringify(values),
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -239,6 +255,7 @@ const getData = (function() {
             method: 'DELETE',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -254,6 +271,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -270,6 +288,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -285,6 +304,7 @@ const getData = (function() {
             method: 'GET',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -299,6 +319,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -314,6 +335,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -329,6 +351,7 @@ const getData = (function() {
             method: 'PATCH',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -344,6 +367,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -358,6 +382,7 @@ const getData = (function() {
             method: 'GET',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -372,6 +397,7 @@ const getData = (function() {
             method: 'GET',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -386,6 +412,7 @@ const getData = (function() {
             method: 'POST',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             body: JSON.stringify(value),
             headers: {
                 Accept: 'application/json',
@@ -401,6 +428,7 @@ const getData = (function() {
             method: 'DELETE',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -415,6 +443,7 @@ const getData = (function() {
             method: 'get',
             mode: 'cors',
             credentials: "include",
+withCredentials:true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

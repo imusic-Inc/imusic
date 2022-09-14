@@ -39,8 +39,8 @@ useEffect(() => {
         function sendMessage() {
                 if (message.length > 3) {
                 getData.postMessage(`session/${props.id}/messages`, { message }).then((value) => { 
-                        if (value.error) {
-                                notify(value.message);
+                        if (value.error || value.status === '') {
+                                notify(value.message ? value.message : value.status);
                         } else {
                                 setMessages([...messages, { message, user: { name: name } }])    
                                 setmessage("");

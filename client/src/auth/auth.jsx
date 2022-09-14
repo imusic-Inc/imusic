@@ -14,7 +14,6 @@ function Auth(props) {
     const paths = new URLSearchParams(window.location.search);
     const token = paths.get("access_token");
     const refresh = paths.get("refresh_token");
-    const jwt = paths.get("jwt");
 
     if (token && token.length > 10) {
       authenticate(token, refresh);
@@ -59,7 +58,6 @@ function Auth(props) {
         getData.getUserByEmail("users", value.email).then((value) => {
           cookies.set("access_token", tokens);
           cookies.set("refresh_token", refresh);
-          cookies.set("jwt", jwt);
           cookies.set("name", value.name);
           cookies.set("email", value.email);
           cookies.set("uid", value._id);

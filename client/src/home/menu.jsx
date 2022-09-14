@@ -38,13 +38,7 @@ const token = cookies.get('access_token');
         });
 }
 
-    let managSession = <></>;
-
-     if (Manasession === "Join") {
-        managSession = <Join onClick = {hideManasession} />;
-    } else {
-         managSession = <></>;
-     }
+    let managSession = Manasession === "Join"?<Join onClick = {hideManasession} />:<></>;
     
     function hideCreate() {
         setCreate(false);

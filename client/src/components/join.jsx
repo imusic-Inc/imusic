@@ -30,8 +30,8 @@ function Join(props) {
     });
     
         getData.getInvite('invite').then(value1 => {
-            
-            value1.forEach(element => {
+            if (value1) {
+               value1.forEach(element => {
                 const sender = getUser(element.senderId);
                 const session = getSessionById(element.sessionId);
                 Promise.all([sender, session]).then(value => {
@@ -48,7 +48,9 @@ function Join(props) {
                     invites.add(payload)
                     setInvite([...invites].filter((v,i,a)=>a.findLastIndex(v2=>(v2.place === v.place))===i));
                 });
-            });
+            }); 
+            }
+            
               
     })
         

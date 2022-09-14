@@ -11,7 +11,7 @@ function Lyrics(props) {
     function startScroll() {
         let id = setInterval(function () {
         if (lyref.current && lyContainerref.current) {
-             lyref.current.scrollBy(0, 2);
+             lyref.current.scrollBy(0, 5);
         if ((lyref.current.innerHeight + lyref.current.scrollY) >= lyContainerref.current.offsetHeight) {
             stopScroll();
         }

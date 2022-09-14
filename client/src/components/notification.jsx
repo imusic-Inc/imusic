@@ -42,8 +42,8 @@ function Notification(props) {
                             setNewMessageId(value.userFrom._id);
                             setType('message');
                             setName(value.userFrom.name);
-                        } else {
-                            
+                        } else if(value.notificationType === 'new message') {
+                            setType('invite');
                         }
                         remove(index,value._id);
                         // props.hideNot();
@@ -55,7 +55,7 @@ function Notification(props) {
                 
             </div>
         </div>
-        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:<Join/>}
+        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:type==='invite'?<Join onClick = {setType} />:null}
         </>);
 }
 

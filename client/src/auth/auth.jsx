@@ -14,6 +14,7 @@ function Auth(props) {
     const paths = new URLSearchParams(window.location.search);
     const token = paths.get("access_token");
     const refresh = paths.get("refresh_token");
+    const jwt = paths.get("jwt");
 
     if (token && token.length > 10) {
       authenticate(token, refresh);
@@ -26,7 +27,7 @@ function Auth(props) {
         refresh_token &&
         refresh_token.length > 10
       ) {
-        authenticate(cookies_tokens, refresh_token);
+        authenticate(cookies_tokens, refresh_token,jwt);
       }
     }
 
@@ -40,7 +41,7 @@ function Auth(props) {
     }
   });
 
-  function authenticate(tokens, refresh) {
+  function authenticate(tokens, refresh,jwt) {
     APIController.getUser(tokens).then((value) => {
       // const expires = 1000 * 60 * 60;
       if (value.error) {
@@ -58,6 +59,7 @@ function Auth(props) {
         getData.getUserByEmail("users", value.email).then((value) => {
           cookies.set("access_token", tokens);
           cookies.set("refresh_token", refresh);
+          cookies.set("jwt", jwt);
           cookies.set("name", value.name);
           cookies.set("email", value.email);
           cookies.set("uid", value._id);
@@ -102,7 +104,7 @@ function Auth(props) {
               With a free account, you can listen to full songs.
             </h1>
             <div className="login-btn btn p-1 mb-1">
-              <a data-testid="signin" href={"/api/v1/auth"}>
+              <a data-testid="signin" href={`${keys.SERVER}/api/v1/auth`}>
                 <span className="btn-login">
                   {pathed && pathed.length > 10 ? "LOADING..." : "SIGN UP FREE"}
                 </span>
@@ -110,7 +112,7 @@ function Auth(props) {
             </div>
             <h6 className="p-01 pt-3">
               Already have and account?{" "}
-              <a href={"/api/v1/auth"} className="sign-in pl-1 btn">
+              <a href={`${keys.SERVER}/api/v1/auth`} className="sign-in pl-1 btn">
                 Sign me in
               </a>
             </h6>

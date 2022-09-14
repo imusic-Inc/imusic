@@ -13,8 +13,7 @@ function Player(props) {
     const [index, setIndex] = useState(0);
     const ref = useRef(null);
     const [expandlyrics, setexpandlyrics] = useState(true);
-    
-    const token = "";
+
 
     function showLogin() {
         setLogin(false);

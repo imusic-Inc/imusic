@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
 import NewMessage from "../message/newMessage";
-import Join from "./join";
 
 function Notification(props) {
     const [type, setType] = useState('');
@@ -42,8 +40,6 @@ function Notification(props) {
                             setNewMessageId(value.userFrom._id);
                             setType('message');
                             setName(value.userFrom.name);
-                        } else if(value.notificationType === 'new message') {
-                            setType('invite');
                         }
                         remove(index,value._id);
                         // props.hideNot();
@@ -55,7 +51,7 @@ function Notification(props) {
                 
             </div>
         </div>
-        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:type==='invite'?<Join onClick = {setType} />:null}
+        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:null}
         </>);
 }
 

@@ -26,7 +26,7 @@ function Auth(props) {
         refresh_token &&
         refresh_token.length > 10
       ) {
-        authenticate(cookies_tokens, refresh_token,jwt);
+        authenticate(cookies_tokens, refresh_token);
       }
     }
 
@@ -40,7 +40,7 @@ function Auth(props) {
     }
   });
 
-  function authenticate(tokens, refresh,jwt) {
+  function authenticate(tokens, refresh, jwt) {
     APIController.getUser(tokens).then((value) => {
       // const expires = 1000 * 60 * 60;
       if (value.error) {
@@ -110,7 +110,10 @@ function Auth(props) {
             </div>
             <h6 className="p-01 pt-3">
               Already have and account?{" "}
-              <a href={`${keys.SERVER}/api/v1/auth`} className="sign-in pl-1 btn">
+              <a
+                href={`${keys.SERVER}/api/v1/auth`}
+                className="sign-in pl-1 btn"
+              >
                 Sign me in
               </a>
             </h6>

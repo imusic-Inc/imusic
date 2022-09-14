@@ -23,20 +23,26 @@ const helmet = require('helmet');
 const cors = require("cors");
 const compression = require("compression")
 const session = require('express-session')
+const path = require('path')
+
+
 app.enable('trust proxy');
 
-//app.set('trust proxy', 1)
-// app.use(
-//     session({
-//         secret: process.env.SESSION_SECRET,
-//         resave: true,
-//         saveUninitialized: false,
-//         cookie: {
-//             sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-//             secure: process.env.NODE_ENV === "production", // must be true if sameSite='none''
-//         }
-//     })
-// );
+app.set('trust proxy', 1)
+
+
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: false,
+        cookie: {
+            sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+            secure: process.env.NODE_ENV === "production", // must be true if sameSite='none''
+        }
+    })
+);
 // const corsOptions = {
 //     origin: 'https://imusicroom.netlify.app', // frontend server address
 //     credentials: true,
@@ -52,6 +58,18 @@ app.use(helmet());
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
+
+//Development logging
+if (process.env.NODE_ENV === "staging" || process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname + '../client/build/index.html'))
+    });
+
+}
+
+
+
 
 app.use(express.json({ limit: '10kb' }));
 

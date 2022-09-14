@@ -53,6 +53,15 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static('build'));
+    app.get('*', (req, res) => {
+        req.sendFile(path.resolve(__dirname, '../client/build', 'index.html', ))
+
+    })
+}
+
+
 app.use(express.json({ limit: '10kb' }));
 
 //Body Parser, reading data from body into req.body

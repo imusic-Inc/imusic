@@ -167,6 +167,7 @@ const [expandInvite, setExpandInvite] = useState(false);
     // identify spotify ids and imusic room and get the room by id; spotify id are the ones with @spotify
     useEffect(() => {
         uid = cookies.get('uid');
+        document.title = search.get('name');
         if (paths.id) {
             if (paths.id.indexOf('@spotify') >= 0) {
                 const inde = paths.id.indexOf('@spotify');

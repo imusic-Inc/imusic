@@ -11,13 +11,8 @@ function Reducer(state = {}, action) {
             }
             break;
         case 'current-play-single':
-            if (state.single) {
-                const set  = new Set([...action.payload])
-                state = {...state, 'single':[...set]}
-            } else {
-                const set = new Set([...action.payload]);
-                state = {...state, 'single':[...set]}
-            }
+            const set1  = new Set([...action.payload])
+            state = {...state, 'single':[...set1]}
             break;
         case 'add-to-playlist':
             if (state.addToPlayList) {
@@ -45,7 +40,8 @@ function Reducer(state = {}, action) {
                 state = {}
             }
             break;
-        default:
+        case 'clear':
+            state = {};
             break;
     }
 

@@ -30,10 +30,10 @@ function stopScroll() {
         if (props.playing) {
         setTimeout(() => {
                 scrollerHandler = startScroll();
-        }, 20000);
+        }, 50000);
         } else {
-                stopScroll();
-            }
+             stopScroll();
+        }
 
         APIController.getLyrics(props.auth, props.name).then(value => {
             if (value) {

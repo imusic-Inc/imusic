@@ -110,7 +110,10 @@ function Auth(props) {
             </div>
             <h6 className="p-01 pt-3">
               Already have and account?{" "}
-              <a href={`${keys.SERVER}/api/v1/auth`} className="sign-in pl-1 btn">
+              <a
+                href={`${keys.SERVER}/api/v1/auth`}
+                className="sign-in pl-1 btn"
+              >
                 Sign me in
               </a>
             </h6>

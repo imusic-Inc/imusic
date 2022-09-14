@@ -43,13 +43,13 @@ app.use(
         }
     })
 );
-// const corsOptions = {
-//     origin: 'https://imusicroom.netlify.app', // frontend server address
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// }
+const corsOptions = {
+    origin: 'https://imusicroom.netlify.app', // frontend server address
+    credentials: true,
+    optionsSuccessStatus: 200
+}
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Set security HTTP headers
 app.use(helmet());
@@ -59,14 +59,11 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-//Development logging
-if (process.env.NODE_ENV === "staging" || process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname + '../client/build/index.html'))
-    });
+// //Development logging
+// if (process.env.NODE_ENV === "staging" || process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, '/public')));
 
-}
+// }
 
 
 

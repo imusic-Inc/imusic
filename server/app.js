@@ -22,19 +22,31 @@ const morgan = require("morgan");
 const helmet = require('helmet');
 const cors = require("cors");
 const compression = require("compression")
+const session = require('express-session')
+app.enable('trust proxy');
 
+//app.set('trust proxy', 1)
+// app.use(
+//     session({
+//         secret: process.env.SESSION_SECRET,
+//         resave: true,
+//         saveUninitialized: false,
+//         cookie: {
+//             sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+//             secure: process.env.NODE_ENV === "production", // must be true if sameSite='none''
+//         }
+//     })
+// );
+// const corsOptions = {
+//     origin: 'https://imusicroom.netlify.app', // frontend server address
+//     credentials: true,
+//     optionsSuccessStatus: 200
+// }
+
+app.use(cors());
 
 // Set security HTTP headers
 app.use(helmet());
-
-
-const corsOptions = {
-    origin: 'http://localhost:3000', // frontend server address
-    credentials: true,
-    optionsSuccessStatus: 200
-}
-
-app.use(cors());
 
 //Development logging
 if (process.env.NODE_ENV === "development") {

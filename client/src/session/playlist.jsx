@@ -55,7 +55,7 @@ function MyMessage({ value,isAdmin,type,id }) {
           
               <div className="messages-list"> 
                   
-                  <div onClick={addAll} style={{display:type==='private'?isAdmin?'block':'none':'block'}} className="bg-danger p-1 text-center btn">
+                  <div onClick={addAll} style={{display:type==='private'?isAdmin?'block':'none':'block'}} className="bg-danger p-01 text-center btn">
                       Add All To Query
                   </div>
 

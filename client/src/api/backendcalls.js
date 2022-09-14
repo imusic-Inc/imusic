@@ -376,7 +376,36 @@ const getData = (function() {
             },
         });
         const data = await result.json();
-        return data.data.notifications;
+        return data;
+    }
+
+    const __createNotification = async(path, value = {}) => {
+        const result = await fetch(link + path, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: "include",
+            body: JSON.stringify(value),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+    const __deleteNotification = async(id) => {
+        const result = await fetch('notification/clear/' + id, {
+            method: 'DELETE',
+            mode: 'cors',
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
     }
 
     const __RefreshToken = async() => {
@@ -472,6 +501,12 @@ const getData = (function() {
         },
         getNotification(path) {
             return __getNotification(path)
+        },
+        createNotification(path, data) {
+            return __createNotification(path, data);
+        },
+        deleteNotification(path) {
+            return __deleteNotification(path)
         }
     }
 })();

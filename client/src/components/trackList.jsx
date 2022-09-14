@@ -18,11 +18,11 @@ function TrackList(props) {
         store.dispatch(payload);
 }
 
-    return (<div className="flex-row flex-center b-r-1 flex-space p-01">
-        <div className="flex-row flex-center">
+    return (<div className="flex-row flex-center b-r-1 flex-space p-1 pr-2">
+        <div className="flex-row flex-center flex-space">
         <img className="b-r-01" src={props.values.album.images[0].url} alt={props.values.name} width="50" height="50" srcSet=""/>
         <div className="pl-1">
-            <h5 className="opacity-8">{props.values.name.substring(0,70)}</h5>
+            <h5 className="opacity-8">{props.values.name.substring(0,60)}</h5>
             <small className="opacity-6 font-size-08">{props.values.album.artists[0].name}</small>
         </div>
     </div>

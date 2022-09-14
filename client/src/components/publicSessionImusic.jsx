@@ -1,6 +1,5 @@
 import { memo, useState,useEffect } from "react"; 
 import Session from "./session";
-import {NavLink} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import getData from '../api/backendcalls';
 import PassCode from "./passcode";

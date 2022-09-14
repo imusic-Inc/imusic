@@ -9,7 +9,18 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
-
+.admin{
+  font-size: 0.7em;
+  color: rgb(44, 86, 44);
+  border: solid rgb(188, 185, 185) 2px;
+  padding: 6px;
+  margin-left: 10px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px var(--secondary);
   -webkit-box-shadow: inset 0 0 6px var(--secondary);
@@ -264,6 +275,9 @@ h3 {
 
 .pt-01 {
   padding-top: 0.5rem;
+}
+.pb-01 {
+  padding-bottom: 0.5rem;
 }
 
 .flex-1 {

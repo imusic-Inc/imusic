@@ -32,7 +32,7 @@ function Invite(props) {
     },[search,source]);
 
 
-    return (<div className='invite bg-default p-1'>
+    return (<div className='invite bg-default b-r-1 p-1'>
         <h1 className='text-right pr-1 pt-01 btn' >
             <svg  onClick={props.show} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor"
                 className="mercado-match close" width="16" height="16" focusable="false">
@@ -44,13 +44,13 @@ function Invite(props) {
                 <h4>Invite friend to join this music room</h4>
                 <div className="flex-row flex-center" >
                     <input type="text" className="playSearch" value={search} onChange={(event)=>setSearch(event.currentTarget.value)} placeholder="&#9835; Search by username or email" name="search" id="playSearch" />
-                    <div onClick={reset} className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 mt-01">
+                    <div onClick={reset} className="addPlayList bg-white text-primary btn pt-01 pl-1 ml-1 btn-default mt-01">
                         Reset
                     </div>
                 </div>
             </div>
             <div className='playList-list-save'>
-                {users.length>0?users.map(value=><InviteList key={ value._id} track={value.name} by={value.email} image={value.photo} id={props.id} />):<SearchLoading/>}
+                {users.length > 0 ? users.map(value => <InviteList key={value._id} track={value.name} by={value.email} toId={value.id} image={value.photo} id={props.id} />):<SearchLoading/>}
             </div>
         </div>
     </div>);

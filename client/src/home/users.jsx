@@ -71,7 +71,7 @@ useEffect(() => {
 
         </div>
       </div>
-      <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder="&#8486; Username or Email" name="name"/>
+      <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder="Username or Email" name="name"/>
           <hr className="opacity-6" />
           <div className="messages-list"> 
               {searced.length > 0 ? searced.map((value,index) =>

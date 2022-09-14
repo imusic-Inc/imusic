@@ -204,7 +204,7 @@ pauseOnHover
   }}
       />:<>Loading...</>}
       
-      {isplaying?<Lyrics  name={lyris.length > 0 ? lyris[0].name:""} auth={lyris.length > 0 ? lyris[0].auth:""} show = {show} />:<></>}
+      {isplaying?<Lyrics  name={lyris.length > 0 ? lyris[0].name:""} playing={isplaying} auth={lyris.length > 0 ? lyris[0].auth:""} show = {show} />:<></>}
     </div>
 </>
    

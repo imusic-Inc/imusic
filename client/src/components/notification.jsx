@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,useState } from "react";
+import getData from "../api/backendcalls";
 import NewMessage from "../message/newMessage";
 
 function Notification(props) {
@@ -17,9 +17,10 @@ function Notification(props) {
         setType('');
     }
 
-    function remove(indexed) {
+    function remove(indexed,id) {
         const newNoti = notifications.filter((value, index) => index !== indexed);
         setNotifications(newNoti);
+        getData.deleteNotification(id);
     }
 
     return (
@@ -39,8 +40,8 @@ function Notification(props) {
                             setNewMessageId(value.userFrom._id);
                             setType('message');
                             setName(value.userFrom.name);
-                            remove(index);
                         }
+                        remove(index,value._id);
                         // props.hideNot();
                 }} className="pl-1 card-column b-r-1 p-1 btn">
                     <h4>{value.notificationType}</h4>

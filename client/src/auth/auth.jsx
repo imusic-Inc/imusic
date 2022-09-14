@@ -97,38 +97,6 @@ function Auth(props) {
             />
           </div>
 
-<<<<<<< HEAD
-    return( <div className='logIn-alert'>
-                <div className='login-card p-2 pb-3'>
-                    <div >
-                        <svg  className='btn' onClick={props.show} style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
-    <path fill="currentColor" d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z" />
-</svg>
-                </div>
-                    <div className=' flex-row flex-center'>
-                    
-                    <div className='flex-1 p-2 auth-image'>
-                        <img className='login-image' src="https://images.unsplash.com/photo-1661664492724-dd5cec84afa8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt=""  width='100%'/>
-                </div>
-                
-                     <div className='flex-1 '>
-                        <h1 className='p-1 auth-h1'>With a free account, you can listen to full songs.</h1>
-                        <div className='login-btn btn p-1 mb-1'>
-                        <a data-testid="signin" href={`${keys.SERVER}/api/v1/auth`}>
-                            <span className='btn-login'>
-                               {pathed && pathed.length>10? "LOADING...":"SIGN UP FREE"}
-                        </span>
-                        </a>   
-                        
-                        
-                        </div>
-                        <h6 className='p-01 pt-3'>Already have and account? <a href={`${keys.SERVER}/api/v1/auth`} className='sign-in pl-1 btn'>Sign me in</a></h6>
-                    </div>
-                </div>
-                </div>
-                
-            </div>)
-=======
           <div className="flex-1 ">
             <h1 className="p-1 auth-h1">
               With a free account, you can listen to full songs.
@@ -151,6 +119,5 @@ function Auth(props) {
       </div>
     </div>
   );
->>>>>>> 697af0a80c94954e0f2244ee6d2d0695dddd723c
 }
 export default Auth;

@@ -26,7 +26,7 @@ function Auth(props) {
         refresh_token &&
         refresh_token.length > 10
       ) {
-        authenticate(cookies_tokens, refresh_token,jwt);
+        authenticate(cookies_tokens, refresh_token);
       }
     }
 
@@ -40,7 +40,7 @@ function Auth(props) {
     }
   });
 
-  function authenticate(tokens, refresh,jwt) {
+  function authenticate(tokens, refresh) {
     APIController.getUser(tokens).then((value) => {
       // const expires = 1000 * 60 * 60;
       if (value.error) {

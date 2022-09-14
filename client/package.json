@@ -1,8 +1,6 @@
 {
     "name": "imusic",
     "version": "0.1.0",
-    "hostname": "https://imusicroom.netlify.app",
-    "proxy": "",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.5",

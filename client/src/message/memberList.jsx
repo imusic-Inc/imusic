@@ -3,9 +3,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 function MemberList(props) {
 
-    console.log(props);
-
-
  const notify = (message) => {
         toast.info(message, {
             autoClose: 2000,

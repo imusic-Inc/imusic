@@ -30,7 +30,7 @@ function stopScroll() {
         if (props.playing) {
         setTimeout(() => {
                 scrollerHandler = startScroll();
-        }, 50000);
+        }, 40000);
         } else {
              stopScroll();
         }

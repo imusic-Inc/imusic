@@ -31,7 +31,6 @@ function Auth(props) {
     }
 
     if (pathed && pathed.length > 10 && userName && userName.length > 3) {
-      console.log("here");
       if (window.location.href.includes("login")) {
         navigate("../home", { replace: true });
       } else {

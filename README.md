@@ -24,11 +24,12 @@ A user can create a music playing session (iMusic Room). A playing session can e
 7. Get/Generate a shareable link that can be forwarded to WhatsApp/fb etc.
 
 ## Screenshots
-<img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-41-22 IMusic Room.png">
 <img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-46-48 IMusic Room.png">
-<img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-43-01 Friday Night.png">
-<img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-45-42 Until The End Of Time.png">
-<img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-42-28 Friday Night.png">
+<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-15-38 Rising Sun.png">
+
+<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-24 Friday Night.png">
+<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-38 Friday Night.png">
+
 
 ## Contributors
 
@@ -42,3 +43,7 @@ A user can create a music playing session (iMusic Room). A playing session can e
 
 ### [John Tekpor Dzikunu ](https://github.com/JudeEdemNyahe)
 > Full-Stack Developer
+
+<br/>
+
+[Edit Page](https://github.com/imusic-Inc/imusic/edit/main/README.md)

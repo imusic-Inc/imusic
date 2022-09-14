@@ -1,3 +1,5 @@
+import keys from "./keys";
+
 export function notificationShow(message, title) {
 
     if (!("Notification" in window)) {

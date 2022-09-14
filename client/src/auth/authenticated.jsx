@@ -58,7 +58,7 @@ function Auth() {
                 stroke="currentColor" stroke-strokeLinecap="round" strokeLinejoin="round" fill="white"></path>
             </svg>
         <div className="flex-row flex-center justify-center btn">
-            <img className="cirle-3 bg-secondary ml-1" src="https://ui-avatars.com/api/?background=random" width="100%" height="100%" alt="" />
+            <img className="cirle-3 bg-secondary ml-1" src={"https://ui-avatars.com/api/?name="+name} width="100%" height="100%" alt="" />
             <div className="pl-1">
                     <h4>{ name }</h4>
                     <small>{ email }</small>

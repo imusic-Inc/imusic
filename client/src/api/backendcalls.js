@@ -67,8 +67,8 @@ const getData = (function() {
         return data.data.doc;
     }
 
-    const __getUserById = async(path,id) => {
-        const result = await fetch(link + path+'/' + id, {
+    const __getUserById = async(path, id) => {
+        const result = await fetch(link + path + '/' + id, {
             method: 'get',
             credentials: "include",
             headers: {
@@ -173,7 +173,7 @@ const getData = (function() {
     }
 
     const __UpdateSession = async(path, values = {}) => {
-        const result = await fetch(link + 'session/' +  path, {
+        const result = await fetch(link + 'session/' + path, {
             method: 'PATCH',
             mode: 'cors',
             body: JSON.stringify(values),
@@ -247,7 +247,7 @@ const getData = (function() {
     }
 
 
-     const __startMessage = async(path,value={}) => {
+    const __startMessage = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -263,7 +263,7 @@ const getData = (function() {
     }
 
 
-    const __getMessage_id = async(path,value={}) => {
+    const __getMessage_id = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -279,7 +279,7 @@ const getData = (function() {
     }
 
     const __getMessage = async(id) => {
-        const result = await fetch(link + 'privateMessage/get/'+id, {
+        const result = await fetch(link + 'privateMessage/get/' + id, {
             method: 'GET',
             mode: 'cors',
             credentials: "include",
@@ -292,7 +292,7 @@ const getData = (function() {
         return data;
     }
 
-     const __addMessage = async(path,value={}) => {
+    const __addMessage = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -307,7 +307,7 @@ const getData = (function() {
         return data;
     }
 
-    const __inviteUser = async(path,value={}) => {
+    const __inviteUser = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -322,7 +322,7 @@ const getData = (function() {
         return data;
     }
 
-    const __acceptInvite = async(path,value={}) => {
+    const __acceptInvite = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'PATCH',
             mode: 'cors',
@@ -337,7 +337,7 @@ const getData = (function() {
         return data;
     }
 
-    const __rejectInvite = async(path,value={}) => {
+    const __rejectInvite = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -351,7 +351,7 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
-     const __getInvite = async(path) => {
+    const __getInvite = async(path) => {
         const result = await fetch(link + path, {
             method: 'GET',
             mode: 'cors',
@@ -365,7 +365,7 @@ const getData = (function() {
         return data;
     }
 
-    const __getNotification = async (path) => {
+    const __getNotification = async(path) => {
         const result = await fetch(link + path, {
             method: 'GET',
             mode: 'cors',
@@ -378,8 +378,8 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
-    
-    const __createNotification = async (path,value={}) => {
+
+    const __createNotification = async(path, value = {}) => {
         const result = await fetch(link + path, {
             method: 'POST',
             mode: 'cors',
@@ -393,9 +393,9 @@ const getData = (function() {
         const data = await result.json();
         return data;
     }
-    
-    const __deleteNotification = async (id) => {
-        const result = await fetch('notification/clear/'+id, {
+
+    const __deleteNotification = async(id) => {
+        const result = await fetch('notification/clear/' + id, {
             method: 'DELETE',
             mode: 'cors',
             credentials: "include",
@@ -406,8 +406,8 @@ const getData = (function() {
         });
         const data = await result.json();
         return data;
-     }
-    
+    }
+
     const __RefreshToken = async() => {
         const result = await fetch(link + 'refreshToken', {
             method: 'get',
@@ -438,8 +438,9 @@ const getData = (function() {
         },
         getUser(path) {
             return __getUser(path);
-        },getUserById(path,id) {
-            return __getUserById(path,id);
+        },
+        getUserById(path, id) {
+            return __getUserById(path, id);
         },
         joinPublicSession(path) {
             return __joinPublicSession(path);
@@ -474,34 +475,34 @@ const getData = (function() {
         refreshToken() {
             return __RefreshToken();
         },
-        startMessage(path,data) {
-            return __startMessage(path,data);
+        startMessage(path, data) {
+            return __startMessage(path, data);
         },
-        getMessage_id(path,data) {
-            return __getMessage_id(path,data);
+        getMessage_id(path, data) {
+            return __getMessage_id(path, data);
         },
         getMessage(id) {
             return __getMessage(id);
         },
-         addMessage(path,data) {
-            return __addMessage(path,data);
+        addMessage(path, data) {
+            return __addMessage(path, data);
         },
-         getInvite(path) {
+        getInvite(path) {
             return __getInvite(path);
         },
-        rejectInvite(path,data) {
-             return __rejectInvite(path,data)
+        rejectInvite(path, data) {
+            return __rejectInvite(path, data)
         },
-        inviteUser(path,data) {
-            return __inviteUser(path,data)
+        inviteUser(path, data) {
+            return __inviteUser(path, data)
         },
-        update(path,data) {
-            return __UpdateSession(path,data)
+        update(path, data) {
+            return __UpdateSession(path, data)
         },
         getNotification(path) {
             return __getNotification(path)
         },
-        createNotification(path,data) {
+        createNotification(path, data) {
             return __createNotification(path, data);
         },
         deleteNotification(path) {

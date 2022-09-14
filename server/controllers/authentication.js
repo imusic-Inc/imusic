@@ -153,7 +153,7 @@ exports.logout = (req, res) => {
 //for rendering and checking user authentication status, no error!
 exports.isLoggedIn = async(req, res, next) => {
 
-
+    console.log('hello', req.cookies)
     if (req.cookies.jwt) {
 
         try {
@@ -177,6 +177,8 @@ exports.isLoggedIn = async(req, res, next) => {
             // THERE IS A LOGGED IN USER
             res.locals.user = currentUser;
             req.user = currentUser
+
+            console.log(req.user)
             return next();
         } catch (err) {
             return next();

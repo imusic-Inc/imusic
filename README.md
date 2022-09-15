@@ -1,5 +1,5 @@
 
-# [<img src="client/public/images/logo.png">](https://imusicroom.netlify.app)
+# [<img src="server/client/public/images/logo.png">](https://imusicroom.netlify.app)
 In the middle of a pandemic where it is best for people to stay isolated. A client wants to build a collaborative music listening application where users from around the world can come together and have fun listening to music right from the comfort of their homes whilst they interact with each other.
 
 ### Where
@@ -24,11 +24,11 @@ A user can create a music playing session (iMusic Room). A playing session can e
 7. Get/Generate a shareable link that can be forwarded to WhatsApp/fb etc.
 
 ## Screenshots
-<img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-46-48 IMusic Room.png">
-<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-15-38 Rising Sun.png">
+<img src="server/client/public/images/screenshots/Screenshot 2022-09-12 at 07-46-48 IMusic Room.png">
+<img src="server/client/public/images/screenshots/Screenshot 2022-09-14 at 07-15-38 Rising Sun.png">
 
-<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-24 Friday Night.png">
-<img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-38 Friday Night.png">
+<img src="server/client/public/images/screenshots/Screenshot 2022-09-14 at 07-17-29 Kwaku the Traveller.png">
+<img src="server/client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-24 Friday Night.png">
 
 
 ## Contributors

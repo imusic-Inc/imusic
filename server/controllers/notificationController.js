@@ -30,7 +30,7 @@ exports.createNotifications = hookAsync(async(req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        results: notifications.length,
+        //results: notifications.length,
         data: {
             notifications
         }

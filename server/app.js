@@ -28,9 +28,10 @@ const path = require('path')
 
 app.enable('trust proxy');
 
-app.set('trust proxy', 1)
+//app.set('trust proxy', 1)
 
 
+app.use(cookieParser());
 
 app.use(
     session({
@@ -73,10 +74,10 @@ app.use(express.json({ limit: '10kb' }));
 
 //Body Parser, reading data from body into req.body
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 
-app.use(cookieParser());
+
 
 //Data sanitization against nosql query injection
 app.use(monogoSanitize());

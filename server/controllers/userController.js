@@ -1,6 +1,4 @@
-const APIFeatures = require("../utils/apiFeatures");
 const User = require("./../models/userModel");
-const hookAsync = require('./../utils/hookAsync');
 const factory = require('./handlerFactory');
 
 

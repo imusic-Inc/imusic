@@ -23,7 +23,6 @@ const helmet = require('helmet');
 const cors = require("cors");
 const compression = require("compression")
 const session = require('express-session')
-const path = require('path')
 
 
 app.enable('trust proxy');
@@ -43,13 +42,25 @@ app.use(
         }
     })
 );
-const corsOptions = {
-    origin: 'https://imusicroom.netlify.app', // frontend server address
-    credentials: true,
-    optionsSuccessStatus: 200
+
+var whitelist = ['https://imusicroom.netlify.app', 'https://imusicroom.herokuapp.com', 'http://localhost:3000']
+var corsOptionsDelegate = function(req, callback) {
+    var corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = {
+                origin: true,
+                credentials: true,
+                optionsSuccessStatus: 200
+            } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions)
 }
 
-app.use(cors(corsOptions));
+
+
+app.use(cors(corsOptionsDelegate));
 
 // Set security HTTP headers
 app.use(helmet());
@@ -58,12 +69,6 @@ app.use(helmet());
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
-
-// //Development logging
-// if (process.env.NODE_ENV === "staging" || process.env.NODE_ENV === "production") {
-//     app.use(express.static(path.join(__dirname, '/public')));
-
-// }
 
 
 

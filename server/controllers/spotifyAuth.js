@@ -22,7 +22,7 @@ const createSendToken = (user, req, res, ) => {
         ),
         sameSite: "none",
         secure: true,
-        domain: "https://imusicroom.netlify.app",
+        domain: "http://localhost:3000",
         httpOnly: true,
         secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
     });

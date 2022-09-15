@@ -3,6 +3,24 @@ import keys from "./keys";
 const getData = (function() {
     const link = `${keys.SERVER}/api/v1/`
 
+
+
+
+    const __getAuth = async(path) => {
+        const result = await fetch(link + path, {
+            method: 'get',
+            credentials: "include",
+            withCredentials:true,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await result.json();
+        return data;
+    }
+
+
     const __getSession = async(path) => {
 
         const result = await fetch(link + path, {
@@ -455,7 +473,10 @@ withCredentials:true,
 
 
     return {
-        getSession(path) {
+        getAuth(path) {
+            return __getAuth(path);
+        },
+         getSession(path) {
             return __getSession(path);
         },
         getSessionByType(path, type) {

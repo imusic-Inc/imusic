@@ -25,7 +25,12 @@ function PassCode(props) {
                     };
                     notify(value.message);
                 }
-                notify(value.status);
+                if (value.message) {
+                    notify(value.message);
+                } else {
+                    notify(value.status);
+                }
+                
             });
         } else {
              notify('Wrong pass code');

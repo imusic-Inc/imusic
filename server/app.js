@@ -34,7 +34,8 @@ app.set('trust proxy', 1)
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
+        // secret: process.env.SESSION_SECRET,
+        secret: '06vUSNEzq1z9U476UrMEx7xIOPGYfu2m',
         resave: true,
         saveUninitialized: false,
         cookie: {
@@ -43,13 +44,13 @@ app.use(
         }
     })
 );
-const corsOptions = {
-    origin: 'https://imusicroom.netlify.app', // frontend server address
-    credentials: true,
-    optionsSuccessStatus: 200
-}
+// const corsOptions = {
+//     origin: 'http://localhost:3000/', // frontend server address
+//     credentials: true,
+//     optionsSuccessStatus: 200
+// }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Set security HTTP headers
 app.use(helmet());
@@ -108,6 +109,8 @@ app.use((req, res, next) => {
 });
 
 
+
+
 // 3) ROUTES
 app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
@@ -118,17 +121,25 @@ app.use('/api/v1/privateMessage', privateMessageRouter);
 app.use('/api/v1/invite', inviteRouter);
 app.use('/api/v1/notification', notificationRouter);
 
-app.all('*', (req, res, next) => {
-    // res.status(404).json({
-    //     status: 'fail',
-    //     message: `Can't find ${req.originalUrl} on this server`
-    // })
-    // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
-    // err.status = 'fail';
-    // err.statusCode = 404;
+app.use(express.static(path.resolve(__dirname, './client/build')));
+// Handle GET requests to /api route
 
-    next(new AppError(`Can't find ${req.originalUrl} on this server`), 404);
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
+
+// app.all('*', (req, res, next) => {
+//     // res.status(404).json({
+//     //     status: 'fail',
+//     //     message: `Can't find ${req.originalUrl} on this server`
+//     // })
+//     // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
+//     // err.status = 'fail';
+//     // err.statusCode = 404;
+
+//     next(new AppError(`Can't find ${req.originalUrl} on this server`), 404);
+// });
 
 app.use(globalErrorhandler);
 

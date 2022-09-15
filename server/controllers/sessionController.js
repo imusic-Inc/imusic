@@ -1,4 +1,3 @@
-const APIFeatures = require('../utils/apiFeatures');
 const Session = require('../models/sessionRoom');
 const sessionModel = require('../models/sessionRoom');
 const hookAsync = require('./../utils/hookAsync');

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Session = require('./sessionRoom')
-    //parent  referencing
+
+//parent  referencing
 
 const messageSchema = new mongoose.Schema({
     message: {

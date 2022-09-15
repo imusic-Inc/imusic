@@ -34,7 +34,7 @@ app.set('trust proxy', 1)
 
 app.use(
     session({
-        secret: "process.env.SESSION_SECRET",
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: false,
         cookie: {
@@ -44,7 +44,7 @@ app.use(
     })
 );
 const corsOptions = {
-    origin: 'http://localhost:3000', // frontend server address//
+    origin: 'https://imusicroom.netlify.app', // frontend server address
     credentials: true,
     optionsSuccessStatus: 200
 }

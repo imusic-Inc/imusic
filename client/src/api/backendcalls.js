@@ -364,21 +364,21 @@ withCredentials:true,
         return data;
     }
 
-    const __acceptInvite = async(path, value = {}) => {
-        const result = await fetch(link + path, {
-            method: 'PATCH',
-            mode: 'cors',
-            credentials: "include",
-withCredentials:true,
-            body: JSON.stringify(value),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await result.json();
-        return data;
-    }
+//     const __acceptInvite = async(path, value = {}) => {
+//         const result = await fetch(link + path, {
+//             method: 'PATCH',
+//             mode: 'cors',
+//             credentials: "include",
+// withCredentials:true,
+//             body: JSON.stringify(value),
+//             headers: {
+//                 Accept: 'application/json',
+//                 'Content-Type': 'application/json',
+//             },
+//         });
+//         const data = await result.json();
+//         return data;
+//     }
 
     const __rejectInvite = async(path, value = {}) => {
         const result = await fetch(link + path, {

@@ -1,5 +1,3 @@
-import keys from "./keys";
-
 export function notificationShow(message, title) {
 
     if (!("Notification" in window)) {
@@ -15,7 +13,7 @@ export function notificationShow(message, title) {
 
         notification.onclick = (event) => {
             event.preventDefault();
-            window.open('/home?n=vs-1dts', '_self');
+            window.open('./home?n=vs-1dts', '_self');
         };
 
     } else if (Notification.permission !== "denied") {
@@ -30,7 +28,7 @@ export function notificationShow(message, title) {
 
                 notification.onclick = (event) => {
                     event.preventDefault();
-                    window.open('/home?n=vs-1dts', '_self');
+                    window.open('./home?n=vs-1dts', '_self');
                 };
 
             }

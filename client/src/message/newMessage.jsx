@@ -121,7 +121,7 @@ pauseOnHover
             <div className="income-messages-list">
 
                     {messages.map(value => {
-                      return  <Message value={{user:{ name: value.name },message: value.message}}><hr className="opacity-6" /></Message>
+                      return  <Message  key={Math.random()} value={{user:{ name: value.name },message: value.message}}><hr className="opacity-6" /></Message>
                     })}
                 
                 <br /><br /><br />

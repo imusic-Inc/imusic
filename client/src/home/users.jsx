@@ -77,7 +77,7 @@ useEffect(() => {
               {searced.length > 0 ? searced.map((value,index) =>
               {/* showing only 20 users */
                   if (index < 20) {
-                      return <MemberList value={value} showMessage={showManasession} />
+                      return <MemberList key={value._id} value={value} showMessage={showManasession} />
                   }
               }
               

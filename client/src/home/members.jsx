@@ -69,7 +69,7 @@ function Members(props) {
       <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder="Username or Email" name="name"/>
           <hr className="opacity-6" />
           <div className="messages-list"> 
-              {searced.length>0 ? searced.map(value => <MemberList owerId={props.ownerId} value={ value } showMessage={showManasession} />):null}
+              {searced.length>0 ? searced.map(value => <MemberList key={value._id} owerId={props.ownerId} value={ value } showMessage={showManasession} />):null}
           </div>
       </div>
       {showNewMessage ? <NewMessage show={hideManasession} id={NewMessageId} name={NewMessageReciever} />:<></>}

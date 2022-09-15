@@ -43,6 +43,9 @@ function Reducer(state = {}, action) {
         case 'clear':
             state = {};
             break;
+        default:
+            
+            break;
     }
 
     return state;

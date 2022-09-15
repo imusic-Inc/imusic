@@ -75,7 +75,7 @@ pauseOnHover
                 <div className='active-list p-01'>
 
         <div className="list">
-                                        {messages.map(value => <Message value={value} />)}
+                                        {messages.map(value => <Message key={value._id} value={value} />)}
                                         <br />
 </div>
 <div className="chat-send-active">

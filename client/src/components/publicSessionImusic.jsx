@@ -65,9 +65,9 @@ pauseOnHover
             <h3 className="pt-1">{props.name}</h3>
             <div className="flex-row p-session hide-scrollbar">
                 {sessions.map(value => {
-                    return props.type === 'private' ? <div onClick={() => { 
+                    return props.type === 'private' ? <div key={value._id} onClick={() => { 
                         show(value.id);
-                    }}> <Session name={value.name}  info={value.description} image={value.now_playing.image} key={value.id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.now_playing.image} key={value.id} /></div> 
+                    }}> <Session name={value.name}   info={value.description} image={value.now_playing.image} key={value._id} /></div>: <div  onClick={()=>joinsession("/room/"+value.id+'?type='+props.type+'&name='+value.name,value.id)} ><Session name={value.name} info={value.description} image={value.now_playing.image} key={value.id} /></div> 
               })}
             </div>
             </div>}

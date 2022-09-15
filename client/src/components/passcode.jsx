@@ -17,13 +17,14 @@ function PassCode(props) {
         if (password && password.length > 4) {
              notify("Joining room, Please wait...");
             getData.joinPrivateSession(`session/${props.pass}/session`, { lock: password }).then(value => {
-                if (value.status === 'success') {
+                console.log(value);
+                if (value.status !== "fail") {
+                    notify(value.status);
                     navigate(props.link + '&v=' + generateRandomString(5), { replace: false });
                     props.show();
                     if (props.invite) {
                         props.declineFun(props.invite);
                     };
-                    notify(value.message);
                 }
                 if (value.message) {
                     notify(value.message);

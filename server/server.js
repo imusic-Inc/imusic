@@ -1,6 +1,6 @@
 const dotenv = require('dotenv')
 const mongoose = require('mongoose') //for manipulating our mongodb
-const socketio = require('socket.io')
+// const socketio = require('socket.io')
 
 dotenv.config({ path: './config.env' }) // retrieving protected variables from config file
 

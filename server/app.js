@@ -28,29 +28,19 @@ const path = require('path')
 
 app.enable('trust proxy');
 
-app.set('trust proxy', 1)
+//app.set('trust proxy', 1)
 
 
+app.use(cookieParser());
 
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: true,
-        saveUninitialized: false,
-        cookie: {
-            sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-            secure: process.env.NODE_ENV === "production", // must be true if sameSite='none''
-        }
-    })
-);
 const corsOptions = {
-    origin: 'https://imusicroom.netlify.app', // frontend server address
+    origin: 'https://imusicroom.herokuapp.com', // frontend server address
     credentials: true,
     optionsSuccessStatus: 200
 }
 
 app.use(cors(corsOptions));
-
+app.options('*', cors());
 // Set security HTTP headers
 app.use(helmet());
 
@@ -72,10 +62,10 @@ app.use(express.json({ limit: '10kb' }));
 
 //Body Parser, reading data from body into req.body
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 
-app.use(cookieParser());
+
 
 //Data sanitization against nosql query injection
 app.use(monogoSanitize());

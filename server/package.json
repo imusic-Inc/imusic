@@ -30,11 +30,12 @@
         "node-fetch": "^2.6.7",
         "node-localstorage": "^2.2.1",
         "querystring": "^0.2.1",
+        "socket.io": "^4.5.2",
         "uuid4": "^2.0.3",
         "validator": "^13.7.0",
         "xss-clean": "^0.1.1"
     },
     "engines": {
-        "node": "^16"
+        "node": ">=10.0.0"
     }
 }

@@ -1,7 +1,7 @@
 import keys from "./keys";
 
 const getData = (function() {
-    const link = `${keys.SERVER}/api/v1/`
+    const link = `https://amalitech-imusic.herokuapp.com/api/v1/`
 
 
 

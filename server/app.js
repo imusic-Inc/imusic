@@ -28,15 +28,13 @@ const path = require('path')
 
 app.enable('trust proxy');
 
-//app.set('trust proxy', 1)
+app.set('trust proxy', 1)
 
 
-app.use(cookieParser());
 
 app.use(
     session({
-        // secret: process.env.SESSION_SECRET,
-        secret: '06vUSNEzq1z9U476UrMEx7xIOPGYfu2m',
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: false,
         cookie: {
@@ -45,13 +43,13 @@ app.use(
         }
     })
 );
-// const corsOptions = {
-//     origin: 'http://localhost:3000/', // frontend server address
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// }
+const corsOptions = {
+    origin: 'https://imusicroom.netlify.app', // frontend server address
+    credentials: true,
+    optionsSuccessStatus: 200
+}
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Set security HTTP headers
 app.use(helmet());
@@ -74,10 +72,10 @@ app.use(express.json({ limit: '10kb' }));
 
 //Body Parser, reading data from body into req.body
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 
-
+app.use(cookieParser());
 
 //Data sanitization against nosql query injection
 app.use(monogoSanitize());
@@ -110,8 +108,6 @@ app.use((req, res, next) => {
 });
 
 
-
-
 // 3) ROUTES
 app.use("/api/v1/auth", spotifyAuth)
 app.use("/api/v1/session", sessionRouter)
@@ -122,25 +118,17 @@ app.use('/api/v1/privateMessage', privateMessageRouter);
 app.use('/api/v1/invite', inviteRouter);
 app.use('/api/v1/notification', notificationRouter);
 
-app.use(express.static(path.resolve(__dirname, './client/build')));
-// Handle GET requests to /api route
+app.all('*', (req, res, next) => {
+    // res.status(404).json({
+    //     status: 'fail',
+    //     message: `Can't find ${req.originalUrl} on this server`
+    // })
+    // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
+    // err.status = 'fail';
+    // err.statusCode = 404;
 
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    next(new AppError(`Can't find ${req.originalUrl} on this server`), 404);
 });
-
-// app.all('*', (req, res, next) => {
-//     // res.status(404).json({
-//     //     status: 'fail',
-//     //     message: `Can't find ${req.originalUrl} on this server`
-//     // })
-//     // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
-//     // err.status = 'fail';
-//     // err.statusCode = 404;
-
-//     next(new AppError(`Can't find ${req.originalUrl} on this server`), 404);
-// });
 
 app.use(globalErrorhandler);
 

@@ -37,7 +37,7 @@ exports.inviteUser = hookAsync(async(req, res, next) => {
     });
 
     if (invitationAlreadyExists) {
-        return next(new AppError('You have already sent an invitation to this user', 401)); //401 which means unauthoried
+        return next(new AppError('You have already sent an invitation to this user!!!!', 401)); //401 which means unauthoried
     }
 
 

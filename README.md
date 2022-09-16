@@ -1,5 +1,5 @@
 
-# [<img src="client/public/images/logo.png">](https://imusicroom.netlify.app)
+# [<img src="client/public/images/logo.png">](https://imusicroom.herokuapp.com)
 In the middle of a pandemic where it is best for people to stay isolated. A client wants to build a collaborative music listening application where users from around the world can come together and have fun listening to music right from the comfort of their homes whilst they interact with each other.
 
 ### Where
@@ -22,6 +22,10 @@ A user can create a music playing session (iMusic Room). A playing session can e
 5. Join a new session without existing the previous session mean the previous session should automatically exit and automatically join the new session
 6. Registers users can message each other on the platform, a non-registered member cannot
 7. Get/Generate a shareable link that can be forwarded to WhatsApp/fb etc.
+
+
+## API Documentation
+[documenter.getpostman ](https://documenter.getpostman.com/view/19413194/2s7YYvahcD)
 
 ## Screenshots
 <img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-46-48 IMusic Room.png">

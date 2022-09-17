@@ -174,8 +174,20 @@ const [expandInvite, setExpandInvite] = useState(false);
                 init(paths.id.substring(0,inde));
                 setType('public');
             } else {
-                getSession(paths.id);
+
+
+
+useEffect(() => {
+        const interval = setInterval(() => {
+            getSession(paths.id);
+            if (type !== search.get("type")) {
                 setType(search.get("type"));
+            }
+                
+  }, 10000);
+  return () => clearInterval(interval);
+}, []);
+                
             }
         }
     },[paths.id]);
@@ -318,10 +330,12 @@ pauseOnHover
             
             {expandShare?<Share show = {showAndHideShare} />:<></>}
             {expandInvite?<Invite show = {showAndHideInvite}  id={paths.id}  />:<></>}
-           {expand?<AddToPlayList show = {showAndHide} id={paths.id}  />:<></>} 
+            {expand ? <AddToPlayList show={showAndHide} id={paths.id} /> : <></>} 
+            
             <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} ownerId = {owerId} />
-            <MyMessage value={ playList } isAdmin={uid ===owerId} id={paths.id} type={type} />
+            <MyMessage value={playList} isAdmin={uid === owerId} id={paths.id} type={type} />
+            
             {auth ? <PlayerConrols auth={setAuth} current={current}  isAdmin={owerId} uid={uid} id={paths.id} type={type} /> : <Player current={current} />}
             {notPart?<Passcode pass={paths.id} show = {show} link={link} />:null}
         </>

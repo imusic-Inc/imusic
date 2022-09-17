@@ -24,15 +24,30 @@ A user can create a music playing session (iMusic Room). A playing session can e
 7. Get/Generate a shareable link that can be forwarded to WhatsApp/fb etc.
 
 
+
 ## API Documentation
 [documenter.getpostman ](https://documenter.getpostman.com/view/19413194/2s7YYvahcD)
 
 ## Screenshots
+
+### Desktop and Tablet View
+
 <img src="client/public/images/screenshots/Screenshot 2022-09-12 at 07-46-48 IMusic Room.png">
 <img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-15-38 Rising Sun.png">
 
 <img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-17-29 Kwaku the Traveller.png">
 <img src="client/public/images/screenshots/Screenshot 2022-09-14 at 07-19-24 Friday Night.png">
+
+
+
+
+### Mobiel View
+
+<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM.jpeg">
+
+<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(1).jpeg">
+
+<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(2).jpeg">
 
 
 ## Contributors

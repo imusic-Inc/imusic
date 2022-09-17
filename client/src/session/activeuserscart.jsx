@@ -21,19 +21,19 @@ const notify = (message) => {
         }, [props.value]);
 
 
-useEffect(() => {
-        const interval = setInterval(() => {
-                if (props.id.indexOf('@spotify') < 0) {
-                     getData.getSessionById('session', props.id).then((value) => {
-                        if (messages.length < value.messages.length) {
-                                setMessages(value.messages); 
-                        }
-                });    
-                };
+// useEffect(() => {
+//         const interval = setInterval(() => {
+//                 if (props.id.indexOf('@spotify') < 0) {
+//                      getData.getSessionById('session', props.id).then((value) => {
+//                         if (messages.length < value.messages.length) {
+//                                 setMessages(value.messages); 
+//                         }
+//                 });    
+//                 };
                
-  }, 3000);
-  return () => clearInterval(interval);
-}, []);
+//   }, 3000);
+//   return () => clearInterval(interval);
+// }, []);
 
 
         function sendMessage() {

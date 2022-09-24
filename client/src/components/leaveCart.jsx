@@ -14,11 +14,11 @@ function LeaveCart({exit,id}) {
     const handleOnClick = useCallback(() => {
         exit();
         getData.leaveSession(`session/${id}/leave`).then(value => {
-            setTimeout(() => {
-               navigate('../home', { replace: true });
-            }, 500);
             notify(value.status);
         })
+        setTimeout(() => {
+               navigate('../home', { replace: true });
+        }, 500);
      }, [exit,id]);
 
 
@@ -26,7 +26,7 @@ function LeaveCart({exit,id}) {
         <>
 <ToastContainer
 position="top-left"
-autoClose={2000}
+autoClose={5000}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick

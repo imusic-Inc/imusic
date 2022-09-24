@@ -1,6 +1,6 @@
 import LeaveCart from '../components/leaveCart';
 import Members from '../home/members'
-import MyMessage from './playlist'
+import MyPlaylist from './playlist'
 import Player from '../players/player';
 import Activeuserscart from './activeuserscart';
 import AddToPlayList from './addToPlayList';
@@ -84,7 +84,10 @@ const [expandInvite, setExpandInvite] = useState(false);
                      
             if (value.status === 'success') {
           if (value.data.notifications.length > 0 && notifcation.length !== value.data.notifications) {
-            setNotifcation(value.data.notifications);
+            if (notifcation !== value.data.notifications) {
+               setNotifcation(value.data.notifications);
+           }
+              
           if (!search.get('n')) {
             notificationShow('hello there you have about '+value.data.notifications.length+' new notifications','New Message');
           } else {
@@ -94,7 +97,7 @@ const [expandInvite, setExpandInvite] = useState(false);
             }
             
     });     
-  }, 1000);
+  }, 30000);
   return () => clearInterval(interval);
         };
     }, []);
@@ -128,15 +131,32 @@ const [expandInvite, setExpandInvite] = useState(false);
 
     // seting values of the room
     function setValues(value) {
+        if (participant !== value.participants) {
         setParticipant(value.participants);
-        setMessages(value.messages);
+        }
+        
+        if (messages  !== value.messages) {
+            setMessages(value.messages);
+        }
+
         // checking to remove duplicate members from the list
-        const set  = new Set(value.playlist?value.playlist:[]);
-        setplayList([...set]);
+        
+        const set = new Set(value.playlist ? value.playlist : []);
+        if (playList !== [...set]) {
+             setplayList([...set]);
+        }
         // setGuest(value.guest);
-        setOwerId(value.ownerId);
-        setCurrent([value.now_playing]);
-        setAllowInvite(value.can_invite);
+        if (owerId !== value.ownerId) {
+            setOwerId(value.ownerId);
+        }
+        if (current !== value.now_playing) {
+            setCurrent([value.now_playing]);
+        }
+        
+        if (allowInvite !== value.can_invite) {
+            setAllowInvite(value.can_invite);
+        }
+        
         link = '../room/' + value.id + '?name=' + value.name + '&admin=true&type=' + value.roomType;
     }
 
@@ -173,23 +193,16 @@ const [expandInvite, setExpandInvite] = useState(false);
                 const inde = paths.id.indexOf('@spotify');
                 init(paths.id.substring(0,inde));
                 setType('public');
-            } else {
-
-
-
-useEffect(() => {
-        const interval = setInterval(() => {
+            } else {              
+            const interval = setInterval(() => {
             getSession(paths.id);
             if (type !== search.get("type")) {
                 setType(search.get("type"));
             }
-                
-  }, 10000);
-  return () => clearInterval(interval);
-}, []);
-                
-            }
-        }
+             }, 10000);
+            return () => clearInterval(interval);
+            };
+        };
     },[paths.id]);
 
 
@@ -330,12 +343,10 @@ pauseOnHover
             
             {expandShare?<Share show = {showAndHideShare} />:<></>}
             {expandInvite?<Invite show = {showAndHideInvite}  id={paths.id}  />:<></>}
-            {expand ? <AddToPlayList show={showAndHide} id={paths.id} /> : <></>} 
-            
+           {expand?<AddToPlayList show = {showAndHide} id={paths.id}  />:<></>} 
             <Activeuserscart value={messages } id={paths.id} />
             <Members value={participant} ownerId = {owerId} />
-            <MyMessage value={playList} isAdmin={uid === owerId} id={paths.id} type={type} />
-            
+            <MyPlaylist value={ playList } isAdmin={uid ===owerId} id={paths.id} type={type} />
             {auth ? <PlayerConrols auth={setAuth} current={current}  isAdmin={owerId} uid={uid} id={paths.id} type={type} /> : <Player current={current} />}
             {notPart?<Passcode pass={paths.id} show = {show} link={link} />:null}
         </>

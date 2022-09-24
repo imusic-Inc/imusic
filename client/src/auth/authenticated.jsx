@@ -8,30 +8,38 @@ function Auth() {
     const [NotificationClick, setNotificationClick] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [click, setclick] = useState(1);
     const [notification, setNotification] = useState([]);
     const search = new URLSearchParams(window.location.search);
-    let NotificationElemt = NotificationClick ? <Notification notification={notification} hideNot={hideNot} /> : <></>;
     const cookies = new Cookies();
   
+  function call() {
+    setclick(click+1)
+  }
   
   // get user notification
-    useEffect(() => {
-      getData.getNotification('notification').then(value => {
+  useEffect(() => {
+    if (name.length > 3 && email.length > 5) {
+       const interval = setInterval(() => {
+        getData.getNotification('notification').then(value => {
         if (value.status === 'success') {
-          if (value.data.notifications.length > 0) {
+          if (value.results > 0 && notification !== value.data.notifications) {
             setNotification(value.data.notifications);
-          if (!search.get('n')) {
-            notificationShow('hello there you have about '+value.data.notifications.length+' new notifications','New Message');
+            if (!search.get('n') && click===1) {
+            notificationShow('hello there you have about ' + value.results + ' new notifications', 'New Message');
           } else {
             setNotificationClick(true);
           }
           }
         }
-    });
-    }, []);
-    
-    
+      });     
+  }, 30000);
+  return () => clearInterval(interval);
 
+      
+    };
+    }, [name,email,click]);
+    
      useEffect(() => {
         const name = cookies.get("name");
          const emil = cookies.get("email");
@@ -44,7 +52,7 @@ function Auth() {
     }
     
     return (<>
-    <div className="flex-row flex-center account">       
+    <div className="flex-row flex-center account pr-1">       
        <svg  className="btn" style={{width:"30px",height:"30px"}} onClick={() => {setNotificationClick(!NotificationClick)}} strokeWidth="1.5" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -59,13 +67,14 @@ function Auth() {
             </svg>
         <div className="flex-row flex-center justify-center btn">
             <img className="cirle-3 bg-secondary ml-1" src={"https://ui-avatars.com/api/?name="+name} width="100%" height="100%" alt="" />
-            <div className="pl-1">
+            <div className="pl-1 profile">
                     <h4>{ name }</h4>
                     <small>{ email }</small>
             </div>
         </div>
-        </div>
-          {NotificationElemt}
+      </div>
+      
+          {NotificationClick ? <Notification notification={notification} call={call}  hideNot={hideNot} /> : <></>}
     </>);
 }
 

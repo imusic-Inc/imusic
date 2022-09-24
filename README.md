@@ -23,7 +23,24 @@ A user can create a music playing session (iMusic Room). A playing session can e
 6. Registers users can message each other on the platform, a non-registered member cannot
 7. Get/Generate a shareable link that can be forwarded to WhatsApp/fb etc.
 
+## TECHNOLOGIES
 
+### Back-End:
+#### Node.js.
+> ExpressJs
+#### Database: 
+> MongoDB
+
+### Front-End :
+#### ReactJS
+ >##### Redux
+
+
+#
+## TOOLS
+- JavaScript
+- HTML
+- CSS
 
 ## API Documentation
 [documenter.getpostman ](https://documenter.getpostman.com/view/19413194/2s7YYvahcD)
@@ -43,11 +60,16 @@ A user can create a music playing session (iMusic Room). A playing session can e
 
 ### Mobiel View
 
-<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM.jpeg">
 
-<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(1).jpeg">
+||||
+| ------- |:-----------:|:----------------------------------:|
+|<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM.jpeg">|<img  src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(1).jpeg">|<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(2).jpeg">|
 
-<img src="client/build/images/screenshots/WhatsApp Image 2022-09-17 at 12.29.14 AM(2).jpeg">
+
+
+
+
+
 
 
 ## Contributors

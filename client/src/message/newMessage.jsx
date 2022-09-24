@@ -4,20 +4,29 @@ import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
 import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const sent = true;
+import NotFound from "../components/404";
+import { useRef } from "react";
+let sent = true;
 function NewMessage(props) {
     const cookies = new Cookies();
     const uid = cookies.get('uid');
     const userName = cookies.get('name');
     const [message_id,setMessage_id] = useState()
     const [message,setMessage] = useState()
-    const [messages,setMessages] = useState([])
+    const [messages, setMessages] = useState([])
+    const ref = useRef();
  const notify = (message) => {
         toast.info(message, {
             autoClose: 2000,
         });
     };
     useEffect(() => {
+         setTimeout(() => {
+        if (ref.current) {
+             ref.current.scrollTo(0, ref.current.scrollHeight);
+        }
+         }, 1000);
+        
         getData.startMessage('conversation/add', {
             "senderId": uid,
             "receiverId": props.id
@@ -34,10 +43,14 @@ function NewMessage(props) {
 
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        if (message_id) {
+             const interval = setInterval(() => {
             getMessage(message_id);
-  }, 1000);
+        }, 1000);
   return () => clearInterval(interval);
+        }
+       
+  
 }, []);
 
 
@@ -50,7 +63,7 @@ function NewMessage(props) {
                 } else {
                     name = userName;
                 }
-                return { name: name, message: value.text };
+                return { name: name, message: value.text,createdAt:value.createdAt };
             });
             
             if (mes.length !== messages.length) {
@@ -74,13 +87,14 @@ function NewMessage(props) {
             setMessage('');
             if (sent) {
                 sent = false;
-                getData.createNotification('notification/new', { receiverId: props.id, alertMessage: 'new message', content: `Hello there, ${userName} sent you a message` });
+                getData.createNotification('notification/new', { receiverId: props.id, alertMessage: 'new message', content: `Hello there, ${userName} sent you a new message` });
             }
             }
-            
         });
     }
 
+const bot = window.screen.availWidth > 600 ? '80px' : null;
+const bot1 = window.screen.availWidth > 600 ? '5px' : null;
     return (  
 
         <>
@@ -95,10 +109,10 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 />
-         <div className="message" style={{bottom: props.home?'80px':null,}}>
+         <div className="message" style={{bottom: props.home?bot:null,}}>
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
-        <h4 className="pl-1">{props.name}</h4>
+        <h4 className="pl-01">{props.name}</h4>
     </div>
 
 
@@ -118,19 +132,18 @@ pauseOnHover
 </div>
 <hr className="bg-primary"/>
 
-            <div className="income-messages-list">
-
-                    {messages.map(value => {
-                      return  <Message  key={Math.random()} value={{user:{ name: value.name },message: value.message}}><hr className="opacity-6" /></Message>
-                    })}
+            <div ref={ref} className="income-messages-list">
+                    {messages.length > 0 ? messages.map(value => {
+                      return  <Message  key={Math.random()} value={{user:{ name: value.name },message: value.message,createdAt:value.createdAt}}><hr className="opacity-6" /></Message>
+                    }):<NotFound/>}
                 
                 <br /><br /><br />
             </div>
 
 
-<div className="chat-send" style={{bottom: props.home?'5px':null,}} >
+<div className="chat-send" style={{bottom: props.home?bot1:null,}} >
 <hr/>
-<textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder="Write a message..." rows="4"></textarea>
+<textarea  className="char-textarea  bg-default" value={message} onChange={(event)=>setMessage(event.currentTarget.value)} name="message" id="message" cols="30" placeholder=" Write a message..." rows="4"></textarea>
 </div>
 </div>
         </>

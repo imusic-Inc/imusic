@@ -1,6 +1,8 @@
 import { useEffect,useState } from "react";
 import getData from "../api/backendcalls";
 import NewMessage from "../message/newMessage";
+import NotFound from "./404";
+import Join from "./join";
 
 function Notification(props) {
     const [type, setType] = useState('');
@@ -17,7 +19,8 @@ function Notification(props) {
         setType('');
     }
 
-    function remove(indexed,id) {
+    function remove(indexed, id) {
+        props.call();
         const newNoti = notifications.filter((value, index) => index !== indexed);
         setNotifications(newNoti);
         getData.deleteNotification(id);
@@ -34,24 +37,26 @@ function Notification(props) {
         </svg>
            </div>
             <div className="notification-list">
-                {notifications.map((value,index) => {
+                {notifications.length>0? notifications.map((value,index) => {
                     return (<div onClick={() => {
                         if (value.notificationType === 'new message') {
                             setNewMessageId(value.userFrom._id);
                             setType('message');
                             setName(value.userFrom.name);
+                        } else {
+                            setType('invite');
                         }
                         remove(index,value._id);
                         // props.hideNot();
-                }} className="pl-1 card-column b-r-1 p-1 btn">
+                }} className="card-column b-r-1 p-01 btn">
                     <h4>{value.notificationType}</h4>
-                        <h6>{value.content}</h6>
+                        <small>{value.content}</small>
                     </div>);
-                })}
+                }):<NotFound/>}
                 
             </div>
         </div>
-        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:null}
+        {type==='message'?<NewMessage  home={'home'} id={NewMessageId} name={name} show={hideManasession} />:type==='invite'?<Join  onClick = {hideManasession}/>:null}
         </>);
 }
 

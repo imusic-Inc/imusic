@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import NotFound from "../components/404";
 import MemberList from "../message/memberList";
 import NewMessage from "../message/newMessage";
 function Members(props) {
@@ -45,9 +46,9 @@ function Members(props) {
 
         <div className="flex-1 text-right">
                   <div onClick={() => {
-                      setexpand("75%");
+                      setexpand("70%");
                       seticonShow(!iconShow);
-                  }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
+                  }} className="pr-1 btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
                     fill="currentColor" className="mercado-match" width="16" height="16" focusable="false">
                     <path d="M15 11L8 6.39 1 11V8.61L8 4l7 4.61z"></path>
@@ -57,7 +58,7 @@ function Members(props) {
                   <div onClick={() => {
                       setexpand("50px");
                       seticonShow(!iconShow);
-                  }} className="pr-2 btn" style={{ display: iconShow ? "none" : "block" }}>
+                  }} className="pr-1 btn" style={{ display: iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
                     fill="currentColor" className="mercado-match" width="16" height="16" focusable="false">
                     <path d="M1 5l7 4.61L15 5v2.39L8 12 1 7.39z"></path>
@@ -66,10 +67,12 @@ function Members(props) {
 
         </div>
       </div>
-      <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder="Username or Email" name="name"/>
-          <hr className="opacity-6" />
+    <div className="pr-1 pl-01">
+               <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder=" &#128269; Search members" name="name"/>
+    </div>
+         
           <div className="messages-list"> 
-              {searced.length>0 ? searced.map(value => <MemberList key={value._id} owerId={props.ownerId} value={ value } showMessage={showManasession} />):null}
+              {searced.length>0 ? searced.map(value => <MemberList key={value._id} owerId={props.ownerId} value={ value } showMessage={showManasession} />):<NotFound/>}
           </div>
       </div>
       {showNewMessage ? <NewMessage show={hideManasession} id={NewMessageId} name={NewMessageReciever} />:<></>}

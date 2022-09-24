@@ -26,15 +26,13 @@ const cookies = new Cookies();
   
   return (
     <div className=" pt-1 left-20">
-      <div className=''>
-        <br /><br />
+      <div className='pt-2 pl-01'>
 <h1 className="fixed bg-primary title">iMusic Rooms</h1>
       </div>
       
-      {token && token.length > 10 ? <Users /> : null}
+      {token && token.length > 10 ?  <Users />: null}
       <PublicSessionImusic name={"IMusic Public Rooms"} type={'public' } />
     <PublicSessionImusic name={"IMusic Private Rooms"} type={'private' } />
-
 
       {genre.length < 1 ? <><LoadingSession /></> : genre.map(value => {
       // console.log(value)

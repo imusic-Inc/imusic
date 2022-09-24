@@ -7,6 +7,8 @@ import {SearchLoading} from './loadingSession'
 import {toast,ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Passcode from "./passcode";
+import InviteList from "../session/inviteList";
+import NotFound from "./404";
 let linked = '';
 let inviteId = '';
 let seletedId = '';
@@ -21,7 +23,8 @@ function Join(props) {
         toast.info(message, {
             autoClose: 2000,
         });
-    };
+ };
+    
     useEffect(() => {
         const uid = cookies.get('uid');
         getData.getSession('session').then(value => {
@@ -29,54 +32,20 @@ function Join(props) {
             setSession(getMySession);
     });
     
+        
+        
         getData.getInvite('invite').then(value1 => {
-            if (value1) {
-               value1.forEach(element => {
-                const sender = getUser(element.senderId);
-                const session = getSessionById(element.sessionId);
-                Promise.all([sender, session]).then(value => {
-                    const senderResult = value[0];
-                    const sessionResult = value[1];
-                    const payload = {
-                        name: sessionResult.name,
-                        description:`Hello there, ${senderResult.name} invites you to a ${sessionResult.roomType} room session.`,
-                        id:element.sessionId,
-                        inviteId:element._id,
-                        photo:sessionResult.now_playing.image,
-                        roomType:sessionResult.roomType,
-                    }
-                    invites.add(payload)
-                    setInvite([...invites].filter((v,i,a)=>a.findLastIndex(v2=>(v2.place === v.place))===i));
-                });
-            }); 
-            }
-            
-              
-    })
+            setInvite(value1);
+        });
         
         
     },[]);
 
-
-
-    function getUser(id) {
-       const user =  getData.getUserById('users', id);
-       return user;
-   }
-    
-    async function getSessionById(id) {
-       const session = await getData.getSessionById('session', id);
-       return session;
-    }
-
-
-
     function deleteFun(id) {
-        getData.deleteSession('session/' + id).then(value => {
-            const getMySession = getSession.filter(value => value.id !== id);
-            setSession(getMySession);
-            notify("Session deleted successfully");
-        })
+        getData.deleteSession('session/' + id);
+        const getMySession = getSession.filter(value => value.id !== id);
+        setSession(getMySession);
+        notify("Session deleted successfully");
        
     }
 
@@ -100,7 +69,7 @@ function Join(props) {
                 setTimeout(() => {
                     navigate(link, { replace: false });
                     if (invite) {
-                        declineFun(invite);
+                        getData.rejectInvite('invite/reject', { "invitationId": invite });
                     };
                 }, 500)
             }
@@ -113,20 +82,19 @@ function Join(props) {
     }
 
     function declineFun(id) {
-        getData.rejectInvite('invite/reject', { "invitationId": id }).then(value => {
-            const getInv = getInvite.filter(value => value.inviteId !== id);
+        if (id) {
+             getData.rejectInvite('invite/reject', { "invitationId": id }).then(value => {
+            const getInv = getInvite.filter(value => value._id !== id);
             setInvite(getInv);
-         notify("invitation declined successfully");
-        })
+            notify("invitation declined successfully");
+        });
+        }
     }
-
-
-
-
 
     function show() {
         setShowpass(false);
     }
+
   return (
       <>
       <ToastContainer
@@ -141,7 +109,7 @@ draggable
 pauseOnHover
 />
       
-       <div className="join-session b-r-1 box-shadow">
+       <div className="join-session bg-secondary b-r-1 box-shadow">
 <div className="flex-row flex-center flex-space">
     <div className="flex-row flex-center">
         <h4 className="pl-1">Join session</h4>
@@ -162,11 +130,12 @@ pauseOnHover
 <hr className="bg-primary"/>
 
 
-              <div className="join-list">
-                  {getInvite.length > 0 ? getInvite.map(value => <JoinList invite={true} key={value.id} name={value.name} description={value.description} inviteId={value.inviteId} id={value.id} photo={value.photo}  roomType={value.roomType} declineFun={declineFun} joinsession={ joinsession } /> ) :SearchLoading} 
+              { (getInvite.length + getSession.length) > 0 ? <div className="join-list">
+
+                  {getInvite.length > 0 ? getInvite.map(value => <InviteList value={value} key={value._id} declineFun={declineFun} joinsession={ joinsession }  /> ) :SearchLoading} 
                   {getSession.length > 0 ? getSession.map(value => <JoinList invite={false} key={value.id} name={value.name} description={value.description} id={value.id} photo={value.now_playing.image}  roomType={value.roomType} deleteFun={deleteFun} joinsession={ joinsession } /> ) :SearchLoading} 
                   
-</div>
+</div>:<NotFound/>}
 
           </div>
           

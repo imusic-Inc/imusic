@@ -1,16 +1,15 @@
-import keys from "./keys";
-
 const getData = (function() {
-    const link = `https://amalitech-imusic.herokuapp.com/api/v1/`
+    const link = `/api/v1/`
 
 
 
 
-    const __getAuth = async(path) => {
+    const __getAuth = async(path,values={}) => {
         const result = await fetch(link + path, {
-            method: 'get',
+            method: 'POST',
             credentials: "include",
             withCredentials:true,
+            body: JSON.stringify(values),
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -442,7 +441,7 @@ withCredentials:true,
     }
 
     const __deleteNotification = async(id) => {
-        const result = await fetch('notification/clear/' + id, {
+        const result = await fetch(link+'notification/clear/' + id, {
             method: 'DELETE',
             mode: 'cors',
             credentials: "include",
@@ -473,8 +472,8 @@ withCredentials:true,
 
 
     return {
-        getAuth(path) {
-            return __getAuth(path);
+        getAuth(path,data) {
+            return __getAuth(path,data);
         },
          getSession(path) {
             return __getSession(path);

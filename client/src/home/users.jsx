@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import getData from "../api/backendcalls";
+import NotFound from "../components/404";
 import MemberList from "../message/memberList";
 import NewMessage from "../message/newMessage";
-function Users() {
+function Users(props) {
     const [expand, setexpand] = useState("50px");
     const [iconShow, seticonShow] = useState(true);
     const [showNewMessage, setshowNewMessage] = useState(false);
@@ -40,10 +41,13 @@ useEffect(() => {
         }
     }, [search]);
 
-  return (<>
-      <div className="messaging-members " style={{ height: expand,bottom: '0px', }}>
-        <div className="flex-row flex-center flex-space  pt-01">
-        <h4 className="flex-5 p-01">
+
+    const bot = window.screen.availWidth > 600 ? '0px' : '70px';
+    return (<>
+      
+      <div className="messaging-members " style={{ height: expand,bottom:  bot, }}>
+        <div className="flex-row flex-center flex-space p-01 pt-01">
+        <h4 className="flex-5 ">
             iMusic Members
         </h4>
 
@@ -52,7 +56,7 @@ useEffect(() => {
                   <div onClick={() => {
                       setexpand("75%");
                       seticonShow(!iconShow);
-                  }} className="pr-2 btn" style={{ display: !iconShow ? "none" : "block" }}>
+                  }} className=" btn" style={{ display: !iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
                     fill="currentColor" className="mercado-match" width="16" height="16" focusable="false">
                     <path d="M15 11L8 6.39 1 11V8.61L8 4l7 4.61z"></path>
@@ -62,7 +66,7 @@ useEffect(() => {
                   <div onClick={() => {
                       setexpand("50px");
                       seticonShow(!iconShow);
-                  }} className="pr-2 btn" style={{ display: iconShow ? "none" : "block" }}>
+                  }} className=" btn" style={{ display: iconShow ? "none" : "block" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16"
                     fill="currentColor" className="mercado-match" width="16" height="16" focusable="false">
                     <path d="M1 5l7 4.61L15 5v2.39L8 12 1 7.39z"></path>
@@ -71,8 +75,10 @@ useEffect(() => {
 
         </div>
       </div>
-      <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder="Username or Email" name="name"/>
-          <hr className="opacity-6" />
+     <div className="pr-1 pl-01">
+        <input type="text" className="playSearch w-100 p-1" onChange={(event)=>SetSearch(event.currentTarget.value)} placeholder=" &#128269; Search members" name="name"/>
+    </div>
+          
           <div className="messages-list"> 
               {searced.length > 0 ? searced.map((value,index) =>
               {/* showing only 20 users */
@@ -81,9 +87,11 @@ useEffect(() => {
                   }
               }
               
-              ) : null}
+              ) : <NotFound/>}
           </div>
       </div>
+
+
       {showNewMessage ? <NewMessage show={hideManasession} home={'home'} id={NewMessageId} name={NewMessageReciever} />:<></>}
       </>
   );

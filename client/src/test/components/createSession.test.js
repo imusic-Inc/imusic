@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event'
 import {render, screen, fireEvent} from '@testing-library/react'
 import { BrowserRouter as Router } from "react-router-dom";
 import CreateSession from "../../components/createSession";

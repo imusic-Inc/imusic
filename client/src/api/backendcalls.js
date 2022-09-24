@@ -1,5 +1,5 @@
 const getData = (function() {
-    const link = `/api/v1/`
+    const link = `http://localhost:3001/api/v1/`
 
 
 
